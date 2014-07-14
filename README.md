@@ -1,4 +1,6 @@
 europace2-api
 =============
 
-Beschreibung der öffentlichen Schnittstellen für die EUROPACE2 Platform
+Dokumentation der öffentlichen Schnittstellen der EUROPACE 2 Platform.
+
+

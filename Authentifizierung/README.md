@@ -5,27 +5,26 @@ EUROPACE 2 - Authentiﬁzierung für Partner
 Dieses Dokument beschreibt die von Europace2 unterstützten Authentiﬁzierungsarten für 
 Partner.
 
-
-Einloggen
+Formularbasiertes Silent-Sign-On
 -----------------------------------------
-Neben der Standard-Login-Seite, stellt Europace2 seinen Partner zwei weitere Wege 
-bereit, sich an Europace2.de zu authentiﬁzieren.
 
+Neben der Standard-Login-Seite, stellt EUROPACE 2 seinen Partner zwei weitere Wege zur Authentifizierung bereit.
 
-### Einloggen per Html-Login-Box
+### Partner Html-Login-Box
 
 Unter https://europace2.de/partnermanagement/partner-login-box.html steht eine minimale 
 HTML Seite zur Verfügung, welche die Eingabefelder für Benutzer und Passwort sowie 
 eine Login-Button enthält. Die Seite enthält zusätzliche Komfort-Funktionen für Benutzer:
 
-* Setzen der Tastatureingabe auf das erste Feld
-* Speichern des Benutzernamen
+* Setzen der Tastatureingabe auf das erste, nicht-ausgefüllte Feld
+* Speichern des Benutzernamen und anzeigen des selben nach Wiederaufruf der Seite
 
 Diese Seite kann mittels iFrame direkt eingebettet werden:
 
 ````
 <iframe src="https://europace2.de/partnermanagement/partner-login-box.html" 
 width="366px" height="250px" style="margin: 0px 0px 0px 0px;"></iframe>
+
 ````
 
 Alternativ dient diese Seite als ''Kopiervorlage'' zum direkten Einbetten in die
