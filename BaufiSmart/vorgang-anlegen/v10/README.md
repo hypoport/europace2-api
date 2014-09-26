@@ -15,7 +15,9 @@ Beispiele
 In dem Ordner ''Beispiele'' beschreiben XML-Dateien Anfragen und Antworten
 an den BEX SOAP Service. für eine bessere Lesbarkeit ist
 der SOAP-Envelope und SOAP-Body nicht dargestellt,
-sondern nur der Inhalt der Anfrage (Vorgang.xml) und der Antwort(VorgangMetadaten.xml).
+sondern nur der Inhalt 
+der Anfrage ([![Vorgang.xml]](Beispiele/bex-v10-Vorgang.xml)) 
+und der Antwort(VorgangMetadaten.xml).
 
 
 Mappingvorlage
@@ -33,7 +35,7 @@ Code-Generierung für Client-Stubs
 
 Aus der WSDL-Beschreibung kann automatisch Code generiert werden.
 
-### Beispiel für Java
+#### Beispiel für Java
 
 ````bash
 wsimport -keep -extension bex-v10-VorgangAnlegen.wsdl
