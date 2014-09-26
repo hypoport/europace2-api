@@ -16,8 +16,8 @@ In dem Ordner ''Beispiele'' beschreiben XML-Dateien Anfragen und Antworten
 an den BEX SOAP Service. für eine bessere Lesbarkeit ist
 der SOAP-Envelope und SOAP-Body nicht dargestellt,
 sondern nur der Inhalt 
-der Anfrage ([![Vorgang.xml]](Beispiele/bex-v10-Vorgang.xml)) 
-und der Antwort(VorgangMetadaten.xml).
+der [[Vorgang.xml]](Beispiele/bex-v10-Vorgang.xml) (Anfrage)
+und der [[VorgangMetadaten.xml]](Beispiele/bex-v10-VorgangMetadaten.xml) (Antwork).
 
 
 Mappingvorlage
