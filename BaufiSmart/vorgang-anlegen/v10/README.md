@@ -33,7 +33,7 @@ Code-Generierung für Client-Stubs
 
 Aus der WSDL-Beschreibung kann automatisch Code generiert werden.
 
-Java:
+### Beispiel für Java
 
 ````bash
 wsimport -keep -extension bex-v10-VorgangAnlegen.wsdl
