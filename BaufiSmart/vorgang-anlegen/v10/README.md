@@ -17,7 +17,7 @@ an den BEX SOAP Service. für eine bessere Lesbarkeit ist
 der SOAP-Envelope und SOAP-Body nicht dargestellt,
 sondern nur der Inhalt 
 der [Vorgang.xml](Beispiele/bex-v10-Vorgang.xml) (Anfrage)
-und der ![[VorgangMetadaten.xml]](Beispiele/bex-v10-VorgangMetadaten.xml) (Antwork).
+und der [VorgangMetadaten.xml](Beispiele/bex-v10-VorgangMetadaten.xml) (Antwork).
 
 
 Mappingvorlage
