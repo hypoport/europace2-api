@@ -23,7 +23,7 @@ und der [VorgangMetadaten.xml](Beispiele/bex-v10-VorgangMetadaten.xml) (Antwork)
 Mappingvorlage
 ---------------
 
-Bei der Mappingvorlage handelt es sich um eine [Excel-Datei](MappingVorlage/bex-v10-VorgangAnlegen-Vorgang_MappingVorlage.xlsx),
+Bei der Mappingvorlage handelt es sich um eine [Excel-Datei](Mappingvorlage/bex-v10-VorgangAnlegen-Vorgang_MappingVorlage.xlsx),
 welche die Struktur des Vorgangs (für die SOAP Anfrage) beschreibt.
 Zusätzlich gibt es darin Spalten, in denen sie Felder aus ihrem Datenmodell
 eintragen können. So kann diese Mappingvorlage beim fachlichen Erstellen
