@@ -5,9 +5,9 @@ Partnermanagement Extern API.
 
 ## Anlegen eines neuen Partners
 
-Partner können per HTTP JSON angelegt werden. 
+Partner können per HTTP JSON angelegt werden.
 
-Für alle Requests gilt: 
+Für alle Requests gilt:
 
 - Leere Felder bei String ("") sind blank und werden wie null behandelt.
 - Dem Server unbekannte Felder werden ignoriert
@@ -25,7 +25,7 @@ Validierungen:
 POST https://www.europace2.de/partnermanagement/partner/4711/untergeordnetePartner
 X-ApiKey: ABC987
 X-PartnerId: 4710                              // FF Organisation
-X-TraceId: ff-request-2014-10-01-07-55 // UID zur Identifikation des requests für support 
+X-TraceId: ff-request-2014-10-01-07-55 // UID zur Identifikation des requests für support
 Accept: application/json
 Content-Type: application/json;charset=utf-8
 
@@ -42,7 +42,7 @@ Content-Type: application/json;charset=utf-8
      "iban" : "...",
      "bic" : "....",
      "kontoinhaber": "...",
-     "referenzFeld" : "...." 
+     "referenzFeld" : "...."
   },
   "email" : "",  
   "externePartnerId" : "MAK004712"
@@ -100,7 +100,7 @@ TODO weitere status codes aus Validierungen dokumentieren
 
 ## Aktualisieren eines Partners
 
-Logik: Nur die im PATCH request enthaltenen Felder werden in den Stammdaten des Partner überschrieben. Alle weiteren Felder der Stammdaten bleiben erhalten. 
+Logik: Nur die im PATCH request enthaltenen Felder werden in den Stammdaten des Partner überschrieben. Alle weiteren Felder der Stammdaten bleiben erhalten.
 
 Hintergrund: Der Datenhaushalt der API ist kleiner als der eines Partners. Auch der Datenhaushalt externe Client-Systeme ist i.d.R. geringer als die API. Damit über die Oberfläche "per Hand" eingetragene Werte nicht durch (fehlende) Attribute eines API Aufrufs verloren gehen, nutzen wir die PATCH Semantik.
 
@@ -115,7 +115,7 @@ Content-Type: application/json;charset=utf-8
 ```
 
 ```
-203 NO_CONTENT
+204 NO_CONTENT
 X-TraceId: ff-request-2014-10-01-07-56
 ```
 
@@ -164,6 +164,3 @@ Partnerdaten werden ohne vererbte Werte ausgeliefert. Bei Bedarf sind die Werte 
 ## Benutzer Ent- Sperren
 
 Erfolgt über das Attribut "gesperrt" im POST / PATCH Requests.
-
-
-
