@@ -37,7 +37,6 @@ Content-Type: application/json;charset=utf-8
     "plz" : "...",
     "ort" : "..."
   },
-  "avatarUrl" : "...", // e.g. dataUrl oder http://www.gravatar.com/avatar/58032b5606013973d9364775a9c8bc66
   "bankverbindung" : {
      "iban" : "...",
      "bic" : "....",
