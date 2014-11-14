@@ -53,7 +53,6 @@ Content-Type: application/json;charset=utf-8
   "gesperrt", false, // default: false
   "mobilnummer" : "",
   "nachname" : "Fiore",
-  "newsletterErhalten" : true,
   "rechtDarfEinstellungenOeffnen" : false, // default false
   "rechtDarfOrgaEinheitenAnlegen" : false, // default false
   "rechtEchtgeschaeftErlaubt" : true, // default false
