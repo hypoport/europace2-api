@@ -37,7 +37,6 @@ Content-Type: application/json;charset=utf-8
     "plz" : "...",
     "ort" : "..."
   },
-  "avatarUrl" : "...", // e.g. dataUrl oder http://www.gravatar.com/avatar/58032b5606013973d9364775a9c8bc66
   "bankverbindung" : {
      "iban" : "...",
      "bic" : "....",
@@ -45,13 +44,13 @@ Content-Type: application/json;charset=utf-8
      "referenzFeld" : "...."
   },
   "email" : "",  
-  "externePartnerId" : "MAK004712"
+  "externePartnerId" : "MAK004712",
   "faxnummer" : "",
   "firmenname" : null,
   "firmennameZusatz" : "",
-  "fusszeileFuerAussenauftritt" : "" //  mit \n  als Zeilentrenner, siehe Kommentar
+  "fusszeileFuerAussenauftritt" : "", //  mit \n  als Zeilentrenner, siehe Kommentar
   "geburtsdatum" : "1970-04-23",  // ISO-8601 Calender Date basic(YYYYMMDD) oder extended(YYYY-MM-DD) format.
-  "gesperrt", "false", // default: false
+  "gesperrt", false, // default: false
   "mobilnummer" : "",
   "nachname" : "Fiore",
   "newsletterErhalten" : true,
@@ -61,8 +60,7 @@ Content-Type: application/json;charset=utf-8
   "titelFunktion" : "Makler",
   "telefonnummer" : "",
   "vorname" : "Marcel",
-  "webseiteUrl" : "",
-  "zugangWebLogin" : "false",
+  "webseiteUrl" : ""
 }
 ```
 
