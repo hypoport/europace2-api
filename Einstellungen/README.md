@@ -115,7 +115,7 @@ Content-Type: application/json;charset=utf-8
 ```
 
 ```
-204 NO_CONTENT
+200 OK
 X-TraceId: ff-request-2014-10-01-07-56
 ```
 
