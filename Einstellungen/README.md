@@ -16,8 +16,6 @@ Für alle Requests gilt:
 Validierungen:
 
 - PartnerId in URL muss durch X-ApiKey administrierbar sein.
-- externePartnerId muss "unterhalb" des ApiKey unique sein.
-- Validierung der Eindeutigkeit der externenPartnerId beim Create / POST => Fehler Status + Link auf die bestehende resource + Fehlertext
 - Rechte dürfen nur vergeben werden, wenn sie beim Vergebenden vorhanden sind (wenn sie am ApiKey vorhanden sind)
 
 
