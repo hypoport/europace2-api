@@ -1,7 +1,8 @@
-DRAFT
+# ---*DRAFT*---
+
 
 # PEX API
-Über die PEX API können Daten zu bestehenden Partnern in EUROPACE 2 via HTTP abgerufen, neue Partner angelegt und bestehende modifiziert werden.
+Über die PEX API können Daten zu bestehenden Partnern in EUROPACE 2 via HTTP abgerufen und modifiziert sowie neue Partner angelegt werden.
 
 ### Basis-Url
 
@@ -18,28 +19,44 @@ Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierun
 
 Header Parameter | Beschreibung
 -----------------|-------------
-X-ApiKey         | API des Benutzers / der Organisationen
+X-ApiKey         | ApiKey des Benutzers / der Organisation
 X-PartnerId      | PartnerId des Benutzers
 
-### TraceId und Nachvollziehbarkeit von Requests
+Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.
+
+
+### TraceId zur Nachverfolgbarkeit von Requests
 
 Für jeden Request sollte eine eindeutige id (TraceId) generiert werden, die den Request im EUROPACE 2 System nachverfolgbar macht und so bei etwaigen Problemen oder Fehlern die Analyse erleichtert.
-Die Übermittlung der TraceId erfolgt über einen HTTP Header.
+Die Übermittlung der TraceId erfolgt über einen HTTP Header. Und wird als solcher auch in der Response zurückgeliefert.
 
 Header Parameter | Beschreibung
 -----------------|-------------
-X-TraceId        | Für jeden Request eindeutige Id
+X-TraceId        | eindeutige Id für jeden Request
 
 
-### JSON Repräsentation der Partner Stammdaten
+## JSON Repräsentation der Partner Stammdaten
 
 Die PEX API stellt die Partner Stammdaten als JSON Dokument bereit. Für das Anlegen oder Modifizieren von Partnern wird ebenfalls dieses Format verwendet.
 
+- Die Attributbezeichner sind case-sensitive.
+- Gültige Werte für das Attribut "anrede" sind "HERR" und "FRAU".
+- Gültige Werte für das Attribut "typ" sind "PERSON" und "ORGANISATION".
+- "email" muß eine Email Adresse in gültigem Format enthalten.
+- "geburtsdatum" muß im Format ISO-8601 Calender Date basic(YYYYMMDD) oder extended(YYYY-MM-DD) vorliegen.
+- Zeilenumbrüche in "fusszeileFuerAussenauftritt" können durch "\n" erreicht werden.
+- Die Reihenfolge der Attribute spielt keine Rolle.
+- Stammdaten werden ohne geerbte Werte ausgeliefert.
 
+Als Partner können sowohl Personen als auch Organisationen angelegt werden. Dies wird über das Attribut "typ" beim Anlegen gesteuert. Der Default für "typ" ist "PERSON". Der Typ eines Partners kann im nachhinein nicht mehr geändert werden.
+Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
+
+### Datenhaushalt einer Person
 ```
 {
-  "id":"...",           // EUROPACE 2 PartnerId
-  "anrede" : "HERR",          // alternativ "FRAU"
+  "id":"...",                 // EUROPACE 2 PartnerId
+  "typ": "PERSON",            
+  "anrede" : "HERR",          
   "anschrift" : {
     "strasse" : "...",
     "hausnummer" : "...",
@@ -57,15 +74,15 @@ Die PEX API stellt die Partner Stammdaten als JSON Dokument bereit. Für das Anl
   "faxnummer" : "...",
   "firmenname" : "...",
   "firmennameZusatz" : "...",
-  "fusszeileFuerAussenauftritt" : "...", //  mit \n  als Zeilentrenner, siehe Kommentar
-  "geburtsdatum" : "1970-01-01",      // ISO-8601 Calender Date basic(YYYYMMDD) oder extended(YYYY-MM-DD) format.
-  "gesperrt", false,            // default: false
-  "gesperrtTransitiv", false
+  "fusszeileFuerAussenauftritt" : "...", 		// mit \n  als Zeilentrenner
+  "geburtsdatum" : "1970-01-01",      	  		// ISO-8601 Calender Date basic(YYYYMMDD) oder extended(YYYY-MM-DD) format.
+  "gesperrt": false,            	      		// default: false 
+  "gesperrtTransitiv": false,	          
   "mobilnummer" : "...",
   "nachname" : "...",
-  "rechtDarfEinstellungenOeffnen" : false, // default false
-  "rechtDarfOrgaEinheitenAnlegen" : false, // default false
-  "rechtEchtgeschaeftErlaubt" : true, // default false
+  "rechtDarfEinstellungenOeffnen" : false, 	// default false
+  "rechtDarfPartnerAnlegen" : false, 			// default false
+  "rechtEchtgeschaeftErlaubt" : true, 			// default false
   "titelFunktion" : "...",
   "telefonnummer" : "...",
   "vorname" : "...",
@@ -73,6 +90,35 @@ Die PEX API stellt die Partner Stammdaten als JSON Dokument bereit. Für das Anl
 }
 ```
 
+### Datenhaushalt einer Organisation
+```
+{
+  "anschrift" : {
+    "strasse" : "...",
+    "hausnummer" : "...",
+    "plz" : "...",
+    "ort" : "..."
+  },
+  "bankverbindung" : {
+     "iban" : "...",
+     "bic" : "....",
+     "kontoinhaber": "...",
+     "referenzFeld" : "...."
+  },
+  "email" : "...",  
+  "externePartnerId" : "...",
+  "faxnummer" : "...",
+  "firmenname" : "...",
+  "firmennameZusatz" : "...",
+  "fusszeileFuerAussenauftritt" : "...", 		// mit \n  als Zeilentrenner
+  "gesperrt": false,            	      		// default: false 
+  "gesperrtTransitiv": false,	          
+  "id":"...",                 					// EUROPACE 2 PartnerId
+  "telefonnummer" : "...",
+  "typ": "ORGANISATION",            
+  "webseiteUrl" : "..."
+}
+```
 
 ## Abruf von Partner Stammdaten
 
@@ -82,7 +128,8 @@ Für den Abruf eines Partners wird die Basis Url um dessen PartnerId erweitert.
 https://www.europace2.de/partnermanagement/partner/{PartnerId}
 ```
 
-Felder die nicht gesetzt sind, sind in der Response nicht enthalten.
+Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 OK**. Der Body der Response enthält die aktuellen Stammdaten im JSON Format.
+Attribute, die nicht gesetzt sind, sind in der Response nicht enthalten.
 
 
 ### Beispiel: HTTP GET Request und Response
@@ -105,38 +152,19 @@ Content-Type: application/json;charset=utf-8
   "_links" : {
     "self" : "https://www.europace2.de/partnermanagement/partner/4712"
   },
-"id":"4712",
-"anrede" : "HERR",
-"anschrift" : {
-  "strasse" : "...",
-  "hausnummer" : "...",
-  "plz" : "...",
-  "ort" : "..."
-},
-"bankverbindung" : {
-   "iban" : "...",
-   "bic" : "....",
-   "kontoinhaber": "...",
-   "referenzFeld" : "...."
-},
-"email" : "...",  
-"externePartnerId" : "...",
-"faxnummer" : "...",
-"firmenname" : "...",
-"firmennameZusatz" : "...",
-"fusszeileFuerAussenauftritt" : "...",
-"geburtsdatum" : "1970-01-01",
-"gesperrt", false,
-"gesperrtTransitiv", false
-"mobilnummer" : "...",
-"nachname" : "...",
-"rechtDarfEinstellungenOeffnen" : false,
-"rechtDarfOrgaEinheitenAnlegen" : false,
-"rechtEchtgeschaeftErlaubt" : true,
-"titelFunktion" : "...",
-"telefonnummer" : "...",
-"vorname" : "...",
-"webseiteUrl" : "..."
+  "id":"4712",
+  "anrede" : "HERR",
+  "externePartnerId" : "123456",
+  "geburtsdatum" : "1970-01-01",
+  "gesperrt": false,
+  "gesperrtTransitiv": false,
+  "nachname" : "Mustermann",
+  "rechtDarfEinstellungenOeffnen" : true,
+  "rechtDarfPartnerAnlegen" : false,
+  "rechtEchtgeschaeftErlaubt" : true,
+  "vorname" : "Max",
+  "telefonnummer" : "030 123456",
+  "webseiteUrl" : "https://github.com/hypoport/europace2-api"
 }
 ```
 
@@ -150,13 +178,17 @@ https://www.europace2.de/partnermanagement/partner/{PartnerId}/untergeordnetePar
 Die Daten werden als JSON Dokument im Body des POST Requests übermittelt.
 
 Bei der serverseitigen Auswertung gelten folgende Regeln:
-- unbekannte Felder werden ignoriert.
-- leere Felder bei Strings ("") werden wie nicht vorhanden (null) behandelt.
-- "gesperrtTransitiv" ist nicht von aussen änderbar werden und wird deshalb ignoriert
+- unbekannte Attribute werden ignoriert.
+- Für Organisationen werden personenspezifische Attribute ignoriert.
+- Für Personen werden organisationenspezifische Attribute ignoriert.
+- Leere Attribute bei Strings ("") werden ignoriert.
+- "gesperrtTransitiv" ist nicht von aussen änderbar und wird deshalb ignoriert
 - "id" ist nicht änderbar und wird deshalb ignoriert.
-- Rechte werden sofern nicht angegeben mit dem Default "false" belegt.
+- Rechte werden für Personen -sofern nicht angegeben- mit "false" belegt.
 
-In der Response wird der aktuelle Stand der Daten zurückgegeben. Felder die serverseitig gesetzt werden bzw. für die es Default Werte gibt, sind dabei also immer enthalten.
+Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **201 CREATED**.
+Der Body der Response enthält die aktuellen Stammdaten im JSON Format. Dies kann zur Erfolgskontrolle genutzt werden. Attribute, die serverseitig gesetzt werden bzw. für die es Defaultwerte gibt, sind dabei immer enthalten. 
+Im HTTP Header "Location" befindet sich die Url unter der der angelegte Partner abgerufen oder modifiziert werden kann.
 
 
 ### Beispiel: HTTP POST Request und Response
@@ -174,7 +206,6 @@ Content-Type: application/json;charset=utf-8
   "anrede" : "HERR",
   "email" : "max@mustermann.de",  
   "externePartnerId" : "MAK004712",
-  "gesperrt", false, // default: false
   "nachname" : "Mustermann",
   "vorname" : "Max"
 }
@@ -185,29 +216,31 @@ RESPONSE
 201 CREATED
 Location: https://www.europace2.de/partnermanagement/partner/4712
 X-TraceId : ff-request-2014-10-01-07-55
+Content-Type: application/json;charset=utf-8
 
 {
   "_links" : {
     "self" : "https://www.europace2.de/partnermanagement/partner/4712"
   }
   "id" : "4712"
+  "typ": "PERSON",
   "anrede" : "HERR",
   "email" : "max@mustermann.de",  
   "externePartnerId" : "MAK004712",
-  "gesperrt", false,
+  "gesperrt": false,
+  "gesperrtTransitiv": false,
   "nachname" : "Mustermann",
-  "vorname" : "Max",
-  "gesperrtTransitiv", false,
   "rechtDarfEinstellungenOeffnen" : false,
-  "rechtDarfOrgaEinheitenAnlegen" : false,
-  "rechtEchtgeschaeftErlaubt" : false
+  "rechtDarfPartnerAnlegen" : false,
+  "rechtEchtgeschaeftErlaubt" : false,
+  "vorname" : "Max"
 }
 ```
 
 ## Modifizieren eines Partners
 
-Felder eines Partners können mittels HTTP PATCH modifiziert werden.
-Dabei werden **ausschließlich** diejenigen Felder überschrieben, die im PATCH Request enthalten sind. Alle anderen Felder werden nicht geändert.
+Attribute eines Partners können mittels HTTP PATCH modifiziert werden.
+Dabei werden **ausschließlich** diejenigen Attribute überschrieben, die im PATCH Request enthalten sind. Alle anderen Attribute werden nicht geändert.
 
 Hintergrund: Der Datenhaushalt der API ist kleiner als der eines Partners. Auch der Datenhaushalt externer Client-Systeme ist i.d.R. geringer als die API. Damit über die Oberfläche "per Hand" eingetragene Werte nicht durch (fehlende) Attribute eines API Aufrufs verloren gehen, nutzen wir die PATCH Semantik.
 
@@ -218,12 +251,14 @@ https://www.europace2.de/partnermanagement/partner/{PartnerId}
 Die Daten werden als JSON Dokument im Body des PATCH Requests übermittelt.
 
 Bei der serverseitigen Auswertung gelten folgende Regeln:
-- unbekannte Felder werden ignoriert.
-- leere Felder bei Strings ("") löschen den bestehenden Wert.
+- unbekannte Attribute werden ignoriert.
+- leere Attribute bei Strings ("") löschen den bestehenden Wert.
 - "gesperrtTransitiv" ist nicht von aussen änderbar werden und wird deshalb ignoriert
 - "id" ist nicht änderbar und wird deshalb ignoriert.
 
-In der Response wird der die gesamte Repräsentation der aktuellen Daten zurückgegeben. Felder, die bereits gesetzt waren bzw. für die es Default Werte gibt, sind dabei also immer enthalten.
+Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 OK**.
+Der Body der Response enthält die aktuellen Stammdaten im JSON Format.
+Dies kann zur Erfolgskontrolle genutzt werden. Attribute, die bereits gesetzt waren bzw. für die es Default Werte gibt, sind dabei immer enthalten.
 
 ### Beispiel: HTTP PATCH Request und Response
 ```
@@ -242,34 +277,46 @@ Content-Type: application/json;charset=utf-8
 ```
 200 OK
 X-TraceId: ff-request-2014-10-01-07-56
+Content-Type: application/json;charset=utf-8
+
 {
   "_links" : {
     "self" : "https://www.europace2.de/partnermanagement/partner/4712"
   }
-  "id" : "4712"
   "anrede" : "HERR",
   "email" : "max@mustermann.de",  
   "externePartnerId" : "MAK004712",
-  "gesperrt", false,
+  "firmenname":"Mustermann AG",
+  "gesperrt": false,
+  "id" : "4712",
   "nachname" : "Mustermann",
-  "vorname" : "Max",
-  "firmenname":"Mustermann AG"
-  "gesperrtTransitiv", false,
+  "gesperrtTransitiv": false,
   "rechtDarfEinstellungenOeffnen" : false,
-  "rechtDarfOrgaEinheitenAnlegen" : false,
-  "rechtEchtgeschaeftErlaubt" : false
+  "rechtDarfPartnerAnlegen" : false,
+  "rechtEchtgeschaeftErlaubt" : false,
+  "typ" : "ORGANISATION",
+  "vorname" : "Max" 
 }
-
 ```
 
-### Validierungen:
+## Berechtigungen
 
-- für Änderungen an einem Partner muß der Inhaber des Api Key Einstellungsrechte auf diesen besitzen.
-- für das Anlegen neuer Partner benötigt der Inhaber des X-ApiKeys das Recht "Darf Organisationseinheiten anlegen" sowie Einstellungsrechte auf denjenigen Partner, unterhalb dessen der neue Partner angelegt werden soll.
-- Rechte können nur vergeben oder geändert werden, wenn der Inhaber des Api Keys sie selbst besitzt.
+- für das Abrufen der Stammdaten eines Partners benötigt der Aufrufer die Berechtigung dazu. Ist diese nicht vorhanden, erhält der Aufrufer eine HTTP Response mit Statuscode **404 NOT FOUND**.
+- für Änderungen an einem Partner benötigt der Aufrufer Einstellungsrechte auf diesen. Sind diese nicht vorhanden, erhält der Aufrufer eine HTTP Response mit Statuscode **403 FORBIDDEN**.
+- für das Anlegen neuer Partner benötigt der Aufrufer das Recht "Darf Organisationseinheiten anlegen" sowie Einstellungsrechte auf denjenigen Partner, unterhalb dessen der neue Partner angelegt werden soll. Sind diese nicht vorhanden, erhält der Aufrufer eine HTTP Response mit Statuscode **403 FORBIDDEN**.
+- Rechte können nur vergeben oder geändert werden, wenn der Aufrufer sie selbst besitzt. Ist dies nicht gegeben, erhält der Aufrufer eine HTTP Response mit Statuscode **403 FORBIDDEN**. 
 
 
+## Validierungen:
 
+Folgende Attribute werden validiert:
+- "typ" gültige Werte: "PERSON", "ORGANISATION"
+- "anrede" gültige Werte: "HERR", "FRAU"
+- "geburtsdatum" gültige Formate "YYYYMMDD", "YYYY-MM-DD" 
+
+Schlägt eine dieser Validierungen fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **400 BAD REQUEST**. Im Response Body befinden sich Details zur fehlgeschlagenen Validierung.
+
+### Beispiel fehlgeschlagene Validierung
 ```
 400 BAD REQUEST
 X-TraceId : ff-request-2014-10-01-07-55
@@ -280,19 +327,3 @@ Content-Type: application/json
   "traceId" : " ff-request-2014-10-01-07-55"
 }
 ```
-
-```
-401 UNAUTHORIZED
-```
-
-```
-TODO weitere status codes aus Validierungen dokumentieren
-```
-
-## Vererbung
-
-Partner Daten werden ohne geerbte Werte ausgeliefert.
-
-## Benutzer Ent- Sperren
-
-Erfolgt über das Attribut "gesperrt" im POST / PATCH Requests.
