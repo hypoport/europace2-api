@@ -6,7 +6,7 @@ Die BaufiSmart Externe Dokumenten API.
 Vorgangsdokument hinzufügen (Multipart Form Upload):
 ----------------------------------------------------
 
-Diese Schnittstelle ermöglicht es, Dokumente einem Baufi Smart Vorgang hinzuzufügen. 
+Diese Schnittstelle ermöglicht es, Dokumente einem Baufi Smart Vorgang hinzuzufügen.
 
 Ein hochgeladenes Dokument besteht aus binär Daten (z.B. einem PDF oder Bild) und dessen Metadaten. Die Schnittstelle ist streaming fähig. Hochgeladene Dokumente erscheinen wie alle anderen Dokumente in der Dokumenten-Lasche innerhalb eines Baufi Smart Vorgang.
 
@@ -36,7 +36,7 @@ POST https://www.europace2.de/vorgang/dokumente
 Content-Type: multipart/form-data
 X-ApiKey: 34jklj34h56l
 X-PartnerId: 324h6lj21
- 
+
 Content-Type: multipart/form-data; boundary=----------------------------b15d48e6d7db
 
 ------------------------------b15d48e6d7db
@@ -58,7 +58,7 @@ Content-Type: application/octet-stream
 ... content hidden for brevity ...
 
 
-------------------------------b15d48e6d7db-- 
+------------------------------b15d48e6d7db--
 
 ```
 
@@ -74,4 +74,3 @@ Ein Beispiel-Request kann mit curl erzeugt werden. Bitte alle grossgeschriebenen
 ```
 curl -v -H "X-PartnerId: PARTNER_ID" -H "X-ApiKey: API_KEY"   -F "vorgangsNummer=V_NR" -F "filename=DATEI_NAME"  -F "file=@DATEI_NAME" -F "sichtbarFuerVertrieb=true" https://www.europace2.de/vorgang/dokumente
 ```
-
