@@ -4,9 +4,9 @@
 # PEX API
 Über die PEX API können Daten zu bestehenden Partnern in EUROPACE 2 via HTTP abgerufen und modifiziert sowie neue Partner angelegt werden.
 
-### Basis-Url
+### Url
 
-Die HTTP Schnittstelle der PEX-API ist unter der Basis-URL
+Die HTTP Schnittstelle der PEX-API ist unter der Url
 ```
 https://www.europace2.de/partnermanagement/partner/
 ```
@@ -34,6 +34,14 @@ Header Parameter | Beschreibung
 -----------------|-------------
 X-TraceId        | eindeutige Id für jeden Request
 
+### Content-Type
+
+Die Schnittstelle liefert Daten auschließlich mit Content-Type "application/json". Entsprechend muß im Request der Accept-Header gesetzt werden:
+
+Header name | Header value
+------------|-------------
+Accept      | application/json
+
 
 ## JSON Repräsentation der Partner Stammdaten
 
@@ -43,12 +51,13 @@ Die PEX API stellt die Partner Stammdaten als JSON Dokument bereit. Für das Anl
 - Gültige Werte für das Attribut "anrede" sind "HERR" und "FRAU".
 - Gültige Werte für das Attribut "typ" sind "PERSON" und "ORGANISATION".
 - "email" muß eine Email Adresse in gültigem Format enthalten.
-- "geburtsdatum" muß im Format ISO-8601 Calender Date basic(YYYYMMDD) oder extended(YYYY-MM-DD) vorliegen.
+- "geburtsdatum" muß im Format ISO-8601 extended(YYYY-MM-DD) vorliegen.
 - Zeilenumbrüche in "fusszeileFuerAussenauftritt" können durch "\n" erreicht werden.
 - Die Reihenfolge der Attribute spielt keine Rolle.
 - Stammdaten werden ohne geerbte Werte ausgeliefert.
 
-Als Partner können sowohl Personen als auch Organisationen angelegt werden. Dies wird über das Attribut "typ" beim Anlegen gesteuert. Der Default für "typ" ist "PERSON". Der Typ eines Partners kann im nachhinein nicht mehr geändert werden.
+Als Partner können sowohl Personen als auch Organisationen angelegt werden. Dies wird über das Attribut "typ" beim Anlegen festgelegt. Der Default für "typ" ist "PERSON". **Der Typ eines Partners kann im nachhinein nicht mehr geändert werden.**
+
 Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
 
 ### Datenhaushalt einer Person
@@ -75,7 +84,7 @@ Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
   "firmenname" : "...",
   "firmennameZusatz" : "...",
   "fusszeileFuerAussenauftritt" : "...", 		// mit \n  als Zeilentrenner
-  "geburtsdatum" : "1970-01-01",      	  		// ISO-8601 Calender Date basic(YYYYMMDD) oder extended(YYYY-MM-DD) format.
+  "geburtsdatum" : "1970-01-01",      	  		// ISO-8601 Calender extended(YYYY-MM-DD) format.
   "gesperrt": false,            	      		// default: false 
   "gesperrtTransitiv": false,	          
   "mobilnummer" : "...",
@@ -122,13 +131,15 @@ Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
 
 ## Abruf von Partner Stammdaten
 
-Die Stammdaten eines Partners können mittels der HTTP-GET Methode abgerufen werden. Sie werden als JSON Dokument zurückgeliefert.
-Für den Abruf eines Partners wird die Basis Url um dessen PartnerId erweitert.
+Die Stammdaten eines Partners können mittels HTTP-GET Methode abgerufen werden. Sie werden als JSON Dokument zurückgeliefert.
+Das Url-Template für den Abfruf lautet:
 ```
 https://www.europace2.de/partnermanagement/partner/{PartnerId}
 ```
 
-Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 OK**. Der Body der Response enthält die aktuellen Stammdaten im JSON Format.
+Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 OK**. 
+
+Der Body der Response enthält die aktuellen Stammdaten im JSON Format.
 Attribute, die nicht gesetzt sind, sind in der Response nicht enthalten.
 
 
@@ -171,10 +182,12 @@ Content-Type: application/json;charset=utf-8
 ## Anlegen eines neuen Partners
 
 Partner können per HTTP POST angelegt werden.
-Für das Anlegen eines neuen Partners erfolgt immer unterhalb eines bestehenden Partners. Die PartnerId des bestehenden Partners wird deshalb in der Url des Requests angegeben:
+Für das Anlegen eines neuen Partners erfolgt immer unterhalb eines bestehenden Partners. 
+Das Url-Template für das Anlegen eines neuen Partners unterhalb von {PartnerId} lautet:
 ```
 https://www.europace2.de/partnermanagement/partner/{PartnerId}/untergeordnetePartner
 ```
+
 Die Daten werden als JSON Dokument im Body des POST Requests übermittelt.
 
 Bei der serverseitigen Auswertung gelten folgende Regeln:
@@ -187,8 +200,11 @@ Bei der serverseitigen Auswertung gelten folgende Regeln:
 - Rechte werden für Personen -sofern nicht angegeben- mit "false" belegt.
 
 Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **201 CREATED**.
-Der Body der Response enthält die aktuellen Stammdaten im JSON Format. Dies kann zur Erfolgskontrolle genutzt werden. Attribute, die serverseitig gesetzt werden bzw. für die es Defaultwerte gibt, sind dabei immer enthalten. 
-Im HTTP Header "Location" befindet sich die Url unter der der angelegte Partner abgerufen oder modifiziert werden kann.
+
+Der Body der Response enthält die aktuellen Stammdaten im JSON Format. 
+Dies kann zur Erfolgskontrolle genutzt werden. Attribute, die serverseitig gesetzt werden bzw. für die es Defaultwerte gibt, sind dabei immer enthalten. 
+
+Im HTTP Header "Location" befindet sich die Url des neu angelegten Partners.
 
 
 ### Beispiel: HTTP POST Request und Response
@@ -244,19 +260,20 @@ Dabei werden **ausschließlich** diejenigen Attribute überschrieben, die im PAT
 
 Hintergrund: Der Datenhaushalt der API ist kleiner als der eines Partners. Auch der Datenhaushalt externer Client-Systeme ist i.d.R. geringer als die API. Damit über die Oberfläche "per Hand" eingetragene Werte nicht durch (fehlende) Attribute eines API Aufrufs verloren gehen, nutzen wir die PATCH Semantik.
 
-Die PartnerId des Partners wird in der Url des Requests angegeben:
+Das Url-Template ist dasselbe wie für den Abruf eines Partners:
 ```
 https://www.europace2.de/partnermanagement/partner/{PartnerId}
 ```
 Die Daten werden als JSON Dokument im Body des PATCH Requests übermittelt.
 
 Bei der serverseitigen Auswertung gelten folgende Regeln:
+- **leere Attribute bei Strings ("") löschen den bestehenden Wert.**
 - unbekannte Attribute werden ignoriert.
-- leere Attribute bei Strings ("") löschen den bestehenden Wert.
 - "gesperrtTransitiv" ist nicht von aussen änderbar werden und wird deshalb ignoriert
 - "id" ist nicht änderbar und wird deshalb ignoriert.
 
 Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 OK**.
+
 Der Body der Response enthält die aktuellen Stammdaten im JSON Format.
 Dies kann zur Erfolgskontrolle genutzt werden. Attribute, die bereits gesetzt waren bzw. für die es Default Werte gibt, sind dabei immer enthalten.
 
@@ -301,10 +318,10 @@ Content-Type: application/json;charset=utf-8
 
 ## Berechtigungen
 
-- für das Abrufen der Stammdaten eines Partners benötigt der Aufrufer die Berechtigung dazu. Ist diese nicht vorhanden, erhält der Aufrufer eine HTTP Response mit Statuscode **404 NOT FOUND**.
-- für Änderungen an einem Partner benötigt der Aufrufer Einstellungsrechte auf diesen. Sind diese nicht vorhanden, erhält der Aufrufer eine HTTP Response mit Statuscode **403 FORBIDDEN**.
+- für den Zugriff auf einen Partner benötigt der Aufrufer grundsätzlich die Berechtigung, diesen zu sehen. Ist sie nicht vorhanden, erhält der Aufrufer eine HTTP Response mit Statuscode **404 NOT FOUND**.
+- für Änderungen an einem Partner benötigt der Aufrufer Einstellungsrechte auf diesen. Sind sie nicht vorhanden, erhält der Aufrufer eine HTTP Response mit Statuscode **403 FORBIDDEN**.
 - für das Anlegen neuer Partner benötigt der Aufrufer das Recht "Darf Organisationseinheiten anlegen" sowie Einstellungsrechte auf denjenigen Partner, unterhalb dessen der neue Partner angelegt werden soll. Sind diese nicht vorhanden, erhält der Aufrufer eine HTTP Response mit Statuscode **403 FORBIDDEN**.
-- Rechte können nur vergeben oder geändert werden, wenn der Aufrufer sie selbst besitzt. Ist dies nicht gegeben, erhält der Aufrufer eine HTTP Response mit Statuscode **403 FORBIDDEN**. 
+- Rechte können nur vergeben bzw. geändert werden, wenn der Aufrufer sie selbst besitzt. Ist dies nicht gegeben, erhält der Aufrufer eine HTTP Response mit Statuscode **403 FORBIDDEN**. 
 
 
 ## Validierungen:
