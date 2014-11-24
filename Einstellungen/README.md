@@ -6,7 +6,7 @@
 
 ### Url
 
-Die HTTP Schnittstelle der PEX-API ist unter der Url
+Die HTTP Schnittstelle der PEX-API ist unter der Basis-Url
 ```
 https://www.europace2.de/partnermanagement/partner/
 ```
@@ -17,7 +17,7 @@ erreichbar.
 
 Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierung erfolgt über HTTP Header.
 
-Header Parameter | Beschreibung
+Request Header Parameter | Beschreibung
 -----------------|-------------
 X-ApiKey         | ApiKey des Benutzers / der Organisation
 X-PartnerId      | PartnerId des Benutzers
@@ -30,7 +30,7 @@ Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit
 Für jeden Request sollte eine eindeutige id (TraceId) generiert werden, die den Request im EUROPACE 2 System nachverfolgbar macht und so bei etwaigen Problemen oder Fehlern die Analyse erleichtert.
 Die Übermittlung der TraceId erfolgt über einen HTTP Header. Und wird als solcher auch in der Response zurückgeliefert.
 
-Header Parameter | Beschreibung
+Request / Response Header Parameter | Beschreibung
 -----------------|-------------
 X-TraceId        | eindeutige Id für jeden Request
 
@@ -38,7 +38,7 @@ X-TraceId        | eindeutige Id für jeden Request
 
 Die Schnittstelle liefert Daten auschließlich mit Content-Type "application/json". Entsprechend muß im Request der Accept-Header gesetzt werden:
 
-Header name | Header value
+Request Header name | Header value
 ------------|-------------
 Accept      | application/json
 
@@ -47,25 +47,28 @@ Accept      | application/json
 
 Die PEX API stellt die Partner Stammdaten als JSON Dokument bereit. Für das Anlegen oder Modifizieren von Partnern wird ebenfalls dieses Format verwendet.
 
+Als Partner können sowohl Personen als auch Organisationen angelegt werden. Dies wird über das Attribut "typ" beim Anlegen festgelegt. Der Default für "typ" ist "PERSON". **Der Typ eines Partners kann im nachhinein nicht mehr geändert werden.**
+
+Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
+
+Einige Felder seien hier herausgestellt:
+
 - Die Attributbezeichner sind case-sensitive.
 - Gültige Werte für das Attribut "anrede" sind "HERR" und "FRAU".
 - Gültige Werte für das Attribut "typ" sind "PERSON" und "ORGANISATION".
 - "email" muß eine Email Adresse in gültigem Format enthalten.
-- "geburtsdatum" muß im Format ISO-8601 extended(YYYY-MM-DD) vorliegen.
-- Zeilenumbrüche in "fusszeileFuerAussenauftritt" können durch "\n" erreicht werden.
+- "geburtsdatum" muß im Format ISO-8601 extended (YYYY-MM-DD) vorliegen.
+- Zeilenumbrüche in "fusszeileFuerAussenauftritt" können durch '\n' erreicht werden.
 - Die Reihenfolge der Attribute spielt keine Rolle.
 - Stammdaten werden ohne geerbte Werte ausgeliefert.
 
-Als Partner können sowohl Personen als auch Organisationen angelegt werden. Dies wird über das Attribut "typ" beim Anlegen festgelegt. Der Default für "typ" ist "PERSON". **Der Typ eines Partners kann im nachhinein nicht mehr geändert werden.**
-
-Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
 
 ### Datenhaushalt einer Person
 ```
 {
   "id":"...",                 // EUROPACE 2 PartnerId
-  "typ": "PERSON",            
-  "anrede" : "HERR",          
+  "typ": "PERSON",            // alternativ: ORGANISATION
+  "anrede" : "HERR",          // alternativ: FRAU
   "anschrift" : {
     "strasse" : "...",
     "hausnummer" : "...",
@@ -79,7 +82,7 @@ Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
      "referenzFeld" : "...."
   },
   "email" : "...",  
-  "externePartnerId" : "...",
+  "externePartnerId" : "...", // Eine beliebige, extern erzeugte Id. Z.B. SAP oder CRM Nummer.
   "faxnummer" : "...",
   "firmenname" : "...",
   "firmennameZusatz" : "...",
@@ -115,7 +118,7 @@ Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
      "referenzFeld" : "...."
   },
   "email" : "...",  
-  "externePartnerId" : "...",
+  "externePartnerId" : "...", // Eine beliebige, extern erzeugte Id. Z.B. SAP oder CRM Nummer.
   "faxnummer" : "...",
   "firmenname" : "...",
   "firmennameZusatz" : "...",
@@ -133,6 +136,7 @@ Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
 
 Die Stammdaten eines Partners können mittels HTTP-GET Methode abgerufen werden. Sie werden als JSON Dokument zurückgeliefert.
 Das Url-Template für den Abfruf lautet:
+
 ```
 https://www.europace2.de/partnermanagement/partner/{PartnerId}
 ```
@@ -143,18 +147,17 @@ Der Body der Response enthält die aktuellen Stammdaten im JSON Format.
 Attribute, die nicht gesetzt sind, sind in der Response nicht enthalten.
 
 
-### Beispiel: HTTP GET Request und Response
+### GET Request Beispiel:
 ```
-REQUEST:
 GET https://www.europace2.de/partnermanagement/partner/4712
 X-ApiKey: xxxxxx
 X-PartnerId: ABC987
 X-TraceId: request-2014-10-01-07-59
 Accept: application/json
-Content-Type: application/json;charset=utf-8
 ```
+
+### GET Response Beispiel:
 ```
-RESPONSE:
 200 OK
 X-TraceId: request-2014-10-01-07-59
 Content-Type: application/json;charset=utf-8
@@ -184,6 +187,7 @@ Content-Type: application/json;charset=utf-8
 Partner können per HTTP POST angelegt werden.
 Für das Anlegen eines neuen Partners erfolgt immer unterhalb eines bestehenden Partners. 
 Das Url-Template für das Anlegen eines neuen Partners unterhalb von {PartnerId} lautet:
+
 ```
 https://www.europace2.de/partnermanagement/partner/{PartnerId}/untergeordnetePartner
 ```
@@ -191,12 +195,13 @@ https://www.europace2.de/partnermanagement/partner/{PartnerId}/untergeordnetePar
 Die Daten werden als JSON Dokument im Body des POST Requests übermittelt.
 
 Bei der serverseitigen Auswertung gelten folgende Regeln:
+
 - unbekannte Attribute werden ignoriert.
 - Für Organisationen werden personenspezifische Attribute ignoriert.
 - Für Personen werden organisationenspezifische Attribute ignoriert.
 - Leere Attribute bei Strings ("") werden ignoriert.
 - "gesperrtTransitiv" ist nicht von aussen änderbar und wird deshalb ignoriert
-- "id" ist nicht änderbar und wird deshalb ignoriert.
+- "id" ist nicht setzbar und wird deshalb ignoriert.
 - Rechte werden für Personen -sofern nicht angegeben- mit "false" belegt.
 
 Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **201 CREATED**.
@@ -207,10 +212,8 @@ Dies kann zur Erfolgskontrolle genutzt werden. Attribute, die serverseitig geset
 Im HTTP Header "Location" befindet sich die Url des neu angelegten Partners.
 
 
-### Beispiel: HTTP POST Request und Response
+### POST Request Beispiel
 ```
-REQUEST
-
 POST https://www.europace2.de/partnermanagement/partner/4711/untergeordnetePartner
 X-ApiKey: xxxxxxx
 X-PartnerId: ABC987
@@ -226,9 +229,9 @@ Content-Type: application/json;charset=utf-8
   "vorname" : "Max"
 }
 ```
-```
-RESPONSE
 
+### POST Response Beispiele
+```
 201 CREATED
 Location: https://www.europace2.de/partnermanagement/partner/4712
 X-TraceId : ff-request-2014-10-01-07-55
@@ -261,16 +264,20 @@ Dabei werden **ausschließlich** diejenigen Attribute überschrieben, die im PAT
 Hintergrund: Der Datenhaushalt der API ist kleiner als der eines Partners. Auch der Datenhaushalt externer Client-Systeme ist i.d.R. geringer als die API. Damit über die Oberfläche "per Hand" eingetragene Werte nicht durch (fehlende) Attribute eines API Aufrufs verloren gehen, nutzen wir die PATCH Semantik.
 
 Das Url-Template ist dasselbe wie für den Abruf eines Partners:
+
 ```
 https://www.europace2.de/partnermanagement/partner/{PartnerId}
 ```
+
 Die Daten werden als JSON Dokument im Body des PATCH Requests übermittelt.
 
 Bei der serverseitigen Auswertung gelten folgende Regeln:
+
 - **leere Attribute bei Strings ("") löschen den bestehenden Wert.**
 - unbekannte Attribute werden ignoriert.
 - "gesperrtTransitiv" ist nicht von aussen änderbar werden und wird deshalb ignoriert
 - "id" ist nicht änderbar und wird deshalb ignoriert.
+- "typ" ist nicht änderbar und wird deshalb ignoriert.
 
 Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 OK**.
 
@@ -327,9 +334,10 @@ Content-Type: application/json;charset=utf-8
 ## Validierungen:
 
 Folgende Attribute werden validiert:
+
 - "typ" gültige Werte: "PERSON", "ORGANISATION"
 - "anrede" gültige Werte: "HERR", "FRAU"
-- "geburtsdatum" gültige Formate "YYYYMMDD", "YYYY-MM-DD" 
+- "geburtsdatum" gültiges Format ISO8601 extended: "YYYY-MM-DD" 
 
 Schlägt eine dieser Validierungen fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **400 BAD REQUEST**. Im Response Body befinden sich Details zur fehlgeschlagenen Validierung.
 
