@@ -1,74 +1,27 @@
-# ---*DRAFT*---
-
-
 # PEX API
-Über die PEX API können Daten zu bestehenden Partnern in EUROPACE 2 via HTTP abgerufen und modifiziert sowie neue Partner angelegt werden.
 
-### Url
+Das Partnermanagment von EUROPACE 2 dient Organisationen zur Abbildung der eigenen Struktur. Hierzu bietet die Weboberfläche des Partnermanagements umfassende Möglichkeiten. Die PEX API erlaubt Fremdsystemen einen automatisierten Zugriff auf das Partnermanagement via HTTP.
 
-Die HTTP Schnittstelle der PEX-API ist unter der Basis-Url
-```
-https://www.europace2.de/partnermanagement/partner/
-```
-erreichbar.
+Über die PEX API ist es möglich
+- neue Partner anzulegen,
+- Daten zu Partnern abzurufen,
+- Partner zu modifizieren.
 
 
-### Authentifizierung
+## Datenformat der Partner Stammdaten
 
-Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierung erfolgt über HTTP Header.
+Die PEX API stellt die Partner Stammdaten als JSON Dokument bereit.
 
-Request Header Parameter | Beschreibung
------------------|-------------
-X-ApiKey         | ApiKey des Benutzers / der Organisation
-X-PartnerId      | PartnerId des Benutzers
+Die aus der Weboberfläche des Partnermanagments bekannte Vererbung von Werten bestimmter Attribute entlang der Hierarchie wird in der API nicht reflektiert. **Geerbte Werte werden also nicht ausgeliefert.**
 
-Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.
-
-
-### TraceId zur Nachverfolgbarkeit von Requests
-
-Für jeden Request sollte eine eindeutige id (TraceId) generiert werden, die den Request im EUROPACE 2 System nachverfolgbar macht und so bei etwaigen Problemen oder Fehlern die Analyse erleichtert.
-Die Übermittlung der TraceId erfolgt über einen HTTP Header. Und wird als solcher auch in der Response zurückgeliefert.
-
-Request / Response Header Parameter | Beschreibung
------------------|-------------
-X-TraceId        | eindeutige Id für jeden Request
-
-### Content-Type
-
-Die Schnittstelle liefert Daten auschließlich mit Content-Type "application/json". Entsprechend muß im Request der Accept-Header gesetzt werden:
-
-Request Header name | Header value
-------------|-------------
-Accept      | application/json
-
-
-## JSON Repräsentation der Partner Stammdaten
-
-Die PEX API stellt die Partner Stammdaten als JSON Dokument bereit. Für das Anlegen oder Modifizieren von Partnern wird ebenfalls dieses Format verwendet.
-
-Als Partner können sowohl Personen als auch Organisationen angelegt werden. Dies wird über das Attribut "typ" beim Anlegen festgelegt. Der Default für "typ" ist "PERSON". **Der Typ eines Partners kann im nachhinein nicht mehr geändert werden.**
+Als Partner können sowohl Personen als auch Organisationen angelegt werden. Dies wird über das Attribut "typ" beim Anlegen festgelegt. Gültige Werte für das Attribut "typ" sind "PERSON" und "ORGANISATION". Der Default ist "PERSON". **Der Typ eines Partners kann im nachhinein nicht mehr geändert werden.**
 
 Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
-
-Einige Felder seien hier herausgestellt:
-
-- Die Attributbezeichner sind case-sensitive.
-- Gültige Werte für das Attribut "anrede" sind "HERR" und "FRAU".
-- Gültige Werte für das Attribut "typ" sind "PERSON" und "ORGANISATION".
-- "email" muß eine Email Adresse in gültigem Format enthalten.
-- "geburtsdatum" muß im Format ISO-8601 extended (YYYY-MM-DD) vorliegen.
-- Zeilenumbrüche in "fusszeileFuerAussenauftritt" können durch '\n' erreicht werden.
-- Die Reihenfolge der Attribute spielt keine Rolle.
-- Stammdaten werden ohne geerbte Werte ausgeliefert.
-
 
 ### Datenhaushalt einer Person
 ```
 {
-  "id":"...",                 // EUROPACE 2 PartnerId
-  "typ": "PERSON",            // alternativ: ORGANISATION
-  "anrede" : "HERR",          // alternativ: FRAU
+  "anrede" : "HERR",          	// alternativ: FRAU
   "anschrift" : {
     "strasse" : "...",
     "hausnummer" : "...",
@@ -82,25 +35,34 @@ Einige Felder seien hier herausgestellt:
      "referenzFeld" : "...."
   },
   "email" : "...",  
-  "externePartnerId" : "...", // Eine beliebige, extern erzeugte Id. Z.B. SAP oder CRM Nummer.
+  "externePartnerId" : "...", 		// Eine beliebige, extern erzeugte Id. Z.B. SAP oder CRM Nummer.
   "faxnummer" : "...",
   "firmenname" : "...",
   "firmennameZusatz" : "...",
-  "fusszeileFuerAussenauftritt" : "...", 		// mit \n  als Zeilentrenner
-  "geburtsdatum" : "1970-01-01",      	  		// ISO-8601 Calender extended(YYYY-MM-DD) format.
-  "gesperrt": false,            	      		// default: false 
-  "gesperrtTransitiv": false,	          
+  "fusszeileFuerAussenauftritt" : "...", 	  // mit \n  als Zeilentrenner
+  "geburtsdatum" : "1970-01-01",      	  	  // ISO-8601 Calender extended(YYYY-MM-DD) format.
+  "gesperrt": false,            	          // default: false 
+  "gesperrtTransitiv": false,	          	  // true, wenn ein übergeordneter Partner gesperrt ist. (readonly)
+  "id":"...",                 				  // EUROPACE 2 PartnerId (readonly)
   "mobilnummer" : "...",
   "nachname" : "...",
-  "rechtDarfEinstellungenOeffnen" : false, 	// default false
-  "rechtDarfPartnerAnlegen" : false, 			// default false
-  "rechtEchtgeschaeftErlaubt" : true, 			// default false
+  "rechtDarfEinstellungenOeffnen" : false,   // default false
+  "rechtDarfPartnerAnlegen" : false, 		  // default false
+  "rechtEchtgeschaeftErlaubt" : true, 		  // default false
   "titelFunktion" : "...",
   "telefonnummer" : "...",
+  "typ": "PERSON",            				  
   "vorname" : "...",
   "webseiteUrl" : "..."
 }
 ```
+
+Dabei gilt:
+- Die Reihenfolge der Attribute spielt keine Rolle.
+- Die Attributbezeichner sind case-sensitive.
+- Gültige Werte für das Attribut "anrede" sind "HERR" und "FRAU".
+- Zeilenumbrüche in "fusszeileFuerAussenauftritt" können durch '\n' erreicht werden.
+
 
 ### Datenhaushalt einer Organisation
 ```
@@ -118,74 +80,70 @@ Einige Felder seien hier herausgestellt:
      "referenzFeld" : "...."
   },
   "email" : "...",  
-  "externePartnerId" : "...", // Eine beliebige, extern erzeugte Id. Z.B. SAP oder CRM Nummer.
+  "externePartnerId" : "...", 		// Eine beliebige, extern erzeugte Id. Z.B. SAP oder CRM Nummer.
   "faxnummer" : "...",
   "firmenname" : "...",
   "firmennameZusatz" : "...",
   "fusszeileFuerAussenauftritt" : "...", 		// mit \n  als Zeilentrenner
   "gesperrt": false,            	      		// default: false 
-  "gesperrtTransitiv": false,	          
-  "id":"...",                 					// EUROPACE 2 PartnerId
+  "gesperrtTransitiv": false,	          		// true, wenn ein übergeordneter Partner gesperrt ist. (readonly)
+  "id":"...",                 					// EUROPACE 2 PartnerId (readonly)
   "telefonnummer" : "...",
   "typ": "ORGANISATION",            
   "webseiteUrl" : "..."
 }
 ```
+Dabei gilt:
+- Die Reihenfolge der Attribute spielt keine Rolle.
+- Die Attributbezeichner sind case-sensitive.
+- Zeilenumbrüche in "fusszeileFuerAussenauftritt" können durch '\n' erreicht werden.
 
-## Abruf von Partner Stammdaten
 
-Die Stammdaten eines Partners können mittels HTTP-GET Methode abgerufen werden. Sie werden als JSON Dokument zurückgeliefert.
-Das Url-Template für den Abfruf lautet:
 
+## Die HTTP Schnittstelle
+
+Die HTTP Schnittstelle der PEX-API ist unter der Basis-Url
 ```
-https://www.europace2.de/partnermanagement/partner/{PartnerId}
+https://www.europace2.de/partnermanagement/partner/
 ```
-
-Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 OK**. 
-
-Der Body der Response enthält die aktuellen Stammdaten im JSON Format.
-Attribute, die nicht gesetzt sind, sind in der Response nicht enthalten.
+erreichbar.
 
 
-### GET Request Beispiel:
-```
-GET https://www.europace2.de/partnermanagement/partner/4712
-X-ApiKey: xxxxxx
-X-PartnerId: ABC987
-X-TraceId: request-2014-10-01-07-59
-Accept: application/json
-```
+### Authentifizierung
 
-### GET Response Beispiel:
-```
-200 OK
-X-TraceId: request-2014-10-01-07-59
-Content-Type: application/json;charset=utf-8
+Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierung erfolgt über HTTP Header.
 
-{
-  "_links" : {
-    "self" : "https://www.europace2.de/partnermanagement/partner/4712"
-  },
-  "id":"4712",
-  "anrede" : "HERR",
-  "externePartnerId" : "123456",
-  "geburtsdatum" : "1970-01-01",
-  "gesperrt": false,
-  "gesperrtTransitiv": false,
-  "nachname" : "Mustermann",
-  "rechtDarfEinstellungenOeffnen" : true,
-  "rechtDarfPartnerAnlegen" : false,
-  "rechtEchtgeschaeftErlaubt" : true,
-  "vorname" : "Max",
-  "telefonnummer" : "030 123456",
-  "webseiteUrl" : "https://github.com/hypoport/europace2-api"
-}
-```
+Request Header Name | Beschreibung
+-----------------|-------------
+X-ApiKey         | API Key des Benutzers / der Organisation
+X-PartnerId      | Europace2 PartnerId des Aufrufers
+
+Den API Key erhalten Sie von Ihrem Ansprechpartner bei EUROPACE 2. Die PartnerId finden Sie in den Einstellungen des jeweiligen Partners in der Weboberfläche des Partnermanagements.
+
+Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.
+
+
+### TraceId zur Nachverfolgbarkeit von Requests
+
+Für jeden Request sollte eine eindeutige id (TraceId) generiert werden, die den Request im EUROPACE 2 System nachverfolgbar macht und so bei etwaigen Problemen oder Fehlern die systemübergreifende Analyse erleichtert.
+Die Übermittlung der TraceId erfolgt über einen HTTP Header und wird als solcher auch in der Response zurückgeliefert. Wird keine TraceId übermittelt, enthält die Response eine in EUROPACE 2 automatisch erzeugte TraceId. 
+
+Request / Response Header Name | Beschreibung
+-----------------|-------------
+X-TraceId        | eindeutige Id für jeden Request
+
+### Content-Type
+
+Die Schnittstelle liefert Daten auschließlich mit Content-Type "application/json". Entsprechend muß im Request der Accept-Header gesetzt werden:
+
+Request Header Name | Header Value
+------------|-------------
+Accept      | application/json
 
 ## Anlegen eines neuen Partners
 
 Partner können per HTTP POST angelegt werden.
-Für das Anlegen eines neuen Partners erfolgt immer unterhalb eines bestehenden Partners. 
+Das Anlegen eines neuen Partners erfolgt immer unterhalb eines bestehenden Partners. 
 Das Url-Template für das Anlegen eines neuen Partners unterhalb von {PartnerId} lautet:
 
 ```
@@ -256,12 +214,64 @@ Content-Type: application/json;charset=utf-8
 }
 ```
 
+
+## Abruf eines Partners
+
+Die Stammdaten eines Partners können mittels HTTP-GET Methode abgerufen werden. Sie werden als JSON Dokument zurückgeliefert.
+Das Url-Template für den Abfruf lautet:
+
+```
+https://www.europace2.de/partnermanagement/partner/{PartnerId}
+```
+
+Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 OK**. 
+
+Der Body der Response enthält die aktuellen Stammdaten im JSON Format.
+Attribute, die nicht gesetzt sind, sind in der Response nicht enthalten.
+
+
+### GET Request Beispiel:
+```
+GET https://www.europace2.de/partnermanagement/partner/4712
+X-ApiKey: xxxxxx
+X-PartnerId: ABC987
+X-TraceId: request-2014-10-01-07-59
+Accept: application/json
+```
+
+### GET Response Beispiel:
+```
+200 OK
+X-TraceId: request-2014-10-01-07-59
+Content-Type: application/json;charset=utf-8
+
+{
+  "_links" : {
+    "self" : "https://www.europace2.de/partnermanagement/partner/4712"
+  },
+  "id":"4712",
+  "anrede" : "HERR",
+  "externePartnerId" : "123456",
+  "geburtsdatum" : "1970-01-01",
+  "gesperrt": false,
+  "gesperrtTransitiv": false,
+  "nachname" : "Mustermann",
+  "rechtDarfEinstellungenOeffnen" : true,
+  "rechtDarfPartnerAnlegen" : false,
+  "rechtEchtgeschaeftErlaubt" : true,
+  "vorname" : "Max",
+  "telefonnummer" : "030 123456",
+  "webseiteUrl" : "https://github.com/hypoport/europace2-api"
+}
+```
+
+
 ## Modifizieren eines Partners
 
 Attribute eines Partners können mittels HTTP PATCH modifiziert werden.
 Dabei werden **ausschließlich** diejenigen Attribute überschrieben, die im PATCH Request enthalten sind. Alle anderen Attribute werden nicht geändert.
 
-Hintergrund: Der Datenhaushalt der API ist kleiner als der eines Partners. Auch der Datenhaushalt externer Client-Systeme ist i.d.R. geringer als die API. Damit über die Oberfläche "per Hand" eingetragene Werte nicht durch (fehlende) Attribute eines API Aufrufs verloren gehen, nutzen wir die PATCH Semantik.
+Hintergrund: Der Datenhaushalt der API ist kleiner als der eines Partners im EUROPACE 2 Partnermanagement. Zudem ist der Datenhaushalt externer Systeme i.d.R. kleiner als der der API. Damit Werte, die über die Weboberfläche "per Hand" eingetragene wurden, nicht durch (fehlende) Attribute eines API Aufrufs verloren gehen, wird die PATCH Semantik angewandt.
 
 Das Url-Template ist dasselbe wie für den Abruf eines Partners:
 
@@ -288,7 +298,7 @@ Dies kann zur Erfolgskontrolle genutzt werden. Attribute, die bereits gesetzt wa
 ```
 PATCH https://www.europace2.de/partnermanagement/partner/4712
 X-ApiKey: xxxxxxx
-X-ApiKey: ABC987
+X-PartnerId: ABC987
 X-TraceId: ff-request-2014-10-01-07-56
 Accept: application/json
 Content-Type: application/json;charset=utf-8
@@ -331,7 +341,7 @@ Content-Type: application/json;charset=utf-8
 - Rechte können nur vergeben bzw. geändert werden, wenn der Aufrufer sie selbst besitzt. Ist dies nicht gegeben, erhält der Aufrufer eine HTTP Response mit Statuscode **403 FORBIDDEN**. 
 
 
-## Validierungen:
+## Validierungen
 
 Folgende Attribute werden validiert:
 
@@ -339,16 +349,46 @@ Folgende Attribute werden validiert:
 - "anrede" gültige Werte: "HERR", "FRAU"
 - "geburtsdatum" gültiges Format ISO8601 extended: "YYYY-MM-DD" 
 
+
 Schlägt eine dieser Validierungen fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **400 BAD REQUEST**. Im Response Body befinden sich Details zur fehlgeschlagenen Validierung.
 
-### Beispiel fehlgeschlagene Validierung
+### Beispiel: fehlgeschlagene Validierung
+```
+PATCH https://www.europace2.de/partnermanagement/partner/4712
+X-ApiKey: xxxxxxx
+X-PartnerId: ABC987
+X-TraceId: ff-request-2014-10-01-07-55
+Accept: application/json
+Content-Type: application/json;charset=utf-8
+
+{
+  "anrede":"abc"
+}
+```
+
 ```
 400 BAD REQUEST
 X-TraceId : ff-request-2014-10-01-07-55
 Content-Type: application/json
 
 {
-  "message" : "Enum literal für 'anrede' muss FRAU oder HERR sein.: Unbestimmt",
+  "message" : "Enum literal für 'anrede' muss FRAU oder HERR sein.: abc",
   "traceId" : " ff-request-2014-10-01-07-55"
 }
 ```
+
+## Hinweise
+
+### Anforderungen an die Vollständigkeit für BaufiSmart
+
+Für eine erfolgreiche Angebotsannahme in BaufiSmart ist es für die nachfolgenden Prozesse erforderlich, daß für den Kundenbetreuer des Vorgangs die folgenden Attribute im Partnermanagement gepflegt sind:
+
+- anrede
+- vorname
+- nachname
+- anschrift
+- bankverbindung
+- email
+
+Eine Angebotsannahme ist andernfalls nicht möglich.
+
