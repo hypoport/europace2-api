@@ -8,6 +8,17 @@ Das Partnermanagment von EUROPACE 2 dient Organisationen zur Abbildung der eigen
 - Partner zu modifizieren.
 
 
+## Inhalt
+* [Datenformat der Partner Stammdaten](#datenformat-der-partner-stammdaten)
+* [Die HTTP Schnittstelle](#die-http-schnittstelle)
+* [Anlegen eines neuen Partners](#anlegen-eines-neuen-partners)
+* [Abruf eines Partners](#abruf-eines-partners)
+* [Modifizieren eines Partners](#modifizieren-eines-partners)
+* [Berechtigungen](#berechtigungen)
+* [Validierungen](#validierungen)
+* [Hinweise](#hinweise)
+
+
 ## Datenformat der Partner Stammdaten
 
 Die PEX API stellt die Partner Stammdaten als JSON Dokument bereit.
