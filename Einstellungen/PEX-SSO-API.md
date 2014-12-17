@@ -24,7 +24,7 @@ Der öffentliche RSA key muss in EUROPACE 2 hinterlegt sein, um die Signatur des
 curl -X PUT
      -H "Accept: application/json" 
      -H "X-ApiKey: ${apiKey}" 
-     -H "X-PartnerId: {$partnerId}"
+     -H "X-PartnerId: ${partnerId}"
      -H "X-TraceId: `date "+%Y-%m-%dT%H:%M:%S-test"`"
      --data @public-key.pem
      https://ep2.mtp.rz-hypoport.local/partnermanagement/partner/${issuerId}/sso-pub-key
