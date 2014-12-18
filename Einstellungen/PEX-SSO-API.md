@@ -1,9 +1,14 @@
-__DRAFT__
 
 PEX SSO (Silent Sign On) API
 ============================
 
-EUROPACE 2 erlaubt es seinen Partner, sich neben der Benutzernamen- / Passwort-Anmeldung, auch per "Silent Sign On" einzuloggen. Dieses Dokument erläutert Ihnen die verwendeten technischen Standards und welche Schritte zu einer erfolgreichen Anbindung notwendig sind.
+EUROPACE 2 erlaubt es seinen Partnern, Benutzer per _Silent Sign On_ anzumelden. 
+
+_Silent Sign On_ in ein Verfahren, das es ermöglicht, einen Benutzer von einer Webseite zu BaufiSmart weiter zu leiten, ohne das sich dieser erneut anmelden muss.
+
+EUROPACE 2 nutzt dafür den Internet Standard [JWT](http://jwt.io) mit [RSA](http://de.wikipedia.org/wiki/RSA-Kryptosystem) als Signaturverfahren.
+
+Dieses Dokument erläutert Ihnen die verwendeten technischen Standards und welche Schritte zu einer erfolgreichen Anbindung notwendig sind.
 
 Erzeugung der RSA Keys
 ----------------------
