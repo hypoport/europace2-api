@@ -78,3 +78,4 @@ Der soeben erzeugte token kann nun zur Anmeldung an EUROPACE 2 verwendet werden.
 https://www.europace2.de/partnermanagement/login?redirectTo=/uebersicht&authentication=${jwt}
 ```
 
+![Sequenzdiagramm für die EUROPACE 2 Anmeldung via Silent Sign On](Sequence.png?raw=true)
