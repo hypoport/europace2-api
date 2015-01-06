@@ -7,5 +7,6 @@ PEX steht für "Partnermanagement Extern". Unter dem Akronym "PEX" sind alle API
 
 Vorhandene API's:
 
-- Zugriff auf die Partner der EUROPACE 2 Plattform erhalten sie durch die [PEX-Partner-API](./PEX-Partner-API.md).
-- Eine "stillschweigende" Anmeldung an der EUROPACE 2 Plattform ist mit Hilfe der [PEX-SSO-API](./PEX-SSO-API.md) möglich.
+- [PEX Benutzername Passwort API](./PEX-Benutzername-Passwort-API)
+- [PEX SSO API](./PEX-SSO-API.md) zur "stillschweigende" Anmeldung an der EUROPACE 2 Plattform
+- [PEX Partner API](./PEX-Partner-API.md) bietet Zugriff auf die Partnerdaten
