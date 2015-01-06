@@ -20,11 +20,11 @@ eine Login-Button enthält. Die Seite enthält zusätzliche Komfort-Funktionen f
 
 Diese Seite kann mittels iFrame direkt eingebettet werden:
 
-````
+```
 <iframe src="https://europace2.de/partnermanagement/partner-login-box.html" 
 width="366px" height="250px" style="margin: 0px 0px 0px 0px;"></iframe>
 
-````
+```
 
 Alternativ dient diese Seite als ''Kopiervorlage'' zum direkten Einbetten in die
 Partner-Webseite. Folgende Elemente sind zu Kopieren:
@@ -34,7 +34,7 @@ Partner-Webseite. Folgende Elemente sind zu Kopieren:
 
 Die Html Seite hat keinerlei externe Abhängigkeiten auf CSS oder Javascript Bibliotheken. 
 
-![Eingebettete Login-Box von EUROPACE2](partner_login_box.png?raw=true)
+![Eingebettete Login-Box von EUROPACE2](images/partner_login_box.png?raw=true)
 
 
 ### Einloggen per HTTP POST Request

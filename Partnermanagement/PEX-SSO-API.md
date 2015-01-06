@@ -81,4 +81,4 @@ https://www.europace2.de/partnermanagement/login?redirectTo=/uebersicht&authenti
 
 Das folgende Sequenzdiagramm erläutert das Zusammenspiel der Kollaborateure in der HTTP Netzwerkebene:
 
-![Sequenzdiagramm für die EUROPACE 2 Anmeldung via Silent Sign On](Sequence.png?raw=true)
+![Sequenzdiagramm für die EUROPACE 2 Anmeldung via Silent Sign On](images/Sequence.png?raw=true)
