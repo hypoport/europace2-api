@@ -77,5 +77,8 @@ Der soeben erzeugte token kann nun zur Anmeldung an EUROPACE 2 verwendet werden.
 ```
 https://www.europace2.de/partnermanagement/login?redirectTo=/uebersicht&authentication=${jwt}
 ```
-### Sequenzdiagramm
+### Schematischer Ablauf
+
+Das folgende Sequenzdiagramm erläutert das Zusammenspiel der Kollaborateure in der HTTP Netzwerkebene:
+
 ![Sequenzdiagramm für die EUROPACE 2 Anmeldung via Silent Sign On](Sequence.png?raw=true)
