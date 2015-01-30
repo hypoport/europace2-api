@@ -31,11 +31,17 @@ curl -X PUT
      -H "X-ApiKey: ${apiKey}" 
      -H "X-PartnerId: ${partnerId}"
      -H "X-TraceId: `date "+%Y-%m-%dT%H:%M:%S-test"`"
+     -H "Content-Type: text/plain;charset=utf-8"
      --data @public-key.pem
      https://ep2.mtp.rz-hypoport.local/partnermanagement/partner/${issuerId}/sso-pub-key
 ```
 
 apiKey und partnerId müssen einer Organisationseinheit identifizieren, die "Einstellungsrechte" auf den _issuerId_ hat.
+Die _issuerId_ entspricht der partnerId, für die der Key hinterlegt werden soll.
+
+_Hinweis_
+Das interne 'MTP' Test-System verwendet ein selbst-signiertes SSL-Zertifikat. _curl_ kennt dieses Zertifikat nicht.
+Deshalb muss man _curl_ das Zertifikat bekannt machen - siehe [Details on Server SSL Certificates](http://curl.haxx.se/docs/sslcerts.html)
 
 
 Erzeugen eines Json Web Tokens (JWT)
