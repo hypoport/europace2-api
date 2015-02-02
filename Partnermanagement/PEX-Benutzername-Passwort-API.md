@@ -45,7 +45,7 @@ Europace 2 folgenden Request absenden.
 Request
 
 ````
-POST https://www.europace2.de/partnermanagement/login.do?redirectTo=%2FvorgangsManagementFrontend
+POST https://www.europace2.de/partnermanagement/login.do?oeffne=%2FvorgangsManagementFrontend
 ---
 Header:
 Content-type: application/x-www-form-urlencoded;charset=UTF-8
@@ -55,7 +55,7 @@ username=Mustermann@beispiel.de&password=4711
 
 ````
 
-Der URL Parameter ''redirectTo'' ist optional. Dieser kann benutzt werden,
+Der URL Parameter ''oeffne'' ist optional. Dieser kann benutzt werden,
 um die Zieladresse nach erfolgreichem Login festzulegen.
 
 Response (korrekte Anmeldedaten):
