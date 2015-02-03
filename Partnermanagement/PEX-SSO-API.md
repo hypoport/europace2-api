@@ -33,7 +33,7 @@ curl -X PUT
      -H "X-TraceId: `date "+%Y-%m-%dT%H:%M:%S-test"`"
      -H "Content-Type: text/plain;charset=utf-8"
      --data @public-key.pem
-     https://ep2.mtp.rz-hypoport.local/partnermanagement/partner/${issuerId}/sso-pub-key
+     https://www.europace2.de/partnermanagement/partner/${issuerId}/sso-pub-key
 ```
 
 apiKey und partnerId müssen einer Organisationseinheit identifizieren, die "Einstellungsrechte" auf den _issuerId_ hat.
