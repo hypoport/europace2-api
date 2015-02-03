@@ -10,6 +10,19 @@ EUROPACE 2 nutzt dafür den Internet Standard [JWT](http://jwt.io) mit [RSA](htt
 
 Dieses Dokument erläutert Ihnen die verwendeten technischen Standards und welche Schritte zu einer erfolgreichen Anbindung notwendig sind.
 
+### Übersicht der notwendigen Schritte als Shell Skripte
+
+
+Folgende Script Aufrufe spielen den Prozess exemplarisch durch. Benötigt werden der API-Key und die Partner-Id der Organisation (issuer) sowie die Partner-Id des einzuloggenden Benutzers.
+
+Es muss Java 1.8 installiert sein.
+
+```
+./generate-key.sh
+./upload-key.sh  <api-key> <partnerId_des_key_issuers>
+./login-via-sso.sh <partnerId_des_einzuloggenden> <partnerId_des_key_issuers> [redirectTarget]
+```
+
 Erzeugung der RSA Keys
 ----------------------
 
@@ -27,13 +40,13 @@ Der öffentliche RSA key muss in EUROPACE 2 hinterlegt sein, um die Signatur des
 
 ```
 curl -X PUT
-     -H "Accept: application/json" 
-     -H "X-ApiKey: ${apiKey}" 
-     -H "X-PartnerId: ${partnerId}"
-     -H "X-TraceId: `date "+%Y-%m-%dT%H:%M:%S-test"`"
-     -H "Content-Type: text/plain;charset=utf-8"
-     --data @public-key.pem
-     https://www.europace2.de/partnermanagement/partner/${issuerId}/sso-pub-key
+	 -H "Accept: application/json" 
+	 -H "X-ApiKey: ${apiKey}" 
+	 -H "X-PartnerId: ${partnerId}"
+	 -H "X-TraceId: `date "+%Y-%m-%dT%H:%M:%S"`"
+	 -H "Content-Type: text/plain;charset=utf-8"
+	 --data @public-key.pem
+	 https://www.europace2.de/partnermanagement/partner/${issuerId}/sso-pub-key
 ```
 
 apiKey und partnerId müssen einer Organisationseinheit identifizieren, die "Einstellungsrechte" auf den _issuerId_ hat.
@@ -73,11 +86,32 @@ java -jar target/jwt-toolbox-jar-with-dependencies.jar private-key.pem ${partner
 Einloggen via JWT mit Redirect
 ------------------------------
 
-Der soeben erzeugte token kann nun zur Anmeldung an EUROPACE 2 verwendet werden. Im Browser oder per curl folgende URL per GET abrufen:
+Der soeben erzeugte token kann nun zur Anmeldung an EUROPACE 2 verwendet werden. 
+
+Nun kann im Browser folgende URL aufgerufen werden:
 
 ```
 https://www.europace2.de/partnermanagement/login?redirectTo=/uebersicht&authentication=${jwt}
 ```
+
+Alternativ kann auch ein POST request mit gesetztem X-Authentication header verwenden werden:
+
+```
+POST /partnermanagement/login?redirectTo=/uebersicht&authentication=${jwt} HTTP/1.1
+Host: www.europace2.de
+X-Authentication: ${jwt}
+X-TraceId: Eine_TraceId_zB_Datum_rueckwaerts
+```
+
+Response:
+
+```
+HTTP/1.1 302 FOUND
+Location: /uebersicht
+Set-Cookie: sessionId=dd800897698f8e2637d5c39e33083764 
+```
+
+
 ### Schematischer Ablauf
 
 Das folgende Sequenzdiagramm erläutert das Zusammenspiel der Kollaborateure in der HTTP Netzwerkebene:
