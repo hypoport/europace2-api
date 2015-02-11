@@ -59,7 +59,7 @@ Für manuelle, explorative Tests der SSO Schnittstelle sowie als "Kopiervorlage"
 
 Folgende Komponenten müssen installiert sein:
 
-- [Java7](http://www.java.com/en/download/index.jsp)
+- [Java8](http://www.java.com/en/download/index.jsp)
 - [Maven3](http://maven.apache.org/download.cgi)
 
 
