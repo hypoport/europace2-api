@@ -25,6 +25,10 @@ Es muss Java 1.8 installiert sein.
 ./login-via-sso.sh <partnerId_des_einzuloggenden> <partnerId_des_key_issuers> [redirectTarget]
 ```
 
+Die Skripte [generate-key.sh](./generate-key.sh) [upload-key.sh](./upload-key.sh) [login-via-sso.sh](./login-via-sso.sh)
+automatisieren die manuellen Schritte, um mit OpenSSL und curl die Keys zu erzeugen und hochzuladen.
+
+
 Erzeugung der RSA Keys
 ----------------------
 
