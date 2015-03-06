@@ -146,6 +146,12 @@ Nun kann im Browser folgende URL aufgerufen werden:
 https://www.europace2.de/partnermanagement/login?redirectTo=/uebersicht&authentication=${jwt}
 ```
 
+Aufruf mit _curl_:
+
+```
+curl -v -X POST "https://www.europace2.de/partnermanagement/login?redirectTo=/uebersicht&authentication=`java -jar jwt-toolbox.jar private-key.pem ${partnerToLogonId} ${issuerId}`"
+```
+
 Alternativ kann auch ein POST request mit gesetztem X-Authentication header verwenden werden:
 
 ```
@@ -154,6 +160,13 @@ Host: www.europace2.de
 X-Authentication: ${jwt}
 X-TraceId: Eine_TraceId_zB_Datum_rueckwaerts
 ```
+
+Aufruf mit _curl_:
+
+```
+curl -v -X POST -H "X-Authentication: `java -jar jwt-toolbox.jar private-key.pem ${partnerToLogonId} ${issuerId}`" "https://www.europace2.de/partnermanagement/login?redirectTo=/uebersicht"
+```
+
 
 Response:
 
