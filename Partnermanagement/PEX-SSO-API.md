@@ -2,7 +2,7 @@
 PEX SSO (Silent Sign On) API
 ============================
 
-EUROPACE 2 erlaubt es seinen Partnern, Benutzer per _Silent Sign On_ anzumelden. 
+EUROPACE 2 erlaubt es seinen Partnern, Benutzer per _Silent Sign On_ anzumelden.
 
 _Silent Sign On_ in ein Verfahren, das es ermöglicht, einen Benutzer von einer Webseite zu BaufiSmart weiter zu leiten, ohne das sich dieser erneut anmelden muss.
 
@@ -46,8 +46,8 @@ Der öffentliche RSA key muss in EUROPACE 2 hinterlegt sein, um die Signatur des
 
 ```
 curl -X PUT
-	 -H "Accept: application/json" 
-	 -H "X-ApiKey: ${apiKey}" 
+	 -H "Accept: application/json"
+	 -H "X-ApiKey: ${apiKey}"
 	 -H "X-PartnerId: ${partnerId}"
 	 -H "X-TraceId: `date "+%Y-%m-%dT%H:%M:%S"`"
 	 -H "Content-Type: text/plain;charset=utf-8"
@@ -80,7 +80,7 @@ Die JSON Struktur des Token Headers sieht wie folgt aus:
 }
 ````
 
-Das Feld _iss_ beschreibt die PartnerId der unterschreibenden Person oder Organisation.
+Das Feld _iss_ beschreibt die PartnerId der unterschreibenden Person oder Organisation (Bürge).
 Das Feld _alg_ beschreibt, dass der _RS256_ Algorithmus zum Signieren verwendet wird. Es wird ausschließlich nur dieser Algorithmus unterstützt.
 
 
@@ -96,7 +96,11 @@ Das Feld _alg_ beschreibt, dass der _RS256_ Algorithmus zum Signieren verwendet 
 Das Feld _sub_ beschreibt die PartnerId der einzuloggenden Person oder Organisation.
 Das Feld _exp_ beschreibt den Ablaufzeitpunkt bzw. maximale Gültigkeit dieses Tokens in Form der [Unixzeit](http://de.wikipedia.org/wiki/Unixzeit)
 
+#### Absicherung durch die Hirachie
 
+Es ist nur erlaubt Partner die in der Europace Struktur untergeordnet sind, sowie sich selbst, als vertrauenswürdig einzustufen. Das heißt, dass der
+Bürge (Issuer) im Baum immer über der einzuloggenden Person (Subject) stehen muss.
+Es ist nicht erlaubt Einer Person oder Organisation in einem Nachbarbaum den Login auf die Plattform zu ermöglichen. 
 
 ### Java Beispiel
 
@@ -173,7 +177,7 @@ Response:
 ```
 HTTP/1.1 302 FOUND
 Location: /uebersicht
-Set-Cookie: sessionId=dd800897698f8e2637d5c39e33083764 
+Set-Cookie: sessionId=dd800897698f8e2637d5c39e33083764
 ```
 
 
