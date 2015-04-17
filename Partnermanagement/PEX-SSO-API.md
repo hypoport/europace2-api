@@ -98,9 +98,9 @@ Das Feld _exp_ beschreibt den Ablaufzeitpunkt bzw. maximale Gültigkeit dieses T
 
 #### Absicherung durch die Hirachie
 
-Es ist nur erlaubt Partner, die in der Europace Struktur untergeordnet sind, sowie sich selbst, als vertrauenswürdig einzustufen. Das heißt, dass der
+Es ist nur erlaubt, Partner, die in der Europace Struktur untergeordnet sind, sowie sich selbst, als vertrauenswürdig einzustufen. Das heißt, dass der
 Bürge (Issuer) im Baum immer über der einzuloggenden Person (Subject) stehen muss.
-Es ist nicht erlaubt Einer Person oder Organisation in einem Nachbarbaum den Login auf die Plattform zu ermöglichen.
+Es ist nicht erlaubt, einer Person oder Organisation, in einem Nachbarbaum den Login auf die Plattform zu ermöglichen.
 
 ### Java Beispiel
 
