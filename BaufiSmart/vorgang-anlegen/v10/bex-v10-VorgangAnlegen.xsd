@@ -1217,7 +1217,7 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
           <xs:documentation>Beispiel: lead4711</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <xs:element name="sendMail" type="Boolean" minOccurs="0" maxOccurs="1" >
+    <xs:element name="sendNotification" type="Boolean" minOccurs="0" maxOccurs="1" >
         <xs:annotation>
           <xs:documentation>Dient zur Steuerung des Versendens einer Email nach dem Import des Vorgangs an den Kundenbetreuer, falls dieser eine Email erfasst hat.   Beispiel: false</xs:documentation>
         </xs:annotation>
