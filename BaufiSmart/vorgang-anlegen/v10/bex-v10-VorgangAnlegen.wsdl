@@ -2052,6 +2052,7 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
 <xs:enumeration value="YE"/>
 <xs:enumeration value="ZM"/>
 <xs:enumeration value="ZW"/>
+<xs:enumeration value="KO"/>
 </xs:restriction>
 </xs:simpleType>
 
