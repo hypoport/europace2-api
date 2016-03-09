@@ -30,6 +30,8 @@
     </xs:element>
     <xs:element name="empfaenger" type="PartnerInformation" minOccurs="1" maxOccurs="1" >
     </xs:element>
+    <xs:element name="tippgeber" type="PartnerInformation" minOccurs="0" maxOccurs="1">
+    </xs:element>
     <xs:element name="teilVorgangId" type="String" minOccurs="1" maxOccurs="1" >
         <xs:annotation>
           <xs:documentation>Beispiel: 4fc4932a2206dadba1473c88</xs:documentation>
@@ -74,6 +76,11 @@
         <xs:annotation>
           <xs:documentation>Beispiel: NEUTRAL</xs:documentation>
         </xs:annotation>
+    </xs:element>
+    <xs:element name="tippgeberPartnerId" type="String" minOccurs="0" maxOccurs="1">
+      <xs:annotation>
+        <xs:documentation>Europace2 PartnerId des Tippgebers</xs:documentation>
+      </xs:annotation>
     </xs:element>
   </xs:sequence>
 </xs:complexType>
@@ -1920,6 +1927,7 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
 <xs:enumeration value="KZ"/>
 <xs:enumeration value="KE"/>
 <xs:enumeration value="KI"/>
+<xs:enumeration value="KO"/>
 <xs:enumeration value="KP"/>
 <xs:enumeration value="KR"/>
 <xs:enumeration value="KW"/>
@@ -2052,7 +2060,6 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
 <xs:enumeration value="YE"/>
 <xs:enumeration value="ZM"/>
 <xs:enumeration value="ZW"/>
-<xs:enumeration value="KO"/>
 </xs:restriction>
 </xs:simpleType>
 
@@ -2120,6 +2127,7 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
 <xs:element name="DatenKontext" type="DatenKontext"/>
 <xs:element name="EmpfaengerPartnerId" type="String"/>
 <xs:element name="LoggingId" type="LoggingId"/>
+  <xs:element name="TippgeberPartnerId" type="String"/>
 </xs:schema>
   </wsdl:types>
   <wsdl:message name="VorgangAnlegenAnfrage">
