@@ -79,7 +79,7 @@
     </xs:element>
     <xs:element name="tippgeberPartnerId" type="String" minOccurs="0" maxOccurs="1">
       <xs:annotation>
-        <xs:documentation>Europace2 PartnerId des Tippgebers</xs:documentation>
+        <xs:documentation>EUROPACE 2 PartnerId des Tippgebers. Wird ignoriert, wenn auf EUROPACE 2 nicht vorhanden.</xs:documentation>
       </xs:annotation>
     </xs:element>
   </xs:sequence>
