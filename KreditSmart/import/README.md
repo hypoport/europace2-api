@@ -1,9 +1,10 @@
-Diese Schnittstelle wird als "KreditSmart EXtern" - kurz: "KEX" bezeichnet. Sie ermöglicht das automatisierte Anlegen von Vorgängen in KreditSmart.
-<BR>
-<BR>
-### Exportieren eines neuen Vorgangs nach **Kredit**Smart
+# KEX-Vorgang-Import-API 
 
-Neue Vorgänge können per **HTTP POST** exportiert werden.
+Die Schnittstelle ermöglicht das automatisierte Anlegen von Vorgängen in **Kredit**Smart.
+
+## Anlegen eines neuen Vorgangs
+
+Neue Vorgänge können per **HTTP POST** angelegt werden.
 
 Die URL für das Anlegen von Echtgeschäftsvorgängen ist:
 
@@ -16,9 +17,8 @@ Die URL für das Anlegen von Testvorgängen ist:
 Die Daten werden als JSON Dokument im Body des POST Requests übermittelt.
 
 Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **201 CREATED**.
-<BR>
-<BR>
-### Authentifizierung
+
+## Authentifizierung
 
 Für jeden Request ist eine Authentifizierung erforderlich.
 
@@ -38,9 +38,8 @@ Request Header Name</th><th>	Beschreibung</th>
 Das API JWT (JSON Web Token) erhalten Sie von Ihrem Ansprechpartner im **Kredit**Smart Team. 
 
 Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.
-<BR>
-<BR>
-### TraceId zur Nachverfolgbarkeit von Requests
+
+## TraceId zur Nachverfolgbarkeit von Requests
 
 Für jeden Request soll eine eindeutige ID generiert werden, die den Request im EUROPACE 2 System nachverfolgbar macht und so bei etwaigen Problemen oder Fehlern die systemübergreifende Analyse erleichtert.
 
@@ -52,12 +51,12 @@ Die Übermittlung der X-TraceId erfolgt über einen HTTP Header.
 <tr>
 <td>X-TraceId</td>
 <td>eindeutige Id für jeden Request</td>
-<td>&lt;Kürzel des aufrufenden Systems&gt;-&lt;8Ziffern&gt;</td>
-<td>sys-12345678</td>
+<td>&lt;Kürzel des aufrufenden Systems&gt;&lt;8Ziffern&gt;</td>
+<td>sys12345678</td>
 </tr>
 </table>
-<BR>
-### Content-Type
+
+## Content-Type
 
 Die Schnittstelle akzeptiert Daten mit Content-Type "**application/json**".
 
@@ -73,7 +72,7 @@ Request Header Name</th><th>	Header Value</th>
 </tr>
 </table>
 
-#### POST Request Beispiel:
+### POST Request Beispiel:
 
 	POST https://www.europace2.de/kreditsmart/kex/vorgang
 	X-Authentication: xxxxxxx
@@ -90,15 +89,15 @@ Request Header Name</th><th>	Header Value</th>
 		}
 	}
     
-#### POST Response Beispiel:
+### POST Response Beispiel:
 
 	201 CREATED
 	{
 		"vorgangsnummer": "AB1234",
 		"messages": []
 	}
-<BR>
-### Fehlercodes
+
+## Fehlercodes
 
 Wenn der Request nicht erfolgreich verarbeitet werden konnte, liefert die Schnittstelle einen Fehlercode, auf den die aufrufende Anwendung reagieren kann, zurück.
 
@@ -118,9 +117,8 @@ Fehlercode</th><th>Nachricht</th><th>	Erklärung</th>
 </table>
 
 Weitere Fehlercodes und ihre Bedeutung siehe Wikipedia: [HTTP-Statuscode](https://de.wikipedia.org/wiki/HTTP-Statuscode)
-<BR>
-<BR>
-### Request Format
+
+## Request Format
 
 Die Angaben werden als JSON im Body des Requests gesendet.
 
@@ -138,7 +136,7 @@ Alle übermittelten Daten werden in **Kredit**Smart übernommen, mit Ausnahme vo
 An verschiedenen Stellen im Request ist die Angabe eines Landes oder der Staatsangehörigkeit notwendig:
 Die Übermittlung erfolgt im Format [ISO-3166/ALPHA-2](https://de.wikipedia.org/wiki/ISO-3166-1-Kodierliste)
 
-#### Vorgang
+### Vorgang
 
     {
 		"kundenbetreuer": Partner,
@@ -154,7 +152,7 @@ Die Übermittlung erfolgt im Format [ISO-3166/ALPHA-2](https://de.wikipedia.org/
 
 Das Feld *kundenbetreuer.partnerId* ist ein Pflichtfeld.
 
-#### Partner
+### Partner
 
 	{
 		"partnerId": String
@@ -162,7 +160,7 @@ Das Feld *kundenbetreuer.partnerId* ist ein Pflichtfeld.
 
 Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12. 
 
-##### Antragsteller
+#### Antragsteller
 
     {
 		"herkunft": Herkunft,
@@ -171,7 +169,7 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
 		"beschaeftigung": Beschäftigung
 	}
 
-##### Herkunft
+#### Herkunft
 
     {
 		"arbeitserlaubnisVorhanden": true | false,
@@ -182,7 +180,7 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
 		"aufenthaltstitel": "VISUM" | "AUFENTHALTSERLAUBNIS" | "NIEDERLASSUNGSERLAUBNIS" | "ERLAUBNIS_ZUM_DAUERAUFENTHALT_EU"
 	}
 
-##### Personendaten
+#### Personendaten
 
     {
 		"titel": [ "DOKTOR" | "PROFESSOR" ]
@@ -199,7 +197,7 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
 	}
 
 
-##### Wohnsituation
+#### Wohnsituation
 
 	{
 		"anschrift": {
@@ -226,7 +224,7 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
 
 Die Angabe *gemeinsamerHaushalt* ist nur beim zweiten Antragsteller relevant.
 
-##### Beschäftigung
+#### Beschäftigung
 
 
 	{
@@ -244,7 +242,7 @@ Die Angabe *gemeinsamerHaushalt* ist nur beim zweiten Antragsteller relevant.
 Die zu befüllende Felder zur Beschäftigung ist abhängig von der ausgewählten Beschäftigungsart.<BR>Ist keine Beschäftigungsart gesetzt bzw. andere Felder, die nicht zur Beschäftigungsart passen, befüllt, werden sie ignoriert.
 Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berücksichtigt
 
-##### Arbeiter und Angestellter
+#### Arbeiter und Angestellter
 
 	{
 		"beschaeftigungsverhaeltnis": {
@@ -269,14 +267,14 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		}
 	}
 
-##### Arbeitsloser und Hausfrau
+#### Arbeitsloser und Hausfrau
 
 	{
 		"sonstigesEinkommenMonatlich": Decimal
 	}
 
 
-##### Selbstständiger und Freiberufler
+#### Selbstständiger und Freiberufler
 
 	{
 		"berufsbezeichnung": String,
@@ -295,7 +293,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		"einkommenssteuerVor3Jahren": Decimal
 	}
 
-##### Beamter
+#### Beamter
 
 	{
 		"beschaeftigungsverhaeltnis": {
@@ -319,7 +317,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		}
 	}
 
-##### Rentner
+#### Rentner
 
 	{
 		"staatlicheRenteMonatlich": Decimal,
@@ -335,7 +333,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		}
 	}
 
-##### Arbeitgeber
+#### Arbeitgeber
 
 	{
 		"name": String,
@@ -343,7 +341,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		"branche": "BAUGEWERBE" | "DIENSTLEISTUNGEN" | "ENERGIE_WASSERVERSORGUNG_BERGBAU" | "GEBIETSKOERPERSCHAFTEN" | "HANDEL" | "HOTEL_GASTRONOMIE" | "KREDITINSTITUTE_VERSICHERUNGEN" | "LANDWIRTSCHAFT_FORSTWIRTSCHAFT_FISCHEREI" | "OEFFENTLICHER_DIENST" | "GEMEINNUETZIGE_ORGANISATION" | "PRIVATE_HAUSHALTE" | "SOZIALVERSICHERUNGEN" | "VERARBEITENDES_GEWERBE" | "VERKEHR_TELEKOMMUNIKATION" | "SONSTIGE"
 	}
 
-##### Anschrift
+#### Anschrift
 
 	{
 		"strasse": String,
@@ -354,7 +352,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 	}
     
 
-##### Haushalt
+#### Haushalt
 
     {
 		"verbindlichkeiten": {
@@ -391,11 +389,11 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		}
 	}
 
-##### Antragstellerzuordnung
+#### Antragstellerzuordnung
 
 	"ANTRAGSTELLER_1" | "ANTRAGSTELLER_2" | "BEIDE"
 
-##### Kreditkarte
+#### Kreditkarte
 
 	{
 		"beanspruchterBetrag": Decimal,
@@ -410,7 +408,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		"kreditinstitut": String 
 	}
 	
-##### Dispositionskredit
+#### Dispositionskredit
 
 	{
 		"beanspruchterBetrag": Decimal,
@@ -424,7 +422,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		"kreditinstitut": String 
 	}			
 
-##### Ratenkredit und Sonstige Verbindlichkeit
+#### Ratenkredit und Sonstige Verbindlichkeit
 
 	{
 		"rateMonatlich": Decimal,
@@ -441,7 +439,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		"kreditinstitut": String 
 	}
 
-##### Leasing
+#### Leasing
 
 	{
 		"rateMonatlich": Decimal,
@@ -451,7 +449,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		"gehoertZuAntragsteller": Antragstellerzuordnung
 	}
 
-##### Lebensversicherung
+#### Lebensversicherung
 
 
 	{
@@ -460,7 +458,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		"gehoertZuAntragsteller": Antragstellerzuordnung
 	}
 				
-##### Bausparvertrag
+#### Bausparvertrag
 
 
 	{
@@ -469,21 +467,21 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		"gehoertZuAntragsteller": Antragstellerzuordnung
 	}							
 
-##### Private Krankenversicherung und Unterhaltsverpflichtung
+#### Private Krankenversicherung und Unterhaltsverpflichtung
 
 	{
 		"betragMonatlich": Decimal,
 		"gehoertZuAntragsteller": "ANTRAGSTELLER_1" | "ANTRAGSTELLER_2"
 	}
 				
-##### Sonstige Ausgabe, Mietausgabe und Sonstige Versicherungsausgabe
+#### Sonstige Ausgabe, Mietausgabe und Sonstige Versicherungsausgabe
 
 	{
 		"betragMonatlich": Decimal,
 		"gehoertZuAntragsteller": Antragstellerzuordnung
 	}
 				
-##### Einkunft aus Nebentätigkeit
+#### Einkunft aus Nebentätigkeit
 
 	{
 		"betragMonatlich": Decimal,
@@ -491,7 +489,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		"gehoertZuAntragsteller": "ANTRAGSTELLER_1" | "ANTRAGSTELLER_2"
 	}
 
-##### Ehegattenunterhalt, Sonstige Einnahme und Unbefristete Zusatzrente
+#### Ehegattenunterhalt, Sonstige Einnahme und Unbefristete Zusatzrente
 
 	{
 		"betragMonatlich": Decimal,
@@ -499,7 +497,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 	}
 
 
-##### Immobilie
+#### Immobilie
 
 	{
 		"mieteinnahmenWarmMonatlich": Decimal,
@@ -521,7 +519,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		]
 	}			
 
-##### Kind
+#### Kind
 
 	{
 		"name": String,
@@ -531,7 +529,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 	}	
 				
 
-##### Finanzbedarf
+#### Finanzbedarf
 
     {
 		"fahrzeugkauf": Fahrzeugkauf,
@@ -549,7 +547,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		}
 	}
 
-##### Fahrzeugkauf
+#### Fahrzeugkauf
 
 	{
 		"modell": String,
@@ -564,9 +562,8 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 	}
 
 Fahrzeugkauf wird nur ausgewertet, wenn als Finanzierungszweck "FAHRZEUGKAUF" gesetzt ist.
-<BR>
-<BR>
-### Response Format
+
+## Response Format
 
 Die Angaben werden als JSON im Body der Response gesendet.
 
