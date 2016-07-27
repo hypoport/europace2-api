@@ -10,4 +10,4 @@ Spezifikation: https://github.com/OAI/OpenAPI-Specification
 ## Usage
 
 Open in Swagger Editor: 
-http://editor.swagger.io/#/?import=https://raw.githubusercontent.com/hypoport/europace2-api/master/Produktanbieterdarlehensdaten/padd-api.yaml
+http://editor.swagger.io/#/?import=https://raw.githubusercontent.com/hypoport/europace2-api/master/Produktanbieterdarlehensdaten/swagger.yaml
