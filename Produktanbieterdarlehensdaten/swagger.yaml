@@ -76,6 +76,40 @@ definitions:
       strasse:
         type: string
 
+  DarlehensArt:
+    type: string
+    enum:
+      - Annuitätendarlehen
+      - KfW
+      - Forward
+      - Prolongation
+
+  Euro:
+    type: number
+    format: Eurobetrag
+
+  Prozent:
+    type: number
+    format: Prozentsatz
+
+  Darlehen:
+    properties:
+      kontonummer:
+        type: string
+      darlehensArt:
+        $ref: '#/definitions/DarlehensArt'
+      darlehensBetrag:
+        $ref: '#/definitions/Euro'
+      rate:
+        $ref: '#/definitions/Euro'
+      zinsbindungsende:
+        type: string
+        format: date
+      restschuld:
+        $ref: '#/definitions/Euro'
+      sollZins:
+        $ref: '#/definitions/Prozent'
+
   DarlehensdatenAnfrage:
     type: object
     properties:
@@ -97,5 +131,8 @@ definitions:
     properties:
       darlehensId:
         $ref: '#/definitions/DarlehensId'
-
+      bausteine:
+        type: array
+        items:
+          $ref: '#/definitions/Darlehen'
 
