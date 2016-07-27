@@ -1,0 +1,54 @@
+swagger: "2.0"
+info:
+  description: Produktanbieter-Darlehensdaten API
+  title: PADD API
+  version: 0.0.1
+schemes:
+- http
+produces:
+- application/json
+consumes:
+- application/json
+
+# Pfade und Ressourcen
+paths:
+  /darlehensdaten:
+    post:
+      summary: Anfrage von Darlehensdaten
+      description: TBD
+      operationId: postDarlehensdatenAnfrage
+      parameters:
+        - name: anfrage
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DarlehensdatenAnfrage'
+
+      responses:
+        200:
+          description: Erfolgreiche Antwort
+          schema:
+            $ref: '#/definitions/DarlehensdatenAntwort'
+        default:
+          description: unspezifizierter Fehler
+
+# Objektdefinitionen
+definitions:
+  DarlehensId:
+    type: string
+    description: |
+      Eindeutige ID des Darlehens beim Produktanbieter, z.B. Darlehensnummer, Kontonummer oder IBAN.
+
+  DarlehensdatenAnfrage:
+    type: object
+    properties:
+      darlehensId:
+        $ref: '#/definitions/DarlehensId'
+
+  DarlehensdatenAntwort:
+    type: object
+    properties:
+      darlehensId:
+        $ref: '#/definitions/DarlehensId'
+
+
