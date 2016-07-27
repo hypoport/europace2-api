@@ -63,7 +63,8 @@ definitions:
         type: string
       geburtsdatum:
         description: Geburtsdatum nach RFC3339 1973-03-29
-        type: date
+        type: string
+        format: date
 
   Immobilie:
     description: Daten zur bestehenden Immobilie
@@ -88,6 +89,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Antragsteller'
+      immobilie:
+        $ref: '#/definitions/Immobilie'
 
   DarlehensdatenAntwort:
     type: object
