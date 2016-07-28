@@ -65,9 +65,10 @@ definitions:
       nachname:
         type: string
       geburtsdatum:
-        description: Geburtsdatum nach RFC3339 1973-03-29
+        description: Geburtsdatum nach RFC3339
         type: string
         format: date
+        example: 1973-03-29
 
   Immobilie:
     description: Daten zur bestehenden Immobilie
@@ -117,8 +118,10 @@ definitions:
       rateMonatlich:
         $ref: '#/definitions/Euro'
       zinsbindungsende:
+        description: Zinsbindungsende, Datum nach RFC3339
         type: string
         format: date
+        example: 2020-12-31
       restschuldZinsbindungsende:
         $ref: '#/definitions/Euro'
       sollZins:
