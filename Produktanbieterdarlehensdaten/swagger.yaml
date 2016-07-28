@@ -1,6 +1,8 @@
 swagger: "2.0"
 info:
-  description: Produktanbieter-Darlehensdaten API
+  description: |
+    Produktanbieter-Darlehensdaten API
+    Benutzt werden JSON Datentypen, siehe http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf
   title: PADD API
   version: 0.0.1
 schemes:
@@ -34,10 +36,11 @@ paths:
 
 # Objektdefinitionen
 definitions:
-  DarlehensId:
+  Id:
     type: string
     description: |
-      Eindeutige ID des Darlehens beim Produktanbieter, z.B. Darlehensnummer, Kontonummer oder IBAN.
+      Eindeutige ID als String.
+      Kann Buchstaben, Zahlen oder andere Sonderzeichen enthalten.
 
   PartnerId:
     type: string
@@ -85,27 +88,41 @@ definitions:
       - Prolongation
 
   Euro:
+    description: |
+      JSON Number type ohne Währungssymbol, siehe http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf.
+      Vorkomma ist der Eurobetrag und zwei Nachkommastellen - Cents 0-99.
+      Beispiele: 50000 oder 1234.56
     type: number
     format: Eurobetrag
 
   Prozent:
+    description: |
+      JSON Number type ohne Prozentzeichen, siehe http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf.
+      Prozent ist 100 basierend.
+      Beispiele: 60 oder 2.562
     type: number
     format: Prozentsatz
 
-  Darlehen:
+  Finanzierungsbaustein:
+    description: Repräsentanz eines Teils der Gesamtfinanzierung.
     properties:
       kontonummer:
+        description: IBAN, Konto- oder Unterkontonummer des Produktanbieters.
         type: string
       darlehensArt:
+        description: Definiert die Art des Finanzierungsbausteins.
         $ref: '#/definitions/DarlehensArt'
       darlehensBetrag:
+        description: Ursprünglicher Betrag des Darlehens.
         $ref: '#/definitions/Euro'
-      rate:
+      rateMonatlich:
+        description: Monatliche Rate.
         $ref: '#/definitions/Euro'
       zinsbindungsende:
         type: string
         format: date
-      restschuld:
+      restschuldZinsbindungsende:
+        description: Restschuld zum Ende der Zinsbindung.
         $ref: '#/definitions/Euro'
       sollZins:
         $ref: '#/definitions/Prozent'
@@ -114,7 +131,8 @@ definitions:
     type: object
     properties:
       darlehensId:
-        $ref: '#/definitions/DarlehensId'
+        description: Eindeutige ID des Darlehens beim Produktanbieter, z.B. Darlehensnummer, Kontonummer oder IBAN.
+        $ref: '#/definitions/Id'
       kundenBetreuer:
         $ref: '#/definitions/Partner'
       bearbeiter:
@@ -130,9 +148,11 @@ definitions:
     type: object
     properties:
       darlehensId:
-        $ref: '#/definitions/DarlehensId'
+        description: |
+          Eindeutige ID des Darlehens beim Produktanbieter, z.B. Darlehensnummer, Kontonummer oder IBAN.
+        $ref: '#/definitions/Id'
       bausteine:
         type: array
         items:
-          $ref: '#/definitions/Darlehen'
+          $ref: '#/definitions/Finanzierungsbaustein'
 
