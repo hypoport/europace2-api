@@ -36,10 +36,10 @@ paths:
 
 # Objektdefinitionen
 definitions:
-  Id:
+  DarlehensId:
     type: string
     description: |
-      Eindeutige ID als String.
+      Eindeutige ID des Darlehens beim Produktanbieter, z.B. Darlehensnummer, Kontonummer oder IBAN.
       Kann Buchstaben, Zahlen oder andere Sonderzeichen enthalten.
 
   PartnerId:
@@ -80,6 +80,7 @@ definitions:
         type: string
 
   DarlehensArt:
+    description: Definiert die Art des Finanzierungsbausteins.
     type: string
     enum:
       - Annuitätendarlehen
@@ -110,19 +111,15 @@ definitions:
         description: IBAN, Konto- oder Unterkontonummer des Produktanbieters.
         type: string
       darlehensArt:
-        description: Definiert die Art des Finanzierungsbausteins.
         $ref: '#/definitions/DarlehensArt'
-      darlehensBetrag:
-        description: Ursprünglicher Betrag des Darlehens.
+      darlehensBetrag: # Ursprünglicher Betrag des Darlehens.
         $ref: '#/definitions/Euro'
       rateMonatlich:
-        description: Monatliche Rate.
         $ref: '#/definitions/Euro'
       zinsbindungsende:
         type: string
         format: date
       restschuldZinsbindungsende:
-        description: Restschuld zum Ende der Zinsbindung.
         $ref: '#/definitions/Euro'
       sollZins:
         $ref: '#/definitions/Prozent'
@@ -131,8 +128,7 @@ definitions:
     type: object
     properties:
       darlehensId:
-        description: Eindeutige ID des Darlehens beim Produktanbieter, z.B. Darlehensnummer, Kontonummer oder IBAN.
-        $ref: '#/definitions/Id'
+        $ref: '#/definitions/DarlehensId'
       kundenBetreuer:
         $ref: '#/definitions/Partner'
       bearbeiter:
@@ -150,7 +146,7 @@ definitions:
       darlehensId:
         description: |
           Eindeutige ID des Darlehens beim Produktanbieter, z.B. Darlehensnummer, Kontonummer oder IBAN.
-        $ref: '#/definitions/Id'
+        $ref: '#/definitions/DarlehensId'
       bausteine:
         type: array
         items:
