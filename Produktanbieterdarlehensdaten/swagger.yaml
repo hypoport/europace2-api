@@ -144,8 +144,6 @@ definitions:
     type: object
     properties:
       darlehensId:
-        description: |
-          Eindeutige ID des Darlehens beim Produktanbieter, z.B. Darlehensnummer, Kontonummer oder IBAN.
         $ref: '#/definitions/DarlehensId'
       bausteine:
         type: array
