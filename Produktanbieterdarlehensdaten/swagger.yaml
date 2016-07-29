@@ -50,6 +50,12 @@ definitions:
   Partner:
     type: object
     properties:
+      vorname:
+        type: string
+      nachname:
+        type: string
+      email:
+        type: string
       partnerId:
         $ref: '#/definitions/PartnerId'
 
@@ -57,9 +63,6 @@ definitions:
     description: Daten eines Antragsteller
     type: object
     properties:
-      id:
-        description: Eindeutiger Identifier des Antragstellers im Europace 2 Systems
-        type: string
       vorname:
         type: string
       nachname:
@@ -69,25 +72,23 @@ definitions:
         type: string
         format: date
         example: 1973-03-29
+      anschrift:
+        $ref: "#/definitions/Postadresse"
 
-  Immobilie:
+  Finanzierungsobjekt:
     description: Daten zur bestehenden Immobilie
     properties:
-      plz:
-        type: string
-      ort:
-        type: string
-      strasse:
-        type: string
+      adresse:
+        $ref: "#/definitions/Postadresse"
 
   DarlehensArt:
     description: Definiert die Art des Finanzierungsbausteins.
     type: string
     enum:
-      - Annuitätendarlehen
-      - KfW
-      - Forward
-      - Prolongation
+      - IMMOBILIENDARLEHEN
+      - BAUSPARDARLEHEN
+      - FOERDERDARLEHEN
+      - SONSTIGES_DARLEHEN
 
   Euro:
     description: |
@@ -105,24 +106,23 @@ definitions:
     type: number
     format: Prozentsatz
 
-  Finanzierungsbaustein:
-    description: Repräsentanz eines Teils der Gesamtfinanzierung.
+  BestehendesDarlehen:
     properties:
-      kontonummer:
+      darlehensKontonummer:
         description: IBAN, Konto- oder Unterkontonummer des Produktanbieters.
         type: string
       darlehensArt:
         $ref: '#/definitions/DarlehensArt'
-      darlehensBetrag: # Ursprünglicher Betrag des Darlehens.
+      urspruenglicherDarlehensBetrag:
         $ref: '#/definitions/Euro'
       rateMonatlich:
         $ref: '#/definitions/Euro'
-      zinsbindungsende:
+      zinsBindungBis:
         description: Zinsbindungsende, Datum nach RFC3339
         type: string
         format: date
         example: 2020-12-31
-      restschuldZinsbindungsende:
+      abzuloesendeRestschuld:
         $ref: '#/definitions/Euro'
       sollZins:
         $ref: '#/definitions/Prozent'
@@ -130,8 +130,12 @@ definitions:
   DarlehensdatenAnfrage:
     type: object
     properties:
-      darlehensId:
+      hauptkontonummer:
         $ref: '#/definitions/DarlehensId'
+      bestehendeDarlehen:
+        type: array
+        items:
+          $ref: '#/definitions/BestehendesDarlehen'
       kundenBetreuer:
         $ref: '#/definitions/Partner'
       bearbeiter:
@@ -140,16 +144,27 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Antragsteller'
-      immobilie:
-        $ref: '#/definitions/Immobilie'
+      finanzierungsobjekt:
+        $ref: '#/definitions/Finanzierungsobjekt'
 
   DarlehensdatenAntwort:
     type: object
     properties:
-      darlehensId:
+      hauptkontonummer:
         $ref: '#/definitions/DarlehensId'
-      bausteine:
+      bestehendeDarlehen:
         type: array
         items:
-          $ref: '#/definitions/Finanzierungsbaustein'
+          $ref: '#/definitions/BestehendesDarlehen'
 
+  Postadresse:
+    type: object
+    properties:
+      strasse:
+        type: string
+      hausnummer:
+        type: string
+      postleitzahl:
+        type: string
+      ort:
+        type: string
