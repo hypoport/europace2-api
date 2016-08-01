@@ -146,6 +146,10 @@ definitions:
           $ref: '#/definitions/Antragsteller'
       finanzierungsobjekt:
         $ref: '#/definitions/Finanzierungsobjekt'
+      dokumente:
+        type: array
+        items:
+          $ref: '#/definitions/Dokument'
 
   DarlehensdatenAntwort:
     type: object
@@ -169,4 +173,20 @@ definitions:
       postleitzahl:
         type: string
       ort:
+        type: string
+
+  Dokument:
+    type: object
+    properties:
+      dateiname:
+        type: string
+      anzeigename:
+        type: string
+      mimeType:
+        type: string
+      erstellungsdatum:
+        type: string
+        format: date
+        example: 2014-06-27T14:11:32.000+02:00
+      href:
         type: string
