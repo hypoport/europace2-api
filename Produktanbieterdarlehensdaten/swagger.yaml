@@ -36,10 +36,10 @@ paths:
 
 # Objektdefinitionen
 definitions:
-  DarlehensId:
+  Hauptkontonummer:
     type: string
     description: |
-      Eindeutige ID des Darlehens beim Produktanbieter, z.B. Darlehensnummer, Kontonummer oder IBAN.
+      Eindeutige Nummer des Darlehens beim Produktanbieter, z.B. Darlehensnummer, Kontonummer oder IBAN.
       Kann Buchstaben, Zahlen oder andere Sonderzeichen enthalten.
 
   PartnerId:
@@ -131,7 +131,7 @@ definitions:
     type: object
     properties:
       hauptkontonummer:
-        $ref: '#/definitions/DarlehensId'
+        $ref: '#/definitions/Hauptkontonummer'
       bestehendeDarlehen:
         type: array
         items:
@@ -155,13 +155,17 @@ definitions:
     type: object
     properties:
       hauptkontonummer:
-        $ref: '#/definitions/DarlehensId'
+        $ref: '#/definitions/Hauptkontonummer'
       bestehendeDarlehen:
         type: array
         items:
           $ref: '#/definitions/BestehendesDarlehen'
       marktwertDesFinanzierungsobjekts:
         $ref: '#/definitions/Euro'
+      kommentar:
+        type: string
+        description: Optionales Feld für Kommentare
+        example: "Keine Darlehen vorhanden"
 
   Postadresse:
     type: object
@@ -180,13 +184,21 @@ definitions:
     properties:
       dateiname:
         type: string
+        description: Der Name der Datei
+        example: "erklaerung_4711.pdf"
       anzeigename:
         type: string
+        description: Anzeigename in der Benutzeroberfläche
+        example: "Unterschriebene Einwilligungserklärung"
       mimeType:
         type: string
+        description: Typ der Datei
+        example: "application/pdf"
       erstellungsdatum:
         type: string
         format: date
         example: 2014-06-27T14:11:32.000+02:00
       href:
         type: string
+        description: Hyperlink, unter dem die Datei zum Download bereit liegt
+        example: "http://example.org/download/files/erklaerung_4711.pdf"
