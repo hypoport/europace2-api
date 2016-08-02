@@ -36,6 +36,8 @@ paths:
             $ref: '#/definitions/DarlehensdatenAntwort'
         default:
           description: unspezifizierter Fehler
+          schema:
+            $ref: '#/definitions/FehlerAntwort'
 
 # Objektdefinitionen
 definitions:
@@ -205,3 +207,14 @@ definitions:
         type: string
         description: Hyperlink, unter dem die Datei zum Download bereit liegt
         example: "http://example.org/download/files/erklaerung_4711.pdf"
+
+  FehlerAntwort:
+    type: object
+    properties:
+      error:
+        type: object
+        properties:
+          code:
+            type: integer
+          message:
+            type: string
