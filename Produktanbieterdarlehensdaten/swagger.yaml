@@ -165,9 +165,9 @@ definitions:
           $ref: '#/definitions/BestehendesDarlehen'
       marktwertDesFinanzierungsobjekts:
         $ref: '#/definitions/Euro'
-      kommentar:
+      meldung:
         type: string
-        description: Optionales Feld für Kommentare
+        description: Optionales Feld für eine Meldung
         example: "Keine Darlehen vorhanden"
 
   Postadresse:
