@@ -112,6 +112,9 @@ definitions:
     format: Prozentsatz
 
   BestehendesDarlehen:
+    type: object
+    required:
+      - darlehensKontonummer
     properties:
       darlehensKontonummer:
         description: IBAN, Konto- oder Unterkontonummer des Produktanbieters.
@@ -134,6 +137,8 @@ definitions:
 
   DarlehensdatenAnfrage:
     type: object
+    required:
+      - hauptkontonummer
     properties:
       hauptkontonummer:
         $ref: '#/definitions/Hauptkontonummer'
@@ -186,6 +191,8 @@ definitions:
 
   Dokument:
     type: object
+    required:
+      - href
     properties:
       dateiname:
         type: string
@@ -210,9 +217,13 @@ definitions:
 
   FehlerAntwort:
     type: object
+    required:
+      - error
     properties:
       error:
         type: object
+        required:
+          - message
         properties:
           code:
             type: integer
