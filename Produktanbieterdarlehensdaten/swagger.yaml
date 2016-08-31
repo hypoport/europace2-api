@@ -4,7 +4,7 @@ info:
     Produktanbieter-Darlehensdaten API
     Benutzt werden JSON Datentypen, siehe http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf
   title: PADD API
-  version: 0.0.2
+  version: 0.0.3
 schemes:
 - http
 - https
@@ -95,6 +95,13 @@ definitions:
       - FOERDERDARLEHEN
       - SONSTIGES_DARLEHEN
 
+  DatenKontext:
+    description: Echtgeschäft oder Testumgebung?
+    type: string
+    enum:
+      - TEST_UMGEBUNG
+      - ECHT_GESCHAEFT
+
   Euro:
     description: |
       JSON Number type ohne Währungssymbol, siehe http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf.
@@ -160,6 +167,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Dokument'
+      datenKontext:
+        $ref: '#/definitions/DatenKontext'
 
   DarlehensdatenAntwort:
     type: object
@@ -176,6 +185,8 @@ definitions:
         type: string
         description: Optionales Feld für eine Meldung
         example: "Keine Darlehen vorhanden"
+      datenKontext:
+        $ref: '#/definitions/DatenKontext'
 
   Postadresse:
     type: object
