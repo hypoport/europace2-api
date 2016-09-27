@@ -1,6 +1,6 @@
 
 
-Baufi Smart - Vorgang Anlegen Schnittstelle - Version 10
+BaufiSmart - Vorgang Anlegen Schnittstelle - Version 10
 =========================================================
 
 Die BEX API wird durch die Datei [bex-v10-VorgangAnlegen.wsdl](bex-v10-VorgangAnlegen.wsdl)

@@ -1,5 +1,5 @@
 
-Baufi Smart - Vorgang Anlegen Schnittstelle
+BaufiSmart - Vorgang Anlegen Schnittstelle
 ==============================================
 
 Diese Schnittstelle wird auch als "Baufismart EXtern" - kurz: "BEX" bezeichnet.
