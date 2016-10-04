@@ -1,34 +1,23 @@
 <bex:VorgangMetadaten xmlns:bex="www.europace2.de/baufiSmart/bex/schema/bex-v12-VorgangAnlegen">
-  <!--Optional:-->
   <bearbeiter>
-    <!--Optional:-->
-    <email>string</email>
-    <partnerId>string</partnerId>
-    <!--Optional:-->
-    <name>string</name>
-    <!--Optional:-->
-    <vorname>string</vorname>
-  </bearbeiter>
-  <empfaenger>
-    <!--Optional:-->
-    <email>string</email>
-    <partnerId>string</partnerId>
-    <!--Optional:-->
-    <name>string</name>
-    <!--Optional:-->
-    <vorname>string</vorname>
-  </empfaenger>
-  <!--Optional:-->
+ 		<email>mitarbeiter.31@partner.de</email>
+ 		<partnerId>ECZ95</partnerId>
+ 		<name>Kallischke</name>
+ 		<vorname>Horst</vorname>
+ 	</bearbeiter>
+ 	<empfaenger>
+ 		<email>mitarbeiter.31@partner.de</email>
+ 		<partnerId>ECZ95</partnerId>
+ 		<name>Kallischke</name>
+ 		<vorname>Horst</vorname>
+ 	</empfaenger>
   <tippgeber>
-    <!--Optional:-->
-    <email>string</email>
-    <partnerId>string</partnerId>
-    <!--Optional:-->
-    <name>string</name>
-    <!--Optional:-->
-    <vorname>string</vorname>
+    <email>mitarbeiter.31@partner.de</email>
+    <partnerId>ECZ95</partnerId>
+    <name>Kallischke</name>
+    <vorname>Horst</vorname>
   </tippgeber>
-  <teilVorgangId>string</teilVorgangId>
-  <vorgangId>string</vorgangId>
-  <weburl>string</weburl>
+  <teilVorgangId>4fc4932a2206dadba1473c88</teilVorgangId>
+ 	<vorgangId>306196</vorgangId>
+ 	<weburl>https://www.europace2.de/baufiSmart/vorgangBearbeiten.html?teilvorgang=4fc4932a2206dadba1473c88</weburl>
 </bex:VorgangMetadaten>

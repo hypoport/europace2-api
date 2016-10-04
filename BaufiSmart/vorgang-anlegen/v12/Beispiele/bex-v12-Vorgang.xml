@@ -1,761 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <bex:Vorgang xmlns:bex="www.europace2.de/baufiSmart/bex/schema/bex-v12-VorgangAnlegen">
-  <!--Optional:-->
   <erfassteDaten>
-    <!--0 to 2 repetitions:-->
     <antragsteller>
-      <!--Optional:-->
       <anrede>HERR</anrede>
-      <!--Optional:-->
       <anschrift>
-        <!--Optional:-->
-        <hausnummer>string</hausnummer>
-        <!--Optional:-->
-        <ort>string</ort>
-        <!--Optional:-->
-        <postleitzahl>string</postleitzahl>
-        <!--Optional:-->
-        <strasse>string</strasse>
+        <hausnummer>9</hausnummer>
+        <ort>Berlin</ort>
+        <postleitzahl>10178</postleitzahl>
+        <strasse>Alexanderstraße</strasse>
       </anschrift>
-      <!--Optional:-->
       <beschaeftigung>
-        <!--You have a CHOICE of the next 4 items at this level-->
-        <!--Optional:-->
         <angestellterOderArbeiterOderBeamter>
-          <!--Optional:-->
-          <anzahlGehaelterProJahr>1000.00</anzahlGehaelterProJahr>
-          <!--Optional:-->
+          <anzahlGehaelterProJahr>12.5</anzahlGehaelterProJahr>
           <arbeitgeberInDeutschland>TRUE</arbeitgeberInDeutschland>
-          <!--Optional:-->
-          <befristungsStatusBeiAngestelltenOderArbeitern>BEFRISTET</befristungsStatusBeiAngestelltenOderArbeitern>
-          <!--Optional:-->
-          <beschaeftigtSeit>string</beschaeftigtSeit>
-          <!--Optional:-->
-          <einkommenNettoMonatlich>1000.00</einkommenNettoMonatlich>
-          <!--Optional:-->
-          <inProbezeit>yes</inProbezeit>
-          <typ>ARBEITER</typ>
-        </angestellterOderArbeiterOderBeamter>
-        <!--Optional:-->
-        <freiberuflerOderSelbstaendiger>
-          <!--Optional:-->
-          <einkommenNettoJaehrlich>1000.00</einkommenNettoJaehrlich>
-          <!--Optional:-->
-          <taetigSeit>string</taetigSeit>
+          <befristungsStatusBeiAngestelltenOderArbeitern>UNBEFRISTET</befristungsStatusBeiAngestelltenOderArbeitern>
+          <beschaeftigtSeit>2001-01-01</beschaeftigtSeit>
+          <einkommenNettoMonatlich>2860.00</einkommenNettoMonatlich>
+          <inProbezeit>FALSE</inProbezeit>
           <typ>ANGESTELLTER</typ>
-          <!--Optional:-->
-          <taetigkeit>KLASSISCHER_KONZERTMUSIKER</taetigkeit>
-        </freiberuflerOderSelbstaendiger>
-        <!--Optional:-->
-        <hausfrauOderArbeitsloser>
-          <!--Optional:-->
-          <sonstigesRegelmaessigesEinkommenNettoMonatlich>1000.00</sonstigesRegelmaessigesEinkommenNettoMonatlich>
-          <typ>HAUSFRAU</typ>
-        </hausfrauOderArbeitsloser>
-        <!--Optional:-->
-        <rentner>
-          <!--Optional:-->
-          <staatlicheRenteNettoMonatlich>1000.00</staatlicheRenteNettoMonatlich>
-        </rentner>
+        </angestellterOderArbeiterOderBeamter>
       </beschaeftigung>
-      <!--Optional:-->
-      <email>string</email>
-      <!--Optional:-->
-      <externeAntragstellerId>string</externeAntragstellerId>
-      <!--Optional:-->
-      <familienstand>VERHEIRATET</familienstand>
-      <!--Optional:-->
-      <geburtsdatum>string</geburtsdatum>
-      <!--Optional:-->
-      <guetertrennungVereinbartWennVerheiratet>false</guetertrennungVereinbartWennVerheiratet>
-      <!--Optional:-->
-      <nachname>string</nachname>
-      <!--Optional:-->
-      <staatsangehoerigkeit>GF</staatsangehoerigkeit>
-      <!--Optional:-->
-      <telefonnummer>string</telefonnummer>
-      <!--Optional:-->
-      <telefonnummerVorwahl>string</telefonnummerVorwahl>
-      <!--Optional:-->
-      <titelDoktor>true</titelDoktor>
-      <!--Optional:-->
-      <titelProfessor>no</titelProfessor>
-      <!--Optional:-->
-      <verheiratetmitWeiteremAntragsteller>true</verheiratetmitWeiteremAntragsteller>
-      <!--Optional:-->
+      <email>johannes.finke@example.org</email>
+      <externeAntragstellerId>FJ71-0126</externeAntragstellerId>
+      <familienstand>LEDIG</familienstand>
+      <geburtsdatum>1966-01-01</geburtsdatum>
+      <guetertrennungVereinbartWennVerheiratet>TRUE</guetertrennungVereinbartWennVerheiratet>
+      <nachname>Finke</nachname>
+      <staatsangehoerigkeit>DE</staatsangehoerigkeit>
+      <telefonnummer>65487213</telefonnummer>
+      <telefonnummerVorwahl>030</telefonnummerVorwahl>
+      <titelDoktor>FALSE</titelDoktor>
+      <titelProfessor>FALSE</titelProfessor>
+      <verheiratetmitWeiteremAntragsteller>FALSE</verheiratetmitWeiteremAntragsteller>
       <vorAnschrift>
-        <!--Optional:-->
-        <hausnummer>string</hausnummer>
-        <!--Optional:-->
-        <ort>string</ort>
-        <!--Optional:-->
-        <postleitzahl>string</postleitzahl>
-        <!--Optional:-->
-        <strasse>string</strasse>
+        <hausnummer>9</hausnummer>
+        <ort>Berlin</ort>
+        <postleitzahl>10178</postleitzahl>
+        <strasse>Alexanderstraße</strasse>
       </vorAnschrift>
-      <!--Optional:-->
-      <vorname>string</vorname>
-      <!--Optional:-->
-      <weitereKontaktMoeglichkeiten>string</weitereKontaktMoeglichkeiten>
-      <!--Optional:-->
-      <wohnhaftSeit>string</wohnhaftSeit>
+      <vorname>Johannes</vorname>
+      <weitereKontaktMoeglichkeiten>Fax: 030-65487211</weitereKontaktMoeglichkeiten>
+      <wohnhaftSeit>2001-01-01</wohnhaftSeit>
     </antragsteller>
-    <!--Optional:-->
     <haushalt>
-      <!--Optional:-->
       <bestehendeImmobilien>
-        <!--0 to 999 repetitions:-->
         <bestehendeImmobilie>
-          <!--Optional:-->
           <bestehendeDarlehen>
-            <!--0 to 999 repetitions:-->
             <bestehendesDarlehen>
-              <!--Optional:-->
-              <aktuelleRestschuld>1000.00</aktuelleRestschuld>
-              <!--Optional:-->
-              <darlehensArt>SONSTIGES_DARLEHEN</darlehensArt>
-              <!--Optional:-->
-              <darlehensGeber>string</darlehensGeber>
-              <!--Optional:-->
-              <rateMonatlich>1000.00</rateMonatlich>
-              <!--Optional:-->
-              <zinsBindungBis>string</zinsBindungBis>
+              <aktuelleRestschuld>88616.70</aktuelleRestschuld>
+              <darlehensArt>IMMOBILIENDARLEHEN</darlehensArt>
+              <darlehensGeber>ING-DiBa</darlehensGeber>
+              <rateMonatlich>296.67.00</rateMonatlich>
+              <zinsBindungBis>2014-01-31</zinsBindungBis>
             </bestehendesDarlehen>
           </bestehendeDarlehen>
-          <!--Optional:-->
-          <bezeichnungOderAdresseZurIdentifikation>string</bezeichnungOderAdresseZurIdentifikation>
-          <!--Optional:-->
+          <bezeichnungOderAdresseZurIdentifikation>Prenzlauer Promenade 58</bezeichnungOderAdresseZurIdentifikation>
           <immobilienEinsatz>VERKAUFEN</immobilienEinsatz>
-          <!--Optional:-->
-          <marktwert>1000.00</marktwert>
-          <!--Optional:-->
-          <maximalEinzusetzenderBetragWennVerkauf>1000.00</maximalEinzusetzenderBetragWennVerkauf>
-          <!--Optional:-->
+          <marktwert>250000.00</marktwert>
+          <maximalEinzusetzenderBetragWennVerkauf>200000.00</maximalEinzusetzenderBetragWennVerkauf>
           <nutzungsArt>VERMIETET</nutzungsArt>
-          <!--Optional:-->
           <nutzungsDetailsBeiVermietung>
-            <!--Optional:-->
-            <mieteinnahmenNettoKaltMonatlich>1000.00</mieteinnahmenNettoKaltMonatlich>
-            <!--Optional:-->
-            <vermieteteWohnflaecheBeiTeilvermietung>1000.00</vermieteteWohnflaecheBeiTeilvermietung>
+            <mieteinnahmenNettoKaltMonatlich>600.00</mieteinnahmenNettoKaltMonatlich>
+            <vermieteteWohnflaecheBeiTeilvermietung>0.00</vermieteteWohnflaecheBeiTeilvermietung>
           </nutzungsDetailsBeiVermietung>
-          <!--Optional:-->
-          <wohnflaecheGesamt>1000.00</wohnflaecheGesamt>
+          <wohnflaecheGesamt>124.00</wohnflaecheGesamt>
         </bestehendeImmobilie>
       </bestehendeImmobilien>
-      <!--Optional:-->
       <einnahmenAusgabenVermoegenVerbindlichkeiten>
-        <!--Optional:-->
-        <ausgabenSonstigeMonatlich>1000.00</ausgabenSonstigeMonatlich>
-        <!--Optional:-->
+        <ausgabenSonstigeMonatlich>50.00</ausgabenSonstigeMonatlich>
         <bankUndSparguthaben>
-          <!--Optional:-->
-          <bankUndSparguthabenGesamt>1000.00</bankUndSparguthabenGesamt>
-          <!--Optional:-->
-          <maximalAufzuloesendesBankUndSparguthaben>1000.00</maximalAufzuloesendesBankUndSparguthaben>
-          <!--Optional:-->
-          <zinsertragJaehrlich>1000.00</zinsertragJaehrlich>
+          <bankUndSparguthabenGesamt>90000.00</bankUndSparguthabenGesamt>
+          <maximalAufzuloesendesBankUndSparguthaben>85000.00</maximalAufzuloesendesBankUndSparguthaben>
+          <zinsertragJaehrlich>500.00</zinsertragJaehrlich>
         </bankUndSparguthaben>
-        <!--0 to 3 repetitions:-->
         <bausparvertrag>
-          <!--Optional:-->
-          <angesparterBetrag>1000.00</angesparterBetrag>
-          <!--Optional:-->
-          <sparBeitragMonatlich>1000.00</sparBeitragMonatlich>
-          <!--Optional:-->
+          <angesparterBetrag>17500.00</angesparterBetrag>
+          <sparBeitragMonatlich>234.00</sparBeitragMonatlich>
           <vermoegensVerwendung>
-            <!--Optional:-->
             <maximalAufzuloesenderBetrag>1000.00</maximalAufzuloesenderBetrag>
             <vermoegensEinsatz>AUFLOESEN</vermoegensEinsatz>
           </vermoegensVerwendung>
-          <!--Optional:-->
           <bausparkasse>LBS_BADEN_WUERTTEMBERG</bausparkasse>
-          <!--Optional:-->
-          <bausparSumme>1000.00</bausparSumme>
-          <!--Optional:-->
-          <tarif>string</tarif>
-          <!--Optional:-->
-          <vertragsNummer>string</vertragsNummer>
+          <bausparSumme>200000.00</bausparSumme>
+          <tarif>LV123</tarif>
+          <vertragsNummer>12345789</vertragsNummer>
         </bausparvertrag>
-        <!--Optional:-->
-        <ehegattenUnterhaltEinnahmenMonatlich>1000.00</ehegattenUnterhaltEinnahmenMonatlich>
-        <!--0 to 3 repetitions:-->
+        <ehegattenUnterhaltEinnahmenMonatlich>350.00</ehegattenUnterhaltEinnahmenMonatlich>
         <einkuenfteAusNebentaetigkeit>
-          <!--Optional:-->
-          <beginnDerNebentaetigkeit>string</beginnDerNebentaetigkeit>
-          <!--Optional:-->
-          <betragMonatlich>1000.00</betragMonatlich>
+          <beginnDerNebentaetigkeit>2012-07-01</beginnDerNebentaetigkeit>
+          <betragMonatlich>125.00</betragMonatlich>
         </einkuenfteAusNebentaetigkeit>
-        <!--Optional:-->
-        <einnahmenSonstigeMonatlich>1000.00</einnahmenSonstigeMonatlich>
-        <!--0 to 3 repetitions:-->
+        <einnahmenSonstigeMonatlich>360.00</einnahmenSonstigeMonatlich>
         <lebensUndRentenversicherung>
-          <!--Optional:-->
-          <praemieMonatlich>1000.00</praemieMonatlich>
-          <!--Optional:-->
-          <rueckkaufsWertAktuell>1000.00</rueckkaufsWertAktuell>
-          <!--Optional:-->
+          <praemieMonatlich>158.00</praemieMonatlich>
+          <rueckkaufsWertAktuell>126000.00</rueckkaufsWertAktuell>
           <vermoegensVerwendung>
-            <!--Optional:-->
-            <maximalAufzuloesenderBetrag>1000.00</maximalAufzuloesenderBetrag>
-            <vermoegensEinsatz>ABTRETEN</vermoegensEinsatz>
+            <maximalAufzuloesenderBetrag>10000.00</maximalAufzuloesenderBetrag>
+            <vermoegensEinsatz>AUFLOESEN</vermoegensEinsatz>
           </vermoegensVerwendung>
         </lebensUndRentenversicherung>
-        <!--Optional:-->
         <mietAusgaben>
-          <!--Optional:-->
           <ausgabenMonatlich>1000.00</ausgabenMonatlich>
-          <!--Optional:-->
-          <entfallenMitFinanzierung>yes</entfallenMitFinanzierung>
+          <entfallenMitFinanzierung>TRUE</entfallenMitFinanzierung>
         </mietAusgaben>
-        <!--0 to 3 repetitions:-->
         <privateDarlehen>
-          <!--Optional:-->
-          <glaeubiger>string</glaeubiger>
-          <!--Optional:-->
-          <laufzeitEnde>string</laufzeitEnde>
-          <!--Optional:-->
-          <rateMonatlich>1000.00</rateMonatlich>
-          <!--Optional:-->
-          <restschuld>1000.00</restschuld>
-          <!--Optional:-->
-          <wirdAbgeloest>no</wirdAbgeloest>
+          <glaeubiger>MediaMarkt GmbH</glaeubiger>
+          <laufzeitEnde>2020-06-01</laufzeitEnde>
+          <rateMonatlich>301.00</rateMonatlich>
+          <restschuld>5000.00</restschuld>
+          <wirdAbgeloest>FALSE</wirdAbgeloest>
         </privateDarlehen>
-        <!--Optional:-->
-        <privateKrankenversicherungBeitragMonatlich>1000.00</privateKrankenversicherungBeitragMonatlich>
-        <!--0 to 3 repetitions:-->
+        <privateKrankenversicherungBeitragMonatlich>0.00</privateKrankenversicherungBeitragMonatlich>
         <ratenkredit>
-          <!--Optional:-->
-          <glaeubiger>string</glaeubiger>
-          <!--Optional:-->
-          <laufzeitEnde>string</laufzeitEnde>
-          <!--Optional:-->
-          <rateMonatlich>1000.00</rateMonatlich>
-          <!--Optional:-->
-          <restschuld>1000.00</restschuld>
-          <!--Optional:-->
-          <wirdAbgeloest>YES</wirdAbgeloest>
+          <glaeubiger>MediaMarkt GmbH</glaeubiger>
+          <laufzeitEnde>2020-08-01</laufzeitEnde>
+          <rateMonatlich>89.00</rateMonatlich>
+          <restschuld>4012.00</restschuld>
+          <wirdAbgeloest>FALSE</wirdAbgeloest>
         </ratenkredit>
-        <!--Optional:-->
         <sparplaene>
-          <!--Optional:-->
-          <aktuellerWert>1000.00</aktuellerWert>
-          <!--Optional:-->
-          <beitragMonatlich>1000.00</beitragMonatlich>
-          <!--Optional:-->
-          <maximalAufzuloesenderWert>1000.00</maximalAufzuloesenderWert>
+          <aktuellerWert>3100.00</aktuellerWert>
+          <beitragMonatlich>120.00</beitragMonatlich>
+          <maximalAufzuloesenderWert>10.00</maximalAufzuloesenderWert>
         </sparplaene>
-        <!--Optional:-->
-        <unbefristeteZusatzRenteMonatlich>1000.00</unbefristeteZusatzRenteMonatlich>
-        <!--0 to 3 repetitions:-->
-        <unterhaltsVerpflichtungMonatlich>1000.00</unterhaltsVerpflichtungMonatlich>
-        <!--Optional:-->
+        <unbefristeteZusatzRenteMonatlich>89.00</unbefristeteZusatzRenteMonatlich>
+        <unterhaltsVerpflichtungMonatlich>0.00</unterhaltsVerpflichtungMonatlich>
         <variableEinkuenfteMonatlich>1000.00</variableEinkuenfteMonatlich>
-        <!--Optional:-->
         <verbindlichkeitSonstige>
-          <!--Optional:-->
-          <glaeubiger>string</glaeubiger>
-          <!--Optional:-->
-          <laufzeitEnde>string</laufzeitEnde>
-          <!--Optional:-->
-          <rateMonatlich>1000.00</rateMonatlich>
-          <!--Optional:-->
+          <glaeubiger>MediaMarkt GmbH</glaeubiger>
+          <laufzeitEnde>2020-01-01</laufzeitEnde>
+          <rateMonatlich>100.00</rateMonatlich>
           <restschuld>1000.00</restschuld>
-          <!--Optional:-->
-          <wirdAbgeloest>true</wirdAbgeloest>
+          <wirdAbgeloest>FALSE</wirdAbgeloest>
         </verbindlichkeitSonstige>
-        <!--Optional:-->
         <vermoegenSonstige>
-          <!--Optional:-->
           <aktuellerWert>1000.00</aktuellerWert>
-          <!--Optional:-->
-          <maximalAufzuloesenderWert>1000.00</maximalAufzuloesenderWert>
+          <maximalAufzuloesenderWert>20.00</maximalAufzuloesenderWert>
         </vermoegenSonstige>
-        <!--Optional:-->
         <versicherungsAusgabenSonstigeMonatlich>1000.00</versicherungsAusgabenSonstigeMonatlich>
-        <!--Optional:-->
         <wertpapiere>
-          <!--Optional:-->
-          <dividendenJaehrlich>1000.00</dividendenJaehrlich>
-          <!--Optional:-->
-          <gesamtwert>1000.00</gesamtwert>
-          <!--Optional:-->
-          <maximalAufzuloesenderWert>1000.00</maximalAufzuloesenderWert>
+          <dividendenJaehrlich>100.00</dividendenJaehrlich>
+          <gesamtwert>160000.00</gesamtwert>
+          <maximalAufzuloesenderWert>0.00</maximalAufzuloesenderWert>
         </wertpapiere>
       </einnahmenAusgabenVermoegenVerbindlichkeiten>
-      <!--Optional:-->
       <kinder>
-        <!--0 to 999 repetitions:-->
         <kind>
-          <!--Optional:-->
-          <geburtsdatum>string</geburtsdatum>
-          <!--Optional:-->
-          <kindergeldWirdBezogen>YES</kindergeldWirdBezogen>
-          <!--Optional:-->
-          <name>string</name>
-          <!--Optional:-->
-          <unterhaltsEinnahmenBetragMonatlich>1000.00</unterhaltsEinnahmenBetragMonatlich>
+          <geburtsdatum>2005-01-01</geburtsdatum>
+          <kindergeldWirdBezogen>TRUE</kindergeldWirdBezogen>
+          <name>Gustav Finke</name>
+          <unterhaltsEinnahmenBetragMonatlich>0.00</unterhaltsEinnahmenBetragMonatlich>
         </kind>
       </kinder>
-      <!--Optional:-->
       <kontoverbindung>
-        <!--Optional:-->
-        <bankleitzahl>string</bankleitzahl>
-        <!--Optional:-->
-        <kontoinhaber>BEIDE_ANTRAGSTELLER</kontoinhaber>
-        <!--Optional:-->
-        <kontonummer>string</kontonummer>
-        <!--Optional:-->
-        <kreditinstitut>string</kreditinstitut>
-        <!--Optional:-->
-        <iban>string</iban>
-        <!--Optional:-->
-        <bic>string</bic>
+        <bankleitzahl>12030000</bankleitzahl>
+        <kontoinhaber>ANTRAGSTELLER_1</kontoinhaber>
+        <kontonummer>12312312</kontonummer>
+        <kreditinstitut>DKB Berlin</kreditinstitut>
+        <iban>DE68210501700012345678</iban>
+        <bic>GENODEF1S10</bic>
       </kontoverbindung>
     </haushalt>
-    <!--Optional:-->
     <finanzierungsObjekt>
-      <!--Optional:-->
       <adresse>
-        <!--Optional:-->
-        <hausnummer>string</hausnummer>
-        <!--Optional:-->
-        <ort>string</ort>
-        <!--Optional:-->
-        <postleitzahl>string</postleitzahl>
-        <!--Optional:-->
-        <strasse>string</strasse>
+        <hausnummer>9</hausnummer>
+        <ort>Berlin</ort>
+        <postleitzahl>10178</postleitzahl>
+        <strasse>Alexanderstraße</strasse>
       </adresse>
-      <!--Optional:-->
       <autoStellplaetze>
-        <!--0 to 999 repetitions:-->
         <autoStellPlatz>
-          <!--Optional:-->
-          <mieteinnahmenMonatlich>1000.00</mieteinnahmenMonatlich>
-          <typ>KELLER_GARAGE</typ>
+          <mieteinnahmenMonatlich>150</mieteinnahmenMonatlich>
+          <typ>CARPORT</typ>
         </autoStellPlatz>
       </autoStellplaetze>
-      <!--Optional:-->
       <beiAnschlussFinanzierungOderModernisierung>
-        <!--Optional:-->
         <darlehenDesFinanzierungsObjekts>
           <!--0 to 999 repetitions:-->
           <bestehendesDarlehenFinanzierungsObjekt>
-            <!--Optional:-->
-            <abzuloesendeRestschuld>1000.00</abzuloesendeRestschuld>
-            <!--Optional:-->
-            <darlehenArt>SONSTIGES_DARLEHEN</darlehenArt>
-            <!--Optional:-->
-            <darlehensGeber>string</darlehensGeber>
-            <!--Optional:-->
-            <sollzins>1000.00</sollzins>
-            <!--Optional:-->
-            <darlehensBetrag>1000.00</darlehensBetrag>
-            <!--Optional:-->
-            <eingetrageneGrundschuld>1000.00</eingetrageneGrundschuld>
-            <!--Optional:-->
-            <rateMonatlich>1000.00</rateMonatlich>
-            <!--Optional:-->
+            <abzuloesendeRestschuld>78000.00</abzuloesendeRestschuld>
+            <darlehenArt>IMMOBILIENDARLEHEN</darlehenArt>
+            <darlehensGeber>DSL</darlehensGeber>
+            <sollzins>1.4</sollzins>
+            <darlehensBetrag>200000.00</darlehensBetrag>
+            <eingetrageneGrundschuld>115000.00</eingetrageneGrundschuld>
+            <rateMonatlich>756.00</rateMonatlich>
             <verwendenAls>ABLOESEN</verwendenAls>
-            <!--Optional:-->
-            <zinsBindungBis>string</zinsBindungBis>
-            <!--Optional:-->
-            <laufzeitBis>string</laufzeitBis>
-            <!--Optional:-->
-            <hauptKontonummer>string</hauptKontonummer>
-            <!--Optional:-->
-            <darlehensKontonummer>string</darlehensKontonummer>
+            <zinsBindungBis>2020-01-01</zinsBindungBis>
+            <laufzeitBis>2030-01-01</laufzeitBis>
+            <hauptKontonummer>111</hauptKontonummer>
+            <darlehensKontonummer>123</darlehensKontonummer>
           </bestehendesDarlehenFinanzierungsObjekt>
         </darlehenDesFinanzierungsObjekts>
-        <!--Optional:-->
-        <verkehrswert>1000.00</verkehrswert>
+        <verkehrswert>256000.00</verkehrswert>
       </beiAnschlussFinanzierungOderModernisierung>
-      <!--Optional:-->
       <erbbaurecht>
-        <erbbaurechtVorhanden>FALSE</erbbaurechtVorhanden>
-        <!--Optional:-->
-        <erbbauzinsJaehrlich>1000.00</erbbauzinsJaehrlich>
-        <!--Optional:-->
+        <erbbaurechtVorhanden>true</erbbaurechtVorhanden>
+        <erbbauzinsJaehrlich>12500.00</erbbauzinsJaehrlich>
         <grundstuecksEigentuemer>OEFFENTLICH_KIRCHLICH</grundstuecksEigentuemer>
-        <!--Optional:-->
-        <laufzeitBisJahr>1000</laufzeitBisJahr>
+        <laufzeitBisJahr>2095</laufzeitBisJahr>
       </erbbaurecht>
-      <!--Optional:-->
-      <externeImmobilienId>string</externeImmobilienId>
-      <!--Optional:-->
+      <externeImmobilienId>0234932483249</externeImmobilienId>
       <grundbuchAngabe>
-        <!--Optional:-->
-        <blattNummer>string</blattNummer>
-        <!--Optional:-->
+        <blattNummer>75 (Band: 2)</blattNummer>
         <flurstuecke>
-          <!--0 to 999 repetitions:-->
           <flurStueck>
-            <!--Optional:-->
             <anteil>
-              <!--Optional:-->
-              <anteil>1000.00</anteil>
-              <!--Optional:-->
-              <gesamt>100</gesamt>
+              <anteil>250.050</anteil>
+              <gesamt>1500</gesamt>
             </anteil>
-            <!--Optional:-->
-            <flur>string</flur>
-            <!--Optional:-->
-            <flurstuecksNummer>string</flurstuecksNummer>
-            <!--Optional:-->
-            <groesse>1000.00</groesse>
+            <flur>17</flur>
+            <flurstuecksNummer>4</flurstuecksNummer>
+            <groesse>2500</groesse>
           </flurStueck>
         </flurstuecke>
-        <!--Optional:-->
-        <ort>string</ort>
-        <!--Optional:-->
+        <ort>Berlin (Köpenick)</ort>
         <rechteInAbteilung2>
-          <!--Optional:-->
-          <beschreibung>string</beschreibung>
-          <!--Optional:-->
-          <betrag>1000.00</betrag>
+          <beschreibung>Wegerecht</beschreibung>
+          <betrag>1300.00</betrag>
         </rechteInAbteilung2>
-        <!--Optional:-->
-        <weitereAnmerkungen>string</weitereAnmerkungen>
+        <weitereAnmerkungen>Sondereigentum in separatem Grundbuch</weitereAnmerkungen>
       </grundbuchAngabe>
-      <!--Optional:-->
-      <grundstuecksGroesse>1000.00</grundstuecksGroesse>
-      <!--Optional:-->
+      <grundstuecksGroesse>1250.00</grundstuecksGroesse>
       <finanzierungsObjektDetails>
-        <!--You have a CHOICE of the next 3 items at this level-->
-        <!--Optional:-->
         <grundstueck>
-          <!--Optional:-->
-          <grundstuecksArt>SONSTIGES_GRUNDSTUECK</grundstuecksArt>
+          <grundstuecksArt>UNBEBAUTES_WOHNGRUNDSTUECK</grundstuecksArt>
         </grundstueck>
-        <!--Optional:-->
-        <eigentumswohnung>
-          <!--Optional:-->
-          <anzahlDerWohneinheitenImObjekt>100</anzahlDerWohneinheitenImObjekt>
-          <!--Optional:-->
-          <anzahlVollgeschosse>100</anzahlVollgeschosse>
-          <!--Optional:-->
-          <baujahrWennNichtNeubau>1000</baujahrWennNichtNeubau>
-          <!--Optional:-->
-          <bauweise>FACHWERK_MIT_STROH_LEHM</bauweise>
-          <!--Optional:-->
-          <bezeichnungWohneinheit>string</bezeichnungWohneinheit>
-          <!--Optional:-->
-          <miteigentumsAnteil>
-            <!--Optional:-->
-            <anteil>1000.00</anteil>
-            <!--Optional:-->
-            <gesamt>100</gesamt>
-          </miteigentumsAnteil>
-          <!--Optional:-->
-          <modernisierungsAngabenWennNichtNeubau>
-            <!--Optional:-->
-            <modernisierungsGrad>HOCH</modernisierungsGrad>
-            <!--Optional:-->
-            <modernisierungsJahr>1000</modernisierungsJahr>
-          </modernisierungsAngabenWennNichtNeubau>
-          <!--Optional:-->
-          <nutzungsArt>VERMIETET</nutzungsArt>
-          <!--Optional:-->
-          <nutzungsDetailsBeiVermietung>
-            <!--Optional:-->
-            <mieteinnahmenNettoKaltMonatlich>1000.00</mieteinnahmenNettoKaltMonatlich>
-            <!--Optional:-->
-            <vermieteteWohnflaecheBeiTeilvermietung>1000.00</vermieteteWohnflaecheBeiTeilvermietung>
-          </nutzungsDetailsBeiVermietung>
-          <!--Optional:-->
-          <wohnflaecheGesamt>1000.00</wohnflaecheGesamt>
-        </eigentumswohnung>
-        <!--Optional:-->
-        <haus>
-          <!--Optional:-->
-          <anzahlDerWohneinheitenBeiMehrfamilienHaus>100</anzahlDerWohneinheitenBeiMehrfamilienHaus>
-          <!--Optional:-->
-          <anzahlVollgeschosse>100</anzahlVollgeschosse>
-          <!--Optional:-->
-          <baujahrWennNichtNeubau>1000</baujahrWennNichtNeubau>
-          <!--Optional:-->
-          <bauweise>FACHWERK_MIT_STROH_LEHM</bauweise>
-          <!--Optional:-->
-          <dachgeschossAusbau>NICHT_AUSGEBAUT</dachgeschossAusbau>
-          <!--Optional:-->
-          <einliegerwohnungVorhandenBeiDoppelOderEinfamilienOderReihenHaus>FALSE</einliegerwohnungVorhandenBeiDoppelOderEinfamilienOderReihenHaus>
-          <!--Optional:-->
-          <fertighausBeiDoppelOderEinfamilienOderZweifamilienHaus>true</fertighausBeiDoppelOderEinfamilienOderZweifamilienHaus>
-          <!--Optional:-->
-          <hausAnordnungMehrfamilienOderZweifamilienHaus>MITTELHAUS</hausAnordnungMehrfamilienOderZweifamilienHaus>
-          <!--Optional:-->
-          <hausAnordnungReihenhaus>MITTELHAUS</hausAnordnungReihenhaus>
-          <hausTyp>DOPPELHAUSHAELFTE</hausTyp>
-          <!--Optional:-->
-          <modernisierungsAngabenWennNichtNeubau>
-            <!--Optional:-->
-            <modernisierungsGrad>HOCH</modernisierungsGrad>
-            <!--Optional:-->
-            <modernisierungsJahr>1000</modernisierungsJahr>
-          </modernisierungsAngabenWennNichtNeubau>
-          <!--Optional:-->
-          <nutzungsArt>EIGENGENUTZT</nutzungsArt>
-          <!--Optional:-->
-          <nutzungsDetailsBeiVermietung>
-            <!--Optional:-->
-            <mieteinnahmenNettoKaltMonatlich>1000.00</mieteinnahmenNettoKaltMonatlich>
-            <!--Optional:-->
-            <vermieteteWohnflaecheBeiTeilvermietung>1000.00</vermieteteWohnflaecheBeiTeilvermietung>
-          </nutzungsDetailsBeiVermietung>
-          <!--Optional:-->
-          <unterkellerung>NICHT_UNTERKELLERT</unterkellerung>
-          <!--Optional:-->
-          <wohnflaecheGesamt>1000.00</wohnflaecheGesamt>
-        </haus>
       </finanzierungsObjektDetails>
     </finanzierungsObjekt>
-    <!--Optional:-->
     <vorhaben>
-      <!--Optional:-->
-      <eigenleistungWennNeubauOderModernisierungsmassnahmen>1000.00</eigenleistungWennNeubauOderModernisierungsmassnahmen>
-      <!--Optional:-->
       <finanzierungsWunsch>
-        <!--You have a CHOICE of the next 5 items at this level-->
-        <!--Optional:-->
         <annuitaetenOderForwardDarlehen>
           <tilgungsWunsch>
-            <!--You have a CHOICE of the next 5 items at this level-->
-            <!--Optional:-->
-            <anfaenglicheTilgung>1000.00</anfaenglicheTilgung>
-            <!--Optional:-->
-            <volltilgerWennAnnuitaetenOderForward>NO</volltilgerWennAnnuitaetenOderForward>
-            <!--Optional:-->
-            <rate>1000.00</rate>
-            <!--Optional:-->
-            <ausgesetztBerechnet>FALSE</ausgesetztBerechnet>
-            <!--Optional:-->
-            <ausgesetztEigenesAngebot>TRUE</ausgesetztEigenesAngebot>
+            <anfaenglicheTilgung>0</anfaenglicheTilgung>
           </tilgungsWunsch>
-          <!--Optional:-->
-          <auszahlungsZeitpunktBeiForward>string</auszahlungsZeitpunktBeiForward>
-          <!--Optional:-->
-          <bereitstellungsZinsfreieZeitInMonaten>100</bereitstellungsZinsfreieZeitInMonaten>
-          <darlehensBetrag>1000.00</darlehensBetrag>
-          <!--Optional:-->
-          <provision>1000.00</provision>
-          <!--Optional:-->
-          <sondertilgungOptionalJaehrlich>1000.00</sondertilgungOptionalJaehrlich>
-          <typ>FORWARDDARLEHEN</typ>
-          <!--Optional:-->
-          <vertriebsBearbeitungsgebuehr>1000.00</vertriebsBearbeitungsgebuehr>
-          <!--Optional:-->
-          <zinsbindungInJahren>100</zinsbindungInJahren>
+          <auszahlungsZeitpunktBeiForward>2014-02-01</auszahlungsZeitpunktBeiForward>
+          <bereitstellungsZinsfreieZeitInMonaten>6</bereitstellungsZinsfreieZeitInMonaten>
+          <darlehensBetrag>200000.00</darlehensBetrag>
+          <provision>1.5</provision>
+          <sondertilgungOptionalJaehrlich>5</sondertilgungOptionalJaehrlich>
+          <typ>ANNUITAETENDARLEHEN</typ>
+          <vertriebsBearbeitungsgebuehr>500.00</vertriebsBearbeitungsgebuehr>
+          <zinsbindungInJahren>10</zinsbindungInJahren>
         </annuitaetenOderForwardDarlehen>
-        <!--Optional:-->
-        <kfwDarlehen>
-          <darlehensBetrag>1000.00</darlehensBetrag>
-          <kfwProgramm>100</kfwProgramm>
-          <!--Optional:-->
-          <laufzeitInJahren>100</laufzeitInJahren>
-          <!--Optional:-->
-          <tilgungsfreieAnlaufjahre>100</tilgungsfreieAnlaufjahre>
-          <!--Optional:-->
-          <zinsbindungInJahren>100</zinsbindungInJahren>
-        </kfwDarlehen>
-        <!--Optional:-->
-        <privatDarlehen>
-          <darlehensBetrag>1000.00</darlehensBetrag>
-          <!--Optional:-->
-          <laufzeitInMonaten>100</laufzeitInMonaten>
-        </privatDarlehen>
-        <!--Optional:-->
-        <zwischenFinanzierung>
-          <darlehensBetrag>1000.00</darlehensBetrag>
-          <!--Optional:-->
-          <verwendungsZweck>SONSTIGE_VERWENDUNG</verwendungsZweck>
-          <!--Optional:-->
-          <maximaleLaufzeitInMonaten>100</maximaleLaufzeitInMonaten>
-          <!--Optional:-->
-          <detailsZurVerwendung>string</detailsZurVerwendung>
-        </zwischenFinanzierung>
-        <!--Optional:-->
-        <variablesDarlehen>
-          <darlehensBetrag>1000.00</darlehensBetrag>
-          <tilgungsWunsch>
-            <!--You have a CHOICE of the next 5 items at this level-->
-            <!--Optional:-->
-            <anfaenglicheTilgung>1000.00</anfaenglicheTilgung>
-            <!--Optional:-->
-            <volltilgerWennAnnuitaetenOderForward>true</volltilgerWennAnnuitaetenOderForward>
-            <!--Optional:-->
-            <rate>1000.00</rate>
-            <!--Optional:-->
-            <ausgesetztBerechnet>YES</ausgesetztBerechnet>
-            <!--Optional:-->
-            <ausgesetztEigenesAngebot>yes</ausgesetztEigenesAngebot>
-          </tilgungsWunsch>
-        </variablesDarlehen>
       </finanzierungsWunsch>
-      <!--Optional:-->
       <nachrangigeExterneDarlehen>
-        <!--Optional:-->
         <arbeitgeberDarlehen>
-          <!--Optional:-->
-          <darlehenBetrag>1000.00</darlehenBetrag>
-          <!--Optional:-->
-          <darlehensGeber>string</darlehensGeber>
-          <!--Optional:-->
-          <rateMonatlich>1000.00</rateMonatlich>
-          <!--Optional:-->
-          <zinsBindungBis>string</zinsBindungBis>
+          <darlehenBetrag>20000.00</darlehenBetrag>
+          <darlehensGeber>Förderbank</darlehensGeber>
+          <rateMonatlich>170.00</rateMonatlich>
+          <zinsBindungBis>2020-01-31</zinsBindungBis>
         </arbeitgeberDarlehen>
-        <!--Optional:-->
         <bausparDarlehen>
-          <!--Optional:-->
-          <darlehenBetrag>1000.00</darlehenBetrag>
-          <!--Optional:-->
-          <darlehensGeber>string</darlehensGeber>
-          <!--Optional:-->
-          <rateMonatlich>1000.00</rateMonatlich>
-          <!--Optional:-->
-          <zinsBindungBis>string</zinsBindungBis>
+          <darlehenBetrag>20000.00</darlehenBetrag>
+          <darlehensGeber>Förderbank</darlehensGeber>
+          <rateMonatlich>170.00</rateMonatlich>
+          <zinsBindungBis>2020-01-31</zinsBindungBis>
         </bausparDarlehen>
-        <!--Optional:-->
         <oeffentlichesDarlehen>
-          <!--Optional:-->
-          <darlehenBetrag>1000.00</darlehenBetrag>
-          <!--Optional:-->
-          <darlehensGeber>string</darlehensGeber>
-          <!--Optional:-->
-          <rateMonatlich>1000.00</rateMonatlich>
-          <!--Optional:-->
-          <zinsBindungBis>string</zinsBindungBis>
+          <darlehenBetrag>20000.00</darlehenBetrag>
+          <darlehensGeber>Förderbank</darlehensGeber>
+          <rateMonatlich>170.00</rateMonatlich>
+          <zinsBindungBis>2020-01-31</zinsBindungBis>
         </oeffentlichesDarlehen>
-        <!--Optional:-->
         <ratenkredit>
-          <!--Optional:-->
-          <darlehenBetrag>1000.00</darlehenBetrag>
-          <!--Optional:-->
-          <darlehensGeber>string</darlehensGeber>
-          <!--Optional:-->
-          <rateMonatlich>1000.00</rateMonatlich>
-          <!--Optional:-->
-          <zinsBindungBis>string</zinsBindungBis>
+          <darlehenBetrag>20000.00</darlehenBetrag>
+          <darlehensGeber>Förderbank</darlehensGeber>
+          <rateMonatlich>170.00</rateMonatlich>
+          <zinsBindungBis>2020-01-31</zinsBindungBis>
         </ratenkredit>
       </nachrangigeExterneDarlehen>
-      <!--Optional:-->
-      <verwendungszweck>ANSCHLUSSFINANZIERUNG</verwendungszweck>
-      <!--Optional:-->
+      <verwendungszweck>KAUF</verwendungszweck>
       <verwendungszweckAbhaengigerFinanzbedarf>
-        <!--You have a CHOICE of the next 5 items at this level-->
-        <!--Optional:-->
         <anschlussfinanzierung>
-          <!--Optional:-->
-          <modernisierungsKostenInklEigenleistungen>1000.00</modernisierungsKostenInklEigenleistungen>
-          <!--Optional:-->
-          <renovierungsKosten>1000.00</renovierungsKosten>
-          <!--Optional:-->
-          <zusaetzlichesKapital>1000.00</zusaetzlichesKapital>
+          <modernisierungsKostenInklEigenleistungen>27000.00</modernisierungsKostenInklEigenleistungen>
+          <renovierungsKosten>3000.00</renovierungsKosten>
+          <zusaetzlichesKapital>15000.00</zusaetzlichesKapital>
         </anschlussfinanzierung>
-        <!--Optional:-->
-        <kauf>
-          <!--Optional:-->
-          <bereitsBeglicheneKosten>1000.00</bereitsBeglicheneKosten>
-          <!--Optional:-->
-          <kaufpreis>1000.00</kaufpreis>
-          <!--Optional:-->
-          <mobiliarKosten>1000.00</mobiliarKosten>
-          <!--Optional:-->
-          <modernisierungsKostenInklEigenleistungen>1000.00</modernisierungsKostenInklEigenleistungen>
-          <!--Optional:-->
-          <nebenkosten>
-            <!--Optional:-->
-            <grunderwerbsteuer>1000.00</grunderwerbsteuer>
-            <!--Optional:-->
-            <maklergebuehr>1000.00</maklergebuehr>
-            <!--Optional:-->
-            <notargebuehr>1000.00</notargebuehr>
-          </nebenkosten>
-          <!--Optional:-->
-          <renovierungsKosten>1000.00</renovierungsKosten>
-          <!--Optional:-->
-          <sonstigeKosten>1000.00</sonstigeKosten>
-        </kauf>
-        <!--Optional:-->
-        <kaufNeubauVomBautraeger>
-          <!--Optional:-->
-          <bereitsBeglicheneKosten>1000.00</bereitsBeglicheneKosten>
-          <!--Optional:-->
-          <kaufpreisInklEigenleistungen>1000.00</kaufpreisInklEigenleistungen>
-          <!--Optional:-->
-          <mobiliarKosten>1000.00</mobiliarKosten>
-          <!--Optional:-->
-          <nebenkosten>
-            <!--Optional:-->
-            <grunderwerbsteuer>1000.00</grunderwerbsteuer>
-            <!--Optional:-->
-            <maklergebuehr>1000.00</maklergebuehr>
-            <!--Optional:-->
-            <notargebuehr>1000.00</notargebuehr>
-          </nebenkosten>
-          <!--Optional:-->
-          <sonstigeKosten>1000.00</sonstigeKosten>
-        </kaufNeubauVomBautraeger>
-        <!--Optional:-->
-        <modernisierung>
-          <!--Optional:-->
-          <mobiliarKosten>1000.00</mobiliarKosten>
-          <!--Optional:-->
-          <modernisierungsKostenInklEigenleistungen>1000.00</modernisierungsKostenInklEigenleistungen>
-          <!--Optional:-->
-          <renovierungsKosten>1000.00</renovierungsKosten>
-          <!--Optional:-->
-          <sonstigeKosten>1000.00</sonstigeKosten>
-          <!--Optional:-->
-          <zusaetzlichesKapital>1000.00</zusaetzlichesKapital>
-        </modernisierung>
-        <!--Optional:-->
-        <neubau>
-          <!--Optional:-->
-          <aussenAnlagen>1000.00</aussenAnlagen>
-          <!--Optional:-->
-          <bauNebenkosten>1000.00</bauNebenkosten>
-          <!--Optional:-->
-          <bereitsBeglicheneKosten>1000.00</bereitsBeglicheneKosten>
-          <!--Optional:-->
-          <erschliessungskosten>1000.00</erschliessungskosten>
-          <!--Optional:-->
-          <grundstueckKaufpreis>1000.00</grundstueckKaufpreis>
-          <!--Optional:-->
-          <herstellungskostenInklusiveEigenleistungen>1000.00</herstellungskostenInklusiveEigenleistungen>
-          <!--Optional:-->
-          <mobiliarKosten>1000.00</mobiliarKosten>
-          <!--Optional:-->
-          <nebenkosten>
-            <!--Optional:-->
-            <grunderwerbsteuer>1000.00</grunderwerbsteuer>
-            <!--Optional:-->
-            <maklergebuehr>1000.00</maklergebuehr>
-            <!--Optional:-->
-            <notargebuehr>1000.00</notargebuehr>
-          </nebenkosten>
-          <!--Optional:-->
-          <sonstigeKosten>1000.00</sonstigeKosten>
-        </neubau>
       </verwendungszweckAbhaengigerFinanzbedarf>
     </vorhaben>
   </erfassteDaten>
-  <!--Optional:-->
-  <externeVorgangsId>string</externeVorgangsId>
-  <!--Optional:-->
-  <importQuelle>string</importQuelle>
-  <!--Optional:-->
-  <leadTracking>
-    <!--Optional:-->
-    <kampagne>string</kampagne>
-    <!--Optional:-->
-    <keyword>string</keyword>
-    <!--Optional:-->
-    <trackingId>string</trackingId>
-    <!--Optional:-->
-    <sendNotification>FALSE</sendNotification>
-  </leadTracking>
-  <!--Optional:-->
-  <mitteilung>string</mitteilung>
-  <!--Optional:-->
+  <externeVorgangsId>WB235415</externeVorgangsId>
+ 	<importQuelle>BW Bank CRM</importQuelle>
+ 	<leadTracking>
+ 		<kampagne>SonderaktionEinfamilienhaus</kampagne>
+ 		<keyword>BaufiLeadFormular</keyword>
+ 		<trackingId>lead4711</trackingId>
+ 		<sendNotification>false</sendNotification>
+ 	</leadTracking>
+ 	<mitteilung>Der Mitteilungstext</mitteilung>
   <prioritaet>NEUTRAL</prioritaet>
 </bex:Vorgang>
