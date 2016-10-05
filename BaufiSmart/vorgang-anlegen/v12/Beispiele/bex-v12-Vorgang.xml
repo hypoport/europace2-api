@@ -51,7 +51,7 @@
               <aktuelleRestschuld>88616.70</aktuelleRestschuld>
               <darlehensArt>IMMOBILIENDARLEHEN</darlehensArt>
               <darlehensGeber>ING-DiBa</darlehensGeber>
-              <rateMonatlich>296.67.00</rateMonatlich>
+              <rateMonatlich>296.67</rateMonatlich>
               <zinsBindungBis>2014-01-31</zinsBindungBis>
             </bestehendesDarlehen>
           </bestehendeDarlehen>
@@ -181,7 +181,7 @@
           <bestehendesDarlehenFinanzierungsObjekt>
             <abzuloesendeRestschuld>78000.00</abzuloesendeRestschuld>
             <darlehenArt>IMMOBILIENDARLEHEN</darlehenArt>
-            <darlehensGeber>DSL</darlehensGeber>
+            <darlehensGeber>DSL_BANK</darlehensGeber>
             <sollzins>1.4</sollzins>
             <darlehensBetrag>200000.00</darlehensBetrag>
             <eingetrageneGrundschuld>115000.00</eingetrageneGrundschuld>
@@ -271,7 +271,7 @@
           <zinsBindungBis>2020-01-31</zinsBindungBis>
         </ratenkredit>
       </nachrangigeExterneDarlehen>
-      <verwendungszweck>KAUF</verwendungszweck>
+      <verwendungszweck>ANSCHLUSSFINANZIERUNG</verwendungszweck>
       <verwendungszweckAbhaengigerFinanzbedarf>
         <anschlussfinanzierung>
           <modernisierungsKostenInklEigenleistungen>27000.00</modernisierungsKostenInklEigenleistungen>
