@@ -141,6 +141,8 @@ definitions:
         $ref: '#/definitions/Euro'
       sollZins:
         $ref: '#/definitions/Prozent'
+      grundschuld:
+        $ref: '#/definitions/Euro'
 
   DarlehensdatenAnfrage:
     type: object
