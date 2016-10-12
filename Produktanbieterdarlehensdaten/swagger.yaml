@@ -138,11 +138,19 @@ definitions:
         format: date
         example: 2020-12-31
       abzuloesendeRestschuld:
+        # veraltet. Wird nach Ausrollen von aktuelleRestschuld und restschuldZumZinsbindungsende entfernt.
+        $ref: '#/definitions/Euro'
+      aktuelleRestschuld:
+        $ref: '#/definitions/Euro'
+      restschuldZumZinsbindungsende:
         $ref: '#/definitions/Euro'
       sollZins:
         $ref: '#/definitions/Prozent'
       grundschuld:
         $ref: '#/definitions/Euro'
+      einmalvalutierungserklaerungAbgegeben:
+        description: true, wenn der Produktanbieter für die Grundschuld dieses Darlehens eine Einmalvalutierungserklärung abgegeben hat.
+        type: boolean
 
   DarlehensdatenAnfrage:
     type: object
