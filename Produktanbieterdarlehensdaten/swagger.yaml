@@ -137,9 +137,6 @@ definitions:
         type: string
         format: date
         example: 2020-12-31
-      abzuloesendeRestschuld:
-        # veraltet. Wird nach Ausrollen von aktuelleRestschuld und restschuldZumZinsbindungsende entfernt.
-        $ref: '#/definitions/Euro'
       aktuelleRestschuld:
         $ref: '#/definitions/Euro'
       restschuldZumZinsbindungsende:
