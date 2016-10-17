@@ -19,9 +19,9 @@ Response:
 ## Fehler
 Wenn ein Fehler auftritt, wird die Fehlerseite als Json ausgeliefert.
 Mögliche Ursachen können sein:
-Der Vorgang ist gesperrt (Statuscode 423),
-der Vorgang wurde nicht gefunden (Statuscode 404),
-der Vorgang konnte nicht wieder aktiviert werden (Statuscode 502).
+- Der Vorgang ist gesperrt (Statuscode 423),
+- der Vorgang wurde nicht gefunden (Statuscode 404),
+- der Vorgang konnte nicht wieder aktiviert werden (Statuscode 502).
 
 ## Hinweis
 Achtung: Der Vorgang wird für die Prolongation vorbereitet, so dass die Daten entsprechend verändert werden.
