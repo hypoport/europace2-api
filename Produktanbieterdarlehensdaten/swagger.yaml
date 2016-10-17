@@ -1,0 +1,249 @@
+swagger: "2.0"
+info:
+  description: |
+    Produktanbieter-Darlehensdaten API
+    Benutzt werden JSON Datentypen, siehe http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf
+  title: PADD API
+  version: 0.0.3
+schemes:
+- http
+- https
+produces:
+- application/json
+- application/xml
+consumes:
+- application/json
+- application/xml
+
+# Pfade und Ressourcen
+paths:
+  /darlehensdaten:
+    post:
+      summary: Anfrage von Darlehensdaten
+      description: TBD
+      operationId: postDarlehensdatenAnfrage
+      parameters:
+        - name: anfrage
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DarlehensdatenAnfrage'
+
+      responses:
+        200:
+          description: Erfolgreiche Antwort
+          schema:
+            $ref: '#/definitions/DarlehensdatenAntwort'
+        default:
+          description: unspezifizierter Fehler
+          schema:
+            $ref: '#/definitions/FehlerAntwort'
+
+# Objektdefinitionen
+definitions:
+  Hauptkontonummer:
+    type: string
+    description: |
+      Eindeutige Nummer des Darlehens beim Produktanbieter, z.B. Darlehensnummer, Kontonummer oder IBAN.
+      Kann Buchstaben, Zahlen oder andere Sonderzeichen enthalten.
+
+  PartnerId:
+    type: string
+    description: |
+      Die ID eines Partners im Europace2 System
+
+  Partner:
+    type: object
+    properties:
+      vorname:
+        type: string
+      nachname:
+        type: string
+      email:
+        type: string
+      partnerId:
+        $ref: '#/definitions/PartnerId'
+
+  Antragsteller:
+    description: Daten eines Antragsteller
+    type: object
+    properties:
+      vorname:
+        type: string
+      nachname:
+        type: string
+      geburtsdatum:
+        description: Geburtsdatum nach RFC3339
+        type: string
+        format: date
+        example: 1973-03-29
+      anschrift:
+        $ref: "#/definitions/Postadresse"
+
+  Finanzierungsobjekt:
+    description: Daten zur bestehenden Immobilie
+    properties:
+      adresse:
+        $ref: "#/definitions/Postadresse"
+
+  DarlehensArt:
+    description: Definiert die Art des Finanzierungsbausteins.
+    type: string
+    enum:
+      - IMMOBILIENDARLEHEN
+      - BAUSPARDARLEHEN
+      - FOERDERDARLEHEN
+      - SONSTIGES_DARLEHEN
+
+  DatenKontext:
+    description: Echtgeschäft oder Testumgebung?
+    type: string
+    enum:
+      - TEST_UMGEBUNG
+      - ECHT_GESCHAEFT
+
+  Euro:
+    description: |
+      JSON Number type ohne Währungssymbol, siehe http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf.
+      Vorkomma ist der Eurobetrag und zwei Nachkommastellen - Cents 0-99.
+      Beispiele: 50000 oder 1234.56
+    type: number
+    format: Eurobetrag
+
+  Prozent:
+    description: |
+      JSON Number type ohne Prozentzeichen, siehe http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf.
+      Prozent ist 100 basierend.
+      Beispiele: 60 oder 2.562
+    type: number
+    format: Prozentsatz
+
+  BestehendesDarlehen:
+    type: object
+    required:
+      - darlehensKontonummer
+    properties:
+      darlehensKontonummer:
+        description: IBAN, Konto- oder Unterkontonummer des Produktanbieters.
+        type: string
+      darlehensArt:
+        $ref: '#/definitions/DarlehensArt'
+      urspruenglicherDarlehensBetrag:
+        $ref: '#/definitions/Euro'
+      rateMonatlich:
+        $ref: '#/definitions/Euro'
+      zinsBindungBis:
+        description: Zinsbindungsende, Datum nach RFC3339
+        type: string
+        format: date
+        example: 2020-12-31
+      aktuelleRestschuld:
+        $ref: '#/definitions/Euro'
+      restschuldZumZinsbindungsende:
+        $ref: '#/definitions/Euro'
+      sollZins:
+        $ref: '#/definitions/Prozent'
+      grundschuld:
+        $ref: '#/definitions/Euro'
+      einmalvalutierungserklaerungAbgegeben:
+        description: true, wenn der Produktanbieter für die Grundschuld dieses Darlehens eine Einmalvalutierungserklärung abgegeben hat.
+        type: boolean
+
+  DarlehensdatenAnfrage:
+    type: object
+    required:
+      - hauptkontonummer
+    properties:
+      hauptkontonummer:
+        $ref: '#/definitions/Hauptkontonummer'
+      bestehendeDarlehen:
+        type: array
+        items:
+          $ref: '#/definitions/BestehendesDarlehen'
+      kundenBetreuer:
+        $ref: '#/definitions/Partner'
+      bearbeiter:
+        $ref: '#/definitions/Partner'
+      antragsteller:
+        type: array
+        items:
+          $ref: '#/definitions/Antragsteller'
+      finanzierungsobjekt:
+        $ref: '#/definitions/Finanzierungsobjekt'
+      dokumente:
+        type: array
+        items:
+          $ref: '#/definitions/Dokument'
+      datenKontext:
+        $ref: '#/definitions/DatenKontext'
+
+  DarlehensdatenAntwort:
+    type: object
+    properties:
+      hauptkontonummer:
+        $ref: '#/definitions/Hauptkontonummer'
+      bestehendeDarlehen:
+        type: array
+        items:
+          $ref: '#/definitions/BestehendesDarlehen'
+      marktwertDesFinanzierungsobjekts:
+        $ref: '#/definitions/Euro'
+      meldung:
+        type: string
+        description: Optionales Feld für eine Meldung
+        example: "Keine Darlehen vorhanden"
+      datenKontext:
+        $ref: '#/definitions/DatenKontext'
+
+  Postadresse:
+    type: object
+    properties:
+      strasse:
+        type: string
+      hausnummer:
+        type: string
+      postleitzahl:
+        type: string
+      ort:
+        type: string
+
+  Dokument:
+    type: object
+    required:
+      - href
+    properties:
+      dateiname:
+        type: string
+        description: Der Name der Datei
+        example: "erklaerung_4711.pdf"
+      anzeigename:
+        type: string
+        description: Anzeigename in der Benutzeroberfläche
+        example: "Unterschriebene Einwilligungserklärung"
+      mimeType:
+        type: string
+        description: Typ der Datei
+        example: "application/pdf"
+      erstellungsdatum:
+        type: string
+        format: date
+        example: 2014-06-27T14:11:32.000+02:00
+      href:
+        type: string
+        description: Hyperlink, unter dem die Datei zum Download bereit liegt
+        example: "http://example.org/download/files/erklaerung_4711.pdf"
+
+  FehlerAntwort:
+    type: object
+    required:
+      - error
+    properties:
+      error:
+        type: object
+        required:
+          - message
+        properties:
+          code:
+            type: integer
+          message:
+            type: string

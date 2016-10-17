@@ -16,7 +16,7 @@
    https://www.europace2.de/baufiSmart/bex/schema/bex-v9-VorgangAnlegen.xsd"
  -->
   <xs:annotation>
- 		<xs:appinfo>EUROPACE 2, Baufi Smart VorgangAnlegen-Schema, Version: 9</xs:appinfo>
+ 		<xs:appinfo>EUROPACE 2, BaufiSmart VorgangAnlegen-Schema, Version: 9</xs:appinfo>
  		<xs:appinfo>Generiert am: 12. Dezember 2013</xs:appinfo>
  	</xs:annotation>
 
@@ -1059,7 +1059,7 @@
     </xs:element>
     <xs:element name="kfwProgramm" type="Integer" minOccurs="1" maxOccurs="1" >
         <xs:annotation>
-          <xs:documentation>genau 3 Ziffern erlaubt; zur Laufzeit wird geprüft, ob das KfW-Programm in Baufi Smart verfügbar ist   Beispiel: 124</xs:documentation>
+          <xs:documentation>genau 3 Ziffern erlaubt; zur Laufzeit wird geprüft, ob das KfW-Programm in BaufiSmart verfügbar ist   Beispiel: 124</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="laufzeitInJahren" type="Integer" minOccurs="0" maxOccurs="1" >

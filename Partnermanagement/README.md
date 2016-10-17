@@ -1,3 +1,13 @@
+Partnermanagement
+=================
+
+#### Benutzer anhand seiner Registrierungs-E-Mail im Partnermanagement öffnen:
+
+https://www.europace2.de/partnermanagement/benutzer/%s
+
+#### Benutzer anhand seiner EUROPACE2-PartnerID im Partnermanagement öffnen:
+
+https://www.europace2.de/partnermanagement/partner/%s
 
 
 PEX API's

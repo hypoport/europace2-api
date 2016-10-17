@@ -64,7 +64,9 @@ Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
   "telefonnummer" : "...",
   "typ": "PERSON",            				  
   "vorname" : "...",
-  "webseiteUrl" : "..."
+  "webseiteUrl" : "...",
+  "aufsichtsBehoerde" : "...",
+  "registrierungsNummer" : "..."
 }
 ```
 
@@ -272,7 +274,9 @@ Content-Type: application/json;charset=utf-8
   "rechtEchtgeschaeftErlaubt" : true,
   "vorname" : "Max",
   "telefonnummer" : "030 123456",
-  "webseiteUrl" : "https://github.com/hypoport/europace2-api"
+  "webseiteUrl" : "https://github.com/hypoport/europace2-api",
+  "aufsichtsBehoerde" : "Musterbehörde",
+  "registrierungsNummer" : "987654"
 }
 ```
 

@@ -1,6 +1,6 @@
 # KEX-Antragsstatus-API
 
-Die Statuswechsel API für Kredit Smart-Anträge ist unter folgender URL erreichbar:
+Die Statuswechsel API für **Kredit**Smart-Anträge ist unter folgender URL erreichbar:
 
 ```
 https://www.europace2.de/kreditsmart/kex/antraege/status
@@ -68,7 +68,7 @@ Alternativ kann statt der Produktanbieterantragsnummer auch die Teilantragsnumme
 
 #### Statuswechsel mit Kommentar
 
-Der Statuswechsel kann darüber hinaus mit einem Kommentar versehen werden, der den Anwendern von Kredit Smart zusätzlich zum eigentlichen Statuswechsel angezeigt wird:
+Der Statuswechsel kann darüber hinaus mit einem Kommentar versehen werden, der den Anwendern von **Kredit**Smart zusätzlich zum eigentlichen Statuswechsel angezeigt wird:
 
 ```json
 {
@@ -82,7 +82,7 @@ Sollte der Produktanbieterstatus schon dem aktuellen Status entsprechen, wird de
 
 #### Statuswechsel mit Kommentar und Hinweistexten
 
-Es ist außerdem möglich, eine Liste von Hinweistexten hinzuzufügen, welche dann in Kredit Smart entsprechend dargestellt wird.
+Es ist außerdem möglich, eine Liste von Hinweistexten hinzuzufügen, welche dann in **Kredit**Smart entsprechend dargestellt wird.
 
 ```json
 {

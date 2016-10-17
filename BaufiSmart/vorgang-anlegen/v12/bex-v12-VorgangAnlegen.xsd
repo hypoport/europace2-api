@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions
-    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:bex="www.europace2.de/baufiSmart/bex/schema/bex-v10-VorgangAnlegen"
-    targetNamespace="www.europace2.de/baufiSmart/bex/schema/bex-v10-VorgangAnlegen">
-  <wsdl:types>
-
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="www.europace2.de/baufiSmart/bex/schema/bex-v10-VorgangAnlegen" targetNamespace="www.europace2.de/baufiSmart/bex/schema/bex-v10-VorgangAnlegen">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="www.europace2.de/baufiSmart/bex/schema/bex-v12-VorgangAnlegen" targetNamespace="www.europace2.de/baufiSmart/bex/schema/bex-v12-VorgangAnlegen">
   <!--
    In der XML Datei folgende Location verwenden:
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="www.europace2.de/baufiSmart/bex/schema/bex-v10-VorgangAnlegen
-   https://www.europace2.de/baufiSmart/bex/schema/bex-v10-VorgangAnlegen.xsd"
+   xsi:schemaLocation="www.europace2.de/baufiSmart/bex/schema/bex-v12-VorgangAnlegen
+   https://www.europace2.de/baufiSmart/bex/schema/bex-v12-VorgangAnlegen.xsd"
  -->
   <xs:annotation>
- 		<xs:appinfo>EUROPACE 2, BaufiSmart VorgangAnlegen-Schema, Version: 10</xs:appinfo>
- 		<xs:appinfo>Generiert am: 8. Juli 2014</xs:appinfo>
+ 		<xs:appinfo>EUROPACE 2, Baufi Smart VorgangAnlegen-Schema, Version: 12</xs:appinfo>
+ 		<xs:appinfo>Generiert am: 4. Oktober 2016</xs:appinfo>
  	</xs:annotation>
 
   <xs:element name="VorgangMetadaten" type="VorgangMetadaten"/>
@@ -30,7 +21,7 @@
     </xs:element>
     <xs:element name="empfaenger" type="PartnerInformation" minOccurs="1" maxOccurs="1" >
     </xs:element>
-    <xs:element name="tippgeber" type="PartnerInformation" minOccurs="0" maxOccurs="1">
+    <xs:element name="tippgeber" type="PartnerInformation" minOccurs="0" maxOccurs="1" >
     </xs:element>
     <xs:element name="teilVorgangId" type="String" minOccurs="1" maxOccurs="1" >
         <xs:annotation>
@@ -76,11 +67,6 @@
         <xs:annotation>
           <xs:documentation>Beispiel: NEUTRAL</xs:documentation>
         </xs:annotation>
-    </xs:element>
-    <xs:element name="tippgeberPartnerId" type="String" minOccurs="0" maxOccurs="1">
-      <xs:annotation>
-        <xs:documentation>EUROPACE 2 PartnerId des Tippgebers. Wird ignoriert, wenn auf EUROPACE 2 nicht vorhanden.</xs:documentation>
-      </xs:annotation>
     </xs:element>
   </xs:sequence>
 </xs:complexType>
@@ -343,6 +329,32 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
     </xs:element>
   </xs:sequence>
 </xs:complexType>
+<xs:simpleType name="Bausparkasse">
+  <xs:restriction base="xs:string">
+<xs:enumeration value="ALTE_LEIPZIGER_BAUSPAR"/>
+<xs:enumeration value="BAUSPARKASSE_MAINZ"/>
+<xs:enumeration value="BAUSPARKASSE_SCHWAEBISCH_HALL"/>
+<xs:enumeration value="BHW"/>
+<xs:enumeration value="BSQ_BAUSPAR"/>
+<xs:enumeration value="DEBEKA_BAUSPARKASSE"/>
+<xs:enumeration value="DEUTSCHE_BANK_BAUSPAR"/>
+<xs:enumeration value="BADENIA"/>
+<xs:enumeration value="DEUTSCHER_RING"/>
+<xs:enumeration value="LBS_BAYERN"/>
+<xs:enumeration value="LBS_NORD"/>
+<xs:enumeration value="LBS_BREMEN"/>
+<xs:enumeration value="LBS_HESSEN_THUERINGEN"/>
+<xs:enumeration value="LBS_SCHLESWIG_HOLSTEIN_HAMBURG"/>
+<xs:enumeration value="LBS_RHEINLAND_PFALZ"/>
+<xs:enumeration value="LBS_WEST"/>
+<xs:enumeration value="LBS_OST"/>
+<xs:enumeration value="LBS_SAAR"/>
+<xs:enumeration value="LBS_BADEN_WUERTTEMBERG"/>
+<xs:enumeration value="SIGNAL_IDUNA"/>
+<xs:enumeration value="SIGNAL_IDUNA_BAUSPAR"/>
+<xs:enumeration value="WUESTENROT"/>
+  </xs:restriction>
+</xs:simpleType>
 <xs:complexType name="Bausparvertrag">
   <xs:sequence>
     <xs:element name="angesparterBetrag" type="Euro" minOccurs="0" maxOccurs="1" >
@@ -356,6 +368,17 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="vermoegensVerwendung" type="AufloesbaresUndAbtretbaresVermoegen" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+    <xs:element name="bausparkasse" type="Bausparkasse" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+    <xs:element name="bausparSumme" type="Euro" minOccurs="0" maxOccurs="1" >
+        <xs:annotation>
+          <xs:documentation>Beispiel: 111000.00</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="tarif" type="String" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+    <xs:element name="vertragsNummer" type="String" minOccurs="0" maxOccurs="1" >
     </xs:element>
   </xs:sequence>
 </xs:complexType>
@@ -502,6 +525,16 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
           <xs:documentation>Beispiel: DSL</xs:documentation>
         </xs:annotation>
     </xs:element>
+    <xs:element name="sollzins" type="Prozent" minOccurs="0" maxOccurs="1" >
+        <xs:annotation>
+          <xs:documentation>Beispiel: 1.3</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="darlehensBetrag" type="Euro" minOccurs="0" maxOccurs="1" >
+        <xs:annotation>
+          <xs:documentation>Beispiel: 115000.00</xs:documentation>
+        </xs:annotation>
+    </xs:element>
     <xs:element name="eingetrageneGrundschuld" type="Euro" minOccurs="0" maxOccurs="1" >
         <xs:annotation>
           <xs:documentation>Beispiel: 115000.00</xs:documentation>
@@ -520,6 +553,21 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
     <xs:element name="zinsBindungBis" type="IsoDate" minOccurs="0" maxOccurs="1" >
         <xs:annotation>
           <xs:documentation>Beispiel: 2013-05-31</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="laufzeitBis" type="IsoDate" minOccurs="0" maxOccurs="1" >
+        <xs:annotation>
+          <xs:documentation>Beispiel: 2013-05-31</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="hauptKontonummer" type="String" minOccurs="0" maxOccurs="1" >
+        <xs:annotation>
+          <xs:documentation>Beispiel: DE12500105170648489890</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="darlehensKontonummer" type="String" minOccurs="0" maxOccurs="1" >
+        <xs:annotation>
+          <xs:documentation>Beispiel: DE12500105170648489890</xs:documentation>
         </xs:annotation>
     </xs:element>
   </xs:sequence>
@@ -1125,7 +1173,7 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
     </xs:element>
     <xs:element name="kfwProgramm" type="Integer" minOccurs="1" maxOccurs="1" >
         <xs:annotation>
-          <xs:documentation>genau 3 Ziffern erlaubt; zur Laufzeit wird geprüft, ob das KfW-Programm in BaufiSmart verfügbar ist   Beispiel: 124</xs:documentation>
+          <xs:documentation>genau 3 Ziffern erlaubt; zur Laufzeit wird geprüft, ob das KfW-Programm in Baufi Smart verfügbar ist   Beispiel: 124</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="laufzeitInJahren" type="Integer" minOccurs="0" maxOccurs="1" >
@@ -2127,67 +2175,4 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
 <xs:element name="DatenKontext" type="DatenKontext"/>
 <xs:element name="EmpfaengerPartnerId" type="String"/>
 <xs:element name="LoggingId" type="LoggingId"/>
-  <xs:element name="TippgeberPartnerId" type="String"/>
 </xs:schema>
-  </wsdl:types>
-  <wsdl:message name="VorgangAnlegenAnfrage">
-    <wsdl:part name="ApiKey" element="bex:ApiKey">
-      <wsdl:documentation>Pflichtfeld</wsdl:documentation>
-    </wsdl:part>
-    <wsdl:part name="BearbeiterPartnerId" element="bex:BearbeiterPartnerId">
-      <wsdl:documentation>Optional; Bearbeiter muss später festgelet werden.</wsdl:documentation>
-    </wsdl:part>
-    <wsdl:part name="DatenKontext" element="bex:DatenKontext">
-      <wsdl:documentation>Optional; ECHT_GESCHAEFT ist das Standardwert</wsdl:documentation>
-    </wsdl:part>
-    <wsdl:part name="EmpfaengerPartnerId" element="bex:EmpfaengerPartnerId">
-      <wsdl:documentation>Pflichtfeld</wsdl:documentation>
-    </wsdl:part>
-    <wsdl:part name="LoggingId" element="bex:LoggingId">
-      <wsdl:documentation>Optional; Bex erzeugt eine eigene LoggingId</wsdl:documentation>
-    </wsdl:part>
-    <wsdl:part name="Vorgang" element="bex:Vorgang">
-      <wsdl:documentation>Pflichtfeld</wsdl:documentation>
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="VorgangAnlegenAntwort">
-    <wsdl:part name="LoggingId" element="bex:LoggingId"/>
-    <wsdl:part name="VorgangMetadaten" element="bex:VorgangMetadaten"/>
-  </wsdl:message>
-  <wsdl:message name="VorgangAnlegenFehlermeldungen">
-    <wsdl:part name="LoggingId" element="bex:LoggingId"/>
-  </wsdl:message>
-  <wsdl:portType name="VorgangAnlegenPortType">
-    <wsdl:operation name="VorgangAnlegen">
-      <wsdl:input message="bex:VorgangAnlegenAnfrage"/>
-      <wsdl:output message="bex:VorgangAnlegenAntwort"/>
-      <wsdl:fault message="bex:VorgangAnlegenFehlermeldungen" name="VorgangAnlegenFehlermeldungen"/>
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:binding name="VorgangAnlegenBinding" type="bex:VorgangAnlegenPortType">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-    <wsdl:operation name="VorgangAnlegen">
-      <soap:operation soapAction="urn:#VorgangAnlegen"/>
-      <wsdl:input>
-        <soap:header part="ApiKey" message="bex:VorgangAnlegenAnfrage" use="literal" required="true"/>
-        <soap:header part="BearbeiterPartnerId" message="bex:VorgangAnlegenAnfrage" use="literal" required="false"/>
-        <soap:header part="EmpfaengerPartnerId" message="bex:VorgangAnlegenAnfrage" use="literal" required="true"/>
-        <soap:header part="DatenKontext" message="bex:VorgangAnlegenAnfrage" use="literal" required="false"/>
-        <soap:header part="LoggingId" message="bex:VorgangAnlegenAnfrage" use="literal" required="false"/>
-        <soap:body parts="Vorgang" use="literal" required="true"/>
-      </wsdl:input>
-      <wsdl:output>
-        <soap:header part="LoggingId" message="bex:VorgangAnlegenAntwort" use="literal"/>
-        <soap:body parts="VorgangMetadaten" use="literal"/>
-      </wsdl:output>
-      <wsdl:fault name="VorgangAnlegenFehlermeldungen">
-        <soap:header part="LoggingId" message="bex:VorgangAnlegenFehlermeldungen" use="literal"/>
-      </wsdl:fault>
-    </wsdl:operation>
-  </wsdl:binding>
-  <wsdl:service name="VorgangAnlegenService">
-    <wsdl:port name="VorgangAnlegenPort" binding="bex:VorgangAnlegenBinding">
-      <soap:address location="https://www.europace2.de/baufiSmart/soap/bex/v10/vorgangAnlegen"/>
-    </wsdl:port>
-  </wsdl:service>
-</wsdl:definitions>
