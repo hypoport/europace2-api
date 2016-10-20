@@ -102,7 +102,7 @@ definitions:
         $ref: '#/definitions/Href'
       antragsteller:
         type: array
-          items:
+        items:
           $ref: "#/definitions/Antragsteller"
 
   Antragsteller:
