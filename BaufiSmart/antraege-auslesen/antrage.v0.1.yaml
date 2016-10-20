@@ -3,7 +3,7 @@ info:
   description: |
     Eine API zum Auslesen von Daten aus BaufiSmart & Co.
   title: Anträge auslesen API
-  version: 0.1
+  version: 0.0.1
   contact:
       name: "Europace AG"
       url: "www.europace2.de"
