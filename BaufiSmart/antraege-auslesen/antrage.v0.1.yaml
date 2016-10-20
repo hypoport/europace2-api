@@ -106,6 +106,7 @@ definitions:
           $ref: "#/definitions/Antragsteller"
 
   Antragsteller:
+    type: object
     properties:
       id:
         type: string
