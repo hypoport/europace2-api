@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: |
     Eine API zum Auslesen von Daten aus BaufiSmart & Co.
-  title: Anträge auslesen API
+  title: 'Anträge auslesen API'
   version: 0.0.1
   contact:
       name: "Europace AG"
