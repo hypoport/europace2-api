@@ -100,6 +100,47 @@ definitions:
         $ref: '#/definitions/DatenKontext'
       kreditEntscheidungsInformation:
         $ref: '#/definitions/Href'
+      antragsteller:
+        type: array
+          items:
+          $ref: "#/definitions/Antragsteller"
+
+  Antragsteller:
+    properties:
+      id:
+        type: string
+      anrede:
+        type: string
+        enum:
+          - Herr
+          - Frau
+      vorname:
+        type: string
+      nachname:
+        type: string
+      email:
+        type: string
+      telefonnummer:
+        type: string
+        description: Telefonnummer formatiert nach DIN 5008
+      geburtsdatum:
+        type: string
+        format: date
+      anschrift:
+        $ref: "#/definitions/Postadresse"
+      wohnhaftSeit:
+        type: string
+        format: date
+      vorAnschrift:
+        $ref: "#/definitions/Postadresse"
+      familienstand:
+        type: string
+        enum:
+          - VERWITWET
+          - LEBENSPARTNERSCHAFT
+          - GESCHIEDEN
+          - GETRENNT_LEBEND
+          - LEDIG
 
   # Basic Types
   Href:
@@ -115,6 +156,19 @@ definitions:
         type: string
         description: |
           Media type der Resource: https://tools.ietf.org/html/rfc2045
+
+  Postadresse:
+    type: object
+    properties:
+      strasse:
+        type: string
+      hausnummer:
+        type: string
+      postleitzahl:
+        type: string
+      ort:
+        type: string
+
 
   Partner:
     type: object
