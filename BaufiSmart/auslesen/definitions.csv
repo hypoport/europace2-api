@@ -1,45 +1,15 @@
 Definition Name                              ;Attribut Name                                                  ;Attribut Type                                      ;Moegliche Enum Werte
-Angebot                                      ;                                                               ;                                                   ;
-                                             ;angebotsFrist                                                  ;string(date)                                       ;
-                                             ;anpassungsStatus                                               ;enum                                               ;
-                                             ;                                                               ;                                                   ;NICHT_ANGEPASST
-                                             ;                                                               ;                                                   ;ANGEPASST
-                                             ;                                                               ;                                                   ;ALTERNATIV
-                                             ;bausparvertraege                                               ;array of EuropaceBausparAngebot                    ;
-                                             ;beleihungsAuslaeufe                                            ;array of BeleihungsAuslauf                         ;
-                                             ;beleihungsWertSummen                                           ;array of BeleihungsWertSumme                       ;
-                                             ;beleihungsWerte                                                ;array of BeleihungsWert                            ;
-                                             ;bewertungDesAngebots                                           ;enum                                               ;
-                                             ;                                                               ;                                                   ;ANGEBOT_ENTSPRICHT_MEINER_EMPFEHLUNG
-                                             ;                                                               ;                                                   ;ANGEBOT_ENTSPRICHT_DEM_WUNSCH_DES_KUNDEN
-                                             ;darlehen                                                       ;array of Darlehen                                  ;
-                                             ;einstandWunschDatum                                            ;string(date)                                       ;
-                                             ;id                                                             ;string                                             ;
-                                             ;kennung                                                        ;string                                             ;
-                                             ;machbarkeitsStatus                                             ;enum                                               ;
-                                             ;                                                               ;                                                   ;MACHBAR
-                                             ;                                                               ;                                                   ;UNTER_VORBEHALT_PRODUZENT
-                                             ;                                                               ;                                                   ;NICHT_MACHBAR
-                                             ;marketEngineErzeugtAmDatum                                     ;string(date)                                       ;
-                                             ;meldungen                                                      ;Meldungen                                          ;
-                                             ;provisionKundenbetreuerRelativ                                 ;number                                             ;
-                                             ;pruefungsErgebnisse                                            ;array of MarketEnginePruefungsErgebnis             ;
-                                             ;rueckdatierungsFrist                                           ;string(date)                                       ;
 AngebotZumAntrag                             ;                                                               ;                                                   ;
-                                             ;angebotsFrist                                                  ;string(date)                                       ;
+                                             ;angebotsFristEndeAm                                            ;string(date)                                       ;
                                              ;anpassungsStatus                                               ;enum                                               ;
                                              ;                                                               ;                                                   ;NICHT_ANGEPASST
                                              ;                                                               ;                                                   ;ANGEPASST
                                              ;                                                               ;                                                   ;ALTERNATIV
                                              ;bausparvertraege                                               ;array of EuropaceBausparAngebot                    ;
-                                             ;beleihungsAuslaeufe                                            ;array of BeleihungsAuslauf                         ;
-                                             ;beleihungsWertSummen                                           ;array of BeleihungsWertSumme                       ;
-                                             ;beleihungsWerte                                                ;array of BeleihungsWert                            ;
                                              ;bewertungDesAngebots                                           ;enum                                               ;
                                              ;                                                               ;                                                   ;ANGEBOT_ENTSPRICHT_MEINER_EMPFEHLUNG
                                              ;                                                               ;                                                   ;ANGEBOT_ENTSPRICHT_DEM_WUNSCH_DES_KUNDEN
                                              ;darlehen                                                       ;array of Darlehen                                  ;
-                                             ;einstandWunschDatum                                            ;string(date)                                       ;
                                              ;id                                                             ;string                                             ;
                                              ;kennung                                                        ;string                                             ;
                                              ;konditionsAnpassungsBegruendung                                ;string                                             ;
@@ -47,45 +17,12 @@ AngebotZumAntrag                             ;                                  
                                              ;                                                               ;                                                   ;MACHBAR
                                              ;                                                               ;                                                   ;UNTER_VORBEHALT_PRODUZENT
                                              ;                                                               ;                                                   ;NICHT_MACHBAR
-                                             ;marketEngineErzeugtAmDatum                                     ;string(date)                                       ;
                                              ;meldungen                                                      ;Meldungen                                          ;
-                                             ;provisionKundenbetreuerRelativ                                 ;number                                             ;
-                                             ;pruefungsErgebnisse                                            ;array of MarketEnginePruefungsErgebnis             ;
-                                             ;rueckdatierungsFrist                                           ;Links                                              ;
-AngebotZumVorgang                            ;                                                               ;                                                   ;
-                                             ;angebotsFrist                                                  ;string(date)                                       ;
-                                             ;anpassungsStatus                                               ;enum                                               ;
-                                             ;                                                               ;                                                   ;NICHT_ANGEPASST
-                                             ;                                                               ;                                                   ;ANGEPASST
-                                             ;                                                               ;                                                   ;ALTERNATIV
-                                             ;bausparvertraege                                               ;array of EuropaceBausparAngebot                    ;
-                                             ;beleihungsAuslaeufe                                            ;array of BeleihungsAuslauf                         ;
-                                             ;beleihungsWertSummen                                           ;array of BeleihungsWertSumme                       ;
-                                             ;beleihungsWerte                                                ;array of BeleihungsWert                            ;
-                                             ;bewertungDesAngebots                                           ;enum                                               ;
-                                             ;                                                               ;                                                   ;ANGEBOT_ENTSPRICHT_MEINER_EMPFEHLUNG
-                                             ;                                                               ;                                                   ;ANGEBOT_ENTSPRICHT_DEM_WUNSCH_DES_KUNDEN
-                                             ;darlehen                                                       ;array of Darlehen                                  ;
-                                             ;einstandWunschDatum                                            ;string(date)                                       ;
-                                             ;id                                                             ;string                                             ;
-                                             ;kennung                                                        ;string                                             ;
-                                             ;machbarkeitsStatus                                             ;enum                                               ;
-                                             ;                                                               ;                                                   ;MACHBAR
-                                             ;                                                               ;                                                   ;UNTER_VORBEHALT_PRODUZENT
-                                             ;                                                               ;                                                   ;NICHT_MACHBAR
-                                             ;marketEngineErzeugtAmDatum                                     ;string(date)                                       ;
-                                             ;meldungen                                                      ;Meldungen                                          ;
-                                             ;provisionKundenbetreuerRelativ                                 ;number                                             ;
-                                             ;pruefungsErgebnisse                                            ;array of MarketEnginePruefungsErgebnis             ;
-                                             ;rueckdatierungsFrist                                           ;Links                                              ;
-AngeboteZumVorgang                           ;                                                               ;                                                   ;
-                                             ;content                                                        ;Collection«AngebotZumVorgang»                      ;
-                                             ;links                                                          ;array of Link                                      ;
+                                             ;rueckdatierungsFristEndeAm                                     ;Links                                              ;
 AngestellterOderArbeiterOderBeamter          ;                                                               ;                                                   ;
                                              ;anzahlGehaelterProJahr                                         ;number(double)                                     ;
                                              ;arbeitgeber                                                    ;string                                             ;
-                                             ;arbeitgeberInDeutschland                                       ;boolean                                            ;
-                                             ;arbeitgeberNichtInDeutschlandKommentar                         ;string                                             ;
+                                             ;arbeitgeberInDeutschlandAnsaessig                              ;boolean                                            ;
                                              ;befristungsStatusBeiAngestelltenOderArbeitern                  ;enum                                               ;
                                              ;                                                               ;                                                   ;BEFRISTET
                                              ;                                                               ;                                                   ;UNBEFRISTET
@@ -131,10 +68,11 @@ Antrag                                       ;                                  
                                              ;datenKontext                                                   ;enum                                               ;
                                              ;                                                               ;                                                   ;TEST_MODUS
                                              ;                                                               ;                                                   ;ECHT_GESCHAEFT
+                                             ;id                                                             ;string                                             ;
                                              ;produktAnbieter                                                ;ProduktAnbieter                                    ;
                                              ;prolongation                                                   ;boolean                                            ;
                                              ;status                                                         ;AntragsStatus                                      ;
-                                             ;voraussichtlicheBearbeitungAm                                  ;string(date)                                       ;
+                                             ;voraussichtlicheBearbeitungAm                                  ;Links                                              ;
 AntragResourcen                              ;                                                               ;                                                   ;
                                              ;angebot                                                        ;AngebotZumAntrag                                   ;
                                              ;ansprechpartner                                                ;Partner                                            ;
@@ -202,7 +140,6 @@ Antragsteller                                ;                                  
                                              ;telefonnummerVorwahl                                           ;string                                             ;
                                              ;titelDoktor                                                    ;boolean                                            ;
                                              ;titelProfessor                                                 ;boolean                                            ;
-                                             ;verheiratetmitWeiteremAntragsteller                            ;boolean                                            ;
                                              ;vorAnschrift                                                   ;Postadresse                                        ;
                                              ;vorname                                                        ;string                                             ;
                                              ;weitereKontaktMoeglichkeiten                                   ;string                                             ;
@@ -246,7 +183,7 @@ Bankverbindung                               ;                                  
                                              ;kreditinstitut                                                 ;string                                             ;
 BausparAngebot                               ;                                                               ;                                                   ;
                                              ;abschlussGebuehr                                               ;number                                             ;
-                                             ;angebotsHinweisFuerDenKunden                                   ;string                                             ;
+                                             ;angebotsHinweisFuerAntragsteller                               ;string                                             ;
                                              ;bausparSumme                                                   ;number                                             ;
                                              ;einmalzahlung                                                  ;number                                             ;
                                              ;id                                                             ;string                                             ;
@@ -320,7 +257,7 @@ BausparvertragAlsTilgungsErsatz              ;                                  
                                              ;abschlussGebuehrenVerrechnung                                  ;enum                                               ;
                                              ;                                                               ;                                                   ;SOFORTZAHLUNG
                                              ;                                                               ;                                                   ;VERRECHNUNG
-                                             ;angebotsHinweisFuerDenKunden                                   ;string                                             ;
+                                             ;angebotsHinweisFuerAntragsteller                               ;string                                             ;
                                              ;antragsEntscheider                                             ;ProduktAnbieter                                    ;
                                              ;bausparSumme                                                   ;number                                             ;
                                              ;einmalzahlung                                                  ;number                                             ;
@@ -385,15 +322,6 @@ BausparvertragAlsTilgungsErsatz              ;                                  
                                              ;                                                               ;                                                   ;ALS_TILGUNGSERSATZ
                                              ;                                                               ;                                                   ;ZUR_ZINSABSICHERUNG
                                              ;zuteilungsDatum                                                ;string(date)                                       ;
-BeleihungsAuslauf                            ;                                                               ;                                                   ;
-                                             ;beleihungsAuslauf                                              ;number                                             ;
-                                             ;produktAnbieter                                                ;ProduktAnbieter                                    ;
-BeleihungsWert                               ;                                                               ;                                                   ;
-                                             ;beleihungsWert                                                 ;number                                             ;
-                                             ;immobilieId                                                    ;string                                             ;
-BeleihungsWertSumme                          ;                                                               ;                                                   ;
-                                             ;beleihungsWertSumme                                            ;number                                             ;
-                                             ;produktAnbieterId                                              ;ProduktAnbieter                                    ;
 Beratung                                     ;                                                               ;                                                   ;
                                              ;art                                                            ;enum                                               ;
                                              ;                                                               ;                                                   ;PRAESENZ_GESCHAEFT
@@ -505,8 +433,7 @@ BestehendesDarlehenDesFinanzierungsObjekts   ;                                  
                                              ;                                                               ;                                                   ;TRITT_NICHT_IM_RANG_ZURUECK
                                              ;zinsBindungBis                                                 ;string(date)                                       ;
 BestehendesDarlehenVerknuepfung              ;                                                               ;                                                   ;
-                                             ;id                                                             ;_Typ_ : object                                     ;
-Collection«AngebotZumVorgang»                ;                                                               ;                                                   ;
+                                             ;id                                                             ;string                                             ;
 Darlehen                                     ;                                                               ;                                                   ;
                                              ;abzuloesendeAltdarlehen                                        ;array of BestehendesDarlehenVerknuepfung           ;
                                              ;auszahlungsBetrag                                              ;number                                             ;
@@ -537,7 +464,7 @@ Darlehen                                     ;                                  
                                              ;sollZins                                                       ;number                                             ;
                                              ;tilgung                                                        ;Tilgung                                            ;
                                              ;zinsBindung                                                    ;ZinsBindung                                        ;
-                                             ;zinsZahlungsBeginn                                             ;string(date)                                       ;
+                                             ;zinsZahlungsBeginnAm                                           ;string(date)                                       ;
                                              ;zwischenFinanzierung                                           ;ZwischenFinanzierung                               ;
 DarlehensWunsch                              ;                                                               ;                                                   ;
                                              ;annuitaetenOderForwardDarlehen                                 ;AnnuitaetenOderForwardDarlehensWunsch              ;
@@ -594,17 +521,12 @@ Erbbaurecht                                  ;                                  
                                              ;                                                               ;                                                   ;ANDERE
                                              ;                                                               ;                                                   ;OEFFENTLICH_KIRCHLICH
                                              ;laufzeitBisJahr                                                ;string                                             ;
-ErfassteDatenAmVorgang                       ;                                                               ;                                                   ;
-                                             ;finanzierungsObjekt                                            ;FinanzierungsObjekt                                ;
-                                             ;haushalte                                                      ;array of Haushalt                                  ;
-                                             ;links                                                          ;array of Link                                      ;
-                                             ;vorhaben                                                       ;Vorhaben                                           ;
 EuropaceBausparAngebot                       ;                                                               ;                                                   ;
                                              ;abschlussGebuehr                                               ;number                                             ;
                                              ;abschlussGebuehrenVerrechnung                                  ;enum                                               ;
                                              ;                                                               ;                                                   ;SOFORTZAHLUNG
                                              ;                                                               ;                                                   ;VERRECHNUNG
-                                             ;angebotsHinweisFuerDenKunden                                   ;string                                             ;
+                                             ;angebotsHinweisFuerAntragsteller                               ;string                                             ;
                                              ;antragsEntscheider                                             ;ProduktAnbieter                                    ;
                                              ;bausparSumme                                                   ;number                                             ;
                                              ;einmalzahlung                                                  ;number                                             ;
@@ -861,6 +783,7 @@ HaushaltsPositionen                          ;                                  
                                              ;ehegattenUnterhaltEinnahmenMonatlich                           ;array of EinnahmenMonatlich                        ;
                                              ;einkuenfteAusNebentaetigkeit                                   ;array of EinkuenfteAusNebentaetigkeit              ;
                                              ;einnahmenSonstigeMonatlich                                     ;array of EinnahmenMonatlich                        ;
+                                             ;kindergeld                                                     ;array of EinnahmenMonatlich                        ;
                                              ;lebensUndRentenversicherung                                    ;array of LebensOderRentenversicherungVermoegen     ;
                                              ;mietAusgaben                                                   ;array of MietAusgaben                              ;
                                              ;privateDarlehen                                                ;array of Verbindlichkeit                           ;
@@ -927,11 +850,6 @@ Kind                                         ;                                  
                                              ;kindergeldWirdBezogen                                          ;boolean                                            ;
                                              ;name                                                           ;string                                             ;
                                              ;unterhaltsEinnahmenBetragMonatlich                             ;number                                             ;
-LeadTracking                                 ;                                                               ;                                                   ;
-                                             ;kampagne                                                       ;string                                             ;
-                                             ;keyword                                                        ;string                                             ;
-                                             ;kundenBetreuerBenachrichtigen                                  ;boolean                                            ;
-                                             ;trackingId                                                     ;string                                             ;
 LebensOderRentenversicherungAlsTilgungsErsatz;                                                               ;                                                   ;
                                              ;id                                                             ;string                                             ;
                                              ;praemieMonatlich                                               ;number                                             ;
@@ -981,17 +899,10 @@ LebensOderRentenversicherungVermoegen        ;                                  
                                              ;                                                               ;                                                   ;AUSGABEN
 Link                                         ;                                                               ;                                                   ;
                                              ;href                                                           ;string                                             ;
-                                             ;rel                                                            ;string                                             ;
                                              ;templated                                                      ;boolean                                            ;
                                              ;type                                                           ;string                                             ;
 Links                                        ;                                                               ;                                                   ;
                                              ;self                                                           ;Link                                               ;
-MarketEnginePruefungsErgebnis                ;                                                               ;                                                   ;
-                                             ;kreditEntscheider                                              ;ProduktAnbieter                                    ;
-                                             ;produktAnbieter                                                ;ProduktAnbieter                                    ;
-                                             ;rating                                                         ;Rating                                             ;
-                                             ;schufaErgebnis                                                 ;SchufaErgebnis                                     ;
-                                             ;zusaetzlicheAngabenFuerExport                                  ;string                                             ;
 Meldung                                      ;                                                               ;                                                   ;
                                              ;kategorie                                                      ;enum                                               ;
                                              ;                                                               ;                                                   ;AUSZAHLUNGS_VORAUSSETZUNG
@@ -1009,14 +920,10 @@ Meldung                                      ;                                  
                                              ;                                                               ;                                                   ;NICHT_ANBIETBAR
                                              ;kreditEntscheider                                              ;ProduktAnbieter                                    ;
                                              ;produktAnbieter                                                ;ProduktAnbieter                                    ;
-                                             ;sichtbarkeit                                                   ;enum                                               ;
-                                             ;                                                               ;                                                   ;OHNE_EINSCHRAENKUNG
-                                             ;                                                               ;                                                   ;NUR_VERTRIEB
-                                             ;                                                               ;                                                   ;NUR_PRODUKTANBIETER
                                              ;text                                                           ;string                                             ;
                                              ;zuordnung                                                      ;enum                                               ;
                                              ;                                                               ;                                                   ;ANTRAGSTELLER
-                                             ;                                                               ;                                                   ;OBJEKT
+                                             ;                                                               ;                                                   ;FINANZIERUNGS_OBJEKT
                                              ;                                                               ;                                                   ;VORHABEN
                                              ;                                                               ;                                                   ;ALTERNATIV
                                              ;                                                               ;                                                   ;ANPASSUNG
@@ -1099,31 +1006,12 @@ Provision                                    ;                                  
                                              ;europaceMargeAbsolut                                           ;number                                             ;
                                              ;produktAnbieterZahltEuropaceMarge                              ;boolean                                            ;
                                              ;provisionKundenbetreuerAbsolut                                 ;number                                             ;
-                                             ;provisionKundenbetreuerRelativ                                 ;number                                             ;
                                              ;vertriebsProvisionGesamtAbsolut                                ;number                                             ;
-                                             ;vertriebsProvisionGesamtRelativ                                ;number                                             ;
-Rating                                       ;                                                               ;                                                   ;
-                                             ;ausfallrate                                                    ;number                                             ;
-                                             ;klasse                                                         ;string                                             ;
-                                             ;ratingZeitpunkt                                                ;string                                             ;
-                                             ;risikoKosten                                                   ;integer(int32)                                     ;
-                                             ;verfahren                                                      ;string                                             ;
 RechteAbteilung2                             ;                                                               ;                                                   ;
                                              ;beschreibung                                                   ;string                                             ;
                                              ;betrag                                                         ;number                                             ;
 Rentner                                      ;                                                               ;                                                   ;
                                              ;staatlicheRenteNettoMonatlich                                  ;number                                             ;
-Resources                                    ;                                                               ;                                                   ;
-                                             ;kundenBetreuer                                                 ;Partner                                            ;
-                                             ;tippGeber                                                      ;Partner                                            ;
-                                             ;vorgangsBearbeiter                                             ;Partner                                            ;
-SchufaDetails                                ;                                                               ;                                                   ;
-                                             ;antragstellerId                                                ;string                                             ;
-                                             ;antragstellerNichtGefunden                                     ;boolean                                            ;
-                                             ;nachbehandlung                                                 ;boolean                                            ;
-                                             ;score                                                          ;string                                             ;
-SchufaErgebnis                               ;                                                               ;                                                   ;
-                                             ;schufaDetails                                                  ;array of SchufaDetails                             ;
 SituationNachRenteneintritt                  ;                                                               ;                                                   ;
                                              ;gesetzlicheRenteMonatlich                                      ;number                                             ;
                                              ;privateRenteMonatlich                                          ;number                                             ;
@@ -1151,7 +1039,7 @@ Tilgung                                      ;                                  
                                              ;bausparvertragAlsTilgungsErsatz                                ;BausparvertragAlsTilgungsErsatz                    ;
                                              ;lebensOderRentenversicherungAlsTilgungsErsatz                  ;LebensOderRentenversicherungAlsTilgungsErsatz      ;
                                              ;sonderTilgungJaehrlich                                         ;number                                             ;
-                                             ;tilgungsBeginn                                                 ;string(date)                                       ;
+                                             ;tilgungsBeginnAm                                               ;string(date)                                       ;
 TilgungsPhase                                ;                                                               ;                                                   ;
                                              ;bausparDarlehenSumme                                           ;number                                             ;
                                              ;darlehensGebuehrEinmalig                                       ;number                                             ;
@@ -1199,21 +1087,6 @@ Vermoegen                                    ;                                  
                                              ;                                                               ;                                                   ;VERBINDLICHKEIT
 VertragsPartner                              ;                                                               ;                                                   ;
                                              ;id                                                             ;string                                             ;
-Vorgaenge                                    ;                                                               ;                                                   ;
-                                             ;vorgaenge                                                      ;Links                                              ;
-Vorgang                                      ;                                                               ;                                                   ;
-                                             ;angebote                                                       ;array of Angebot                                   ;
-                                             ;antraege                                                       ;array of Antrag                                    ;
-                                             ;archiviert                                                     ;boolean                                            ;
-                                             ;datenKontext                                                   ;enum                                               ;
-                                             ;                                                               ;                                                   ;TEST_MODUS
-                                             ;                                                               ;                                                   ;ECHT_GESCHAEFT
-                                             ;externeVorgangsId                                              ;string                                             ;
-                                             ;id                                                             ;string                                             ;
-                                             ;importQuelle                                                   ;string                                             ;
-                                             ;leadTracking                                                   ;LeadTracking                                       ;
-                                             ;mitteilung                                                     ;string                                             ;
-                                             ;prioritaet                                                     ;Links                                              ;
 Vorhaben                                     ;                                                               ;                                                   ;
                                              ;eigenleistungWennNeubauOderModernisierungsmassnahmen           ;number                                             ;
                                              ;externeBausparAngebote                                         ;array of BausparAngebot                            ;
@@ -1241,8 +1114,8 @@ Wertpapiere                                  ;                                  
                                              ;                                                               ;                                                   ;EINNAHMEN
                                              ;                                                               ;                                                   ;AUSGABEN
 ZinsBindung                                  ;                                                               ;                                                   ;
-                                             ;endeDerZinsBindung                                             ;string(date)                                       ;
                                              ;zinsBindungInJahren                                            ;integer(int32)                                     ;
+                                             ;zinsBindungsEndeAm                                             ;string(date)                                       ;
 ZugrundeliegendeDatenZumAntrag               ;                                                               ;                                                   ;
                                              ;finanzierungsObjekt                                            ;FinanzierungsObjekt                                ;
                                              ;haushalte                                                      ;array of Haushalt                                  ;
