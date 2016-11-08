@@ -18,11 +18,12 @@ AngebotZumAntrag                             ;                                  
                                              ;                                                               ;                                                   ;UNTER_VORBEHALT_PRODUZENT
                                              ;                                                               ;                                                   ;NICHT_MACHBAR
                                              ;meldungen                                                      ;Meldungen                                          ;
-                                             ;rueckdatierungsFristEndeAm                                     ;Links                                              ;
+                                             ;rueckdatierungsFristEndeAm                                     ;string(date)                                       ;
 AngestellterOderArbeiterOderBeamter          ;                                                               ;                                                   ;
                                              ;anzahlGehaelterProJahr                                         ;number(double)                                     ;
                                              ;arbeitgeber                                                    ;string                                             ;
                                              ;arbeitgeberInDeutschlandAnsaessig                              ;boolean                                            ;
+                                             ;arbeitgeberNichtInDeutschlandAnsaessigKommentar                ;string                                             ;
                                              ;befristungsStatusBeiAngestelltenOderArbeitern                  ;enum                                               ;
                                              ;                                                               ;                                                   ;BEFRISTET
                                              ;                                                               ;                                                   ;UNBEFRISTET
@@ -59,9 +60,9 @@ AnschlussFinanzierung                        ;                                  
                                              ;renovierungsKosten                                             ;number                                             ;
                                              ;zusaetzlichesKapital                                           ;number                                             ;
 Antraege                                     ;                                                               ;                                                   ;
-                                             ;antraege                                                       ;Links                                              ;
+                                             ;antraege                                                       ;array of Antrag                                    ;
 AntraegeZumVorgang                           ;                                                               ;                                                   ;
-                                             ;antraege                                                       ;Links                                              ;
+                                             ;antraege                                                       ;array of Antrag                                    ;
 Antrag                                       ;                                                               ;                                                   ;
                                              ;angenommenAm                                                   ;string(date)                                       ;
                                              ;beratung                                                       ;Beratung                                           ;
@@ -72,7 +73,7 @@ Antrag                                       ;                                  
                                              ;produktAnbieter                                                ;ProduktAnbieter                                    ;
                                              ;prolongation                                                   ;boolean                                            ;
                                              ;status                                                         ;AntragsStatus                                      ;
-                                             ;voraussichtlicheBearbeitungAm                                  ;Links                                              ;
+                                             ;voraussichtlicheBearbeitungAm                                  ;AntragResourcen                                    ;
 AntragResourcen                              ;                                                               ;                                                   ;
                                              ;angebot                                                        ;AngebotZumAntrag                                   ;
                                              ;ansprechpartner                                                ;Partner                                            ;
@@ -473,7 +474,7 @@ DarlehensWunsch                              ;                                  
                                              ;variablesDarlehen                                              ;VariablesDarlehensWunsch                           ;
                                              ;zwischenFinanzierung                                           ;ZwischenFinanzierungsWunsch                        ;
 Dokument                                     ;                                                               ;                                                   ;
-                                             ;filename                                                       ;Links                                              ;
+                                             ;filename                                                       ;string                                             ;
 EffektivZinsKosten                           ;                                                               ;                                                   ;
                                              ;beratungsHonorar                                               ;number                                             ;
                                              ;grundbuchKosten                                                ;number                                             ;
@@ -923,7 +924,7 @@ Meldung                                      ;                                  
                                              ;text                                                           ;string                                             ;
                                              ;zuordnung                                                      ;enum                                               ;
                                              ;                                                               ;                                                   ;ANTRAGSTELLER
-                                             ;                                                               ;                                                   ;FINANZIERUNGS_OBJEKT
+                                             ;                                                               ;                                                   ;IMMOBILIE
                                              ;                                                               ;                                                   ;VORHABEN
                                              ;                                                               ;                                                   ;ALTERNATIV
                                              ;                                                               ;                                                   ;ANPASSUNG
@@ -984,7 +985,7 @@ Partner                                      ;                                  
                                              ;nachname                                                       ;string                                             ;
                                              ;partnerId                                                      ;string                                             ;
                                              ;telefonnummer                                                  ;string                                             ;
-                                             ;vorname                                                        ;Links                                              ;
+                                             ;vorname                                                        ;string                                             ;
 Postadresse                                  ;                                                               ;                                                   ;
                                              ;hausnummer                                                     ;string                                             ;
                                              ;ort                                                            ;string                                             ;
@@ -1119,7 +1120,7 @@ ZinsBindung                                  ;                                  
 ZugrundeliegendeDatenZumAntrag               ;                                                               ;                                                   ;
                                              ;finanzierungsObjekt                                            ;FinanzierungsObjekt                                ;
                                              ;haushalte                                                      ;array of Haushalt                                  ;
-                                             ;vorhaben                                                       ;Links                                              ;
+                                             ;vorhaben                                                       ;Vorhaben                                           ;
 ZwischenFinanzierung                         ;                                                               ;                                                   ;
                                              ;detailsZurVerwendung                                           ;string                                             ;
                                              ;maximaleLaufzeitInMonaten                                      ;integer(int32)                                     ;
