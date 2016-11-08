@@ -12,6 +12,6 @@ Aus diesen Dateien können mit Hilfe von [Swagger Codegen](https://github.com/sw
 
 ## Hilfsdateien zum Festhalten eigener Mappings
 Zur Unterstützung für das Mapping werden folgende Dateien bereit gestellt:
-  - [statische HTML Seite](Dokumentation/index.html)
+  - [statische HTML Seite](http://htmlpreview.github.io?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/Dokumentation/index.html)
   - [CSV Datei](definitions.csv)
   - [Excel Datei](definitions.xls)
