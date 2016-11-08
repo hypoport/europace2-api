@@ -10,12 +10,12 @@ Aus diesen Dateien können mit Hilfe von [Swagger Codegen](https://github.com/sw
 
 **Hinweis:** Einige wichtige Basistypen, wie zum Beispiel `Euro`, sind in der Swagger Spezifikation bisher lediglich als `number` deklariert. Hier wird die Spezifikation in Zukunft noch erweitert, um die Basistypen noch besser zu dokumentieren.
 
-### API Doc
+### API Documentation
 
-Dokumentation der API via API-Doc:
+Dokumentation der API via API-Doc und Swagger:
  - [API Doc](https://auslesen-api.api-docs.io/0.1)
- - [RELEASE NOTES](RELEASE_NOTES.MD)
  - [Swagger Editor](http://editor.swagger.io/#?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/swagger.yaml)
+ - [RELEASE NOTES](RELEASE_NOTES.MD)
 
 ### Hilfsdateien zum Festhalten eigener Mappings
 Zur Unterstützung für das Mapping werden folgende Dateien bereit gestellt:
