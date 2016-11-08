@@ -13,10 +13,12 @@ Aus diesen Dateien können mit Hilfe von [Swagger Codegen](https://github.com/sw
 ### API Doc
 
 Dokumentation der API via API-Doc:
- -  [API Doc v0.1](https://auslesen-api.api-docs.io/0.1/antraege/angebot-des-antrags-abrufen)
+ - [API Doc](https://auslesen-api.api-docs.io/0.1/antraege/angebot-des-antrags-abrufen)
+ - [RELEASE NOTES](RELEASE_NOTES.MD)
 
 ### Hilfsdateien zum Festhalten eigener Mappings
 Zur Unterstützung für das Mapping werden folgende Dateien bereit gestellt:
   - [statische HTML Seite](http://htmlpreview.github.io?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/Dokumentation/index.html)
   - [CSV Datei](https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/definitions.csv)
   - [Excel Datei](https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/definitions.xls)
+
