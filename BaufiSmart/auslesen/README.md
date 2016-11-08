@@ -13,7 +13,7 @@ Aus diesen Dateien können mit Hilfe von [Swagger Codegen](https://github.com/sw
 ### API Doc
 
 Dokumentation der API via API-Doc:
- - [API Doc](https://auslesen-api.api-docs.io/0.1/antraege/angebot-des-antrags-abrufen)
+ - [API Doc](https://auslesen-api.api-docs.io/0.1)
  - [RELEASE NOTES](RELEASE_NOTES.MD)
 
 ### Hilfsdateien zum Festhalten eigener Mappings
