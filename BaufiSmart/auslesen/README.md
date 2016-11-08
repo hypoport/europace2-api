@@ -15,6 +15,7 @@ Aus diesen Dateien können mit Hilfe von [Swagger Codegen](https://github.com/sw
 Dokumentation der API via API-Doc:
  - [API Doc](https://auslesen-api.api-docs.io/0.1)
  - [RELEASE NOTES](RELEASE_NOTES.MD)
+ - [Swagger Editor](http://editor.swagger.io/#?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/swagger.yaml)
 
 ### Hilfsdateien zum Festhalten eigener Mappings
 Zur Unterstützung für das Mapping werden folgende Dateien bereit gestellt:
