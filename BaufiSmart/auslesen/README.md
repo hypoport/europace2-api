@@ -18,8 +18,34 @@ Dokumentation der API via API-Doc und Swagger:
  - [RELEASE NOTES](RELEASE_NOTES.MD)
 
 ### Hilfsdateien zum Festhalten eigener Mappings
+
 Zur Unterstützung für das Mapping werden folgende Dateien bereit gestellt:
   - [statische HTML Seite](http://htmlpreview.github.io?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/Dokumentation/index.html)
   - [CSV Datei](https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/definitions.csv)
   - [Excel Datei](https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/definitions.xls)
 
+### Generierung des Clients
+#### JAVA mit Retrofit
+
+1. Die aktuelle Swagger Version 2.2.1 downloaden
+2. Client mit folgendem Kommando generieren:
+
+
+```
+java -jar swagger-codegen-cli-2.2.1.jar generate -i swagger.yaml -l java -c codegen-config-file.json -o ../europace-api-client
+
+
+```
+
+Example codegen-config-file.json für Version 0.1:
+
+```
+{
+  "artifactId": "europace-api-client",
+  "groupId": "de.europace.api",
+  "library": "retrofit2",
+  "artifactVersion": "0.1",
+  "dateLibrary": "java8"
+}
+
+```
