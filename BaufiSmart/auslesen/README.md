@@ -32,7 +32,7 @@ Zur Unterstützung für das Mapping werden folgende Dateien bereit gestellt:
 
 
 ```
-java -jar swagger-codegen-cli-2.2.1.jar generate -i swagger.yaml -l java -c codegen-config-file.json -o ../europace-api-client
+java -jar swagger-codegen-cli-2.2.1.jar generate -i swagger.yaml -l java -c codegen-config-file.json -o europace-api-client
 ```
 
 Example **codegen-config-file.json** für Version 0.1:
