@@ -47,3 +47,14 @@ Example **codegen-config-file.json** für Version 0.1:
 }
 
 ```
+
+### Authentifizierung
+
+Die Authentifizierung läuft über den [OAuth2](https://oauth.net/2/) Flow vom Typ *ressource owner password credentials flow*.
+https://tools.ietf.org/html/rfc6749#section-1.3.3
+ 
+ 
+
+1. Absenden eines POST Requests auf den [Login-Endpunkt](https://htmlpreview.github.io/?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/Dokumentation/index.html#_oauth2) /login mit Username und Password. Der Username entspricht der PartnerId und das Password ist der API-Key. Auf dem Testsystem können diese Werte frei gewählt werden.
+2. Aus der JSON-Antwort das JWToken (access_token) entnehmen
+3. Bei weiteren Requests muss dieses JWToken als Authentication Header mitgeschickt werden.
