@@ -13,7 +13,6 @@ Aus diesen Dateien können mit Hilfe von [Swagger Codegen](https://github.com/sw
 ### API Documentation
 
 Dokumentation der API via API-Doc und Swagger:
- - [API Doc](https://auslesen-api.api-docs.io/0.1)
  - [Swagger Editor](http://editor.swagger.io/#?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/swagger.yaml)
  - [RELEASE NOTES](RELEASE_NOTES.MD)
 
