@@ -96,7 +96,7 @@ Das Feld _alg_ beschreibt, dass der _RS256_ Algorithmus zum Signieren verwendet 
 Das Feld _sub_ beschreibt die PartnerId der einzuloggenden Person oder Organisation.
 Das Feld _exp_ beschreibt den Ablaufzeitpunkt bzw. maximale Gültigkeit dieses Tokens in Form der [Unixzeit](http://de.wikipedia.org/wiki/Unixzeit)
 
-#### Absicherung durch die Hirachie
+#### Absicherung durch die Hierarchie
 
 Es ist nur erlaubt, Partner, die in der Europace Struktur untergeordnet sind, sowie sich selbst, als vertrauenswürdig einzustufen. Das heißt, dass der
 Bürge (Issuer) im Baum immer über der einzuloggenden Person (Subject) stehen muss.

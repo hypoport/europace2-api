@@ -8,7 +8,7 @@
  -->
   <xs:annotation>
  		<xs:appinfo>EUROPACE 2, Baufi Smart VorgangAnlegen-Schema, Version: 12</xs:appinfo>
- 		<xs:appinfo>Generiert am: 4. Oktober 2016</xs:appinfo>
+ 		<xs:appinfo>Generiert am: 15. November 2016</xs:appinfo>
  	</xs:annotation>
 
   <xs:element name="VorgangMetadaten" type="VorgangMetadaten"/>
@@ -66,6 +66,11 @@
     <xs:element name="prioritaet" type="VorgangsPrioritaet" minOccurs="0" maxOccurs="1" >
         <xs:annotation>
           <xs:documentation>Beispiel: NEUTRAL</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="tippgeberPartnerId" type="String" minOccurs="0" maxOccurs="1" >
+        <xs:annotation>
+          <xs:documentation>Die Europace2PartnerId des Tippgebers (Person)   Beispiel: ABC123</xs:documentation>
         </xs:annotation>
     </xs:element>
   </xs:sequence>
