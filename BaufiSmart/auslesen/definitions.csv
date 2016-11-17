@@ -5,11 +5,13 @@ AngebotZumAntrag                             ;                                  
                                              ;                                                               ;                                                   ;NICHT_ANGEPASST
                                              ;                                                               ;                                                   ;ANGEPASST
                                              ;                                                               ;                                                   ;ALTERNATIV
-                                             ;bausparvertraege                                               ;array of EuropaceBausparAngebot                    ;
+                                             ;bausparvertraege                                               ;array of Bausparvertrag                            ;
+                                             ;beleihung                                                      ;array of BeleihungsRechnung                        ;
                                              ;bewertungDesAngebots                                           ;enum                                               ;
                                              ;                                                               ;                                                   ;ANGEBOT_ENTSPRICHT_MEINER_EMPFEHLUNG
                                              ;                                                               ;                                                   ;ANGEBOT_ENTSPRICHT_DEM_WUNSCH_DES_KUNDEN
                                              ;darlehen                                                       ;array of Darlehen                                  ;
+                                             ;erzeugtAm                                                      ;string(date)                                       ;
                                              ;id                                                             ;string                                             ;
                                              ;kennung                                                        ;string                                             ;
                                              ;konditionsAnpassungsBegruendung                                ;string                                             ;
@@ -18,12 +20,18 @@ AngebotZumAntrag                             ;                                  
                                              ;                                                               ;                                                   ;UNTER_VORBEHALT_PRODUZENT
                                              ;                                                               ;                                                   ;NICHT_MACHBAR
                                              ;meldungen                                                      ;Meldungen                                          ;
+                                             ;pruefungsErgebnisse                                            ;array of AngebotsPruefungsErgebnis                 ;
                                              ;rueckdatierungsFristEndeAm                                     ;string(date)                                       ;
                                              ;_links                                                         ;Links                                              ;
+AngebotsPruefungsErgebnis                    ;                                                               ;                                                   ;
+                                             ;produktAnbieter                                                ;ProduktAnbieter                                    ;
+                                             ;rating                                                         ;Rating                                             ;
+                                             ;weitereAngaben                                                 ;string                                             ;
 AngestellterOderArbeiterOderBeamter          ;                                                               ;                                                   ;
                                              ;anzahlGehaelterProJahr                                         ;number(double)                                     ;
                                              ;arbeitgeber                                                    ;string                                             ;
                                              ;arbeitgeberInDeutschlandAnsaessig                              ;boolean                                            ;
+                                             ;arbeitgeberNichtInDeutschlandAnsaessigKommentar                ;string                                             ;
                                              ;befristungsStatusBeiAngestelltenOderArbeitern                  ;enum                                               ;
                                              ;                                                               ;                                                   ;BEFRISTET
                                              ;                                                               ;                                                   ;UNBEFRISTET
@@ -125,7 +133,59 @@ Antragsteller                                ;                                  
                                              ;                                                               ;                                                   ;NIEDERLASSUNGS_ERLAUBNIS
                                              ;                                                               ;                                                   ;DAUERAUFENTHALT_EU
                                              ;aufenthaltsTitelBefristetBis                                   ;string(date)                                       ;
+                                             ;berufsgruppeBeiIngDiba                                         ;enum                                               ;
+                                             ;                                                               ;                                                   ;ANGESTELLTER
+                                             ;                                                               ;                                                   ;ARBEITER
+                                             ;                                                               ;                                                   ;BEAMTER
+                                             ;                                                               ;                                                   ;FREIBERUFLER
+                                             ;                                                               ;                                                   ;SELBSTSTAENDIG
+                                             ;                                                               ;                                                   ;RENTNER
+                                             ;                                                               ;                                                   ;HAUSMANN
+                                             ;                                                               ;                                                   ;PRIVATIER
+                                             ;                                                               ;                                                   ;SOLDAT
+                                             ;                                                               ;                                                   ;SCHUELER
+                                             ;                                                               ;                                                   ;AZUBI
+                                             ;                                                               ;                                                   ;STUDENT
+                                             ;                                                               ;                                                   ;OHNE
                                              ;beschaeftigung                                                 ;Beschaeftigungsart                                 ;
+                                             ;brancheBeiIngDiba                                              ;enum                                               ;
+                                             ;                                                               ;                                                   ;BANKEN_VERSICHERUNGEN
+                                             ;                                                               ;                                                   ;BAUGEWERBE
+                                             ;                                                               ;                                                   ;DIENSTLEISTUNGEN_SONSTIGE
+                                             ;                                                               ;                                                   ;EDV_BERATUNG
+                                             ;                                                               ;                                                   ;ENERGIE
+                                             ;                                                               ;                                                   ;ERZIEHUNG_UNTERRICHT
+                                             ;                                                               ;                                                   ;GESUNDHEITSWESEN
+                                             ;                                                               ;                                                   ;HANDEL
+                                             ;                                                               ;                                                   ;HANDWERK
+                                             ;                                                               ;                                                   ;HOTEL_GASTRONOMIE
+                                             ;                                                               ;                                                   ;LANDWIRTSCHAFT
+                                             ;                                                               ;                                                   ;OEFFENTLICHER_DIENST
+                                             ;                                                               ;                                                   ;PRODUKTION_INDUSTRIE
+                                             ;                                                               ;                                                   ;VERKEHR
+                                             ;brancheBeiMhb                                                  ;enum                                               ;
+                                             ;                                                               ;                                                   ;VERARBEITENDES_GEWERBE
+                                             ;                                                               ;                                                   ;BAU
+                                             ;                                                               ;                                                   ;HANDEL
+                                             ;                                                               ;                                                   ;VERKEHR_INFORMATION
+                                             ;                                                               ;                                                   ;DIENSTLEISTUNG
+                                             ;                                                               ;                                                   ;SONSTIGES
+                                             ;brancheBeiSRating                                              ;enum                                               ;
+                                             ;                                                               ;                                                   ;BAUGEWERBE
+                                             ;                                                               ;                                                   ;DIENSTLEISTUNGEN
+                                             ;                                                               ;                                                   ;ENERGIE_UND_WASSERVERSORGUNG_BERGBAU
+                                             ;                                                               ;                                                   ;GEBIETSKOERPERSCHAFTEN_UND_SOZIALVERSICHERUNGEN
+                                             ;                                                               ;                                                   ;GESUNDHEITSWESEN
+                                             ;                                                               ;                                                   ;HANDEL
+                                             ;                                                               ;                                                   ;HOTEL_UND_GASTRONOMIE
+                                             ;                                                               ;                                                   ;KREDITINSTITUTE
+                                             ;                                                               ;                                                   ;LAND_UND_FORSTWIRTSCHAFT_FISCHEREI
+                                             ;                                                               ;                                                   ;OEFFENTLICHER_DIENST
+                                             ;                                                               ;                                                   ;ORGANISATIONEN_OHNE_ERWERBSZWECK_PRIVATE_HAUSHALTE
+                                             ;                                                               ;                                                   ;VERARBEITENDES_GEWERBE
+                                             ;                                                               ;                                                   ;VERKEHR_UND_NACHRICHTENUEBERMITTLUNG
+                                             ;                                                               ;                                                   ;VERSICHERUNGEN
+                                             ;                                                               ;                                                   ;SONSTIGE
                                              ;email                                                          ;string                                             ;
                                              ;externeAntragstellerId                                         ;string                                             ;
                                              ;familienstand                                                  ;enum                                               ;
@@ -136,18 +196,25 @@ Antragsteller                                ;                                  
                                              ;                                                               ;                                                   ;VERHEIRATET
                                              ;                                                               ;                                                   ;VERWITWET
                                              ;geburtsdatum                                                   ;string(date)                                       ;
+                                             ;geburtsort                                                     ;string                                             ;
                                              ;guetertrennungVereinbartWennVerheiratet                        ;boolean                                            ;
                                              ;id                                                             ;string                                             ;
+                                             ;legitimationsDaten                                             ;LegitimationsDaten                                 ;
                                              ;nachname                                                       ;string                                             ;
+                                             ;schufaErgebnis                                                 ;SchufaErgebnis                                     ;
                                              ;staatsangehoerigkeit                                           ;string                                             ;
                                              ;telefonnummer                                                  ;string                                             ;
                                              ;telefonnummerVorwahl                                           ;string                                             ;
                                              ;titelDoktor                                                    ;boolean                                            ;
                                              ;titelProfessor                                                 ;boolean                                            ;
+                                             ;verheiratetMitAntragsteller                                    ;AntragstellerVerknuepfung                          ;
                                              ;vorAnschrift                                                   ;Postadresse                                        ;
                                              ;vorname                                                        ;string                                             ;
                                              ;weitereKontaktMoeglichkeiten                                   ;string                                             ;
                                              ;wohnhaftSeit                                                   ;string(date)                                       ;
+AntragstellerVerknuepfung                    ;                                                               ;                                                   ;
+                                             ;id                                                             ;string                                             ;
+                                             ;name                                                           ;string                                             ;
 AusgabenMonatlich                            ;                                                               ;                                                   ;
                                              ;ausgabenMonatlich                                              ;number                                             ;
                                              ;berechnungsHilfeAusgaben                                       ;BerechnungsHilfeZahlungen                          ;
@@ -190,7 +257,6 @@ BausparAngebot                               ;                                  
                                              ;angebotsHinweisFuerAntragsteller                               ;string                                             ;
                                              ;bausparSumme                                                   ;number                                             ;
                                              ;einmalzahlung                                                  ;number                                             ;
-                                             ;id                                                             ;string                                             ;
                                              ;produktAnbieter                                                ;ProduktAnbieter                                    ;
                                              ;sparPhase                                                      ;SparPhase                                          ;
                                              ;tarif                                                          ;string                                             ;
@@ -256,7 +322,7 @@ BausparWunsch                                ;                                  
                                              ;tilgungsBeitragMonatlich                                       ;number                                             ;
                                              ;vertragsPartnerId                                              ;string                                             ;
                                              ;zuteilungsDatum                                                ;string(date)                                       ;
-BausparvertragAlsTilgungsErsatz              ;                                                               ;                                                   ;
+Bausparvertrag                               ;                                                               ;                                                   ;
                                              ;abschlussGebuehr                                               ;number                                             ;
                                              ;abschlussGebuehrenVerrechnung                                  ;enum                                               ;
                                              ;                                                               ;                                                   ;SOFORTZAHLUNG
@@ -326,6 +392,83 @@ BausparvertragAlsTilgungsErsatz              ;                                  
                                              ;                                                               ;                                                   ;ALS_TILGUNGSERSATZ
                                              ;                                                               ;                                                   ;ZUR_ZINSABSICHERUNG
                                              ;zuteilungsDatum                                                ;string(date)                                       ;
+BausparvertragAlsTilgungsErsatz              ;                                                               ;                                                   ;
+                                             ;abschlussGebuehr                                               ;number                                             ;
+                                             ;abschlussGebuehrenVerrechnung                                  ;enum                                               ;
+                                             ;                                                               ;                                                   ;SOFORTZAHLUNG
+                                             ;                                                               ;                                                   ;VERRECHNUNG
+                                             ;angebotsHinweisFuerAntragsteller                               ;string                                             ;
+                                             ;antragsEntscheider                                             ;ProduktAnbieter                                    ;
+                                             ;bausparSumme                                                   ;number                                             ;
+                                             ;einmalzahlung                                                  ;number                                             ;
+                                             ;gesamtLaufzeitInJahren                                         ;integer(int32)                                     ;
+                                             ;produktAnbieter                                                ;ProduktAnbieter                                    ;
+                                             ;provision                                                      ;Provision                                          ;
+                                             ;sparPhase                                                      ;SparPhase                                          ;
+                                             ;tarif                                                          ;string                                             ;
+                                             ;tarifId                                                        ;enum                                               ;
+                                             ;                                                               ;                                                   ;BKM_MAX_PREMIUM_OPTIMAL
+                                             ;                                                               ;                                                   ;BKM_MAX_PREMIUM_NIEDRIGE_SPARRATE
+                                             ;                                                               ;                                                   ;BKM_MAX_PREMIUM_NIEDRIGE_TILGUNG
+                                             ;                                                               ;                                                   ;BKM_MAX_PREMIUM_BESTER_ZINS
+                                             ;                                                               ;                                                   ;FUCHS_IMMO_1
+                                             ;                                                               ;                                                   ;FUCHS_IMMO_2
+                                             ;                                                               ;                                                   ;LBS_OST_CLASSIC15_F5
+                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_30
+                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_35
+                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_40
+                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_45
+                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_50
+                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_60
+                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_30_MZ
+                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_35_MZ
+                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_40_MZ
+                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_45_MZ
+                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_50_MZ
+                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_60_MZ
+                                             ;                                                               ;                                                   ;BHW_TARIF_FI1
+                                             ;                                                               ;                                                   ;BHW_TARIF_FI2
+                                             ;                                                               ;                                                   ;BHW_TARIF_FI3
+                                             ;                                                               ;                                                   ;BHW_TARIF_FI4
+                                             ;                                                               ;                                                   ;BHW_TARIF_FX1
+                                             ;                                                               ;                                                   ;BHW_TARIF_FX2
+                                             ;                                                               ;                                                   ;BHW_TARIF_REN
+                                             ;                                                               ;                                                   ;DT_RING_TARIF_FT_0
+                                             ;                                                               ;                                                   ;DT_RING_TARIF_FT_1
+                                             ;                                                               ;                                                   ;DT_RING_TARIF_FT_2
+                                             ;                                                               ;                                                   ;DT_RING_TARIF_XT_0
+                                             ;                                                               ;                                                   ;DT_RING_TARIF_XT_1
+                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1503
+                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1603
+                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1703
+                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1803
+                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1903
+                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_2003
+                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1503_MZ
+                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1603_MZ
+                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1703_MZ
+                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1803_MZ
+                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1903_MZ
+                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_2003_MZ
+                                             ;teilBausparSumme                                               ;number                                             ;
+                                             ;tilgungsPhase                                                  ;TilgungsPhase                                      ;
+                                             ;typ                                                            ;string                                             ;
+                                             ;vertragsBeginn                                                 ;string(date)                                       ;
+                                             ;vertragsNummer                                                 ;string                                             ;
+                                             ;vertragsPartner                                                ;array of VertragsPartner                           ;
+                                             ;verwaltungsgebuehrenJaehrlich                                  ;number                                             ;
+                                             ;verwendungszweck                                               ;enum                                               ;
+                                             ;                                                               ;                                                   ;ALS_TILGUNGSERSATZ
+                                             ;                                                               ;                                                   ;ZUR_ZINSABSICHERUNG
+                                             ;zuteilungsDatum                                                ;string(date)                                       ;
+BeleihungsRechnung                           ;                                                               ;                                                   ;
+                                             ;beleihungsAuslauf                                              ;number                                             ;
+                                             ;beleihungsWerte                                                ;array of BeleihungsWert                            ;
+                                             ;beleihungsWerteSumme                                           ;number                                             ;
+                                             ;produktAnbieter                                                ;ProduktAnbieter                                    ;
+BeleihungsWert                               ;                                                               ;                                                   ;
+                                             ;beleihungsWert                                                 ;number                                             ;
+                                             ;immobilie                                                      ;ImmobilieVerknuepfung                              ;
 Beratung                                     ;                                                               ;                                                   ;
                                              ;art                                                            ;enum                                               ;
                                              ;                                                               ;                                                   ;PRAESENZ_GESCHAEFT
@@ -359,7 +502,7 @@ BestehendeImmobilie                          ;                                  
                                              ;erbbaurecht                                                    ;Erbbaurecht                                        ;
                                              ;grundbuchAngabe                                                ;GrundbuchAngabe                                    ;
                                              ;grundstueck                                                    ;Grundstueck                                        ;
-                                             ;grundstuecksGroesse                                            ;Flaeche                                            ;
+                                             ;grundstuecksGroesse                                            ;number                                             ;
                                              ;haus                                                           ;Haus                                               ;
                                              ;id                                                             ;string                                             ;
                                              ;immobilienEinsatz                                              ;enum                                               ;
@@ -377,7 +520,6 @@ BestehenderBausparvertrag                    ;                                  
                                              ;berechnungsHilfeAusgaben                                       ;BerechnungsHilfeZahlungen                          ;
                                              ;berechnungsHilfeVermoegen                                      ;BerechnungsHilfeBetrag                             ;
                                              ;einmalzahlung                                                  ;number                                             ;
-                                             ;id                                                             ;string                                             ;
                                              ;maximalAufzuloesenderBetrag                                    ;number                                             ;
                                              ;produktAnbieter                                                ;ProduktAnbieter                                    ;
                                              ;sparBeitragMonatlich                                           ;number                                             ;
@@ -437,6 +579,7 @@ BestehendesDarlehenDesFinanzierungsObjekts   ;                                  
                                              ;                                                               ;                                                   ;TRITT_NICHT_IM_RANG_ZURUECK
                                              ;zinsBindungBis                                                 ;string(date)                                       ;
 BestehendesDarlehenVerknuepfung              ;                                                               ;                                                   ;
+                                             ;bezeichner                                                     ;string                                             ;
                                              ;id                                                             ;string                                             ;
 Darlehen                                     ;                                                               ;                                                   ;
                                              ;abzuloesendeAltdarlehen                                        ;array of BestehendesDarlehenVerknuepfung           ;
@@ -491,6 +634,11 @@ EffektivZinsKosten                           ;                                  
 Eigentumswohnung                             ;                                                               ;                                                   ;
                                              ;anzahlDerWohneinheitenImObjekt                                 ;integer(int32)                                     ;
                                              ;anzahlVollgeschosse                                            ;integer(int32)                                     ;
+                                             ;ausstattung                                                    ;enum                                               ;
+                                             ;                                                               ;                                                   ;EINFACH
+                                             ;                                                               ;                                                   ;MITTEL
+                                             ;                                                               ;                                                   ;GEHOBEN
+                                             ;                                                               ;                                                   ;STARK_GEHOBEN
                                              ;baujahrWennNichtNeubau                                         ;string                                             ;
                                              ;bauweise                                                       ;enum                                               ;
                                              ;                                                               ;                                                   ;FACHWERK_MIT_STROH_LEHM
@@ -500,12 +648,12 @@ Eigentumswohnung                             ;                                  
                                              ;                                                               ;                                                   ;MASSIV
                                              ;bezeichnungWohneinheit                                         ;string                                             ;
                                              ;gewerbeVermietungsInformationWennGewerbeflaecheVorhanden       ;VermietungsInformationen                           ;
-                                             ;gewerbeflaecheGesamt                                           ;Flaeche                                            ;
+                                             ;gewerbeflaecheGesamt                                           ;number                                             ;
                                              ;gewerbeflaecheVorhanden                                        ;boolean                                            ;
                                              ;miteigentumsAnteil                                             ;MiteigentumsAnteil                                 ;
                                              ;modernisierungsAngabenWennNichtNeubau                          ;ModernisierungsAngaben                             ;
                                              ;wohnVermietungsInformation                                     ;VermietungsInformationen                           ;
-                                             ;wohnflaecheGesamt                                              ;Flaeche                                            ;
+                                             ;wohnflaecheGesamt                                              ;number                                             ;
 EinkuenfteAusNebentaetigkeit                 ;                                                               ;                                                   ;
                                              ;beginnDerNebentaetigkeit                                       ;string(date)                                       ;
                                              ;berechnungsHilfeEinnahmen                                      ;BerechnungsHilfeZahlungen                          ;
@@ -526,76 +674,6 @@ Erbbaurecht                                  ;                                  
                                              ;                                                               ;                                                   ;ANDERE
                                              ;                                                               ;                                                   ;OEFFENTLICH_KIRCHLICH
                                              ;laufzeitBisJahr                                                ;string                                             ;
-EuropaceBausparAngebot                       ;                                                               ;                                                   ;
-                                             ;abschlussGebuehr                                               ;number                                             ;
-                                             ;abschlussGebuehrenVerrechnung                                  ;enum                                               ;
-                                             ;                                                               ;                                                   ;SOFORTZAHLUNG
-                                             ;                                                               ;                                                   ;VERRECHNUNG
-                                             ;angebotsHinweisFuerAntragsteller                               ;string                                             ;
-                                             ;antragsEntscheider                                             ;ProduktAnbieter                                    ;
-                                             ;bausparSumme                                                   ;number                                             ;
-                                             ;einmalzahlung                                                  ;number                                             ;
-                                             ;gesamtLaufzeitInJahren                                         ;integer(int32)                                     ;
-                                             ;id                                                             ;string                                             ;
-                                             ;produktAnbieter                                                ;ProduktAnbieter                                    ;
-                                             ;provision                                                      ;Provision                                          ;
-                                             ;sparPhase                                                      ;SparPhase                                          ;
-                                             ;tarif                                                          ;string                                             ;
-                                             ;tarifId                                                        ;enum                                               ;
-                                             ;                                                               ;                                                   ;BKM_MAX_PREMIUM_OPTIMAL
-                                             ;                                                               ;                                                   ;BKM_MAX_PREMIUM_NIEDRIGE_SPARRATE
-                                             ;                                                               ;                                                   ;BKM_MAX_PREMIUM_NIEDRIGE_TILGUNG
-                                             ;                                                               ;                                                   ;BKM_MAX_PREMIUM_BESTER_ZINS
-                                             ;                                                               ;                                                   ;FUCHS_IMMO_1
-                                             ;                                                               ;                                                   ;FUCHS_IMMO_2
-                                             ;                                                               ;                                                   ;LBS_OST_CLASSIC15_F5
-                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_30
-                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_35
-                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_40
-                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_45
-                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_50
-                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_60
-                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_30_MZ
-                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_35_MZ
-                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_40_MZ
-                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_45_MZ
-                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_50_MZ
-                                             ;                                                               ;                                                   ;SIGNAL_IDUNA_FREIRAUM_F_60_MZ
-                                             ;                                                               ;                                                   ;BHW_TARIF_FI1
-                                             ;                                                               ;                                                   ;BHW_TARIF_FI2
-                                             ;                                                               ;                                                   ;BHW_TARIF_FI3
-                                             ;                                                               ;                                                   ;BHW_TARIF_FI4
-                                             ;                                                               ;                                                   ;BHW_TARIF_FX1
-                                             ;                                                               ;                                                   ;BHW_TARIF_FX2
-                                             ;                                                               ;                                                   ;BHW_TARIF_REN
-                                             ;                                                               ;                                                   ;DT_RING_TARIF_FT_0
-                                             ;                                                               ;                                                   ;DT_RING_TARIF_FT_1
-                                             ;                                                               ;                                                   ;DT_RING_TARIF_FT_2
-                                             ;                                                               ;                                                   ;DT_RING_TARIF_XT_0
-                                             ;                                                               ;                                                   ;DT_RING_TARIF_XT_1
-                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1503
-                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1603
-                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1703
-                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1803
-                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1903
-                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_2003
-                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1503_MZ
-                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1603_MZ
-                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1703_MZ
-                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1803_MZ
-                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_1903_MZ
-                                             ;                                                               ;                                                   ;ALTE_LEIPZIGER_2003_MZ
-                                             ;teilBausparSumme                                               ;number                                             ;
-                                             ;tilgungsPhase                                                  ;TilgungsPhase                                      ;
-                                             ;typ                                                            ;string                                             ;
-                                             ;vertragsBeginn                                                 ;string(date)                                       ;
-                                             ;vertragsNummer                                                 ;string                                             ;
-                                             ;vertragsPartner                                                ;array of VertragsPartner                           ;
-                                             ;verwaltungsgebuehrenJaehrlich                                  ;number                                             ;
-                                             ;verwendungszweck                                               ;enum                                               ;
-                                             ;                                                               ;                                                   ;ALS_TILGUNGSERSATZ
-                                             ;                                                               ;                                                   ;ZUR_ZINSABSICHERUNG
-                                             ;zuteilungsDatum                                                ;string(date)                                       ;
 ExternesImmobilienDarlehen                   ;                                                               ;                                                   ;
                                              ;auszahlungsBetrag                                              ;number                                             ;
                                              ;darlehenBetrag                                                 ;number                                             ;
@@ -618,7 +696,7 @@ FinanzierungsObjekt                          ;                                  
                                              ;erbbaurecht                                                    ;Erbbaurecht                                        ;
                                              ;grundbuchAngabe                                                ;GrundbuchAngabe                                    ;
                                              ;grundstueck                                                    ;Grundstueck                                        ;
-                                             ;grundstuecksGroesse                                            ;Flaeche                                            ;
+                                             ;grundstuecksGroesse                                            ;number                                             ;
                                              ;haus                                                           ;Haus                                               ;
                                              ;id                                                             ;string                                             ;
                                              ;keineAutostellplaetzeVorhanden                                 ;boolean                                            ;
@@ -626,13 +704,12 @@ FinanzierungsObjekt                          ;                                  
                                              ;verkehrswert                                                   ;number                                             ;
 Finanzierungswunsch                          ;                                                               ;                                                   ;
                                              ;bausparWuensche                                                ;array of BausparWunsch                             ;
-                                             ;darlehensWuensche                                              ;_Typ_ : object                                     ;
-Flaeche                                      ;                                                               ;                                                   ;
+                                             ;darlehensWuensche                                              ;array of DarlehensWunsch                           ;
 Flurstueck                                   ;                                                               ;                                                   ;
                                              ;anteil                                                         ;MiteigentumsAnteil                                 ;
                                              ;flur                                                           ;string                                             ;
                                              ;flurstuecksNummer                                              ;string                                             ;
-                                             ;groesse                                                        ;Flaeche                                            ;
+                                             ;groesse                                                        ;number                                             ;
 ForwardDarlehen                              ;                                                               ;                                                   ;
                                              ;auszahlungsDatum                                               ;string(date)                                       ;
                                              ;forwardPeriodeInMonaten                                        ;integer(int32)                                     ;
@@ -719,6 +796,11 @@ Grundstueck                                  ;                                  
 Haus                                         ;                                                               ;                                                   ;
                                              ;anzahlDerWohneinheitenBeiMehrfamilienHaus                      ;integer(int32)                                     ;
                                              ;anzahlVollgeschosse                                            ;integer(int32)                                     ;
+                                             ;ausstattung                                                    ;enum                                               ;
+                                             ;                                                               ;                                                   ;EINFACH
+                                             ;                                                               ;                                                   ;MITTEL
+                                             ;                                                               ;                                                   ;GEHOBEN
+                                             ;                                                               ;                                                   ;STARK_GEHOBEN
                                              ;baujahrWennNichtNeubau                                         ;string                                             ;
                                              ;bauweise                                                       ;enum                                               ;
                                              ;                                                               ;                                                   ;FACHWERK_MIT_STROH_LEHM
@@ -734,7 +816,7 @@ Haus                                         ;                                  
                                              ;einliegerwohnungVorhandenBeiDoppelOderEinfamilienOderReihenHaus;boolean                                            ;
                                              ;fertighausBeiDoppelOderEinfamilienOderZweifamilienHaus         ;boolean                                            ;
                                              ;gewerbeVermietungsInformationWennGewerbeflaecheVorhanden       ;VermietungsInformationen                           ;
-                                             ;gewerbeflaecheGesamt                                           ;Flaeche                                            ;
+                                             ;gewerbeflaecheGesamt                                           ;number                                             ;
                                              ;gewerbeflaecheVorhanden                                        ;boolean                                            ;
                                              ;hausAnordnungMehrfamilienOderZweifamilienHaus                  ;enum                                               ;
                                              ;                                                               ;                                                   ;FREISTEHEND
@@ -755,7 +837,7 @@ Haus                                         ;                                  
                                              ;                                                               ;                                                   ;TEILWEISE_UNTERKELLERT
                                              ;                                                               ;                                                   ;UNTERKELLERT
                                              ;wohnVermietungsInformation                                     ;VermietungsInformationen                           ;
-                                             ;wohnflaecheGesamt                                              ;Flaeche                                            ;
+                                             ;wohnflaecheGesamt                                              ;number                                             ;
 HausfrauOderArbeitsloser                     ;                                                               ;                                                   ;
                                              ;beruf                                                          ;string                                             ;
                                              ;situationNachRenteneintritt                                    ;SituationNachRenteneintritt                        ;
@@ -771,12 +853,16 @@ HausfrauOderArbeitsloser                     ;                                  
                                              ;                                                               ;                                                   ;SELBSTAENDIGER
 Haushalt                                     ;                                                               ;                                                   ;
                                              ;antragsteller                                                  ;array of Antragsteller                             ;
+                                             ;anzahlErwachseneImHaushalt                                     ;integer(int32)                                     ;
+                                             ;anzahlKinderNichtImHaushalt                                    ;integer(int32)                                     ;
                                              ;bankverbindung                                                 ;Bankverbindung                                     ;
                                              ;bestehendeImmobilien                                           ;array of BestehendeImmobilie                       ;
                                              ;einnahmenAusgabenVermoegenVerbindlichkeiten                    ;HaushaltsPositionen                                ;
                                              ;keineBestehendenImmobilienVorhanden                            ;boolean                                            ;
                                              ;keineKinderVorhanden                                           ;boolean                                            ;
+                                             ;kfzAnzahl                                                      ;integer(int32)                                     ;
                                              ;kinder                                                         ;array of Kind                                      ;
+                                             ;lebenshaltungsKostenMonatlich                                  ;number                                             ;
 HaushaltsPositionen                          ;                                                               ;                                                   ;
                                              ;ausgabenSonstigeMonatlich                                      ;array of AusgabenMonatlich                         ;
                                              ;bankUndSparguthaben                                            ;array of BankUndSparguthaben                       ;
@@ -802,6 +888,9 @@ HaushaltsPositionen                          ;                                  
                                              ;vermoegenSonstige                                              ;array of Vermoegen                                 ;
                                              ;versicherungsAusgabenSonstigeMonatlich                         ;array of AusgabenMonatlich                         ;
                                              ;wertpapiere                                                    ;array of Wertpapiere                               ;
+ImmobilieVerknuepfung                        ;                                                               ;                                                   ;
+                                             ;bezeichner                                                     ;string                                             ;
+                                             ;id                                                             ;string                                             ;
 Kapitalbeschaffung                           ;                                                               ;                                                   ;
                                              ;betrag                                                         ;number                                             ;
                                              ;verwendungKommentar                                            ;string                                             ;
@@ -856,7 +945,6 @@ Kind                                         ;                                  
                                              ;name                                                           ;string                                             ;
                                              ;unterhaltsEinnahmenBetragMonatlich                             ;number                                             ;
 LebensOderRentenversicherungAlsTilgungsErsatz;                                                               ;                                                   ;
-                                             ;id                                                             ;string                                             ;
                                              ;praemieMonatlich                                               ;number                                             ;
                                              ;produktAnbieter                                                ;ProduktAnbieter                                    ;
                                              ;rueckkaufsWertAktuell                                          ;number                                             ;
@@ -875,7 +963,6 @@ LebensOderRentenversicherungAlsTilgungsErsatz;                                  
 LebensOderRentenversicherungVermoegen        ;                                                               ;                                                   ;
                                              ;berechnungsHilfeAusgaben                                       ;BerechnungsHilfeZahlungen                          ;
                                              ;berechnungsHilfeVermoegen                                      ;BerechnungsHilfeBetrag                             ;
-                                             ;id                                                             ;string                                             ;
                                              ;maximalAufzuloesenderBetrag                                    ;number                                             ;
                                              ;praemieMonatlich                                               ;number                                             ;
                                              ;produktAnbieter                                                ;ProduktAnbieter                                    ;
@@ -902,6 +989,15 @@ LebensOderRentenversicherungVermoegen        ;                                  
                                              ;zahlungTyp                                                     ;enum                                               ;
                                              ;                                                               ;                                                   ;EINNAHMEN
                                              ;                                                               ;                                                   ;AUSGABEN
+LegitimationsDaten                           ;                                                               ;                                                   ;
+                                             ;ausstellendeBehoerde                                           ;string                                             ;
+                                             ;ausstellungsdatum                                              ;string(date)                                       ;
+                                             ;ausweisArt                                                     ;enum                                               ;
+                                             ;                                                               ;                                                   ;PERSONALAUSWEIS
+                                             ;                                                               ;                                                   ;REISEPASS
+                                             ;                                                               ;                                                   ;ANDERE
+                                             ;ausweisArtBeiAndererAusweis                                    ;string                                             ;
+                                             ;ausweisNummer                                                  ;string                                             ;
 Link                                         ;                                                               ;                                                   ;
                                              ;href                                                           ;string                                             ;
                                              ;templated                                                      ;boolean                                            ;
@@ -928,7 +1024,7 @@ Meldung                                      ;                                  
                                              ;text                                                           ;string                                             ;
                                              ;zuordnung                                                      ;enum                                               ;
                                              ;                                                               ;                                                   ;ANTRAGSTELLER
-                                             ;                                                               ;                                                   ;FINANZIERUNGS_OBJEKT
+                                             ;                                                               ;                                                   ;IMMOBILIE
                                              ;                                                               ;                                                   ;VORHABEN
                                              ;                                                               ;                                                   ;ALTERNATIV
                                              ;                                                               ;                                                   ;ANPASSUNG
@@ -1009,15 +1105,23 @@ ProduktAnbieter                              ;                                  
                                              ;kurzname                                                       ;string                                             ;
                                              ;firmierung                                                     ;string                                             ;
 Provision                                    ;                                                               ;                                                   ;
-                                             ;europaceMargeAbsolut                                           ;number                                             ;
-                                             ;produktAnbieterZahltEuropaceMarge                              ;boolean                                            ;
-                                             ;provisionKundenbetreuerAbsolut                                 ;number                                             ;
-                                             ;vertriebsProvisionGesamtAbsolut                                ;number                                             ;
+                                             ;europaceGebuehren                                              ;number                                             ;
+                                             ;kundenbetreuerProvision                                        ;number                                             ;
+                                             ;vertriebsProvisionGesamt                                       ;number                                             ;
+Rating                                       ;                                                               ;                                                   ;
+                                             ;ausfallrate                                                    ;number                                             ;
+                                             ;klasse                                                         ;string                                             ;
+                                             ;ratingZeitpunkt                                                ;string                                             ;
+                                             ;risikoKosten                                                   ;integer(int32)                                     ;
+                                             ;verfahren                                                      ;string                                             ;
 RechteAbteilung2                             ;                                                               ;                                                   ;
                                              ;beschreibung                                                   ;string                                             ;
                                              ;betrag                                                         ;number                                             ;
 Rentner                                      ;                                                               ;                                                   ;
                                              ;staatlicheRenteNettoMonatlich                                  ;number                                             ;
+SchufaErgebnis                               ;                                                               ;                                                   ;
+                                             ;antragstellerUnbekannt                                         ;boolean                                            ;
+                                             ;score                                                          ;string                                             ;
 SituationNachRenteneintritt                  ;                                                               ;                                                   ;
                                              ;gesetzlicheRenteMonatlich                                      ;number                                             ;
                                              ;privateRenteMonatlich                                          ;number                                             ;
@@ -1083,7 +1187,7 @@ VermietungsInformationen                     ;                                  
                                              ;                                                               ;                                                   ;EIGENGENUTZT
                                              ;                                                               ;                                                   ;TEIL_VERMIETET
                                              ;                                                               ;                                                   ;VERMIETET
-                                             ;vermieteteWohnflaecheBeiTeilvermietung                         ;Flaeche                                            ;
+                                             ;vermieteteWohnflaecheBeiTeilvermietung                         ;number                                             ;
 Vermoegen                                    ;                                                               ;                                                   ;
                                              ;aktuellerWert                                                  ;number                                             ;
                                              ;berechnungsHilfeVermoegen                                      ;BerechnungsHilfeBetrag                             ;
