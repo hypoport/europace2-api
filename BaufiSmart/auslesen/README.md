@@ -12,14 +12,10 @@ Aus diesen Dateien können mit Hilfe von [Swagger Codegen](https://github.com/sw
 
 ### API Documentation
 
-Dokumentation der API via API-Doc und Swagger:
- - [Swagger Editor](http://editor.swagger.io/#?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/swagger.yaml)
  - [RELEASE NOTES](RELEASE_NOTES.MD)
-
-### Hilfsdateien zum Festhalten eigener Mappings
+ - [statische HTML Seite](http://htmlpreview.github.io?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/Dokumentation/index.html)
 
 Zur Unterstützung für das Mapping werden folgende Dateien bereit gestellt:
-  - [statische HTML Seite](http://htmlpreview.github.io?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/Dokumentation/index.html)
   - [CSV Datei](https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/definitions.csv)
   - [Excel Datei](https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/definitions.xls)
 
