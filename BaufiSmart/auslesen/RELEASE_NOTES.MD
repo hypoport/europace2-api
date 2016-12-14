@@ -2,6 +2,47 @@
 
 Informationen zu den Änderungen in den verschiedenen Versionen
 
+#### Version 0.3
+
+##### Neue Felder
+
+* antragsteller.schufaErgebnis.inManuellerNachbehandlung
+* `antrag.angebot` beinhaltet das Angebot, auf dem der Antrag basiert
+* `antrag.angebot.darlehen` Darlehen, aus dem das Angebot besteht
+* haus.anzahlDerGewerbeeinheitenBeiMehrfamilienHaus
+* `vorhaben.verwendungszweckAbhaengigerFinanzbedarf` hat jetzt zusätzlich ein Feld `finanzbedarfArt`, welches beschreibt was für
+  eine Form von Finanzbedarf in dem Vorhaben-JSON-Objekt vorhanden ist.
+
+##### Neue Werte
+
+* Vorhaben.verwendungszweck kann jetzt zusätzlich den Wert 'KAPITALBESCHAFFUNG' haben
+* Haustyp kann den Wert 'KEIN_TYP_AUSGEWAEHLT' haben
+
+##### Breaking Changes
+
+* Die Knoten des `_embedded` Objects sind hoch in das Angebot verschoben
+* Im Angebot gibt es einen Knoten `dokumente`, indem alle Dokumente gesammelt sind 
+* Bugfix: Flaechenwerte werden analog Euro und Prozent, wie in Swagger dokumentiert, als Nummern serialisiert
+* Bankverbindung: Kontoinhaber ist jetzt eine Liste von AntragstellerVerknuepfungen (jeweils mit den Feldern 'id' und 'name')
+* Renamings in haushalt.einnahmenAusgabenVermoegenVerbindlichkeiten
+  * `lebensUndRentenversicherung` -> `lebensUndRentenversicherungen` 
+  * `privateKrankenversicherungBeitragMonatlich` -> `privateKrankenversicherungsBeitraegeMonatlich` 
+  * `ratenkredit` -> `ratenkredite`
+  * `unbefristeteZusatzRenteMonatlich` -> `unbefristeteZusatzRentenMonatlich`
+  * `unterhaltsVerpflichtungMonatlich` -> `unterhaltsVerpflichtungenMonatlich`
+  * `verbindlichkeitSonstige` -> `verbindlichkeitenSonstige`
+  * `bausparvertrag` -> `bausparvertraege`
+* Lebens- und Rentenversicherungen: komplexes Objekt `produktAnbieter` durch einfachen String `versicherungsGesellschaft` ersetzt
+* Jahreszahl ist Integer basiert, nicht String basiert
+* Kellerausbau umbenannt in ingDibaKellerausbau
+  
+* FinanzierungsObjekt
+  * `BestehendesDarlehenDesFinanzierungsObjekts.darlehenArt` -> `darlehensArt`
+* BestehendeImmobilie
+  * `BestehendesDarlehen.darlehenArt` -> `darlehensArt`
+* NachrangigesExternesDarlehen: `darlehenBetrag` -> `darlehensBetrag`
+* VermietungsInformationen: Umbenennung `vermieteteWohnflaecheBeiTeilvermietung` -> `vermieteteFlaecheBeiTeilvermietung`
+
 #### Version 0.2
 
 

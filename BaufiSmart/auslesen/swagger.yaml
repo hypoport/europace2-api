@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "Die EUROPACE API zum Auslesen von Anträgen und Vorgängen.\n\nDie API\
     \ ist zur Zeit in der Entwicklung."
-  version: "0.2"
+  version: "0.3"
   title: "Auslesen API"
   contact:
     name: "Europace AG"
@@ -81,7 +81,7 @@ paths:
       summary: "einen Antrag abrufen"
       description: "Als Parameter wird die Antragsnummer verwendet, die aus der BaufiSmart\
         \ erzeugt werden. Diese Nummer ist zweigeteilt."
-      operationId: "getByIdUsingGET"
+      operationId: "getAntragUsingGET"
       consumes:
       - "*/*"
       produces:
@@ -202,7 +202,7 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/BankUndSparguthaben"
-      bausparvertrag:
+      bausparvertraege:
         type: "array"
         items:
           $ref: "#/definitions/BestehenderBausparvertrag"
@@ -232,7 +232,7 @@ definitions:
           \ berechnet. Pro kindergelderhaltendem Kind ein Listenelement."
         items:
           $ref: "#/definitions/EinnahmenMonatlich"
-      lebensUndRentenversicherung:
+      lebensUndRentenversicherungen:
         type: "array"
         items:
           $ref: "#/definitions/LebensOderRentenversicherungVermoegen"
@@ -244,11 +244,11 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Verbindlichkeit"
-      privateKrankenversicherungBeitragMonatlich:
+      privateKrankenversicherungsBeitraegeMonatlich:
         type: "array"
         items:
           $ref: "#/definitions/AusgabenMonatlich"
-      ratenkredit:
+      ratenkredite:
         type: "array"
         items:
           $ref: "#/definitions/Verbindlichkeit"
@@ -256,11 +256,11 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Sparplaene"
-      unbefristeteZusatzRenteMonatlich:
+      unbefristeteZusatzRentenMonatlich:
         type: "array"
         items:
           $ref: "#/definitions/EinnahmenMonatlich"
-      unterhaltsVerpflichtungMonatlich:
+      unterhaltsVerpflichtungenMonatlich:
         type: "array"
         items:
           $ref: "#/definitions/AusgabenMonatlich"
@@ -268,7 +268,7 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/EinnahmenMonatlich"
-      verbindlichkeitSonstige:
+      verbindlichkeitenSonstige:
         type: "array"
         items:
           $ref: "#/definitions/Verbindlichkeit"
@@ -540,8 +540,6 @@ definitions:
       id:
         type: "string"
         readOnly: true
-      kennung:
-        type: "string"
       kfwDarlehen:
         description: "nur bei darlehensArt==KFW_DARLEHEN"
         $ref: "#/definitions/KfwDarlehen"
@@ -554,10 +552,6 @@ definitions:
         $ref: "#/definitions/PrivatDarlehen"
       produktAnbieter:
         $ref: "#/definitions/ProduktAnbieter"
-      produktDetails:
-        type: "array"
-        items:
-          type: "string"
       provision:
         $ref: "#/definitions/Provision"
       rateMonatlich:
@@ -739,13 +733,6 @@ definitions:
         enum:
         - "EINNAHMEN"
         - "AUSGABEN"
-  Meldungen:
-    type: "object"
-    properties:
-      meldungen:
-        type: "array"
-        items:
-          $ref: "#/definitions/Meldung"
   Vorhaben:
     type: "object"
     properties:
@@ -778,21 +765,9 @@ definitions:
         - "KAUF_NEUBAU_VOM_BAUTRAEGER"
         - "MODERNISIERUNG_UMBAU_ANBAU"
         - "NEUBAU"
+        - "KAPITALBESCHAFFUNG"
       verwendungszweckAbhaengigerFinanzbedarf:
         $ref: "#/definitions/Finanzbedarf"
-  ZugrundeliegendeDatenZumAntrag:
-    type: "object"
-    properties:
-      finanzierungsObjekt:
-        $ref: "#/definitions/FinanzierungsObjekt"
-      haushalte:
-        type: "array"
-        items:
-          $ref: "#/definitions/Haushalt"
-      vorhaben:
-        $ref: "#/definitions/Vorhaben"
-      _links:
-        $ref: "#/definitions/Links"
   Beratung:
     type: "object"
     properties:
@@ -811,6 +786,19 @@ definitions:
         enum:
         - "NICHT_DER_KUNDEN_BETREUER"
         - "KUNDEN_BETREUER"
+  ZugrundeliegendeDatenZumAntrag:
+    type: "object"
+    properties:
+      finanzierungsObjekt:
+        $ref: "#/definitions/FinanzierungsObjekt"
+      haushalte:
+        type: "array"
+        items:
+          $ref: "#/definitions/Haushalt"
+      vorhaben:
+        $ref: "#/definitions/Vorhaben"
+      _links:
+        $ref: "#/definitions/Links"
   KfwDarlehen:
     type: "object"
     properties:
@@ -897,9 +885,7 @@ definitions:
     type: "object"
     properties:
       href:
-        type: "string"
-      templated:
-        type: "boolean"
+        $ref: "#/definitions/URI"
       type:
         type: "string"
   BestehendesDarlehenVerknuepfung:
@@ -914,19 +900,20 @@ definitions:
   ZinsBindung:
     type: "object"
     properties:
-      zinsBindungInJahren:
-        type: "integer"
-        format: "int32"
-      zinsBindungsEndeAm:
+      endetAm:
         type: "string"
         format: "date"
+      jahre:
+        type: "integer"
+        format: "int32"
+      monate:
+        type: "integer"
+        format: "int32"
   LebensOderRentenversicherungAlsTilgungsErsatz:
     type: "object"
     properties:
       praemieMonatlich:
         type: "number"
-      produktAnbieter:
-        $ref: "#/definitions/ProduktAnbieter"
       rueckkaufsWertAktuell:
         type: "number"
       tarif:
@@ -939,6 +926,8 @@ definitions:
         - "KAPITALBILDENDE_RENTENVERSICHERUNG"
         - "FONDSGEBUNDENE_RENTENVERSICHERUNG"
         - "RISIKO_LEBENSVERSICHERUNG"
+      versicherungsGesellschaft:
+        type: "string"
       versicherungsSumme:
         type: "number"
       vertragsBeginn:
@@ -951,6 +940,44 @@ definitions:
         type: "string"
       verwaltungsgebuehrenJaehrlich:
         type: "number"
+  URI:
+    type: "object"
+    properties:
+      absolute:
+        type: "boolean"
+      authority:
+        type: "string"
+      fragment:
+        type: "string"
+      host:
+        type: "string"
+      opaque:
+        type: "boolean"
+      path:
+        type: "string"
+      port:
+        type: "integer"
+        format: "int32"
+      query:
+        type: "string"
+      rawAuthority:
+        type: "string"
+      rawFragment:
+        type: "string"
+      rawPath:
+        type: "string"
+      rawQuery:
+        type: "string"
+      rawSchemeSpecificPart:
+        type: "string"
+      rawUserInfo:
+        type: "string"
+      scheme:
+        type: "string"
+      schemeSpecificPart:
+        type: "string"
+      userInfo:
+        type: "string"
   AnnuitaetenOderForwardDarlehensWunsch:
     type: "object"
     properties:
@@ -1114,6 +1141,9 @@ definitions:
   Haus:
     type: "object"
     properties:
+      anzahlDerGewerbeeinheitenBeiMehrfamilienHaus:
+        type: "integer"
+        format: "int32"
       anzahlDerWohneinheitenBeiMehrfamilienHaus:
         type: "integer"
         format: "int32"
@@ -1171,6 +1201,7 @@ definitions:
       hausTyp:
         type: "string"
         enum:
+        - "KEIN_TYP_AUSGEWAEHLT"
         - "DOPPELHAUSHAELFTE"
         - "EINFAMILIENHAUS"
         - "MEHRFAMILIENHAUS"
@@ -1391,7 +1422,7 @@ definitions:
       aktuelleRestschuldWennNichtAbzuloesen:
         type: "number"
         description: "nur wenn wirdAbgeloest==true"
-      darlehenArt:
+      darlehensArt:
         type: "string"
         enum:
         - "BAUSPARDARLEHEN"
@@ -1402,7 +1433,7 @@ definitions:
         type: "number"
         description: "für Prolongation, d.h. technisch: Vorhaben verwendungszweck==ANSCHLUSSFINANZIERUNG"
       darlehensGeber:
-        type: "string"
+        $ref: "#/definitions/ProduktAnbieter"
       darlehensKontonummer:
         type: "string"
         description: "für Prolongation, d.h. technisch: Vorhaben verwendungszweck==ANSCHLUSSFINANZIERUNG"
@@ -1433,7 +1464,7 @@ definitions:
       aktuelleRestschuldWennNichtAbzuloesen:
         type: "number"
         description: "nur wenn wirdAbgeloest==true"
-      darlehenArt:
+      darlehensArt:
         type: "string"
         enum:
         - "BAUSPARDARLEHEN"
@@ -1444,7 +1475,7 @@ definitions:
         type: "number"
         description: "für Prolongation, d.h. technisch: Vorhaben verwendungszweck==ANSCHLUSSFINANZIERUNG"
       darlehensGeber:
-        type: "string"
+        $ref: "#/definitions/ProduktAnbieter"
       darlehensKontonummer:
         type: "string"
         description: "für Prolongation, d.h. technisch: Vorhaben verwendungszweck==ANSCHLUSSFINANZIERUNG"
@@ -1482,12 +1513,17 @@ definitions:
         type: "boolean"
         example: false
         description: "Der Antragsteller ist bei der Schufa unbekannt."
+      inManuellerNachbehandlung:
+        type: "boolean"
+        example: false
+        description: "Die Ermittlung des Schufa-Scores verzögert sich, wenn sich die\
+          \ Anfrage bei der Schufa in manueller Nachbehandlung befindet."
       score:
         type: "string"
   NachrangigesExternesDarlehen:
     type: "object"
     properties:
-      darlehenBetrag:
+      darlehensBetrag:
         type: "number"
       darlehensGeber:
         type: "string"
@@ -1521,11 +1557,9 @@ definitions:
       iban:
         type: "string"
       kontoinhaber:
-        type: "string"
-        enum:
-        - "ANTRAGSTELLER_1"
-        - "ANTRAGSTELLER_2"
-        - "BEIDE_ANTRAGSTELLER"
+        type: "array"
+        items:
+          $ref: "#/definitions/AntragstellerVerknuepfung"
       kontonummer:
         type: "string"
       kreditinstitut:
@@ -1681,8 +1715,6 @@ definitions:
         readOnly: true
       kennung:
         type: "string"
-      konditionsAnpassungsBegruendung:
-        type: "string"
       machbarkeitsStatus:
         type: "string"
         enum:
@@ -1690,7 +1722,9 @@ definitions:
         - "UNTER_VORBEHALT_PRODUZENT"
         - "NICHT_MACHBAR"
       meldungen:
-        $ref: "#/definitions/Meldungen"
+        type: "array"
+        items:
+          $ref: "#/definitions/Meldung"
       pruefungsErgebnisse:
         type: "array"
         items:
@@ -1941,10 +1975,21 @@ definitions:
           \ Das Format entspricht der Definition des Produktanbieters."
   Finanzbedarf:
     type: "object"
+    required:
+    - "finanzbedarfArt"
     properties:
       anschlussfinanzierung:
         description: "muss leer sein, wenn eines der anderen Attribute gefüllt ist"
         $ref: "#/definitions/AnschlussFinanzierung"
+      finanzbedarfArt:
+        type: "string"
+        enum:
+        - "ANSCHLUSSFINANZIERUNG"
+        - "KAUF"
+        - "KAUF_NEUBAU_VOM_BAUTRAEGER"
+        - "MODERNISIERUNG"
+        - "KAPITALBESCHAFFUNG"
+        - "NEUBAU"
       kapitalbeschaffung:
         description: "muss leer sein, wenn eines der anderen Attribute gefüllt ist"
         $ref: "#/definitions/Kapitalbeschaffung"
@@ -1964,9 +2009,6 @@ definitions:
     type: "object"
     properties:
       laufzeitInMonaten:
-        type: "integer"
-        format: "int32"
-      zinsBindungInMonaten:
         type: "integer"
         format: "int32"
   BeleihungsWert:
@@ -2494,7 +2536,7 @@ definitions:
         - "EIGENGENUTZT"
         - "TEIL_VERMIETET"
         - "VERMIETET"
-      vermieteteWohnflaecheBeiTeilvermietung:
+      vermieteteFlaecheBeiTeilvermietung:
         type: "number"
   BestehenderBausparvertrag:
     type: "object"
@@ -2551,11 +2593,20 @@ definitions:
   Antrag:
     type: "object"
     properties:
+      angebot:
+        description: "Das angenommene Angebot, auf dem dieser Antrag basiert"
+        $ref: "#/definitions/AngebotZumAntrag"
       angenommenAm:
         type: "string"
         format: "date"
         example: "2016-10-24"
         description: "Zeitpunkt, zu dem der Antrag im System erstellt wurde."
+      ansprechpartner:
+        description: "Für Rückfragen auf Seite des Vertriebs, kann mit dem Vermittler\
+          \ identisch sein"
+        $ref: "#/definitions/Partner"
+      antragsNummer:
+        type: "string"
       beratung:
         $ref: "#/definitions/Beratung"
       datenKontext:
@@ -2563,44 +2614,37 @@ definitions:
         enum:
         - "TEST_MODUS"
         - "ECHT_GESCHAEFT"
+      dokumente:
+        type: "array"
+        items:
+          $ref: "#/definitions/Dokument"
       id:
         type: "string"
         description: "Antragsnummer des BaufiSmart Vorgangs"
+      kreditSachbearbeiter:
+        description: "Gewählter Sachbearbeiter aus Seite des Kreditvertriebs"
+        $ref: "#/definitions/Partner"
       produktAnbieter:
         $ref: "#/definitions/ProduktAnbieter"
       prolongation:
         type: "boolean"
       status:
         $ref: "#/definitions/AntragsStatus"
+      vermittler:
+        description: "Partner auf Seite des Vertriebs"
+        $ref: "#/definitions/Partner"
       voraussichtlicheBearbeitungAm:
         type: "string"
         format: "date"
         example: "2016-10-24"
         description: "Das Datum, zu dem der Antrags vorrausichtlich bearbeitet wird."
-      _embedded:
-        $ref: "#/definitions/AntragResourcen"
+      zugrundeliegendeDaten:
+        description: "Basisdaten des Kunden, die für die Berechnung des Angebots relevant\
+          \ waren"
+        $ref: "#/definitions/ZugrundeliegendeDatenZumAntrag"
       _links:
         $ref: "#/definitions/Links"
     description: "Diese Resource repräsentiert einen Antrag in Baufi Smart."
-  AntragResourcen:
-    type: "object"
-    properties:
-      angebot:
-        $ref: "#/definitions/AngebotZumAntrag"
-      ansprechpartner:
-        $ref: "#/definitions/Partner"
-      beratungsDokumentation:
-        $ref: "#/definitions/Dokument"
-      kreditEntscheidungsInformation:
-        $ref: "#/definitions/Dokument"
-      kreditSachbearbeiter:
-        $ref: "#/definitions/Partner"
-      selbstauskunft:
-        $ref: "#/definitions/Dokument"
-      vermittler:
-        $ref: "#/definitions/Partner"
-      zugrundeliegendeDaten:
-        $ref: "#/definitions/ZugrundeliegendeDatenZumAntrag"
   LebensOderRentenversicherungVermoegen:
     type: "object"
     properties:
@@ -2612,8 +2656,6 @@ definitions:
         type: "number"
       praemieMonatlich:
         type: "number"
-      produktAnbieter:
-        $ref: "#/definitions/ProduktAnbieter"
       rueckkaufsWertAktuell:
         type: "number"
       tarif:
@@ -2638,6 +2680,8 @@ definitions:
         - "KEIN_EINSATZ"
         - "ABTRETEN"
         - "AUFLOESEN"
+      versicherungsGesellschaft:
+        type: "string"
       versicherungsSumme:
         type: "number"
       vertragsBeginn:
@@ -2737,10 +2781,15 @@ definitions:
   Dokument:
     type: "object"
     properties:
-      filename:
+      href:
+        $ref: "#/definitions/URI"
+      name:
         type: "string"
-      _links:
-        $ref: "#/definitions/Links"
+      size:
+        type: "integer"
+        format: "int64"
+      type:
+        type: "string"
   ZwischenFinanzierungsWunsch:
     type: "object"
     properties:

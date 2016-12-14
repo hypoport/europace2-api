@@ -14,12 +14,11 @@ AngebotZumAntrag                             ;                                  
                                              ;erzeugtAm                                                      ;string(date)                                       ;
                                              ;id                                                             ;string                                             ;
                                              ;kennung                                                        ;string                                             ;
-                                             ;konditionsAnpassungsBegruendung                                ;string                                             ;
                                              ;machbarkeitsStatus                                             ;enum                                               ;
                                              ;                                                               ;                                                   ;MACHBAR
                                              ;                                                               ;                                                   ;UNTER_VORBEHALT_PRODUZENT
                                              ;                                                               ;                                                   ;NICHT_MACHBAR
-                                             ;meldungen                                                      ;Meldungen                                          ;
+                                             ;meldungen                                                      ;array of Meldung                                   ;
                                              ;pruefungsErgebnisse                                            ;array of AngebotsPruefungsErgebnis                 ;
                                              ;rueckdatierungsFristEndeAm                                     ;string(date)                                       ;
                                              ;_links                                                         ;Links                                              ;
@@ -74,26 +73,24 @@ AntraegeZumVorgang                           ;                                  
                                              ;antraege                                                       ;array of Antrag                                    ;
                                              ;_links                                                         ;Links                                              ;
 Antrag                                       ;                                                               ;                                                   ;
+                                             ;angebot                                                        ;AngebotZumAntrag                                   ;
                                              ;angenommenAm                                                   ;string(date)                                       ;
+                                             ;ansprechpartner                                                ;Partner                                            ;
+                                             ;antragsNummer                                                  ;string                                             ;
                                              ;beratung                                                       ;Beratung                                           ;
                                              ;datenKontext                                                   ;enum                                               ;
                                              ;                                                               ;                                                   ;TEST_MODUS
                                              ;                                                               ;                                                   ;ECHT_GESCHAEFT
+                                             ;dokumente                                                      ;array of Dokument                                  ;
                                              ;id                                                             ;string                                             ;
+                                             ;kreditSachbearbeiter                                           ;Partner                                            ;
                                              ;produktAnbieter                                                ;ProduktAnbieter                                    ;
                                              ;prolongation                                                   ;boolean                                            ;
                                              ;status                                                         ;AntragsStatus                                      ;
-                                             ;voraussichtlicheBearbeitungAm                                  ;AntragResourcen                                    ;
-                                             ;_links                                                         ;Links                                              ;
-AntragResourcen                              ;                                                               ;                                                   ;
-                                             ;angebot                                                        ;AngebotZumAntrag                                   ;
-                                             ;ansprechpartner                                                ;Partner                                            ;
-                                             ;beratungsDokumentation                                         ;Dokument                                           ;
-                                             ;kreditEntscheidungsInformation                                 ;Dokument                                           ;
-                                             ;kreditSachbearbeiter                                           ;Partner                                            ;
-                                             ;selbstauskunft                                                 ;Dokument                                           ;
                                              ;vermittler                                                     ;Partner                                            ;
+                                             ;voraussichtlicheBearbeitungAm                                  ;string(date)                                       ;
                                              ;zugrundeliegendeDaten                                          ;ZugrundeliegendeDatenZumAntrag                     ;
+                                             ;_links                                                         ;Links                                              ;
 AntragsStatus                                ;                                                               ;                                                   ;
                                              ;antragStatus                                                   ;enum                                               ;
                                              ;                                                               ;                                                   ;BEANTRAGT_ANTRAGSTELLER
@@ -246,10 +243,7 @@ Bankverbindung                               ;                                  
                                              ;bankleitzahl                                                   ;string                                             ;
                                              ;bic                                                            ;string                                             ;
                                              ;iban                                                           ;string                                             ;
-                                             ;kontoinhaber                                                   ;enum                                               ;
-                                             ;                                                               ;                                                   ;ANTRAGSTELLER_1
-                                             ;                                                               ;                                                   ;ANTRAGSTELLER_2
-                                             ;                                                               ;                                                   ;BEIDE_ANTRAGSTELLER
+                                             ;kontoinhaber                                                   ;array of AntragstellerVerknuepfung                 ;
                                              ;kontonummer                                                    ;string                                             ;
                                              ;kreditinstitut                                                 ;string                                             ;
 BausparAngebot                               ;                                                               ;                                                   ;
@@ -541,13 +535,13 @@ BestehenderBausparvertrag                    ;                                  
 BestehendesDarlehen                          ;                                                               ;                                                   ;
                                              ;abzuloesendeRestschuld                                         ;number                                             ;
                                              ;aktuelleRestschuldWennNichtAbzuloesen                          ;number                                             ;
-                                             ;darlehenArt                                                    ;enum                                               ;
+                                             ;darlehensArt                                                   ;enum                                               ;
                                              ;                                                               ;                                                   ;BAUSPARDARLEHEN
                                              ;                                                               ;                                                   ;FOERDERDARLEHEN
                                              ;                                                               ;                                                   ;IMMOBILIENDARLEHEN
                                              ;                                                               ;                                                   ;SONSTIGES_DARLEHEN
                                              ;darlehensBetrag                                                ;number                                             ;
-                                             ;darlehensGeber                                                 ;string                                             ;
+                                             ;darlehensGeber                                                 ;ProduktAnbieter                                    ;
                                              ;darlehensKontonummer                                           ;string                                             ;
                                              ;eingetrageneGrundschuld                                        ;number                                             ;
                                              ;hauptKontonummerDslBank                                        ;string                                             ;
@@ -559,13 +553,13 @@ BestehendesDarlehen                          ;                                  
 BestehendesDarlehenDesFinanzierungsObjekts   ;                                                               ;                                                   ;
                                              ;abzuloesendeRestschuld                                         ;number                                             ;
                                              ;aktuelleRestschuldWennNichtAbzuloesen                          ;number                                             ;
-                                             ;darlehenArt                                                    ;enum                                               ;
+                                             ;darlehensArt                                                   ;enum                                               ;
                                              ;                                                               ;                                                   ;BAUSPARDARLEHEN
                                              ;                                                               ;                                                   ;FOERDERDARLEHEN
                                              ;                                                               ;                                                   ;IMMOBILIENDARLEHEN
                                              ;                                                               ;                                                   ;SONSTIGES_DARLEHEN
                                              ;darlehensBetrag                                                ;number                                             ;
-                                             ;darlehensGeber                                                 ;string                                             ;
+                                             ;darlehensGeber                                                 ;ProduktAnbieter                                    ;
                                              ;darlehensKontonummer                                           ;string                                             ;
                                              ;eingetrageneGrundschuld                                        ;number                                             ;
                                              ;hauptKontonummerDslBank                                        ;string                                             ;
@@ -598,13 +592,11 @@ Darlehen                                     ;                                  
                                              ;effektivZinsRelevanteKosten                                    ;EffektivZinsKosten                                 ;
                                              ;forwardDarlehen                                                ;ForwardDarlehen                                    ;
                                              ;id                                                             ;string                                             ;
-                                             ;kennung                                                        ;string                                             ;
                                              ;kfwDarlehen                                                    ;KfwDarlehen                                        ;
                                              ;konditionWurdeManuellAngepasst                                 ;boolean                                            ;
                                              ;kreditEntscheider                                              ;ProduktAnbieter                                    ;
                                              ;privatDarlehen                                                 ;PrivatDarlehen                                     ;
                                              ;produktAnbieter                                                ;ProduktAnbieter                                    ;
-                                             ;produktDetails                                                 ;array of < string > array                          ;
                                              ;provision                                                      ;Provision                                          ;
                                              ;rateMonatlich                                                  ;number                                             ;
                                              ;restschuldNachZinsbindungsende                                 ;number                                             ;
@@ -620,8 +612,10 @@ DarlehensWunsch                              ;                                  
                                              ;variablesDarlehen                                              ;VariablesDarlehensWunsch                           ;
                                              ;zwischenFinanzierung                                           ;ZwischenFinanzierungsWunsch                        ;
 Dokument                                     ;                                                               ;                                                   ;
-                                             ;filename                                                       ;string                                             ;
-                                             ;_links                                                         ;Links                                              ;
+                                             ;href                                                           ;URI                                                ;
+                                             ;name                                                           ;string                                             ;
+                                             ;size                                                           ;integer(int64)                                     ;
+                                             ;type                                                           ;string                                             ;
 EffektivZinsKosten                           ;                                                               ;                                                   ;
                                              ;beratungsHonorar                                               ;number                                             ;
                                              ;grundbuchKosten                                                ;number                                             ;
@@ -683,6 +677,13 @@ ExternesImmobilienDarlehen                   ;                                  
                                              ;zinsBindungEnde                                                ;string(date)                                       ;
 Finanzbedarf                                 ;                                                               ;                                                   ;
                                              ;anschlussfinanzierung                                          ;AnschlussFinanzierung                              ;
+                                             ;finanzbedarfArt                                                ;enum                                               ;
+                                             ;                                                               ;                                                   ;ANSCHLUSSFINANZIERUNG
+                                             ;                                                               ;                                                   ;KAUF
+                                             ;                                                               ;                                                   ;KAUF_NEUBAU_VOM_BAUTRAEGER
+                                             ;                                                               ;                                                   ;MODERNISIERUNG
+                                             ;                                                               ;                                                   ;KAPITALBESCHAFFUNG
+                                             ;                                                               ;                                                   ;NEUBAU
                                              ;kapitalbeschaffung                                             ;Kapitalbeschaffung                                 ;
                                              ;kauf                                                           ;Kauf                                               ;
                                              ;kaufNeubauVomBautraeger                                        ;KaufNeubauVomBautraeger                            ;
@@ -794,6 +795,7 @@ Grundstueck                                  ;                                  
                                              ;                                                               ;                                                   ;LANDWIRTSCHAFTLICHES_GRUNDSTUECK
                                              ;                                                               ;                                                   ;SONSTIGES_GRUNDSTUECK
 Haus                                         ;                                                               ;                                                   ;
+                                             ;anzahlDerGewerbeeinheitenBeiMehrfamilienHaus                   ;integer(int32)                                     ;
                                              ;anzahlDerWohneinheitenBeiMehrfamilienHaus                      ;integer(int32)                                     ;
                                              ;anzahlVollgeschosse                                            ;integer(int32)                                     ;
                                              ;ausstattung                                                    ;enum                                               ;
@@ -826,6 +828,7 @@ Haus                                         ;                                  
                                              ;                                                               ;                                                   ;KOPFHAUS
                                              ;                                                               ;                                                   ;MITTELHAUS
                                              ;hausTyp                                                        ;enum                                               ;
+                                             ;                                                               ;                                                   ;KEIN_TYP_AUSGEWAEHLT
                                              ;                                                               ;                                                   ;DOPPELHAUSHAELFTE
                                              ;                                                               ;                                                   ;EINFAMILIENHAUS
                                              ;                                                               ;                                                   ;MEHRFAMILIENHAUS
@@ -866,7 +869,7 @@ Haushalt                                     ;                                  
 HaushaltsPositionen                          ;                                                               ;                                                   ;
                                              ;ausgabenSonstigeMonatlich                                      ;array of AusgabenMonatlich                         ;
                                              ;bankUndSparguthaben                                            ;array of BankUndSparguthaben                       ;
-                                             ;bausparvertrag                                                 ;array of BestehenderBausparvertrag                 ;
+                                             ;bausparvertraege                                               ;array of BestehenderBausparvertrag                 ;
                                              ;berechnungsHilfeAusgabenSumme                                  ;BerechnungsHilfeZahlungen                          ;
                                              ;berechnungsHilfeEinnahmenSumme                                 ;BerechnungsHilfeZahlungen                          ;
                                              ;berechnungsHilfeVerbindlichkeitenSumme                         ;BerechnungsHilfeBetrag                             ;
@@ -875,16 +878,16 @@ HaushaltsPositionen                          ;                                  
                                              ;einkuenfteAusNebentaetigkeit                                   ;array of EinkuenfteAusNebentaetigkeit              ;
                                              ;einnahmenSonstigeMonatlich                                     ;array of EinnahmenMonatlich                        ;
                                              ;kindergeld                                                     ;array of EinnahmenMonatlich                        ;
-                                             ;lebensUndRentenversicherung                                    ;array of LebensOderRentenversicherungVermoegen     ;
+                                             ;lebensUndRentenversicherungen                                  ;array of LebensOderRentenversicherungVermoegen     ;
                                              ;mietAusgaben                                                   ;array of MietAusgaben                              ;
                                              ;privateDarlehen                                                ;array of Verbindlichkeit                           ;
-                                             ;privateKrankenversicherungBeitragMonatlich                     ;array of AusgabenMonatlich                         ;
-                                             ;ratenkredit                                                    ;array of Verbindlichkeit                           ;
+                                             ;privateKrankenversicherungsBeitraegeMonatlich                  ;array of AusgabenMonatlich                         ;
+                                             ;ratenkredite                                                   ;array of Verbindlichkeit                           ;
                                              ;sparplaene                                                     ;array of Sparplaene                                ;
-                                             ;unbefristeteZusatzRenteMonatlich                               ;array of EinnahmenMonatlich                        ;
-                                             ;unterhaltsVerpflichtungMonatlich                               ;array of AusgabenMonatlich                         ;
+                                             ;unbefristeteZusatzRentenMonatlich                              ;array of EinnahmenMonatlich                        ;
+                                             ;unterhaltsVerpflichtungenMonatlich                             ;array of AusgabenMonatlich                         ;
                                              ;variableEinkuenfteMonatlich                                    ;array of EinnahmenMonatlich                        ;
-                                             ;verbindlichkeitSonstige                                        ;array of Verbindlichkeit                           ;
+                                             ;verbindlichkeitenSonstige                                      ;array of Verbindlichkeit                           ;
                                              ;vermoegenSonstige                                              ;array of Vermoegen                                 ;
                                              ;versicherungsAusgabenSonstigeMonatlich                         ;array of AusgabenMonatlich                         ;
                                              ;wertpapiere                                                    ;array of Wertpapiere                               ;
@@ -946,7 +949,6 @@ Kind                                         ;                                  
                                              ;unterhaltsEinnahmenBetragMonatlich                             ;number                                             ;
 LebensOderRentenversicherungAlsTilgungsErsatz;                                                               ;                                                   ;
                                              ;praemieMonatlich                                               ;number                                             ;
-                                             ;produktAnbieter                                                ;ProduktAnbieter                                    ;
                                              ;rueckkaufsWertAktuell                                          ;number                                             ;
                                              ;tarif                                                          ;string                                             ;
                                              ;typ                                                            ;enum                                               ;
@@ -955,6 +957,7 @@ LebensOderRentenversicherungAlsTilgungsErsatz;                                  
                                              ;                                                               ;                                                   ;KAPITALBILDENDE_RENTENVERSICHERUNG
                                              ;                                                               ;                                                   ;FONDSGEBUNDENE_RENTENVERSICHERUNG
                                              ;                                                               ;                                                   ;RISIKO_LEBENSVERSICHERUNG
+                                             ;versicherungsGesellschaft                                      ;string                                             ;
                                              ;versicherungsSumme                                             ;number                                             ;
                                              ;vertragsBeginn                                                 ;string(date)                                       ;
                                              ;vertragsEnde                                                   ;string(date)                                       ;
@@ -965,7 +968,6 @@ LebensOderRentenversicherungVermoegen        ;                                  
                                              ;berechnungsHilfeVermoegen                                      ;BerechnungsHilfeBetrag                             ;
                                              ;maximalAufzuloesenderBetrag                                    ;number                                             ;
                                              ;praemieMonatlich                                               ;number                                             ;
-                                             ;produktAnbieter                                                ;ProduktAnbieter                                    ;
                                              ;rueckkaufsWertAktuell                                          ;number                                             ;
                                              ;tarif                                                          ;string                                             ;
                                              ;typ                                                            ;enum                                               ;
@@ -981,6 +983,7 @@ LebensOderRentenversicherungVermoegen        ;                                  
                                              ;                                                               ;                                                   ;KEIN_EINSATZ
                                              ;                                                               ;                                                   ;ABTRETEN
                                              ;                                                               ;                                                   ;AUFLOESEN
+                                             ;versicherungsGesellschaft                                      ;string                                             ;
                                              ;versicherungsSumme                                             ;number                                             ;
                                              ;vertragsBeginn                                                 ;string(date)                                       ;
                                              ;vertragsEnde                                                   ;string(date)                                       ;
@@ -999,8 +1002,7 @@ LegitimationsDaten                           ;                                  
                                              ;ausweisArtBeiAndererAusweis                                    ;string                                             ;
                                              ;ausweisNummer                                                  ;string                                             ;
 Link                                         ;                                                               ;                                                   ;
-                                             ;href                                                           ;string                                             ;
-                                             ;templated                                                      ;boolean                                            ;
+                                             ;href                                                           ;URI                                                ;
                                              ;type                                                           ;string                                             ;
 Links                                        ;                                                               ;                                                   ;
                                              ;self                                                           ;Link                                               ;
@@ -1029,8 +1031,6 @@ Meldung                                      ;                                  
                                              ;                                                               ;                                                   ;ALTERNATIV
                                              ;                                                               ;                                                   ;ANPASSUNG
                                              ;                                                               ;                                                   ;UNBERUECKSICHTIGTE_ANGABE
-Meldungen                                    ;                                                               ;                                                   ;
-                                             ;meldungen                                                      ;array of Meldung                                   ;
 MietAusgaben                                 ;                                                               ;                                                   ;
                                              ;ausgabenMonatlich                                              ;number                                             ;
                                              ;berechnungsHilfeAusgaben                                       ;BerechnungsHilfeZahlungen                          ;
@@ -1054,7 +1054,7 @@ ModernisierungsAngaben                       ;                                  
                                              ;                                                               ;                                                   ;HOCH
                                              ;                                                               ;                                                   ;MITTEL
 NachrangigesExternesDarlehen                 ;                                                               ;                                                   ;
-                                             ;darlehenBetrag                                                 ;number                                             ;
+                                             ;darlehensBetrag                                                ;number                                             ;
                                              ;darlehensGeber                                                 ;string                                             ;
                                              ;id                                                             ;string                                             ;
                                              ;kommentar                                                      ;string                                             ;
@@ -1094,7 +1094,6 @@ Postadresse                                  ;                                  
                                              ;strasse                                                        ;string                                             ;
 PrivatDarlehen                               ;                                                               ;                                                   ;
                                              ;laufzeitInMonaten                                              ;integer(int32)                                     ;
-                                             ;zinsBindungInMonaten                                           ;integer(int32)                                     ;
 PrivatDarlehensWunsch                        ;                                                               ;                                                   ;
                                              ;abzuloesendeAltdarlehen                                        ;array of BestehendesDarlehenVerknuepfung           ;
                                              ;bestehendesDarlehenDerImmobilieIdsBeiAbloesung                 ;array of < string > array                          ;
@@ -1121,6 +1120,7 @@ Rentner                                      ;                                  
                                              ;staatlicheRenteNettoMonatlich                                  ;number                                             ;
 SchufaErgebnis                               ;                                                               ;                                                   ;
                                              ;antragstellerUnbekannt                                         ;boolean                                            ;
+                                             ;inManuellerNachbehandlung                                      ;boolean                                            ;
                                              ;score                                                          ;string                                             ;
 SituationNachRenteneintritt                  ;                                                               ;                                                   ;
                                              ;gesetzlicheRenteMonatlich                                      ;number                                             ;
@@ -1162,6 +1162,24 @@ TilgungsWunsch                               ;                                  
                                              ;ausgesetztEigenesAngebot                                       ;boolean                                            ;
                                              ;rate                                                           ;number                                             ;
                                              ;volltilgerWennAnnuitaetenOderForward                           ;boolean                                            ;
+URI                                          ;                                                               ;                                                   ;
+                                             ;absolute                                                       ;boolean                                            ;
+                                             ;authority                                                      ;string                                             ;
+                                             ;fragment                                                       ;string                                             ;
+                                             ;host                                                           ;string                                             ;
+                                             ;opaque                                                         ;boolean                                            ;
+                                             ;path                                                           ;string                                             ;
+                                             ;port                                                           ;integer(int32)                                     ;
+                                             ;query                                                          ;string                                             ;
+                                             ;rawAuthority                                                   ;string                                             ;
+                                             ;rawFragment                                                    ;string                                             ;
+                                             ;rawPath                                                        ;string                                             ;
+                                             ;rawQuery                                                       ;string                                             ;
+                                             ;rawSchemeSpecificPart                                          ;string                                             ;
+                                             ;rawUserInfo                                                    ;string                                             ;
+                                             ;scheme                                                         ;string                                             ;
+                                             ;schemeSpecificPart                                             ;string                                             ;
+                                             ;userInfo                                                       ;string                                             ;
 VariablesDarlehensWunsch                     ;                                                               ;                                                   ;
                                              ;abzuloesendeAltdarlehen                                        ;array of BestehendesDarlehenVerknuepfung           ;
                                              ;bestehendesDarlehenDerImmobilieIdsBeiAbloesung                 ;array of < string > array                          ;
@@ -1187,7 +1205,7 @@ VermietungsInformationen                     ;                                  
                                              ;                                                               ;                                                   ;EIGENGENUTZT
                                              ;                                                               ;                                                   ;TEIL_VERMIETET
                                              ;                                                               ;                                                   ;VERMIETET
-                                             ;vermieteteWohnflaecheBeiTeilvermietung                         ;number                                             ;
+                                             ;vermieteteFlaecheBeiTeilvermietung                             ;number                                             ;
 Vermoegen                                    ;                                                               ;                                                   ;
                                              ;aktuellerWert                                                  ;number                                             ;
                                              ;berechnungsHilfeVermoegen                                      ;BerechnungsHilfeBetrag                             ;
@@ -1210,6 +1228,7 @@ Vorhaben                                     ;                                  
                                              ;                                                               ;                                                   ;KAUF_NEUBAU_VOM_BAUTRAEGER
                                              ;                                                               ;                                                   ;MODERNISIERUNG_UMBAU_ANBAU
                                              ;                                                               ;                                                   ;NEUBAU
+                                             ;                                                               ;                                                   ;KAPITALBESCHAFFUNG
                                              ;verwendungszweckAbhaengigerFinanzbedarf                        ;Finanzbedarf                                       ;
 Wertpapiere                                  ;                                                               ;                                                   ;
                                              ;aktuellerWert                                                  ;number                                             ;
@@ -1224,8 +1243,9 @@ Wertpapiere                                  ;                                  
                                              ;                                                               ;                                                   ;EINNAHMEN
                                              ;                                                               ;                                                   ;AUSGABEN
 ZinsBindung                                  ;                                                               ;                                                   ;
-                                             ;zinsBindungInJahren                                            ;integer(int32)                                     ;
-                                             ;zinsBindungsEndeAm                                             ;string(date)                                       ;
+                                             ;endetAm                                                        ;string(date)                                       ;
+                                             ;jahre                                                          ;integer(int32)                                     ;
+                                             ;monate                                                         ;integer(int32)                                     ;
 ZugrundeliegendeDatenZumAntrag               ;                                                               ;                                                   ;
                                              ;finanzierungsObjekt                                            ;FinanzierungsObjekt                                ;
                                              ;haushalte                                                      ;array of Haushalt                                  ;
