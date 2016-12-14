@@ -1,0 +1,262 @@
+{
+  "datenKontext": "ECHT_GESCHAEFT",
+  "antragsNummer": "AB1234/1",
+  "angenommenAm": "2016-11-21",
+  "produktAnbieter": {
+    "id": "MUSTERBANK",
+    "kurzname": "Musterbank",
+    "firmierung": "Musterbank AG"
+  },
+  "beratung": {
+    "art": "FERN_ABSATZ_GESCHAEFT"
+  },
+  "status": {
+    "antragstellerStatus": "BEANTRAGT",
+    "produktAnbieterStatus": "NICHT_BEARBEITET",
+    "vertragsBearbeitungsFortschritt": "NICHT_VON_PRODUKTANBIETER_BESTAETIGT"
+  },
+  "dokumente": [
+    {
+      "name": "Selbstauskunft.pdf",
+      "type": "application/pdf",
+      "size": 0,
+      "href": "http://example.org/path/to/my/dokument"
+    }
+  ],
+  "zugrundeliegendeDaten": {
+    "haushalte": [
+      {
+        "antragsteller": [
+          {
+            "id": "555981060686489",
+            "anrede": "FRAU",
+            "anschrift": {
+              "hausnummer": "77",
+              "ort": "Berlin",
+              "postleitzahl": "10247",
+              "strasse": "Frankfurter Allee"
+            },
+            "beschaeftigung": {},
+            "familienstand": "LEDIG",
+            "geburtsdatum": "1970-01-01",
+            "nachname": "Fuchs",
+            "telefonnummer": "420860",
+            "telefonnummerVorwahl": "030",
+            "vorname": "Mareike",
+            "wohnhaftSeit": "2000-01-01"
+          }
+        ],
+        "einnahmenAusgabenVermoegenVerbindlichkeiten": {
+          "bankUndSparguthaben": [
+            {
+              "aktuellerWert": 120000,
+              "maximalAufzuloesenderWert": 112000,
+              "zahlungTyp": "EINNAHMEN",
+              "vermoegenOderVerbindlichkeit": "VERMOEGEN"
+            }
+          ],
+          "kindergeld": [
+            {
+              "einnahmenMonatlich": 0,
+              "zahlungTyp": "EINNAHMEN"
+            }
+          ]
+        },
+        "bankverbindung": {
+          "bankleitzahl": "37010050",
+          "kontoinhaber": [
+            {
+              "id": "555981060686489",
+              "name": "Mareike Fuchs"
+            }
+          ],
+          "kontonummer": "0007985502",
+          "kreditinstitut": "Postbank (Prüfungsmock)",
+          "iban": "DE51370100500007985502",
+          "bic": "PBNKDEFFXXX"
+        },
+        "anzahlErwachseneImHaushalt": 1,
+        "lebenshaltungsKostenMonatlich": 500,
+        "kfzAnzahl": 1
+      }
+    ],
+    "finanzierungsObjekt": {
+      "id": "9969861379646952",
+      "adresse": {
+        "hausnummer": "77",
+        "ort": "Berlin",
+        "postleitzahl": "10247",
+        "strasse": "Frankfurter Allee"
+      },
+      "keineAutostellplaetzeVorhanden": true,
+      "grundstuecksGroesse": 200,
+      "haus": {
+        "baujahrWennNichtNeubau": 2000,
+        "anzahlVollgeschosse": 2,
+        "bauweise": "MASSIV",
+        "wohnflaecheGesamt": 100,
+        "wohnVermietungsInformation": {
+          "nutzungsArt": "EIGENGENUTZT"
+        },
+        "gewerbeVermietungsInformationWennGewerbeflaecheVorhanden": {},
+        "dachgeschossAusbau": "VOLL_AUSGEBAUT",
+        "einliegerwohnungVorhandenBeiDoppelOderEinfamilienOderReihenHaus": false,
+        "fertighausBeiDoppelOderEinfamilienOderZweifamilienHaus": false,
+        "hausTyp": "EINFAMILIENHAUS",
+        "unterkellerung": "UNTERKELLERT"
+      }
+    },
+    "vorhaben": {
+      "verwendungszweck": "KAUF",
+      "verwendungszweckAbhaengigerFinanzbedarf": {
+        "kauf": {
+          "kaufpreis": 200000,
+          "nebenkosten": {}
+        },
+        "finanzbedarfArt": "KAUF"
+      }
+    }
+  },
+  "angebot": {
+    "_links": {
+      "self": {
+        "type": "application/json",
+        "href": "http://localhost:8080/antraege/AB1234/1/angebot"
+      }
+    },
+    "darlehen": [
+      {
+        "id": "urn:europace:darlehen:03231325726687739",
+        "darlehensTyp": "ANNUITAETEN_DARLEHEN",
+        "sollZins": 1.3,
+        "effektivZins": 1.37,
+        "rateMonatlich": 137.5,
+        "darlehensBetrag": 50000,
+        "auszahlungsBetrag": 50000,
+        "auszahlungsKurs": 100,
+        "produktAnbieter": {
+          "id": "MUSTERBANK",
+          "kurzname": "Musterbank",
+          "firmierung": "Musterbank AG"
+        },
+        "provision": {},
+        "restschuldNachZinsbindungsende": 39327.1,
+        "zinsZahlungsBeginnAm": "2017-01-31",
+        "effektivZinsRelevanteKosten": {},
+        "bereitstellung": {
+          "bereitstellungsZinsFreieZeitInMonaten": 6,
+          "bereitstellungsZins": 1.8
+        },
+        "konditionWurdeManuellAngepasst": false,
+        "zinsBindung": {
+          "jahre": 10,
+          "endetAm": "2026-12-31"
+        },
+        "tilgung": {
+          "anfaenglicheTilgung": 2,
+          "tilgungsBeginnAm": "2017-01-31",
+          "sonderTilgungJaehrlich": 5
+        }
+      },
+      {
+        "id": "urn:europace:darlehen:e08199296b2165a6bca59e29cfbcce07",
+        "darlehensTyp": "KFW_DARLEHEN",
+        "sollZins": 1.1,
+        "effektivZins": 1.11,
+        "rateMonatlich": 197.61,
+        "darlehensBetrag": 50000,
+        "auszahlungsBetrag": 50000,
+        "auszahlungsKurs": 100,
+        "produktAnbieter": {
+          "id": "KFW",
+          "kurzname": "KfW",
+          "firmierung": "KfW"
+        },
+        "provision": {},
+        "restschuldNachZinsbindungsende": 32777.55,
+        "zinsZahlungsBeginnAm": "2017-01-31",
+        "effektivZinsRelevanteKosten": {},
+        "bereitstellung": {
+          "bereitstellungsZinsFreieZeitInMonaten": 4,
+          "bereitstellungsZins": 3
+        },
+        "konditionWurdeManuellAngepasst": false,
+        "zinsBindung": {
+          "jahre": 10
+        },
+        "tilgung": {
+          "anfaenglicheTilgung": 3.64,
+          "tilgungsBeginnAm": "2018-01-31"
+        },
+        "kfwDarlehen": {
+          "kfwProgramm": "PROGRAMM_124",
+          "laufZeitInJahren": 25,
+          "tilgungsFreieAnlaufJahre": 1,
+          "rateMonatlichInDerTilgungsfreienAnlaufzeit": 45.83
+        }
+      }
+    ],
+    "id": "urn:europace:angebot:583eac73e4b05f0c0103b5f6",
+    "kennung": "inkl. KfW-Darlehen 124 über 50.000,00 €",
+    "meldungen": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "anpassungsStatus": "ALTERNATIV",
+    "machbarkeitsStatus": "MACHBAR",
+    "erzeugtAm": "2016-11-30",
+    "angebotsFristEndeAm": "2016-12-02"
+  },
+  "ansprechpartner": {
+    "vorname": "wer & wer",
+    "nachname": "wer",
+    "email": "ep2mail@hu8.de",
+    "telefonnummer": "0800/8833-880",
+    "partnerId": "WER03",
+    "_links": {
+      "self": {
+        "type": "application/json",
+        "href": "https://www.europace2.de/partnermanagement/partner/WER03/kontaktdaten"
+      }
+    }
+  },
+  "kreditSachbearbeiter": {
+    "vorname": "wer & wer",
+    "nachname": "wer",
+    "email": "ep2mail@hu8.de",
+    "telefonnummer": "0800/8833-880",
+    "partnerId": "WER03",
+    "_links": {
+      "self": {
+        "type": "application/json",
+        "href": "https://www.europace2.de/partnermanagement/partner/WER03/kontaktdaten"
+      }
+    }
+  },
+  "vermittler": {
+    "vorname": "wer & wer",
+    "nachname": "wer",
+    "email": "ep2mail@hu8.de",
+    "telefonnummer": "0800/8833-880",
+    "partnerId": "WER03",
+    "_links": {
+      "self": {
+        "type": "application/json",
+        "href": "https://www.europace2.de/partnermanagement/partner/WER03/kontaktdaten"
+      }
+    }
+  },
+  "id": "urn:europace:antrag::AB1234/1",
+  "_links": {
+    "self": {
+      "type": "application/json",
+      "href": "http://localhost:8080/antraege/AB1234/1"
+    }
+  }
+}
