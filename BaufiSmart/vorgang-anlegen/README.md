@@ -8,6 +8,10 @@ Sie dient zum automatisierten Anlegen von Vorgängen.
 Für neue Projekt wird immer empfohlen, die aktuellste Version zu verwenden.
 Es werden immer die letzten 3 Versionen der Schnittstelle unterstützt.
 
+#### Version 13
+
+Seit 5. Januar 2017
+
 #### Version 12
 
 Seit 7. Oktober 2016
