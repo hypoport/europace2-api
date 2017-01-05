@@ -303,6 +303,14 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
     </xs:element>
   </xs:sequence>
 </xs:complexType>
+<xs:simpleType name="Ausstattung">
+  <xs:restriction base="xs:string">
+<xs:enumeration value="STARK_GEHOBEN"/>
+<xs:enumeration value="GEHOBEN"/>
+<xs:enumeration value="MITTEL"/>
+<xs:enumeration value="EINFACH"/>
+  </xs:restriction>
+</xs:simpleType>
 <xs:complexType name="AutoStellplatz">
   <xs:sequence>
     <xs:element name="mieteinnahmenMonatlich" type="Euro" minOccurs="0" maxOccurs="1" >
@@ -410,6 +418,20 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
 <xs:enumeration value="MASSIV"/>
   </xs:restriction>
 </xs:simpleType>
+<xs:complexType name="BeleihungswertImmobilieGemeinsameDaten">
+  <xs:sequence>
+    <xs:element name="ausstattung" type="Ausstattung" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+    <xs:element name="wohnlage" type="Wohnlage" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+    <xs:element name="kubatur" type="Double" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+    <xs:element name="vergleichsmieteFuerWohnflaecheProQm" type="Euro" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+    <xs:element name="vergleichsmieteFuerGewerbeflaecheProQm" type="Euro" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+  </xs:sequence>
+</xs:complexType>
 <xs:simpleType name="BeschaeftigungsBefristung">
   <xs:restriction base="xs:string">
 <xs:enumeration value="BEFRISTET"/>
@@ -793,6 +815,8 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:element name="finanzierungsObjektDetails" type="FinanzierungsObjektDetails" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+    <xs:element name="zusatzAngaben" type="ZusatzAngabenImmobilie" minOccurs="0" maxOccurs="1" >
     </xs:element>
   </xs:sequence>
 </xs:complexType>
@@ -1994,6 +2018,13 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
     </xs:element>
   </xs:sequence>
 </xs:complexType>
+<xs:simpleType name="Wohnlage">
+  <xs:restriction base="xs:string">
+<xs:enumeration value="GEHOBEN"/>
+<xs:enumeration value="MITTEL"/>
+<xs:enumeration value="EINFACH"/>
+  </xs:restriction>
+</xs:simpleType>
 <xs:complexType name="ZusatzAngabenAntragsteller">
   <xs:sequence>
     <xs:element name="ingDiba" type="IngDibaAntragsteller" minOccurs="0" maxOccurs="1" >
@@ -2013,6 +2044,12 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
     <xs:element name="speed" type="SpeedHaushalt" minOccurs="0" maxOccurs="1" >
     </xs:element>
     <xs:element name="ingDiba" type="IngDibaHaushalt" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+  </xs:sequence>
+</xs:complexType>
+<xs:complexType name="ZusatzAngabenImmobilie">
+  <xs:sequence>
+    <xs:element name="beleihungswertGemeinsameDaten" type="BeleihungswertImmobilieGemeinsameDaten" minOccurs="0" maxOccurs="1" >
     </xs:element>
   </xs:sequence>
 </xs:complexType>

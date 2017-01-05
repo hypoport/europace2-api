@@ -297,6 +297,15 @@
           </gewerbeVermietungsInformation>
         </haus>
       </finanzierungsObjektDetails>
+      <zusatzAngaben>
+        <beleihungswertGemeinsameDaten>
+          <ausstattung>STARK_GEHOBEN</ausstattung>
+          <wohnlage>GEHOBEN</wohnlage>
+          <kubatur>1000.00</kubatur>
+          <vergleichsmieteFuerWohnflaecheProQm>20.00</vergleichsmieteFuerWohnflaecheProQm>
+          <vergleichsmieteFuerGewerbeflaecheProQm>30.00</vergleichsmieteFuerGewerbeflaecheProQm>
+        </beleihungswertGemeinsameDaten>
+      </zusatzAngaben>
     </finanzierungsObjekt>
     <vorhaben>
       <finanzierungsWunsch>
