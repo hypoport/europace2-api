@@ -19,6 +19,14 @@
           <einkommenNettoMonatlich>2860.00</einkommenNettoMonatlich>
           <inProbezeit>FALSE</inProbezeit>
           <typ>ANGESTELLTER</typ>
+          <beruf>Projektleiter</beruf>
+          <arbeitgeber>Europace AG</arbeitgeber>
+          <situationNachRenteneintritt>
+            <rentenBeginn>2040-01-01</rentenBeginn>
+            <gesetzlicheRenteMonatlich>3000.00</gesetzlicheRenteMonatlich>
+            <privateRenteMonatlich>1000.00</privateRenteMonatlich>
+            <sonstigesEinkommenMonatlich>1000.00</sonstigesEinkommenMonatlich>
+          </situationNachRenteneintritt>
         </angestellterOderArbeiterOderBeamter>
       </beschaeftigung>
       <email>johannes.finke@example.org</email>
@@ -42,6 +50,22 @@
       <vorname>Johannes</vorname>
       <weitereKontaktMoeglichkeiten>Fax: 030-65487211</weitereKontaktMoeglichkeiten>
       <wohnhaftSeit>2001-01-01</wohnhaftSeit>
+      <zusatzAngaben>
+        <ingDiba>
+          <berufsgruppe>OHNE</berufsgruppe>
+          <branche>DIENSTLEISTUNGEN_SONSTIGE</branche>
+          <privateKrankenversicherungMonatlicheAusgaben>1000.00</privateKrankenversicherungMonatlicheAusgaben>
+        </ingDiba>
+        <sRating>
+          <branche>ENERGIE_UND_WASSERVERSORGUNG_BERGBAU</branche>
+        </sRating>
+        <mhb>
+          <branche>VERARBEITENDES_GEWERBE</branche>
+        </mhb>
+        <bausparkassen>
+          <geburtsort>Bonn</geburtsort>
+        </bausparkassen>
+      </zusatzAngaben>
     </antragsteller>
     <haushalt>
       <bestehendeImmobilien>
@@ -65,6 +89,12 @@
             <vermieteteWohnflaecheBeiTeilvermietung>0.00</vermieteteWohnflaecheBeiTeilvermietung>
           </nutzungsDetailsBeiVermietung>
           <wohnflaecheGesamt>124.00</wohnflaecheGesamt>
+          <adresse>
+            <hausnummer>10</hausnummer>
+            <ort>Berlin</ort>
+            <postleitzahl>10178</postleitzahl>
+            <strasse>Alexanderstraße</strasse>
+          </adresse>
         </bestehendeImmobilie>
       </bestehendeImmobilien>
       <einnahmenAusgabenVermoegenVerbindlichkeiten>
@@ -161,6 +191,18 @@
         <iban>DE68210501700012345678</iban>
         <bic>GENODEF1S10</bic>
       </kontoverbindung>
+      <zusatzAngaben>
+        <dsl>
+          <lebenshaltungsKostenMonatlich>1000.00</lebenshaltungsKostenMonatlich>
+        </dsl>
+        <speed>
+          <kfzAnzahl>2</kfzAnzahl>
+        </speed>
+        <ingDiba>
+          <anzahlErwachseneImHaushalt>2</anzahlErwachseneImHaushalt>
+          <anzahlKinderNichtImHaushalt>1</anzahlKinderNichtImHaushalt>
+        </ingDiba>
+      </zusatzAngaben>
     </haushalt>
     <finanzierungsObjekt>
       <adresse>
@@ -224,9 +266,36 @@
       </grundbuchAngabe>
       <grundstuecksGroesse>1250.00</grundstuecksGroesse>
       <finanzierungsObjektDetails>
-        <grundstueck>
-          <grundstuecksArt>UNBEBAUTES_WOHNGRUNDSTUECK</grundstuecksArt>
-        </grundstueck>
+        <haus>
+          <anzahlDerWohneinheitenBeiMehrfamilienHaus>2</anzahlDerWohneinheitenBeiMehrfamilienHaus>
+          <anzahlVollgeschosse>2</anzahlVollgeschosse>
+          <baujahrWennNichtNeubau>1960</baujahrWennNichtNeubau>
+          <bauweise>FACHWERK_MIT_STROH_LEHM</bauweise>
+          <dachgeschossAusbau>VOLL_AUSGEBAUT</dachgeschossAusbau>
+          <einliegerwohnungVorhandenBeiDoppelOderEinfamilienOderReihenHaus>TRUE</einliegerwohnungVorhandenBeiDoppelOderEinfamilienOderReihenHaus>
+          <fertighausBeiDoppelOderEinfamilienOderZweifamilienHaus>TRUE</fertighausBeiDoppelOderEinfamilienOderZweifamilienHaus>
+          <hausAnordnungMehrfamilienOderZweifamilienHaus>FREISTEHEND</hausAnordnungMehrfamilienOderZweifamilienHaus>
+          <hausAnordnungReihenhaus>MITTELHAUS</hausAnordnungReihenhaus>
+          <hausTyp>REIHENHAUS</hausTyp>
+          <modernisierungsAngabenWennNichtNeubau>
+            <modernisierungsGrad>HOCH</modernisierungsGrad>
+            <modernisierungsJahr>2015</modernisierungsJahr>
+          </modernisierungsAngabenWennNichtNeubau>
+          <nutzungsArt>VERMIETET</nutzungsArt>
+          <nutzungsDetailsBeiVermietung>
+            <mieteinnahmenNettoKaltMonatlich>1000.00</mieteinnahmenNettoKaltMonatlich>
+            <vermieteteWohnflaecheBeiTeilvermietung>1000.00</vermieteteWohnflaecheBeiTeilvermietung>
+          </nutzungsDetailsBeiVermietung>
+          <unterkellerung>TEILWEISE_UNTERKELLERT</unterkellerung>
+          <wohnflaecheGesamt>1000.00</wohnflaecheGesamt>
+          <gewerbeflaecheVorhanden>YES</gewerbeflaecheVorhanden>
+          <gesamtGewerbeflaeche>1000.00</gesamtGewerbeflaeche>
+          <gewerbeNutzungsArt>VERMIETET</gewerbeNutzungsArt>
+          <gewerbeVermietungsInformation>
+            <mieteinnahmenNettoKaltMonatlich>1000.00</mieteinnahmenNettoKaltMonatlich>
+            <vermieteteWohnflaecheBeiTeilvermietung>1000.00</vermieteteWohnflaecheBeiTeilvermietung>
+          </gewerbeVermietungsInformation>
+        </haus>
       </finanzierungsObjektDetails>
     </finanzierungsObjekt>
     <vorhaben>
