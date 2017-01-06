@@ -18,17 +18,6 @@ sondern nur der Inhalt
 der [Vorgang.xml](Beispiele/bex-v13-Vorgang.xml) (Anfrage)
 und der [VorgangMetadaten.xml](Beispiele/bex-v13-VorgangMetadaten.xml) (Antwort).
 
-
-Mappingvorlage
----------------
-
-Bei der Mappingvorlage handelt es sich um eine [Excel-Datei](Mappingvorlage/bex-v13-VorgangAnlegen-Vorgang_MappingVorlage.xlsx),
-welche die Struktur des Vorgangs (für die SOAP Anfrage) beschreibt.
-Zusätzlich gibt es darin Spalten, in denen sie Felder aus ihrem Datenmodell
-eintragen können. So kann diese Mappingvorlage beim fachlichen Erstellen
-oder beim Dokumentieren ihre Arbeit unterstützen.
-
-
 Code-Generierung für Client-Stubs
 ----------------------------------
 
