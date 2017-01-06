@@ -20,10 +20,18 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 
 ##### Breaking Changes
 
+* Angebot
+  * `rueckdatierungsFristEndeAm` entfernt
+
+* Antrag
+  * `voraussichtlicheBearbeitungAm` entfernt
+  * `prolongation` entfernt
+
 * Die Knoten des `_embedded` Objects sind hoch in das Angebot verschoben
 * Im Angebot gibt es einen Knoten `dokumente`, indem alle Dokumente gesammelt sind 
 * Bugfix: Flaechenwerte werden analog Euro und Prozent, wie in Swagger dokumentiert, als Nummern serialisiert
 * Bankverbindung: Kontoinhaber ist jetzt eine Liste von AntragstellerVerknuepfungen (jeweils mit den Feldern 'id' und 'name')
+* `antragsteller.staatsangehoerigkeit` ist jetzt ein komplexes Objekt vom Typ `Staat` (enthält Iso-Code und menschenlesbaren Namen) 
 * Renamings in haushalt.einnahmenAusgabenVermoegenVerbindlichkeiten
   * `lebensUndRentenversicherung` -> `lebensUndRentenversicherungen` 
   * `privateKrankenversicherungBeitragMonatlich` -> `privateKrankenversicherungsBeitraegeMonatlich` 
@@ -35,14 +43,33 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 * Lebens- und Rentenversicherungen: komplexes Objekt `produktAnbieter` durch einfachen String `versicherungsGesellschaft` ersetzt
 * Jahreszahl ist Integer basiert, nicht String basiert
 * Kellerausbau umbenannt in ingDibaKellerausbau
-  
+* `darlehen.effektivZinsKosten`: `sonstigeKostenErlaeuterung` entfernt 
+* `darlehen.abzuloesendeAltdarlehen` entfernt 
+* `darlehen.bestehendesDarlehenDerImmobilieIdsBeiAbloesung` entfernt 
+* `darlehen.kreditEntscheider` entfernt 
+* `darlehen.abzuloesendeAltdarlehen` entfernt 
+ 
 * FinanzierungsObjekt
   * `BestehendesDarlehenDesFinanzierungsObjekts.darlehenArt` -> `darlehensArt`
 * BestehendeImmobilie
   * `BestehendesDarlehen.darlehenArt` -> `darlehensArt`
+  * `BestehendesDarlehen.hauptKontonummerDslBank` entfernt
+  * `BestehendesDarlehen.darlehensKontonummer` entfernt
+  * `BestehendesDarlehen.sondertilgungZumZinsbindungsende` entfernt
+  * `BestehendesDarlehen.darlehensBetrag` entfernt
+  * `BestehendesDarlehen.sollZins` entfernt
 * NachrangigesExternesDarlehen: `darlehenBetrag` -> `darlehensBetrag`
 * VermietungsInformationen: Umbenennung `vermieteteWohnflaecheBeiTeilvermietung` -> `vermieteteFlaecheBeiTeilvermietung`
+* BausparAngebot: mehrere Attribute entfernt
+*
 
+* Bausparangebote
+  * `sparPhase.guthabenZins` entfernt
+  * `tilgungsPhase.darlehensGebuehrEinmalig` entfernt
+  
+* Vorhaben
+  * `externeImmobilienDarlehen` entfernt
+  
 #### Version 0.2
 
 
@@ -63,6 +90,7 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 * haushalte.anzahlErwachseneImHaushalt;
 * haushalte.lebenshaltungsKostenMonatlich;
 * haushalte.kfzAnzahl;
+* haushalt.bestehendeImmobilie: kommentar
 
 ##### Breaking Changes
 
@@ -75,6 +103,7 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 * provision.provisionKundenbetreuerAbsolut Renaming zu provision.kundenbetreuerProvision
 * provision.vertriebsProvisionGesamtAbsolut Renaming zu provision.vertriebsProvisionGesamt
 * Flächenangaben jetzt direkt als Wert vom Typ 'number' und nicht mehr als extra Object.
+* bestehendeImmobilienEinsatz: GAR_NICHT -> KEIN_EINSATZ
 
 ##### Type-Renamings
 * `EuropaceBausparAngebot` umbenannt zu `Bausparvertrag`
