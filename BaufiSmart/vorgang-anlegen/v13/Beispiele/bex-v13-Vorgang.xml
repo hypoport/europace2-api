@@ -86,7 +86,7 @@
           <nutzungsArt>VERMIETET</nutzungsArt>
           <nutzungsDetailsBeiVermietung>
             <mieteinnahmenNettoKaltMonatlich>600.00</mieteinnahmenNettoKaltMonatlich>
-            <vermieteteWohnflaecheBeiTeilvermietung>0.00</vermieteteWohnflaecheBeiTeilvermietung>
+            <vermieteteFlaecheBeiTeilvermietung>0.00</vermieteteFlaecheBeiTeilvermietung>
           </nutzungsDetailsBeiVermietung>
           <wohnflaecheGesamt>124.00</wohnflaecheGesamt>
           <adresse>
@@ -284,7 +284,7 @@
           <nutzungsArt>VERMIETET</nutzungsArt>
           <nutzungsDetailsBeiVermietung>
             <mieteinnahmenNettoKaltMonatlich>1000.00</mieteinnahmenNettoKaltMonatlich>
-            <vermieteteWohnflaecheBeiTeilvermietung>1000.00</vermieteteWohnflaecheBeiTeilvermietung>
+            <vermieteteFlaecheBeiTeilvermietung>1000.00</vermieteteFlaecheBeiTeilvermietung>
           </nutzungsDetailsBeiVermietung>
           <unterkellerung>TEILWEISE_UNTERKELLERT</unterkellerung>
           <wohnflaecheGesamt>1000.00</wohnflaecheGesamt>
@@ -293,7 +293,7 @@
           <gewerbeNutzungsArt>VERMIETET</gewerbeNutzungsArt>
           <gewerbeVermietungsInformation>
             <mieteinnahmenNettoKaltMonatlich>1000.00</mieteinnahmenNettoKaltMonatlich>
-            <vermieteteWohnflaecheBeiTeilvermietung>1000.00</vermieteteWohnflaecheBeiTeilvermietung>
+            <vermieteteFlaecheBeiTeilvermietung>1000.00</vermieteteFlaecheBeiTeilvermietung>
           </gewerbeVermietungsInformation>
         </haus>
       </finanzierungsObjektDetails>
@@ -305,6 +305,14 @@
           <vergleichsmieteFuerWohnflaecheProQm>20.00</vergleichsmieteFuerWohnflaecheProQm>
           <vergleichsmieteFuerGewerbeflaecheProQm>30.00</vergleichsmieteFuerGewerbeflaecheProQm>
         </beleihungswertGemeinsameDaten>
+        <beleihungswert>
+          <marktueblicherKaufpreisProQm>23.00</marktueblicherKaufpreisProQm>
+          <keinBaulandFlaeche>50.00</keinBaulandFlaeche>
+          <bodenRichtwert>30.00</bodenRichtwert>
+        </beleihungswert>
+        <dsl>
+          <bewirtschaftungsKostenJaehrlich>300.00</bewirtschaftungsKostenJaehrlich>
+        </dsl>
       </zusatzAngaben>
     </finanzierungsObjekt>
     <vorhaben>

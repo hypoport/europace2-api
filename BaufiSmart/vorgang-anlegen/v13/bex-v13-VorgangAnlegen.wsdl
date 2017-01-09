@@ -17,7 +17,7 @@
  -->
   <xs:annotation>
  		<xs:appinfo>EUROPACE 2, Baufi Smart VorgangAnlegen-Schema, Version: 13</xs:appinfo>
- 		<xs:appinfo>Generiert am: 5. Januar 2017</xs:appinfo>
+ 		<xs:appinfo>Generiert am: 9. Januar 2017</xs:appinfo>
  	</xs:annotation>
 
   <xs:element name="VorgangMetadaten" type="VorgangMetadaten"/>
@@ -427,6 +427,16 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
 <xs:enumeration value="MASSIV"/>
   </xs:restriction>
 </xs:simpleType>
+<xs:complexType name="BeleihungswertImmobilie">
+  <xs:sequence>
+    <xs:element name="marktueblicherKaufpreisProQm" type="Euro" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+    <xs:element name="keinBaulandFlaeche" type="Flaeche" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+    <xs:element name="bodenRichtwert" type="Euro" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+  </xs:sequence>
+</xs:complexType>
 <xs:complexType name="BeleihungswertImmobilieGemeinsameDaten">
   <xs:sequence>
     <xs:element name="ausstattung" type="Ausstattung" minOccurs="0" maxOccurs="1" >
@@ -660,6 +670,12 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
 <xs:complexType name="DslHaushalt">
   <xs:sequence>
     <xs:element name="lebenshaltungsKostenMonatlich" type="Euro" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+  </xs:sequence>
+</xs:complexType>
+<xs:complexType name="DslImmobilie">
+  <xs:sequence>
+    <xs:element name="bewirtschaftungsKostenJaehrlich" type="Euro" minOccurs="0" maxOccurs="1" >
     </xs:element>
   </xs:sequence>
 </xs:complexType>
@@ -1940,7 +1956,7 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
           <xs:documentation>Beispiel: 600.00</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <xs:element name="vermieteteWohnflaecheBeiTeilvermietung" type="Flaeche" minOccurs="0" maxOccurs="1" >
+    <xs:element name="vermieteteFlaecheBeiTeilvermietung" type="Flaeche" minOccurs="0" maxOccurs="1" >
     </xs:element>
   </xs:sequence>
 </xs:complexType>
@@ -2059,6 +2075,10 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
 <xs:complexType name="ZusatzAngabenImmobilie">
   <xs:sequence>
     <xs:element name="beleihungswertGemeinsameDaten" type="BeleihungswertImmobilieGemeinsameDaten" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+    <xs:element name="beleihungswert" type="BeleihungswertImmobilie" minOccurs="0" maxOccurs="1" >
+    </xs:element>
+    <xs:element name="dsl" type="DslImmobilie" minOccurs="0" maxOccurs="1" >
     </xs:element>
   </xs:sequence>
 </xs:complexType>
