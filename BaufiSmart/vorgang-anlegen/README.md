@@ -8,9 +8,11 @@ Sie dient zum automatisierten Anlegen von Vorgängen.
 Für neue Projekt wird immer empfohlen, die aktuellste Version zu verwenden.
 Es werden immer die letzten 3 Versionen der Schnittstelle unterstützt.
 
-#### Version 13
+#### Version 13 
 
-Seit 5. Januar 2017
+Derzeit leider noch in Entwicklung. 
+Wird in den nächsten Tagen released.
+Bitte solange BEX Version 12 nutzen.
 
 #### Version 12
 
