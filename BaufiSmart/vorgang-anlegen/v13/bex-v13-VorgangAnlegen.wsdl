@@ -1956,7 +1956,7 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
           <xs:documentation>Beispiel: 600.00</xs:documentation>
         </xs:annotation>
     </xs:element>
-    <xs:element name="vermieteteFlaecheBeiTeilvermietung" type="Flaeche" minOccurs="0" maxOccurs="1" >
+    <xs:element name="vermieteteWohnflaecheBeiTeilvermietung" type="Flaeche" minOccurs="0" maxOccurs="1" >
     </xs:element>
   </xs:sequence>
 </xs:complexType>

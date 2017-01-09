@@ -28,8 +28,3 @@ Aus der WSDL-Beschreibung kann automatisch Code generiert werden.
 ````bash
 wsimport -keep -extension bex-v13-VorgangAnlegen.wsdl
 ````
-
-Inkompatible Änderungen zu BEX v12
-----------------------------------
-
-- Im Element *nutzungsDetailsBeiVermietung* wurde das Feld *vermieteteWohnflaecheBeiTeilvermietung* umbenannt in *vermieteteFlaecheBeiTeilvermietung*
