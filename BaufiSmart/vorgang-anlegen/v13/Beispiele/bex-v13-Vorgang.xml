@@ -276,7 +276,7 @@
           <fertighausBeiDoppelOderEinfamilienOderZweifamilienHaus>TRUE</fertighausBeiDoppelOderEinfamilienOderZweifamilienHaus>
           <hausAnordnungMehrfamilienOderZweifamilienHaus>FREISTEHEND</hausAnordnungMehrfamilienOderZweifamilienHaus>
           <hausAnordnungReihenhaus>MITTELHAUS</hausAnordnungReihenhaus>
-          <hausTyp>REIHENHAUS</hausTyp>
+          <hausTyp>EINFAMILIENHAUS</hausTyp>
           <modernisierungsAngabenWennNichtNeubau>
             <modernisierungsGrad>HOCH</modernisierungsGrad>
             <modernisierungsJahr>2015</modernisierungsJahr>
