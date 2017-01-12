@@ -10,9 +10,7 @@ Es werden immer die letzten 3 Versionen der Schnittstelle unterstützt.
 
 #### Version 13 
 
-Derzeit leider noch in Entwicklung. 
-Wird in den nächsten Tagen released.
-Bitte solange BEX Version 12 nutzen.
+Seit 12. Januar 2017
 
 #### Version 12
 
