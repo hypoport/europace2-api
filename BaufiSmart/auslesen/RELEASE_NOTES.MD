@@ -12,6 +12,7 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 * haus.anzahlDerGewerbeeinheitenBeiMehrfamilienHaus
 * `vorhaben.verwendungszweckAbhaengigerFinanzbedarf` hat jetzt zusätzlich ein Feld `finanzbedarfArt`, welches beschreibt was für
   eine Form von Finanzbedarf in dem Vorhaben-JSON-Objekt vorhanden ist.
+* HaushaltsPositionen.Postadresse
 
 ##### Neue Werte
 
@@ -20,17 +21,37 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 
 ##### Breaking Changes
 
+* viele als Enum deklarierte Werte werden jetzt als String deklariert
+
 * Angebot
   * `rueckdatierungsFristEndeAm` entfernt
-
+  * `angebotsFristEndeAm` entfernt
+  * Im Knoten `dokumente` sind jetzt alle Dokumente gesammelt
+    * Dokument: `zuordnung` entfernt
+  * `bewertungDesAngebots`: Wert `ANGEBOT_ENTSPRICHT_MEINER_EMPFEHLUNG` -> `ANGEBOT_ENTSPRICHT_DER_EMPFEHLUNG_DES_KUNDENBETREUERS`
+  * `erzeugtAm`: um Zeitstempel erweitert 
+  * `beleihung` -> `beleihungsRechnung`
+  
 * Antrag
+  * Anträge werden jetzt unter dem Pfad `/antraege/antragsNummer` abgerufen, wobei bei der Antragsnummer der Slash '/' durch einen
+    Unterstrich '_' zu ersetzen ist.
+  * Der Unterpfad `.../zugrundeliegendeDaten` wurde entfernt
   * `voraussichtlicheBearbeitungAm` entfernt
   * `prolongation` entfernt
+  * `status` 
+    * `antragstellerStatus` -> `antragsteller`
+    * `produktAnbieterStatus` -> `produktAnbieter`
+    * `antragStatus` entfernt
+    * `vertragsBearbeitungsFortschritt` -> `bearbeitungsFortschritt`
+  * `istKundenBetreuerVerkaeuferOderMaklerDerImmobilie` ist jetzt vom Typ Boolean
+  * `angenommenAm` umbenannt nach `zeitpunktDerAnnahme` und erweitert um Zeitstempel 
 
 * Die Knoten des `_embedded` Objects sind hoch in das Angebot verschoben
-* Im Angebot gibt es einen Knoten `dokumente`, indem alle Dokumente gesammelt sind 
 * Bugfix: Flaechenwerte werden analog Euro und Prozent, wie in Swagger dokumentiert, als Nummern serialisiert
-* Bankverbindung: Kontoinhaber ist jetzt eine Liste von AntragstellerVerknuepfungen (jeweils mit den Feldern 'id' und 'name')
+* Bankverbindung: 
+  * `kontoinhaber` ist jetzt eine Liste von AntragstellerVerknuepfungen (jeweils mit den Feldern 'id' und 'name')
+  * `kontonummer` entfernt
+  * `bankleitzahl` entfert
 * `antragsteller.staatsangehoerigkeit` ist jetzt ein komplexes Objekt vom Typ `Staat` (enthält Iso-Code und menschenlesbaren Namen) 
 * Renamings in haushalt.einnahmenAusgabenVermoegenVerbindlichkeiten
   * `lebensUndRentenversicherung` -> `lebensUndRentenversicherungen` 
@@ -47,7 +68,10 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 * `darlehen.abzuloesendeAltdarlehen` entfernt 
 * `darlehen.bestehendesDarlehenDerImmobilieIdsBeiAbloesung` entfernt 
 * `darlehen.kreditEntscheider` entfernt 
-* `darlehen.abzuloesendeAltdarlehen` entfernt 
+* `darlehen.abzuloesendeAltdarlehen` entfernt
+ * Darlehen: restschuldNachZinsBindungsEnde ist jetzt Attribut am ZinsBindung-Knoten, nicht mehr direkt am Darlehen
+ 
+* Bankverbindung: umgezogen von `haushalt` nach `zugrundeliegendeDaten`
  
 * FinanzierungsObjekt
   * `BestehendesDarlehenDesFinanzierungsObjekts.darlehenArt` -> `darlehensArt`
@@ -55,13 +79,12 @@ Informationen zu den Änderungen in den verschiedenen Versionen
   * `BestehendesDarlehen.darlehenArt` -> `darlehensArt`
   * `BestehendesDarlehen.hauptKontonummerDslBank` entfernt
   * `BestehendesDarlehen.darlehensKontonummer` entfernt
-  * `BestehendesDarlehen.sondertilgungZumZinsbindungsende` entfernt
+  * `BestehendesDarlehen.sondertilgungZumZinsBindungsEnde` entfernt
   * `BestehendesDarlehen.darlehensBetrag` entfernt
   * `BestehendesDarlehen.sollZins` entfernt
 * NachrangigesExternesDarlehen: `darlehenBetrag` -> `darlehensBetrag`
 * VermietungsInformationen: Umbenennung `vermieteteWohnflaecheBeiTeilvermietung` -> `vermieteteFlaecheBeiTeilvermietung`
 * BausparAngebot: mehrere Attribute entfernt
-*
 
 * Bausparangebote
   * `sparPhase.guthabenZins` entfernt
@@ -69,6 +92,10 @@ Informationen zu den Änderungen in den verschiedenen Versionen
   
 * Vorhaben
   * `externeImmobilienDarlehen` entfernt
+  
+* ZinsBindung jetzt überall mit großem "B"
+* ZinsBindungBis -> ZinsBindungEndetAm
+
   
 #### Version 0.2
 
@@ -91,6 +118,7 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 * haushalte.lebenshaltungsKostenMonatlich;
 * haushalte.kfzAnzahl;
 * haushalt.bestehendeImmobilie: kommentar
+* Dokument: art
 
 ##### Breaking Changes
 
@@ -104,6 +132,7 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 * provision.vertriebsProvisionGesamtAbsolut Renaming zu provision.vertriebsProvisionGesamt
 * Flächenangaben jetzt direkt als Wert vom Typ 'number' und nicht mehr als extra Object.
 * bestehendeImmobilienEinsatz: GAR_NICHT -> KEIN_EINSATZ
+* Link / Dokument haben nicht mehr die Attrbute name, type und size
 
 ##### Type-Renamings
 * `EuropaceBausparAngebot` umbenannt zu `Bausparvertrag`

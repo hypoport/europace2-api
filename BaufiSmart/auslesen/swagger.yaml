@@ -117,8 +117,6 @@ definitions:
   Bankverbindung:
     type: "object"
     properties:
-      bankleitzahl:
-        type: "string"
       bic:
         type: "string"
       iban:
@@ -127,8 +125,6 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/AntragstellerVerknuepfung"
-      kontonummer:
-        type: "string"
       kreditinstitut:
         type: "string"
   HaushaltsPositionen:
@@ -260,36 +256,15 @@ definitions:
     properties:
       kategorie:
         type: "string"
-        enum:
-        - "AUSZAHLUNGS_VORAUSSETZUNG"
-        - "MACHBAR"
-        - "MACHBARKEITS_HINWEIS"
-        - "ANPASSUNG_KUNDENWUNSCH"
-        - "ANPASSUNG_VERTRIEBSWUNSCH"
-        - "UNBERUECKSICHTIGTE_ANGABE"
-        - "KONDITIONEN_UNTER_VORBEHALT_VOLLSTAENDIGER_DATEN"
-        - "KONDITIONEN_UNTER_VORBEHALT_EXTERNER_SCHNITTSTELLEN"
-        - "MACHBARKEIT_UNTER_VORBEHALT_VOLLSTAENDIGER_DATEN"
-        - "MACHBARKEIT_UNTER_VORBEHALT_EXTERNER_SCHNITTSTELLEN"
-        - "MACHBAR_UNTER_VORBEHALT_PRODUZENT"
-        - "NICHT_MACHBAR"
-        - "NICHT_ANBIETBAR"
+        description: "Mögliche Werte sind: AUSZAHLUNGS_VORAUSSETZUNG,MACHBAR,MACHBARKEITS_HINWEIS,ANPASSUNG_KUNDENWUNSCH,ANPASSUNG_VERTRIEBSWUNSCH,UNBERUECKSICHTIGTE_ANGABE,KONDITIONEN_UNTER_VORBEHALT_VOLLSTAENDIGER_DATEN,KONDITIONEN_UNTER_VORBEHALT_EXTERNER_SCHNITTSTELLEN,MACHBARKEIT_UNTER_VORBEHALT_VOLLSTAENDIGER_DATEN,MACHBARKEIT_UNTER_VORBEHALT_EXTERNER_SCHNITTSTELLEN,MACHBAR_UNTER_VORBEHALT_PRODUZENT,NICHT_MACHBAR,NICHT_ANBIETBAR.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       kreditEntscheider:
         $ref: "#/definitions/ProduktAnbieter"
       produktAnbieter:
         $ref: "#/definitions/ProduktAnbieter"
       text:
         type: "string"
-      zuordnung:
-        type: "string"
-        enum:
-        - "ANTRAGSTELLER"
-        - "IMMOBILIE"
-        - "VORHABEN"
-        - "ALTERNATIV"
-        - "ANPASSUNG"
-        - "UNBERUECKSICHTIGTE_ANGABE"
-        - "OBJEKT"
   BestehendeImmobilie:
     type: "object"
     properties:
@@ -319,6 +294,8 @@ definitions:
         description: "muss leer sein, wenn eigentumswohnung oder grundstück gefüllt\
           \ ist"
         $ref: "#/definitions/Haus"
+      id:
+        type: "string"
       immobilienEinsatz:
         type: "string"
         enum:
@@ -359,8 +336,6 @@ definitions:
         description: "Dieses Feld ist eine produktanbieterspezifische Zusatzangabe,\
           \ sie wird nicht von allen Produktanbietern bei der Angebotsermittlung berü\
           cksichtigt."
-      bankverbindung:
-        $ref: "#/definitions/Bankverbindung"
       bestehendeImmobilien:
         type: "array"
         items:
@@ -430,15 +405,6 @@ definitions:
   AngebotZumAntrag:
     type: "object"
     properties:
-      angebotsFristEndeAm:
-        type: "string"
-        format: "date"
-      anpassungsStatus:
-        type: "string"
-        enum:
-        - "NICHT_ANGEPASST"
-        - "ANGEPASST"
-        - "ALTERNATIV"
       bausparvertraege:
         type: "array"
         items:
@@ -448,7 +414,7 @@ definitions:
       bewertungDesAngebots:
         type: "string"
         enum:
-        - "ANGEBOT_ENTSPRICHT_MEINER_EMPFEHLUNG"
+        - "ANGEBOT_ENTSPRICHT_DER_EMPFEHLUNG_DES_KUNDENBETREUERS"
         - "ANGEBOT_ENTSPRICHT_DEM_WUNSCH_DES_KUNDEN"
       darlehen:
         type: "array"
@@ -515,10 +481,10 @@ definitions:
       gesamtLaufzeitInJahren:
         type: "integer"
         format: "int32"
+      id:
+        type: "string"
       produktAnbieter:
         $ref: "#/definitions/ProduktAnbieter"
-      provision:
-        $ref: "#/definitions/Provision"
       sparPhase:
         $ref: "#/definitions/SparPhase"
       tarif:
@@ -673,14 +639,10 @@ definitions:
         $ref: "#/definitions/PrivatDarlehen"
       produktAnbieter:
         $ref: "#/definitions/ProduktAnbieter"
-      provision:
-        $ref: "#/definitions/Provision"
       rateMonatlich:
         type: "number"
         example: 123.34
         description: "Die monatliche Rate in Euro"
-      restschuldNachZinsbindungsende:
-        type: "number"
       sollZins:
         type: "number"
         example: 2.05
@@ -708,24 +670,19 @@ definitions:
         format: "int32"
       ausstattung:
         type: "string"
-        description: "Angaben zur Ausstattung für alle Produktanbieter außer ING-DiBa."
-        enum:
-        - "EINFACH"
-        - "MITTEL"
-        - "GEHOBEN"
-        - "STARK_GEHOBEN"
+        description: "Angaben zur Ausstattung für alle verschiedene Produktanbieter,\
+          \ aber nicht für ING-DiBa. Erlaubte Werte sind: EINFACH,MITTEL,GEHOBEN,STARK_GEHOBEN.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       baujahrWennNichtNeubau:
         type: "string"
         example: "2016"
         description: "Baujahr des Gebäudes. Vierstellige Jahresangabe"
       bauweise:
         type: "string"
-        enum:
-        - "FACHWERK_MIT_STROH_LEHM"
-        - "FACHWERK_MIT_ZIEGELN"
-        - "GLAS_STAHL"
-        - "HOLZ"
-        - "MASSIV"
+        description: "Erlaubte Werte sind: FACHWERK_MIT_STROH_LEHM,FACHWERK_MIT_ZIEGELN,GLAS_STAHL,HOLZ,MASSIV.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       bezeichnungWohneinheit:
         type: "string"
       gewerbeVermietungsInformationWennGewerbeflaecheVorhanden:
@@ -810,6 +767,30 @@ definitions:
         type: "string"
         description: "Vom Produktanbieter bei der Angebotsprüfung ergänzte Daten.\
           \ Das Format entspricht der Definition des Produktanbieters."
+  MediaType:
+    type: "object"
+    properties:
+      charSet:
+        $ref: "#/definitions/Charset"
+      charset:
+        $ref: "#/definitions/Charset"
+      concrete:
+        type: "boolean"
+      parameters:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      qualityValue:
+        type: "number"
+        format: "double"
+      subtype:
+        type: "string"
+      type:
+        type: "string"
+      wildcardSubtype:
+        type: "boolean"
+      wildcardType:
+        type: "boolean"
   PrivatDarlehen:
     type: "object"
     properties:
@@ -837,34 +818,14 @@ definitions:
   AntragsStatus:
     type: "object"
     properties:
-      antragStatus:
-        type: "string"
-        description: "aggregiert"
-        readOnly: true
-        enum:
-        - "BEANTRAGT_ANTRAGSTELLER"
-        - "UNTERSCHRIEBEN_ANTRAGSTELLER"
-        - "NICHT_ANGENOMMEN_ANTRAGSTELLER"
-        - "WIDERRUFEN_ANTRAGSTELLER"
-        - "ZURUECKGESTELLT_PRODUKT_ANBIETER"
-        - "UNTERSCHRIEBEN_PRODUKT_ANBIETER"
-        - "UNTERSCHRIEBEN_BEIDE"
-        - "ABGELEHNT_PRODUKT_ANBIETER"
-      antragstellerStatus:
+      antragsteller:
         type: "string"
         enum:
         - "BEANTRAGT"
         - "UNTERSCHRIEBEN"
         - "NICHT_ANGENOMMEN"
         - "WIDERRUFEN"
-      produktAnbieterStatus:
-        type: "string"
-        enum:
-        - "NICHT_BEARBEITET"
-        - "UNTERSCHRIEBEN"
-        - "ABGELEHNT"
-        - "ZURUECKGESTELLT"
-      vertragsBearbeitungsFortschritt:
+      bearbeitungsFortschritt:
         type: "string"
         enum:
         - "NICHT_VON_PRODUKTANBIETER_BESTAETIGT"
@@ -872,6 +833,13 @@ definitions:
         - "FREIGEGEBEN_FUER_SAMMELFORDERUNG"
         - "PROVISION_IN_BEARBEITUNG"
         - "PROVISON_AN_KUNDENBETREUER_VOLLSTAENDIG_AUSGEZAHLT"
+      produktAnbieter:
+        type: "string"
+        enum:
+        - "NICHT_BEARBEITET"
+        - "UNTERSCHRIEBEN"
+        - "ABGELEHNT"
+        - "ZURUECKGESTELLT"
   Kauf:
     type: "object"
     properties:
@@ -959,10 +927,6 @@ definitions:
   ImmobilieVerknuepfung:
     type: "object"
     properties:
-      bezeichner:
-        type: "string"
-        description: "Redundantes Datum für bessere Menschenlesbarkeit / einfachere\
-          \ Zuordnung"
       id:
         type: "string"
   EinnahmenMonatlich:
@@ -990,15 +954,15 @@ definitions:
       hinweisFuerProduktAnbieter:
         type: "string"
       istKundenBetreuerVerkaeuferOderMaklerDerImmobilie:
-        type: "string"
+        type: "boolean"
+        example: false
         description: "Mit diesem Wert wird ausgedrückt, ob der Kundenbetreuer auch\
           \ der Immobilienmakler ist."
-        enum:
-        - "NICHT_DER_KUNDEN_BETREUER"
-        - "KUNDEN_BETREUER"
   ZugrundeliegendeDatenZumAntrag:
     type: "object"
     properties:
+      bankverbindung:
+        $ref: "#/definitions/Bankverbindung"
       finanzierungsObjekt:
         $ref: "#/definitions/FinanzierungsObjekt"
       haushalte:
@@ -1012,26 +976,14 @@ definitions:
     properties:
       kfwEnergieEffizienzStandard:
         type: "string"
-        description: "Nur bei KfW-Programm 153, bei neuen Energieeffizienzstandards\
+        description: "Mögliche Werte: STANDARD_40_PLUS, STANDARD_40, STANDARD_55,STANDARD_70.\
+          \ Nur bei KfW-Programm 153 relevant. Bei neuen Energieeffizienzstandards\
           \ können auch weitere Werte zulässig werden."
-        enum:
-        - "STANDARD_40_PLUS"
-        - "STANDARD_40"
-        - "STANDARD_55"
-        - "STANDARD_70"
       kfwProgramm:
         type: "string"
-        description: "Bei neu aufgelegten KfW-Programmen können auch weitere Werte\
-          \ zulässig werden."
-        enum:
-        - "PROGRAMM_124"
-        - "PROGRAMM_141"
-        - "PROGRAMM_151"
-        - "PROGRAMM_152"
-        - "PROGRAMM_153"
-        - "PROGRAMM_155"
-        - "PROGRAMM_159"
-        - "PROGRAMM_167"
+        description: "Mögiche Werte: PROGRAMM_124, PROGRAMM_141, PROGRAMM_151, PROGRAMM_152,\
+          \ PROGRAMM_153, PROGRAMM_155, PROGRAMM_159, PROGRAMM_167. Bei neu aufgelegten\
+          \ KfW-Programmen können auch weitere Werte zulässig werden."
       laufZeitInJahren:
         type: "integer"
         format: "int32"
@@ -1043,22 +995,22 @@ definitions:
   GrundbuchAngabe:
     type: "object"
     properties:
-      blattNummer:
+      anmerkungen:
         type: "string"
-      flurStueck:
+      bandUndBlatt:
+        type: "string"
+        description: "Angabe von Band und Blatt"
+      flurStuecke:
         type: "array"
         items:
           $ref: "#/definitions/Flurstueck"
-      keineGrundbuchAngabenVorhanden:
-        type: "boolean"
-        example: false
-        description: "darf nur TRUE sein, wenn die anderen Werte nicht gefüllt sind"
-      ortDesGrundbuchs:
+      ort:
         type: "string"
+        description: "Ort des als Grundbuchamt zuständigen Amtsgerichtes"
       rechteInAbteilung2:
+        description: "Belastungen und Beschränkungen in der Nutzbarkeit des Grundstü\
+          cks. Leitungsrechte, Verzichte auf Abstandsflächen, Wegerechte, Insolvenzvermerke."
         $ref: "#/definitions/RechteAbteilung2"
-      weitereAnmerkungen:
-        type: "string"
   Grundstueck:
     type: "object"
     properties:
@@ -1073,11 +1025,19 @@ definitions:
   ProduktAnbieter:
     type: "object"
     properties:
-      id:
+      partnerId:
         type: "string"
-      kurzname:
+      produktAnbieterId:
+        type: "string"
+      vorname:
+        type: "string"
+      nachname:
         type: "string"
       firmierung:
+        type: "string"
+      email:
+        type: "string"
+      telefonnummer:
         type: "string"
   BeleihungsRechnung:
     type: "object"
@@ -1130,7 +1090,7 @@ definitions:
       href:
         $ref: "#/definitions/URI"
       type:
-        type: "string"
+        $ref: "#/definitions/MediaType"
   Tilgung:
     type: "object"
     properties:
@@ -1167,6 +1127,8 @@ definitions:
       monate:
         type: "integer"
         format: "int32"
+      restschuldNachZinsBindungsEnde:
+        type: "number"
   Rating:
     type: "object"
     properties:
@@ -1176,9 +1138,6 @@ definitions:
         type: "string"
       ratingZeitpunkt:
         type: "string"
-      risikoKosten:
-        type: "integer"
-        format: "int32"
       verfahren:
         type: "string"
   RechteAbteilung2:
@@ -1262,10 +1221,12 @@ definitions:
     properties:
       modernisierungsGrad:
         type: "string"
-        enum:
-        - "GERING"
-        - "HOCH"
-        - "MITTEL"
+        description: "erlaubt sind GERING,MITTEL,HOCH. Neue Ausprägungen können kurzfristig\
+          \ hinzukommen. Der Client muss daher mit unbekannten Werten umgehen können."
+      modernisierungsJahr:
+        type: "string"
+        example: "2016"
+        description: "Jahr der Modernisierung der Immobilie. Vierstellige Jahresangabe"
   BankUndSparguthaben:
     type: "object"
     properties:
@@ -1305,31 +1266,24 @@ definitions:
         format: "int32"
       ausstattung:
         type: "string"
-        description: "Angaben zur Ausstattung für alle Produktanbieter außer ING-DiBa."
-        enum:
-        - "EINFACH"
-        - "MITTEL"
-        - "GEHOBEN"
-        - "STARK_GEHOBEN"
+        description: "Angaben zur Ausstattung für alle verschiedene Produktanbieter,\
+          \ aber nicht für ING-DiBa. Erlaubte Werte sind: EINFACH,MITTEL,GEHOBEN,STARK_GEHOBEN.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       baujahrWennNichtNeubau:
         type: "string"
         example: "2016"
         description: "Baujahr des Gebäudes. Vierstellige Jahresangabe"
       bauweise:
         type: "string"
-        enum:
-        - "FACHWERK_MIT_STROH_LEHM"
-        - "FACHWERK_MIT_ZIEGELN"
-        - "GLAS_STAHL"
-        - "HOLZ"
-        - "MASSIV"
+        description: "Erlaubte Werte sind: FACHWERK_MIT_STROH_LEHM,FACHWERK_MIT_ZIEGELN,GLAS_STAHL,HOLZ,MASSIV.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       dachgeschossAusbau:
         type: "string"
-        enum:
-        - "FLACHDACH"
-        - "NICHT_AUSGEBAUT"
-        - "TEILWEISE_AUSGEBAUT"
-        - "VOLL_AUSGEBAUT"
+        description: "Erlaubte Werte sind: FLACHDACH,NICHT_AUSGEBAUT,TEILWEISE_AUSGEBAUT,VOLL_AUSGEBAUT.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       einliegerwohnungVorhandenBeiDoppelOderEinfamilienOderReihenHaus:
         type: "boolean"
       fertighausBeiDoppelOderEinfamilienOderZweifamilienHaus:
@@ -1364,10 +1318,9 @@ definitions:
         $ref: "#/definitions/ModernisierungsAngaben"
       unterkellerung:
         type: "string"
-        enum:
-        - "NICHT_UNTERKELLERT"
-        - "TEILWEISE_UNTERKELLERT"
-        - "UNTERKELLERT"
+        description: "Erlaubte Werte sind: NICHT_UNTERKELLERT,TEILWEISE_UNTERKELLERT,UNTERKELLERT.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       wohnVermietungsInformation:
         $ref: "#/definitions/VermietungsInformationen"
       wohnflaecheGesamt:
@@ -1406,76 +1359,35 @@ definitions:
         type: "string"
         description: "Berufsgruppe des Antragstellers (ING-DiBa) Dieses Feld ist eine\
           \ produktanbieterspezifische Zusatzangabe, sie wird nicht von allen Produktanbietern\
-          \ bei der Angebotsermittlung berücksichtigt."
-        enum:
-        - "ANGESTELLTER"
-        - "ARBEITER"
-        - "BEAMTER"
-        - "FREIBERUFLER"
-        - "SELBSTSTAENDIG"
-        - "RENTNER"
-        - "HAUSMANN"
-        - "PRIVATIER"
-        - "SOLDAT"
-        - "SCHUELER"
-        - "AZUBI"
-        - "STUDENT"
-        - "OHNE"
+          \ bei der Angebotsermittlung berücksichtigt.. Erlaubte Werte sind:  ANGESTELLTER,ARBEITER,BEAMTER,FREIBERUFLER,SELBSTSTAENDIG,RENTNER,HAUSMANN,PRIVATIER,SOLDAT,SCHUELER,AZUBI,STUDENT,OHNE.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       beschaeftigung:
         $ref: "#/definitions/Beschaeftigungsart"
       brancheBeiIngDiba:
         type: "string"
         description: "Branche, in welcher der Antragsteller tätig ist. (ING-DiBa)\
           \ Dieses Feld ist eine produktanbieterspezifische Zusatzangabe, sie wird\
-          \ nicht von allen Produktanbietern bei der Angebotsermittlung berücksichtigt."
-        enum:
-        - "BANKEN_VERSICHERUNGEN"
-        - "BAUGEWERBE"
-        - "DIENSTLEISTUNGEN_SONSTIGE"
-        - "EDV_BERATUNG"
-        - "ENERGIE"
-        - "ERZIEHUNG_UNTERRICHT"
-        - "GESUNDHEITSWESEN"
-        - "HANDEL"
-        - "HANDWERK"
-        - "HOTEL_GASTRONOMIE"
-        - "LANDWIRTSCHAFT"
-        - "OEFFENTLICHER_DIENST"
-        - "PRODUKTION_INDUSTRIE"
-        - "VERKEHR"
+          \ nicht von allen Produktanbietern bei der Angebotsermittlung berücksichtigt..\
+          \ Erlaubte Werte sind: BANKEN_VERSICHERUNGEN,BAUGEWERBE,DIENSTLEISTUNGEN_SONSTIGE,EDV_BERATUNG,ENERGIE,ERZIEHUNG_UNTERRICHT,GESUNDHEITSWESEN,HANDEL,HANDWERK,HOTEL_GASTRONOMIE,LANDWIRTSCHAFT,OEFFENTLICHER_DIENST,PRODUKTION_INDUSTRIE,VERKEHR.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       brancheBeiMhb:
         type: "string"
         description: "Branche, in welcher der Antragsteller tätig ist. (MHB) Dieses\
           \ Feld ist eine produktanbieterspezifische Zusatzangabe, sie wird nicht\
-          \ von allen Produktanbietern bei der Angebotsermittlung berücksichtigt."
-        enum:
-        - "VERARBEITENDES_GEWERBE"
-        - "BAU"
-        - "HANDEL"
-        - "VERKEHR_INFORMATION"
-        - "DIENSTLEISTUNG"
-        - "SONSTIGES"
+          \ von allen Produktanbietern bei der Angebotsermittlung berücksichtigt..\
+          \ Erlaubte Werte sind: VERARBEITENDES_GEWERBE,BAU,HANDEL,VERKEHR_INFORMATION,DIENSTLEISTUNG,SONSTIGES.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       brancheBeiSRating:
         type: "string"
         description: "Branche, in welcher der Antragsteller tätig ist. (Sparkassen)\
           \ Dieses Feld ist eine produktanbieterspezifische Zusatzangabe, sie wird\
-          \ nicht von allen Produktanbietern bei der Angebotsermittlung berücksichtigt."
-        enum:
-        - "BAUGEWERBE"
-        - "DIENSTLEISTUNGEN"
-        - "ENERGIE_UND_WASSERVERSORGUNG_BERGBAU"
-        - "GEBIETSKOERPERSCHAFTEN_UND_SOZIALVERSICHERUNGEN"
-        - "GESUNDHEITSWESEN"
-        - "HANDEL"
-        - "HOTEL_UND_GASTRONOMIE"
-        - "KREDITINSTITUTE"
-        - "LAND_UND_FORSTWIRTSCHAFT_FISCHEREI"
-        - "OEFFENTLICHER_DIENST"
-        - "ORGANISATIONEN_OHNE_ERWERBSZWECK_PRIVATE_HAUSHALTE"
-        - "VERARBEITENDES_GEWERBE"
-        - "VERKEHR_UND_NACHRICHTENUEBERMITTLUNG"
-        - "VERSICHERUNGEN"
-        - "SONSTIGE"
+          \ nicht von allen Produktanbietern bei der Angebotsermittlung berücksichtigt..\
+          \ Erlaubte Werte sind: BAUGEWERBE,DIENSTLEISTUNGEN,ENERGIE_UND_WASSERVERSORGUNG_BERGBAU,GEBIETSKOERPERSCHAFTEN_UND_SOZIALVERSICHERUNGEN,GESUNDHEITSWESEN,HANDEL,HOTEL_UND_GASTRONOMIE,KREDITINSTITUTE,LAND_UND_FORSTWIRTSCHAFT_FISCHEREI,OEFFENTLICHER_DIENST,ORGANISATIONEN_OHNE_ERWERBSZWECK_PRIVATE_HAUSHALTE,VERARBEITENDES_GEWERBE,VERKEHR_UND_NACHRICHTENUEBERMITTLUNG,VERSICHERUNGEN,SONSTIGE.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       email:
         type: "string"
       externeAntragstellerId:
@@ -1538,15 +1450,17 @@ definitions:
   Partner:
     type: "object"
     properties:
-      email:
+      partnerId:
+        type: "string"
+      vorname:
         type: "string"
       nachname:
         type: "string"
-      partnerId:
+      firmierung:
+        type: "string"
+      email:
         type: "string"
       telefonnummer:
-        type: "string"
-      vorname:
         type: "string"
       _links:
         $ref: "#/definitions/Links"
@@ -1580,6 +1494,8 @@ definitions:
         $ref: "#/definitions/BerechnungsHilfeBetrag"
       einmalzahlung:
         type: "number"
+      id:
+        type: "string"
       maximalAufzuloesenderBetrag:
         type: "number"
       produktAnbieter:
@@ -1624,11 +1540,6 @@ definitions:
       angebot:
         description: "Das angenommene Angebot, auf dem dieser Antrag basiert"
         $ref: "#/definitions/AngebotZumAntrag"
-      angenommenAm:
-        type: "string"
-        format: "date"
-        example: "2016-10-24"
-        description: "Zeitpunkt, zu dem der Antrag im System erstellt wurde."
       ansprechpartner:
         description: "Für Rückfragen auf Seite des Vertriebs, kann mit dem Vermittler\
           \ identisch sein"
@@ -1656,6 +1567,10 @@ definitions:
       vermittler:
         description: "Partner auf Seite des Vertriebs"
         $ref: "#/definitions/Partner"
+      zeitpunktDerAnnahme:
+        type: "string"
+        format: "date"
+        description: "Zeitpunkt, zu dem der Antrag im System erstellt wurde."
       zugrundeliegendeDaten:
         description: "Basisdaten des Kunden, die für die Berechnung des Angebots relevant\
           \ waren"
@@ -1670,6 +1585,8 @@ definitions:
         $ref: "#/definitions/BerechnungsHilfeZahlungen"
       berechnungsHilfeVermoegen:
         $ref: "#/definitions/BerechnungsHilfeBetrag"
+      id:
+        type: "string"
       maximalAufzuloesenderBetrag:
         type: "number"
       praemieMonatlich:
@@ -1718,16 +1635,6 @@ definitions:
         enum:
         - "EINNAHMEN"
         - "AUSGABEN"
-  Provision:
-    type: "object"
-    properties:
-      europaceGebuehren:
-        type: "number"
-        description: "Beinhaltet nur den selbst aufzubringenden Betrag"
-      kundenbetreuerProvision:
-        type: "number"
-      vertriebsProvisionGesamt:
-        type: "number"
   Kapitalbeschaffung:
     type: "object"
     properties:
@@ -1764,6 +1671,8 @@ definitions:
         description: "muss leer sein, wenn eigentumswohnung oder grundstück gefüllt\
           \ ist"
         $ref: "#/definitions/Haus"
+      id:
+        type: "string"
       keineAutostellplaetzeVorhanden:
         type: "boolean"
         example: false
@@ -1792,6 +1701,11 @@ definitions:
       monatlichVorFinanzierung:
         type: "number"
         readOnly: true
+  Charset:
+    type: "object"
+    properties:
+      registered:
+        type: "boolean"
   Autostellplatz:
     type: "object"
     properties:
@@ -1825,15 +1739,16 @@ definitions:
   Dokument:
     type: "object"
     properties:
+      art:
+        type: "string"
+        description: "ist nicht immer vorhanden"
+        readOnly: true
       href:
         $ref: "#/definitions/URI"
       name:
         type: "string"
-      size:
-        type: "integer"
-        format: "int64"
       type:
-        type: "string"
+        $ref: "#/definitions/MediaType"
   FreiberuflerOderSelbststaendiger:
     type: "object"
     properties:
@@ -1848,58 +1763,9 @@ definitions:
         format: "date"
       taetigkeit:
         type: "string"
-        enum:
-        - "ALTENPFLEGER"
-        - "AMBULANTER_KRANKENPFLEGER"
-        - "ANWALT"
-        - "APOTHEKER"
-        - "ARCHITEKT"
-        - "ARZT"
-        - "BESTATTER"
-        - "DATENSCHUTZBEAUFTRAGTER"
-        - "DEKORATEUR"
-        - "DIAETASSISTENT"
-        - "DOLMETSCHER"
-        - "EDV_BERATER"
-        - "ERGOTHERAPEUT"
-        - "ERNAEHRUNGSBERATER"
-        - "FOTOGRAF"
-        - "GEOGRAF"
-        - "GRAFIKDESIGNER"
-        - "GRAFIKER"
-        - "HEBAMME"
-        - "HEILMASSEUR"
-        - "HEILPRAKTIKER"
-        - "HISTORIKER"
-        - "INFORMATIKER"
-        - "INGENIEUR"
-        - "INSOLVENZVERWALTER"
-        - "JOURNALIST"
-        - "KLASSISCHER_KONZERTMUSIKER"
-        - "KONSTRUKTEUR"
-        - "KRANKENGYMNAST"
-        - "KRANKENPFLEGER"
-        - "KRANKENSCHWESTER"
-        - "LOGOPAEDE"
-        - "MEDIZINISCH_TECHN_ASSISTENT"
-        - "NOTAR"
-        - "OPERNSAENGER"
-        - "PERSONALBERATER"
-        - "PHYSIOTHERAPEUT"
-        - "PSYCHOLOGE"
-        - "RAUMAUSSTATTER"
-        - "RUNDFUNKSPRECHER"
-        - "SACHVERSTAENDIGER"
-        - "STADTPLANER"
-        - "STATIKER"
-        - "STEUERBERATER"
-        - "TIERARZT"
-        - "UNTERNEHMENSBERATER"
-        - "VERMITTLER"
-        - "WIRTSCH_BUCHPRUEFER_REVISOR"
-        - "ZAHNARZT"
-        - "ZAHNTECHNIKER"
-        - "SONSTIGES"
+        description: "Erlaubte Werte sind: ALTENPFLEGER,AMBULANTER_KRANKENPFLEGER,ANWALT,APOTHEKER,ARCHITEKT,ARZT,BESTATTER,DATENSCHUTZBEAUFTRAGTER,DEKORATEUR,DIAETASSISTENT,DOLMETSCHER,EDV_BERATER,ERGOTHERAPEUT,ERNAEHRUNGSBERATER,FOTOGRAF,GEOGRAF,GRAFIKDESIGNER,GRAFIKER,HEBAMME,HEILMASSEUR,HEILPRAKTIKER,HISTORIKER,INFORMATIKER,INGENIEUR,INSOLVENZVERWALTER,JOURNALIST,KLASSISCHER_KONZERTMUSIKER,KONSTRUKTEUR,KRANKENGYMNAST,KRANKENPFLEGER,KRANKENSCHWESTER,LOGOPAEDE,MEDIZINISCH_TECHN_ASSISTENT,NOTAR,OPERNSAENGER,PERSONALBERATER,PHYSIOTHERAPEUT,PSYCHOLOGE,RAUMAUSSTATTER,RUNDFUNKSPRECHER,SACHVERSTAENDIGER,STADTPLANER,STATIKER,STEUERBERATER,TIERARZT,UNTERNEHMENSBERATER,VERMITTLER,WIRTSCH_BUCHPRUEFER_REVISOR,ZAHNARZT,ZAHNTECHNIKER,SONSTIGES.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       typ:
         type: "string"
         enum:
@@ -1952,11 +1818,9 @@ definitions:
         description: "nur wenn wirdAbgeloest==true"
       darlehensArt:
         type: "string"
-        enum:
-        - "BAUSPARDARLEHEN"
-        - "FOERDERDARLEHEN"
-        - "IMMOBILIENDARLEHEN"
-        - "SONSTIGES_DARLEHEN"
+        description: "Erlaubte Werte sind: BAUSPARDARLEHEN,FOERDERDARLEHEN,IMMOBILIENDARLEHEN,SONSTIGES_DARLEHEN.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       darlehensGeber:
         $ref: "#/definitions/ProduktAnbieter"
       eingetrageneGrundschuld:
@@ -1966,7 +1830,7 @@ definitions:
         readOnly: true
       rateMonatlich:
         type: "number"
-      zinsBindungBis:
+      zinsBindungEndetAm:
         type: "string"
         format: "date"
   BestehendesDarlehenDesFinanzierungsObjekts:
@@ -1979,11 +1843,9 @@ definitions:
         description: "nur wenn wirdAbgeloest==true"
       darlehensArt:
         type: "string"
-        enum:
-        - "BAUSPARDARLEHEN"
-        - "FOERDERDARLEHEN"
-        - "IMMOBILIENDARLEHEN"
-        - "SONSTIGES_DARLEHEN"
+        description: "Erlaubte Werte sind: BAUSPARDARLEHEN,FOERDERDARLEHEN,IMMOBILIENDARLEHEN,SONSTIGES_DARLEHEN.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       darlehensGeber:
         $ref: "#/definitions/ProduktAnbieter"
       eingetrageneGrundschuld:
@@ -2001,7 +1863,7 @@ definitions:
         - "ABLOESEN"
         - "TRITT_IM_RANG_ZURUECK"
         - "TRITT_NICHT_IM_RANG_ZURUECK"
-      zinsBindungBis:
+      zinsBindungEndetAm:
         type: "string"
         format: "date"
   Staat:
