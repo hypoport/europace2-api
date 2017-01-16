@@ -2287,6 +2287,7 @@ vermoegensEinsatz=ABTRETEN   Beispiel: 10000.00</xs:documentation>
 <xs:enumeration value="KZ"/>
 <xs:enumeration value="KE"/>
 <xs:enumeration value="KI"/>
+<xs:enumeration value="KO"/>
 <xs:enumeration value="KP"/>
 <xs:enumeration value="KR"/>
 <xs:enumeration value="KW"/>
