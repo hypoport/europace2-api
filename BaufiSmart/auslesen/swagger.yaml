@@ -1,20 +1,48 @@
 ---
 swagger: "2.0"
 info:
-  description: "Die EUROPACE API zum Auslesen von Anträgen und Vorgängen.\n\nDie API\
-    \ ist zur Zeit in der Entwicklung."
+  description: "Die EUROPACE API zum Auslesen von Anträgen und Vorgängen."
   version: "0.3"
   title: "Auslesen API"
   contact:
     name: "Europace AG"
     url: "www.europace2.de"
     email: "helpdesk@europace2.de"
-host: "www.europace2.de/api-mock"
-basePath: "/"
+host: "baufismart.api.europace.de"
+basePath: "/v1"
 tags:
 - name: "Antraege"
   description: "Dieser Endpunkt repräsentiert die Produktanbietersicht."
+- name: "index-controller"
+  description: "Index Controller"
+schemes:
+- "https"
 paths:
+  /:
+    get:
+      tags:
+      - "index-controller"
+      summary: "getIndexPage"
+      operationId: "getIndexPageUsingGET"
+      consumes:
+      - "*/*"
+      produces:
+      - "text/html"
+      parameters: []
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "string"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+      security:
+      - oauth2:
+        - "API"
   /antraege:
     get:
       tags:
@@ -109,7 +137,7 @@ paths:
 securityDefinitions:
   oauth2:
     type: "oauth2"
-    tokenUrl: "http://www.europace2.de/api-mock/login"
+    tokenUrl: "https://api.europace.de/login"
     flow: "password"
     scopes:
       API: "Authorisation Scope für die gesamte API."
@@ -130,10 +158,6 @@ definitions:
   HaushaltsPositionen:
     type: "object"
     properties:
-      ausgabenSonstigeMonatlich:
-        type: "array"
-        items:
-          $ref: "#/definitions/AusgabenMonatlich"
       bankUndSparguthaben:
         type: "array"
         items:
@@ -142,15 +166,7 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/BestehenderBausparvertrag"
-      berechnungsHilfeAusgabenSumme:
-        $ref: "#/definitions/BerechnungsHilfeZahlungen"
-      berechnungsHilfeEinnahmenSumme:
-        $ref: "#/definitions/BerechnungsHilfeZahlungen"
-      berechnungsHilfeVerbindlichkeitenSumme:
-        $ref: "#/definitions/BerechnungsHilfeBetrag"
-      berechnungsHilfeVermoegenSumme:
-        $ref: "#/definitions/BerechnungsHilfeBetrag"
-      ehegattenUnterhaltEinnahmenMonatlich:
+      ehegattenUnterhalt:
         type: "array"
         items:
           $ref: "#/definitions/EinnahmenMonatlich"
@@ -158,17 +174,13 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/EinkuenfteAusNebentaetigkeit"
-      einnahmenSonstigeMonatlich:
-        type: "array"
-        items:
-          $ref: "#/definitions/EinnahmenMonatlich"
       kindergeld:
         type: "array"
         description: "Read-Only-Feld. Wird dynamisch aus den Angaben zu den Kindern\
           \ berechnet. Pro kindergelderhaltendem Kind ein Listenelement."
         items:
           $ref: "#/definitions/EinnahmenMonatlich"
-      lebensUndRentenversicherungen:
+      lebensUndRentenVersicherungen:
         type: "array"
         items:
           $ref: "#/definitions/LebensOderRentenversicherungVermoegen"
@@ -180,7 +192,7 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Verbindlichkeit"
-      privateKrankenversicherungsBeitraegeMonatlich:
+      privateKrankenversicherung:
         type: "array"
         items:
           $ref: "#/definitions/AusgabenMonatlich"
@@ -188,31 +200,39 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Verbindlichkeit"
+      sonstigeAusgaben:
+        type: "array"
+        items:
+          $ref: "#/definitions/AusgabenMonatlich"
+      sonstigeEinnahmen:
+        type: "array"
+        items:
+          $ref: "#/definitions/EinnahmenMonatlich"
+      sonstigeVerbindlichkeiten:
+        type: "array"
+        items:
+          $ref: "#/definitions/Verbindlichkeit"
+      sonstigeVermoegen:
+        type: "array"
+        items:
+          $ref: "#/definitions/Vermoegen"
       sparplaene:
         type: "array"
         items:
           $ref: "#/definitions/Sparplaene"
-      unbefristeteZusatzRentenMonatlich:
+      unbefristeteZusatzRenten:
         type: "array"
         items:
           $ref: "#/definitions/EinnahmenMonatlich"
-      unterhaltsVerpflichtungenMonatlich:
+      unterhaltsVerpflichtungen:
         type: "array"
         items:
           $ref: "#/definitions/AusgabenMonatlich"
-      variableEinkuenfteMonatlich:
+      variableEinkuenfte:
         type: "array"
         items:
           $ref: "#/definitions/EinnahmenMonatlich"
-      verbindlichkeitenSonstige:
-        type: "array"
-        items:
-          $ref: "#/definitions/Verbindlichkeit"
-      vermoegenSonstige:
-        type: "array"
-        items:
-          $ref: "#/definitions/Vermoegen"
-      versicherungsAusgabenSonstigeMonatlich:
+      versicherungsAusgaben:
         type: "array"
         items:
           $ref: "#/definitions/AusgabenMonatlich"
@@ -278,22 +298,14 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/BestehendesDarlehen"
-      eigentumswohnung:
-        description: "muss leer sein, wenn grundstück oder haus gefüllt ist"
-        $ref: "#/definitions/Eigentumswohnung"
       erbbaurecht:
         $ref: "#/definitions/Erbbaurecht"
+      gebaeude:
+        $ref: "#/definitions/Gebaeude"
       grundbuchAngabe:
         $ref: "#/definitions/GrundbuchAngabe"
       grundstueck:
-        description: "muss leer sein, wenn eigentumswohnung oder haus gefüllt ist"
         $ref: "#/definitions/Grundstueck"
-      grundstuecksGroesse:
-        type: "number"
-      haus:
-        description: "muss leer sein, wenn eigentumswohnung oder grundstück gefüllt\
-          \ ist"
-        $ref: "#/definitions/Haus"
       id:
         type: "string"
       immobilienEinsatz:
@@ -302,19 +314,16 @@ definitions:
         - "KEIN_EINSATZ"
         - "VERKAUFEN"
         - "ALS_ZUSATZSICHERHEIT"
-      keineAutostellplaetzeVorhanden:
-        type: "boolean"
-        example: false
-        description: "darf nur TRUE sein, wenn die Liste 'autostellplaetze' leer ist"
-      keineBestehendenDarlehenVorhanden:
-        type: "boolean"
-        example: false
-        description: "darf nur TRUE sein, wenn die Liste 'bestehendeDarlehen' leer\
-          \ ist"
       kommentar:
         type: "string"
       maximalEinzusetzenderBetragWennVerkauf:
         type: "number"
+      objektArt:
+        type: "string"
+        enum:
+        - "GRUNDSTUECK"
+        - "EIGENTUMSWOHNUNG"
+        - "HAUS"
       verkehrswert:
         type: "number"
   Haushalt:
@@ -340,17 +349,6 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/BestehendeImmobilie"
-      einnahmenAusgabenVermoegenVerbindlichkeiten:
-        $ref: "#/definitions/HaushaltsPositionen"
-      keineBestehendenImmobilienVorhanden:
-        type: "boolean"
-        example: false
-        description: "darf nur TRUE sein, wenn die Liste 'bestehendeImmobilien' leer\
-          \ ist"
-      keineKinderVorhanden:
-        type: "boolean"
-        example: false
-        description: "darf nur TRUE sein, wenn die Liste 'kinder' leer ist"
       kfzAnzahl:
         type: "integer"
         format: "int32"
@@ -366,20 +364,8 @@ definitions:
         description: "Dieses Feld ist eine produktanbieterspezifische Zusatzangabe,\
           \ sie wird nicht von allen Produktanbietern bei der Angebotsermittlung berü\
           cksichtigt. (DSL Bank)"
-  HausfrauOderArbeitsloser:
-    type: "object"
-    properties:
-      beruf:
-        type: "string"
-      situationNachRenteneintritt:
-        $ref: "#/definitions/SituationNachRenteneintritt"
-      sonstigesRegelmaessigesEinkommenNettoMonatlich:
-        type: "number"
-      typ:
-        type: "string"
-        enum:
-        - "ARBEITSLOSER"
-        - "HAUSFRAU"
+      positionen:
+        $ref: "#/definitions/HaushaltsPositionen"
   Nebenkosten:
     type: "object"
     properties:
@@ -394,14 +380,11 @@ definitions:
     properties:
       ausgabenMonatlich:
         type: "number"
-      berechnungsHilfeAusgaben:
-        $ref: "#/definitions/BerechnungsHilfeZahlungen"
-      zahlungTyp:
+      zahlungsTyp:
         type: "string"
-        readOnly: true
         enum:
-        - "EINNAHMEN"
-        - "AUSGABEN"
+        - "EINNAHME"
+        - "AUSGABE"
   AngebotZumAntrag:
     type: "object"
     properties:
@@ -503,15 +486,6 @@ definitions:
       zuteilungsDatum:
         type: "string"
         format: "date"
-  BerechnungsHilfeBetrag:
-    type: "object"
-    properties:
-      betragNachFinanzierung:
-        type: "number"
-        readOnly: true
-      betragVorFinanzierung:
-        type: "number"
-        readOnly: true
   AntragstellerVerknuepfung:
     type: "object"
     properties:
@@ -530,52 +504,6 @@ definitions:
           $ref: "#/definitions/Antrag"
       _links:
         $ref: "#/definitions/Links"
-  Beschaeftigungsart:
-    type: "object"
-    properties:
-      angestellterOderArbeiterOderBeamter:
-        $ref: "#/definitions/AngestellterOderArbeiterOderBeamter"
-      freiberuflerOderSelbstaendiger:
-        $ref: "#/definitions/FreiberuflerOderSelbststaendiger"
-      hausfrauOderArbeitsloser:
-        $ref: "#/definitions/HausfrauOderArbeitsloser"
-      rentner:
-        $ref: "#/definitions/Rentner"
-  AngestellterOderArbeiterOderBeamter:
-    type: "object"
-    properties:
-      anzahlGehaelterProJahr:
-        type: "number"
-        format: "double"
-      arbeitgeber:
-        type: "string"
-      arbeitgeberInDeutschlandAnsaessig:
-        type: "boolean"
-      arbeitgeberNichtInDeutschlandAnsaessigKommentar:
-        type: "string"
-        description: "Nur relevant, wenn 'arbeitgeberInDeutschlandAnsaessig' = false"
-      befristungsStatusBeiAngestelltenOderArbeitern:
-        type: "string"
-        enum:
-        - "BEFRISTET"
-        - "UNBEFRISTET"
-      beruf:
-        type: "string"
-      beschaeftigtSeit:
-        type: "string"
-        format: "date"
-      einkommenNettoMonatlich:
-        type: "number"
-      inProbezeit:
-        type: "boolean"
-      situationNachRenteneintritt:
-        $ref: "#/definitions/SituationNachRenteneintritt"
-      typ:
-        type: "string"
-        enum:
-        - "ANGESTELLTER"
-        - "ARBEITER"
-        - "BEAMTER"
   Sparplaene:
     type: "object"
     properties:
@@ -583,29 +511,27 @@ definitions:
         type: "number"
       beitragMonatlich:
         type: "number"
-      berechnungsHilfeAusgaben:
-        $ref: "#/definitions/BerechnungsHilfeZahlungen"
-      berechnungsHilfeVermoegen:
-        $ref: "#/definitions/BerechnungsHilfeBetrag"
       maximalAufzuloesenderWert:
         type: "number"
-      vermoegenOderVerbindlichkeit:
+      vermoegensTyp:
         type: "string"
-        readOnly: true
         enum:
         - "VERMOEGEN"
         - "VERBINDLICHKEIT"
-      zahlungTyp:
+      zahlungsTyp:
         type: "string"
-        readOnly: true
         enum:
-        - "EINNAHMEN"
-        - "AUSGABEN"
+        - "EINNAHME"
+        - "AUSGABE"
   Darlehen:
     type: "object"
     properties:
       auszahlungsBetrag:
         type: "number"
+      auszahlungsDatum:
+        type: "string"
+        format: "date"
+        description: "nur bei darlehensArt==FORWARD_DARLEHEN"
       auszahlungsKurs:
         type: "number"
       bereitstellung:
@@ -622,27 +548,55 @@ definitions:
         - "PRIVAT_DARLEHEN"
         - "ZWISCHEN_FINANZIERUNG"
         - "VARIABLES_DARLEHEN"
+      detailsZurVerwendung:
+        type: "string"
+        description: "nur bei darlehensArt==ZWISCHEN_FINANZIERUNG"
       effektivZins:
         type: "number"
       effektivZinsRelevanteKosten:
         $ref: "#/definitions/EffektivZinsKosten"
-      forwardDarlehen:
+      forwardPeriodeInMonaten:
+        type: "integer"
+        format: "int32"
         description: "nur bei darlehensArt==FORWARD_DARLEHEN"
-        $ref: "#/definitions/ForwardDarlehen"
-      kfwDarlehen:
-        description: "nur bei darlehensArt==KFW_DARLEHEN"
-        $ref: "#/definitions/KfwDarlehen"
+      kfwEnergieEffizienzStandard:
+        type: "string"
+        description: "nur bei darlehensArt==KFW_DARLEHEN. Mögliche Werte: STANDARD_40_PLUS,\
+          \ STANDARD_40, STANDARD_55,STANDARD_70. Nur bei KfW-Programm 153 relevant.\
+          \ Bei neuen Energieeffizienzstandards können auch weitere Werte zulässig\
+          \ werden."
+      kfwProgramm:
+        type: "string"
+        description: "nur bei darlehensArt==KFW_DARLEHEN. Mögiche Werte: PROGRAMM_124,\
+          \ PROGRAMM_141, PROGRAMM_151, PROGRAMM_152, PROGRAMM_153, PROGRAMM_155,\
+          \ PROGRAMM_159, PROGRAMM_167. Bei neu aufgelegten KfW-Programmen können\
+          \ auch weitere Werte zulässig werden."
       konditionWurdeManuellAngepasst:
         type: "boolean"
-      privatDarlehen:
+      konditionsAnpassungsBegruendung:
+        type: "string"
+        description: "Begründung, wenn die Kondition angepasst wurde"
+      laufZeitInJahren:
+        type: "integer"
+        format: "int32"
+        description: "nur bei darlehensArt==KFW_DARLEHEN"
+      laufzeitInMonaten:
+        type: "integer"
+        format: "int32"
         description: "nur bei darlehensArt==PRIVAT_DARLEHEN"
-        $ref: "#/definitions/PrivatDarlehen"
+      maximaleLaufzeitInMonaten:
+        type: "integer"
+        format: "int32"
+        description: "nur bei darlehensArt==ZWISCHEN_FINANZIERUNG"
       produktAnbieter:
         $ref: "#/definitions/ProduktAnbieter"
       rateMonatlich:
         type: "number"
         example: 123.34
         description: "Die monatliche Rate in Euro"
+      rateMonatlichInDerTilgungsfreienAnlaufzeit:
+        type: "number"
+        description: "nur bei darlehensArt==KFW_DARLEHEN"
       sollZins:
         type: "number"
         example: 2.05
@@ -650,100 +604,35 @@ definitions:
       tilgung:
         description: "nicht bei darlehensArt==ZWISCHEN_FINANZIERUNG"
         $ref: "#/definitions/Tilgung"
+      tilgungsFreieAnlaufJahre:
+        type: "integer"
+        format: "int32"
+        description: "nur bei darlehensArt==KFW_DARLEHEN"
+      verwendungsZweck:
+        type: "string"
+        description: "nur bei darlehensArt==ZWISCHEN_FINANZIERUNG"
+        enum:
+        - "VORFINANZIERUNG_OEFFENTLICHER_MITTEL"
+        - "VERKAUF_EINES_ANDEREN_OBJEKTS"
+        - "SONSTIGE_VERWENDUNG"
       zinsBindung:
         description: "nicht bei darlehensArt IN [VARIABLES_DARLEHEN,ZWISCHEN_FINANZIERUNG]"
         $ref: "#/definitions/ZinsBindung"
       zinsZahlungsBeginnAm:
         type: "string"
         format: "date"
-      zwischenFinanzierung:
-        description: "nur bei darlehensArt==ZWISCHEN_FINANZIERUNG"
-        $ref: "#/definitions/ZwischenFinanzierung"
-  Eigentumswohnung:
-    type: "object"
-    properties:
-      anzahlDerWohneinheitenImObjekt:
-        type: "integer"
-        format: "int32"
-      anzahlVollgeschosse:
-        type: "integer"
-        format: "int32"
-      ausstattung:
-        type: "string"
-        description: "Angaben zur Ausstattung für alle verschiedene Produktanbieter,\
-          \ aber nicht für ING-DiBa. Erlaubte Werte sind: EINFACH,MITTEL,GEHOBEN,STARK_GEHOBEN.\
-          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
-          \ mit unbekannten Werten umgehen können."
-      baujahrWennNichtNeubau:
-        type: "string"
-        example: "2016"
-        description: "Baujahr des Gebäudes. Vierstellige Jahresangabe"
-      bauweise:
-        type: "string"
-        description: "Erlaubte Werte sind: FACHWERK_MIT_STROH_LEHM,FACHWERK_MIT_ZIEGELN,GLAS_STAHL,HOLZ,MASSIV.\
-          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
-          \ mit unbekannten Werten umgehen können."
-      bezeichnungWohneinheit:
-        type: "string"
-      gewerbeVermietungsInformationWennGewerbeflaecheVorhanden:
-        $ref: "#/definitions/VermietungsInformationen"
-      gewerbeflaecheGesamt:
-        type: "number"
-      gewerbeflaecheVorhanden:
-        type: "boolean"
-      miteigentumsAnteil:
-        $ref: "#/definitions/MiteigentumsAnteil"
-      modernisierungsAngabenWennNichtNeubau:
-        $ref: "#/definitions/ModernisierungsAngaben"
-      wohnVermietungsInformation:
-        $ref: "#/definitions/VermietungsInformationen"
-      wohnflaecheGesamt:
-        type: "number"
   Vermoegen:
     type: "object"
     properties:
       aktuellerWert:
         type: "number"
-      berechnungsHilfeVermoegen:
-        $ref: "#/definitions/BerechnungsHilfeBetrag"
       maximalAufzuloesenderWert:
         type: "number"
-      vermoegenOderVerbindlichkeit:
+      vermoegensTyp:
         type: "string"
-        readOnly: true
         enum:
         - "VERMOEGEN"
         - "VERBINDLICHKEIT"
-  Verbindlichkeit:
-    type: "object"
-    properties:
-      berechnungsHilfeAusgaben:
-        $ref: "#/definitions/BerechnungsHilfeZahlungen"
-      berechnungsHilfeVerbindlichkeit:
-        $ref: "#/definitions/BerechnungsHilfeBetrag"
-      glaeubiger:
-        type: "string"
-      laufzeitEnde:
-        type: "string"
-        format: "date"
-      rateMonatlich:
-        type: "number"
-      restschuld:
-        type: "number"
-      vermoegenOderVerbindlichkeit:
-        type: "string"
-        readOnly: true
-        enum:
-        - "VERMOEGEN"
-        - "VERBINDLICHKEIT"
-      wirdAbgeloest:
-        type: "boolean"
-      zahlungTyp:
-        type: "string"
-        readOnly: true
-        enum:
-        - "EINNAHMEN"
-        - "AUSGABEN"
   Kind:
     type: "object"
     properties:
@@ -756,13 +645,35 @@ definitions:
         type: "string"
       unterhaltsEinnahmenBetragMonatlich:
         type: "number"
+  Verbindlichkeit:
+    type: "object"
+    properties:
+      glaeubiger:
+        type: "string"
+      laufzeitEnde:
+        type: "string"
+        format: "date"
+      rateMonatlich:
+        type: "number"
+      restschuld:
+        type: "number"
+      vermoegensTyp:
+        type: "string"
+        enum:
+        - "VERMOEGEN"
+        - "VERBINDLICHKEIT"
+      wirdAbgeloest:
+        type: "boolean"
+      zahlungsTyp:
+        type: "string"
+        enum:
+        - "EINNAHME"
+        - "AUSGABE"
   AngebotsPruefungsErgebnis:
     type: "object"
     properties:
       produktAnbieter:
         $ref: "#/definitions/ProduktAnbieter"
-      rating:
-        $ref: "#/definitions/Rating"
       weitereAngaben:
         type: "string"
         description: "Vom Produktanbieter bei der Angebotsprüfung ergänzte Daten.\
@@ -791,12 +702,6 @@ definitions:
         type: "boolean"
       wildcardType:
         type: "boolean"
-  PrivatDarlehen:
-    type: "object"
-    properties:
-      laufzeitInMonaten:
-        type: "integer"
-        format: "int32"
   AnschlussFinanzierung:
     type: "object"
     properties:
@@ -868,15 +773,6 @@ definitions:
         type: "string"
       groesse:
         type: "number"
-  ForwardDarlehen:
-    type: "object"
-    properties:
-      auszahlungsDatum:
-        type: "string"
-        format: "date"
-      forwardPeriodeInMonaten:
-        type: "integer"
-        format: "int32"
   KaufNeubauVomBautraeger:
     type: "object"
     properties:
@@ -898,32 +794,26 @@ definitions:
     properties:
       ausgabenMonatlich:
         type: "number"
-      berechnungsHilfeAusgaben:
-        $ref: "#/definitions/BerechnungsHilfeZahlungen"
       entfallenMitFinanzierung:
         type: "boolean"
-      zahlungTyp:
+      zahlungsTyp:
         type: "string"
-        readOnly: true
         enum:
-        - "EINNAHMEN"
-        - "AUSGABEN"
+        - "EINNAHME"
+        - "AUSGABE"
   EinkuenfteAusNebentaetigkeit:
     type: "object"
     properties:
       beginnDerNebentaetigkeit:
         type: "string"
         format: "date"
-      berechnungsHilfeEinnahmen:
-        $ref: "#/definitions/BerechnungsHilfeZahlungen"
       einnahmenMonatlich:
         type: "number"
-      zahlungTyp:
+      zahlungsTyp:
         type: "string"
-        readOnly: true
         enum:
-        - "EINNAHMEN"
-        - "AUSGABEN"
+        - "EINNAHME"
+        - "AUSGABE"
   ImmobilieVerknuepfung:
     type: "object"
     properties:
@@ -932,16 +822,13 @@ definitions:
   EinnahmenMonatlich:
     type: "object"
     properties:
-      berechnungsHilfeEinnahmen:
-        $ref: "#/definitions/BerechnungsHilfeZahlungen"
       einnahmenMonatlich:
         type: "number"
-      zahlungTyp:
+      zahlungsTyp:
         type: "string"
-        readOnly: true
         enum:
-        - "EINNAHMEN"
-        - "AUSGABEN"
+        - "EINNAHME"
+        - "AUSGABE"
   Beratung:
     type: "object"
     properties:
@@ -971,27 +858,6 @@ definitions:
           $ref: "#/definitions/Haushalt"
       _links:
         $ref: "#/definitions/Links"
-  KfwDarlehen:
-    type: "object"
-    properties:
-      kfwEnergieEffizienzStandard:
-        type: "string"
-        description: "Mögliche Werte: STANDARD_40_PLUS, STANDARD_40, STANDARD_55,STANDARD_70.\
-          \ Nur bei KfW-Programm 153 relevant. Bei neuen Energieeffizienzstandards\
-          \ können auch weitere Werte zulässig werden."
-      kfwProgramm:
-        type: "string"
-        description: "Mögiche Werte: PROGRAMM_124, PROGRAMM_141, PROGRAMM_151, PROGRAMM_152,\
-          \ PROGRAMM_153, PROGRAMM_155, PROGRAMM_159, PROGRAMM_167. Bei neu aufgelegten\
-          \ KfW-Programmen können auch weitere Werte zulässig werden."
-      laufZeitInJahren:
-        type: "integer"
-        format: "int32"
-      rateMonatlichInDerTilgungsfreienAnlaufzeit:
-        type: "number"
-      tilgungsFreieAnlaufJahre:
-        type: "integer"
-        format: "int32"
   GrundbuchAngabe:
     type: "object"
     properties:
@@ -1000,7 +866,7 @@ definitions:
       bandUndBlatt:
         type: "string"
         description: "Angabe von Band und Blatt"
-      flurStuecke:
+      flurstuecke:
         type: "array"
         items:
           $ref: "#/definitions/Flurstueck"
@@ -1014,6 +880,8 @@ definitions:
   Grundstueck:
     type: "object"
     properties:
+      groesse:
+        type: "number"
       grundstuecksArt:
         type: "string"
         enum:
@@ -1113,7 +981,7 @@ definitions:
     properties:
       id:
         type: "string"
-      type:
+      typ:
         type: "string"
   ZinsBindung:
     type: "object"
@@ -1129,17 +997,6 @@ definitions:
         format: "int32"
       restschuldNachZinsBindungsEnde:
         type: "number"
-  Rating:
-    type: "object"
-    properties:
-      ausfallrate:
-        type: "number"
-      klasse:
-        type: "string"
-      ratingZeitpunkt:
-        type: "string"
-      verfahren:
-        type: "string"
   RechteAbteilung2:
     type: "object"
     properties:
@@ -1202,20 +1059,6 @@ definitions:
         type: "number"
       zusatzSicherheitsKosten:
         type: "number"
-  ZwischenFinanzierung:
-    type: "object"
-    properties:
-      detailsZurVerwendung:
-        type: "string"
-      maximaleLaufzeitInMonaten:
-        type: "integer"
-        format: "int32"
-      verwendungsZweck:
-        type: "string"
-        enum:
-        - "VORFINANZIERUNG_OEFFENTLICHER_MITTEL"
-        - "VERKAUF_EINES_ANDEREN_OBJEKTS"
-        - "SONSTIGE_VERWENDUNG"
   ModernisierungsAngaben:
     type: "object"
     properties:
@@ -1232,98 +1075,19 @@ definitions:
     properties:
       aktuellerWert:
         type: "number"
-      berechnungsHilfeEinnahmen:
-        $ref: "#/definitions/BerechnungsHilfeZahlungen"
-      berechnungsHilfeVermoegen:
-        $ref: "#/definitions/BerechnungsHilfeBetrag"
       maximalAufzuloesenderWert:
         type: "number"
-      vermoegenOderVerbindlichkeit:
+      vermoegensTyp:
         type: "string"
-        readOnly: true
         enum:
         - "VERMOEGEN"
         - "VERBINDLICHKEIT"
-      zahlungTyp:
+      zahlungsTyp:
         type: "string"
-        readOnly: true
         enum:
-        - "EINNAHMEN"
-        - "AUSGABEN"
+        - "EINNAHME"
+        - "AUSGABE"
       zinsertragJaehrlich:
-        type: "number"
-  Haus:
-    type: "object"
-    properties:
-      anzahlDerGewerbeeinheitenBeiMehrfamilienHaus:
-        type: "integer"
-        format: "int32"
-      anzahlDerWohneinheitenBeiMehrfamilienHaus:
-        type: "integer"
-        format: "int32"
-      anzahlVollgeschosse:
-        type: "integer"
-        format: "int32"
-      ausstattung:
-        type: "string"
-        description: "Angaben zur Ausstattung für alle verschiedene Produktanbieter,\
-          \ aber nicht für ING-DiBa. Erlaubte Werte sind: EINFACH,MITTEL,GEHOBEN,STARK_GEHOBEN.\
-          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
-          \ mit unbekannten Werten umgehen können."
-      baujahrWennNichtNeubau:
-        type: "string"
-        example: "2016"
-        description: "Baujahr des Gebäudes. Vierstellige Jahresangabe"
-      bauweise:
-        type: "string"
-        description: "Erlaubte Werte sind: FACHWERK_MIT_STROH_LEHM,FACHWERK_MIT_ZIEGELN,GLAS_STAHL,HOLZ,MASSIV.\
-          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
-          \ mit unbekannten Werten umgehen können."
-      dachgeschossAusbau:
-        type: "string"
-        description: "Erlaubte Werte sind: FLACHDACH,NICHT_AUSGEBAUT,TEILWEISE_AUSGEBAUT,VOLL_AUSGEBAUT.\
-          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
-          \ mit unbekannten Werten umgehen können."
-      einliegerwohnungVorhandenBeiDoppelOderEinfamilienOderReihenHaus:
-        type: "boolean"
-      fertighausBeiDoppelOderEinfamilienOderZweifamilienHaus:
-        type: "boolean"
-      gewerbeVermietungsInformationWennGewerbeflaecheVorhanden:
-        $ref: "#/definitions/VermietungsInformationen"
-      gewerbeflaecheGesamt:
-        type: "number"
-      gewerbeflaecheVorhanden:
-        type: "boolean"
-      hausAnordnungMehrfamilienOderZweifamilienHaus:
-        type: "string"
-        enum:
-        - "FREISTEHEND"
-        - "KOPFHAUS"
-        - "MITTELHAUS"
-      hausAnordnungReihenhaus:
-        type: "string"
-        enum:
-        - "KOPFHAUS"
-        - "MITTELHAUS"
-      hausTyp:
-        type: "string"
-        enum:
-        - "KEIN_TYP_AUSGEWAEHLT"
-        - "DOPPELHAUSHAELFTE"
-        - "EINFAMILIENHAUS"
-        - "MEHRFAMILIENHAUS"
-        - "REIHENHAUS"
-        - "ZWEIFAMILIENHAUS"
-      modernisierungsAngabenWennNichtNeubau:
-        $ref: "#/definitions/ModernisierungsAngaben"
-      unterkellerung:
-        type: "string"
-        description: "Erlaubte Werte sind: NICHT_UNTERKELLERT,TEILWEISE_UNTERKELLERT,UNTERKELLERT.\
-          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
-          \ mit unbekannten Werten umgehen können."
-      wohnVermietungsInformation:
-        $ref: "#/definitions/VermietungsInformationen"
-      wohnflaecheGesamt:
         type: "number"
   Antragsteller:
     type: "object"
@@ -1363,7 +1127,7 @@ definitions:
           \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
           \ mit unbekannten Werten umgehen können."
       beschaeftigung:
-        $ref: "#/definitions/Beschaeftigungsart"
+        $ref: "#/definitions/Beschaeftigung"
       brancheBeiIngDiba:
         type: "string"
         description: "Branche, in welcher der Antragsteller tätig ist. (ING-DiBa)\
@@ -1415,7 +1179,6 @@ definitions:
         description: "nur wenn verheiratet"
       id:
         type: "string"
-        readOnly: true
       legitimationsDaten:
         description: "Dieses Feld ist eine produktanbieterspezifische Zusatzangabe,\
           \ sie wird nicht von allen Produktanbietern bei der Angebotsermittlung berü\
@@ -1477,7 +1240,7 @@ definitions:
         - "EIGENGENUTZT"
         - "TEIL_VERMIETET"
         - "VERMIETET"
-      vermieteteFlaecheBeiTeilvermietung:
+      vermieteteFlaeche:
         type: "number"
   BestehenderBausparvertrag:
     type: "object"
@@ -1488,10 +1251,6 @@ definitions:
         type: "number"
       bausparSumme:
         type: "number"
-      berechnungsHilfeAusgaben:
-        $ref: "#/definitions/BerechnungsHilfeZahlungen"
-      berechnungsHilfeVermoegen:
-        $ref: "#/definitions/BerechnungsHilfeBetrag"
       einmalzahlung:
         type: "number"
       id:
@@ -1506,18 +1265,17 @@ definitions:
         type: "string"
       typ:
         type: "string"
-      vermoegenOderVerbindlichkeit:
-        type: "string"
-        readOnly: true
-        enum:
-        - "VERMOEGEN"
-        - "VERBINDLICHKEIT"
       vermoegensEinsatz:
         type: "string"
         enum:
         - "KEIN_EINSATZ"
         - "ABTRETEN"
         - "AUFLOESEN"
+      vermoegensTyp:
+        type: "string"
+        enum:
+        - "VERMOEGEN"
+        - "VERBINDLICHKEIT"
       vertragsBeginn:
         type: "string"
         format: "date"
@@ -1525,12 +1283,11 @@ definitions:
         type: "string"
       verwaltungsgebuehrenJaehrlich:
         type: "number"
-      zahlungTyp:
+      zahlungsTyp:
         type: "string"
-        readOnly: true
         enum:
-        - "EINNAHMEN"
-        - "AUSGABEN"
+        - "EINNAHME"
+        - "AUSGABE"
       zuteilungsDatum:
         type: "string"
         format: "date"
@@ -1578,13 +1335,16 @@ definitions:
       _links:
         $ref: "#/definitions/Links"
     description: "Diese Resource repräsentiert einen Antrag in Baufi Smart."
+  GebaeudeFlaeche:
+    type: "object"
+    properties:
+      gesamtGrosse:
+        type: "number"
+      vermietungsInformationen:
+        $ref: "#/definitions/VermietungsInformationen"
   LebensOderRentenversicherungVermoegen:
     type: "object"
     properties:
-      berechnungsHilfeAusgaben:
-        $ref: "#/definitions/BerechnungsHilfeZahlungen"
-      berechnungsHilfeVermoegen:
-        $ref: "#/definitions/BerechnungsHilfeBetrag"
       id:
         type: "string"
       maximalAufzuloesenderBetrag:
@@ -1603,18 +1363,17 @@ definitions:
         - "KAPITALBILDENDE_RENTENVERSICHERUNG"
         - "FONDSGEBUNDENE_RENTENVERSICHERUNG"
         - "RISIKO_LEBENSVERSICHERUNG"
-      vermoegenOderVerbindlichkeit:
-        type: "string"
-        readOnly: true
-        enum:
-        - "VERMOEGEN"
-        - "VERBINDLICHKEIT"
       vermoegensEinsatz:
         type: "string"
         enum:
         - "KEIN_EINSATZ"
         - "ABTRETEN"
         - "AUFLOESEN"
+      vermoegensTyp:
+        type: "string"
+        enum:
+        - "VERMOEGEN"
+        - "VERBINDLICHKEIT"
       versicherungsGesellschaft:
         type: "string"
       versicherungsSumme:
@@ -1629,12 +1388,42 @@ definitions:
         type: "string"
       verwaltungsgebuehrenJaehrlich:
         type: "number"
-      zahlungTyp:
+      zahlungsTyp:
         type: "string"
-        readOnly: true
         enum:
-        - "EINNAHMEN"
-        - "AUSGABEN"
+        - "EINNAHME"
+        - "AUSGABE"
+  Gebaeude:
+    type: "object"
+    properties:
+      anzahlDerWohneinheitenImGebaeude:
+        type: "integer"
+        format: "int32"
+      anzahlVollgeschosse:
+        type: "integer"
+        format: "int32"
+      ausstattung:
+        type: "string"
+        description: "Angaben zur Ausstattung für alle verschiedene Produktanbieter,\
+          \ aber nicht für ING-DiBa. Erlaubte Werte sind: EINFACH,MITTEL,GEHOBEN,STARK_GEHOBEN.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      baujahr:
+        type: "string"
+        example: "2016"
+        description: "Baujahr des Gebäudes. Bei verwendungsZweck != NEUBAUVierstellige\
+          \ Jahresangabe"
+      bauweise:
+        type: "string"
+        description: "Erlaubte Werte sind: FACHWERK_MIT_STROH_LEHM,FACHWERK_MIT_ZIEGELN,GLAS_STAHL,HOLZ,MASSIV.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      gewerbeflaeche:
+        $ref: "#/definitions/GebaeudeFlaeche"
+      modernisierungsAngaben:
+        $ref: "#/definitions/ModernisierungsAngaben"
+      wohnflaeche:
+        $ref: "#/definitions/GebaeudeFlaeche"
   Kapitalbeschaffung:
     type: "object"
     properties:
@@ -1655,52 +1444,26 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/BestehendesDarlehenDesFinanzierungsObjekts"
-      eigentumswohnung:
-        description: "muss leer sein, wenn grundstück oder haus gefüllt ist"
-        $ref: "#/definitions/Eigentumswohnung"
       erbbaurecht:
         $ref: "#/definitions/Erbbaurecht"
+      gebaeude:
+        $ref: "#/definitions/Gebaeude"
       grundbuchAngabe:
         $ref: "#/definitions/GrundbuchAngabe"
       grundstueck:
-        description: "muss leer sein, wenn eigentumswohnung oder haus gefüllt ist"
         $ref: "#/definitions/Grundstueck"
-      grundstuecksGroesse:
-        type: "number"
-      haus:
-        description: "muss leer sein, wenn eigentumswohnung oder grundstück gefüllt\
-          \ ist"
-        $ref: "#/definitions/Haus"
       id:
         type: "string"
-      keineAutostellplaetzeVorhanden:
-        type: "boolean"
-        example: false
-        description: "darf nur TRUE sein, wenn die Liste 'autostellplaetze' leer ist"
-      keineBestehendenDarlehenVorhanden:
-        type: "boolean"
-        example: false
-        description: "darf nur TRUE sein, wenn die Liste 'bestehendeDarlehen' leer\
-          \ ist"
+      objektArt:
+        type: "string"
+        enum:
+        - "GRUNDSTUECK"
+        - "EIGENTUMSWOHNUNG"
+        - "HAUS"
       verkehrswert:
         type: "number"
         description: "Nur relevant bei Finanzbedarf AnschlussFinanzierung, Modernisierung\
           \ und Kapitalbeschaffung"
-  BerechnungsHilfeZahlungen:
-    type: "object"
-    properties:
-      jaehrlichNachFinanzierung:
-        type: "number"
-        readOnly: true
-      jaehrlichVorFinanzierung:
-        type: "number"
-        readOnly: true
-      monatlichNachFinanzierung:
-        type: "number"
-        readOnly: true
-      monatlichVorFinanzierung:
-        type: "number"
-        readOnly: true
   Charset:
     type: "object"
     properties:
@@ -1749,28 +1512,6 @@ definitions:
         type: "string"
       type:
         $ref: "#/definitions/MediaType"
-  FreiberuflerOderSelbststaendiger:
-    type: "object"
-    properties:
-      beruf:
-        type: "string"
-      einkommenNettoJaehrlich:
-        type: "number"
-      situationNachRenteneintritt:
-        $ref: "#/definitions/SituationNachRenteneintritt"
-      taetigSeit:
-        type: "string"
-        format: "date"
-      taetigkeit:
-        type: "string"
-        description: "Erlaubte Werte sind: ALTENPFLEGER,AMBULANTER_KRANKENPFLEGER,ANWALT,APOTHEKER,ARCHITEKT,ARZT,BESTATTER,DATENSCHUTZBEAUFTRAGTER,DEKORATEUR,DIAETASSISTENT,DOLMETSCHER,EDV_BERATER,ERGOTHERAPEUT,ERNAEHRUNGSBERATER,FOTOGRAF,GEOGRAF,GRAFIKDESIGNER,GRAFIKER,HEBAMME,HEILMASSEUR,HEILPRAKTIKER,HISTORIKER,INFORMATIKER,INGENIEUR,INSOLVENZVERWALTER,JOURNALIST,KLASSISCHER_KONZERTMUSIKER,KONSTRUKTEUR,KRANKENGYMNAST,KRANKENPFLEGER,KRANKENSCHWESTER,LOGOPAEDE,MEDIZINISCH_TECHN_ASSISTENT,NOTAR,OPERNSAENGER,PERSONALBERATER,PHYSIOTHERAPEUT,PSYCHOLOGE,RAUMAUSSTATTER,RUNDFUNKSPRECHER,SACHVERSTAENDIGER,STADTPLANER,STATIKER,STEUERBERATER,TIERARZT,UNTERNEHMENSBERATER,VERMITTLER,WIRTSCH_BUCHPRUEFER_REVISOR,ZAHNARZT,ZAHNTECHNIKER,SONSTIGES.\
-          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
-          \ mit unbekannten Werten umgehen können."
-      typ:
-        type: "string"
-        enum:
-        - "FREIBERUFLER"
-        - "SELBSTAENDIGER"
   SituationNachRenteneintritt:
     type: "object"
     properties:
@@ -1788,26 +1529,20 @@ definitions:
     properties:
       aktuellerWert:
         type: "number"
-      berechnungsHilfeEinnahmen:
-        $ref: "#/definitions/BerechnungsHilfeZahlungen"
-      berechnungsHilfeVermoegen:
-        $ref: "#/definitions/BerechnungsHilfeBetrag"
       dividendenJaehrlich:
         type: "number"
       maximalAufzuloesenderWert:
         type: "number"
-      vermoegenOderVerbindlichkeit:
+      vermoegensTyp:
         type: "string"
-        readOnly: true
         enum:
         - "VERMOEGEN"
         - "VERBINDLICHKEIT"
-      zahlungTyp:
+      zahlungsTyp:
         type: "string"
-        readOnly: true
         enum:
-        - "EINNAHMEN"
-        - "AUSGABEN"
+        - "EINNAHME"
+        - "AUSGABE"
   BestehendesDarlehen:
     type: "object"
     properties:
@@ -1827,7 +1562,6 @@ definitions:
         type: "number"
       id:
         type: "string"
-        readOnly: true
       rateMonatlich:
         type: "number"
       zinsBindungEndetAm:
@@ -1852,7 +1586,6 @@ definitions:
         type: "number"
       id:
         type: "string"
-        readOnly: true
       rateMonatlich:
         type: "number"
       verwendenAls:
@@ -1882,6 +1615,73 @@ definitions:
       gesamt:
         type: "integer"
         format: "int32"
+  Beschaeftigung:
+    type: "object"
+    properties:
+      anzahlGehaelterProJahr:
+        type: "number"
+        format: "double"
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
+      arbeitgeber:
+        type: "string"
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
+      arbeitgeberInDeutschlandAnsaessig:
+        type: "boolean"
+        example: false
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
+      arbeitgeberNichtInDeutschlandAnsaessigKommentar:
+        type: "string"
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
+      art:
+        type: "string"
+        enum:
+        - "ANGESTELLTER"
+        - "ARBEITER"
+        - "ARBEITSLOSER"
+        - "BEAMTER"
+        - "FREIBERUFLER"
+        - "HAUSFRAU"
+        - "RENTNER"
+        - "SELBSTAENDIGER"
+      befristungsStatus:
+        type: "string"
+        description: "nur bei art==ANGESTELLTER,ARBEITER"
+        enum:
+        - "BEFRISTET"
+        - "UNBEFRISTET"
+      beruf:
+        type: "string"
+        description: "nur bei art!=RENTNER"
+      beschaeftigtSeit:
+        type: "string"
+        format: "date"
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
+      einkommenNettoJaehrlich:
+        type: "number"
+        description: "nur bei art==FREIBERUFLER,SELBSTAENDIGER"
+      einkommenNettoMonatlich:
+        type: "number"
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
+      inProbezeit:
+        type: "boolean"
+        example: false
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
+      situationNachRenteneintritt:
+        description: "nur bei art!=RENTNER"
+        $ref: "#/definitions/SituationNachRenteneintritt"
+      sonstigesRegelmaessigesEinkommenNettoMonatlich:
+        type: "number"
+        description: "nur bei art==ARBEITSLOSER,HAUSFRAU"
+      staatlicheRenteNettoMonatlich:
+        type: "number"
+        description: "nur bei art==RENTNER"
+      taetigSeit:
+        type: "string"
+        format: "date"
+        description: "nur bei art==FREIBERUFLER,SELBSTAENDIGER"
+      taetigkeit:
+        type: "string"
+        description: "nur bei art==FREIBERUFLER,SELBSTAENDIGER"
   SchufaErgebnis:
     type: "object"
     properties:
@@ -1920,8 +1720,3 @@ definitions:
         description: "Nur wenn ausweisArt = ANDERE"
       ausweisNummer:
         type: "string"
-  Rentner:
-    type: "object"
-    properties:
-      staatlicheRenteNettoMonatlich:
-        type: "number"

@@ -32,6 +32,8 @@ Informationen zu den Änderungen in den verschiedenen Versionen
   * `erzeugtAm`: um Zeitstempel erweitert 
   * `beleihung` -> `beleihungsRechnung`
   
+* Tilgungsersatz: `type` -> `typ`
+  
 * Antrag
   * Anträge werden jetzt unter dem Pfad `/antraege/antragsNummer` abgerufen, wobei bei der Antragsnummer der Slash '/' durch einen
     Unterstrich '_' zu ersetzen ist.
@@ -49,11 +51,12 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 * Die Knoten des `_embedded` Objects sind hoch in das Angebot verschoben
 * Bugfix: Flaechenwerte werden analog Euro und Prozent, wie in Swagger dokumentiert, als Nummern serialisiert
 * Bankverbindung: 
+  * umgezogen von `haushalt` nach `zugrundeliegendeDaten`
   * `kontoinhaber` ist jetzt eine Liste von AntragstellerVerknuepfungen (jeweils mit den Feldern 'id' und 'name')
   * `kontonummer` entfernt
   * `bankleitzahl` entfert
 * `antragsteller.staatsangehoerigkeit` ist jetzt ein komplexes Objekt vom Typ `Staat` (enthält Iso-Code und menschenlesbaren Namen) 
-* Renamings in haushalt.einnahmenAusgabenVermoegenVerbindlichkeiten
+* haushalt.einnahmenAusgabenVermoegenVerbindlichkeiten
   * `lebensUndRentenversicherung` -> `lebensUndRentenversicherungen` 
   * `privateKrankenversicherungBeitragMonatlich` -> `privateKrankenversicherungsBeitraegeMonatlich` 
   * `ratenkredit` -> `ratenkredite`
@@ -61,6 +64,8 @@ Informationen zu den Änderungen in den verschiedenen Versionen
   * `unterhaltsVerpflichtungMonatlich` -> `unterhaltsVerpflichtungenMonatlich`
   * `verbindlichkeitSonstige` -> `verbindlichkeitenSonstige`
   * `bausparvertrag` -> `bausparvertraege`
+  * alle Einnahmen und Ausgaben: `zahlungTyp` -> `zahlungsTyp`
+  * alle Berechnungshilfen-Knoten entfernt
 * Lebens- und Rentenversicherungen: komplexes Objekt `produktAnbieter` durch einfachen String `versicherungsGesellschaft` ersetzt
 * Jahreszahl ist Integer basiert, nicht String basiert
 * Kellerausbau umbenannt in ingDibaKellerausbau
@@ -70,8 +75,6 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 * `darlehen.kreditEntscheider` entfernt 
 * `darlehen.abzuloesendeAltdarlehen` entfernt
  * Darlehen: restschuldNachZinsBindungsEnde ist jetzt Attribut am ZinsBindung-Knoten, nicht mehr direkt am Darlehen
- 
-* Bankverbindung: umgezogen von `haushalt` nach `zugrundeliegendeDaten`
  
 * FinanzierungsObjekt
   * `BestehendesDarlehenDesFinanzierungsObjekts.darlehenArt` -> `darlehensArt`
@@ -96,6 +99,9 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 * ZinsBindung jetzt überall mit großem "B"
 * ZinsBindungBis -> ZinsBindungEndetAm
 
+* Grundbuch `flurStuecke` -> `flurstuecke`
+
+* Gebäude: `gewerbeflaecheVorhanden` entfernt
   
 #### Version 0.2
 
