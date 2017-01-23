@@ -16,8 +16,11 @@ Aus diesen Dateien können mit Hilfe von [Swagger Codegen](https://github.com/sw
  - [statische HTML Seite](http://htmlpreview.github.io?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/Dokumentation/index.html)
 
 Zur Unterstützung für das Mapping werden folgende Dateien bereit gestellt:
-  - [CSV Datei](https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/definitions.csv)
-  - [Excel Datei](https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/definitions.xls)
+  - [CSV Datei](definitions.csv)
+  - [Excel Datei](definitions.xls)
+
+Beispielantworten:
+- [Ein Antrag](beispiel-antrag.json)
 
 ### Generierung des Clients
 #### JAVA mit Retrofit
