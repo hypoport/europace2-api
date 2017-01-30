@@ -2,9 +2,29 @@
 
 Informationen zu den Änderungen in den verschiedenen Versionen
 
-#### Version 0.3
+#### Version 0.4
 
 ##### Neue Felder
+
+* `zugrundeliegendeDaten.vorhaben` mit verwendungszweck, finanzbedarf und externen nachrangigen Darlehen
+* `immobilie.gebaeude.hausAnordnung` als Vereinheitlichung von `hausAnordnungMehrfamilienOderZweifamilienhause` und `hausAnordnungReihenhaus`
+
+##### Entfernte Felder
+
+* `antragsteller.beschaeftigung.arbeitgeberNichtInDeutschlandAnsaessigKommentar`
+* `bestehendeImmobilie.kommentar`
+* `immobilie.erbbaurecht.erbbaurechtVorhanden`
+* `finanzierungsObjekt.keineBestehendenDarlehenVorhanden`
+* `immobilie.gebaeude.hausAnordnungMehrfamilienOderZweifamilienhause`
+* `immobilie.gebaeude.hausAnordnungReihenhaus`
+
+##### Entfernte Werte
+
+* Haustyp kann den Wert 'KEIN_TYP_AUSGEWAEHLT' nicht mehr haben und wird stattdessen weggelassen
+
+#### Version 0.3
+
+##### Neue Felder                                                                                                                  
 
 * antragsteller.schufaErgebnis.inManuellerNachbehandlung
 * `antrag.angebot` beinhaltet das Angebot, auf dem der Antrag basiert
@@ -18,22 +38,23 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 
 * Vorhaben.verwendungszweck kann jetzt zusätzlich den Wert 'KAPITALBESCHAFFUNG' haben
 * Haustyp kann den Wert 'KEIN_TYP_AUSGEWAEHLT' haben
+* angebot.bausparvertraege.id
+
+##### Entfernte Felder
+* angebot.id
+* angebot.bausparvertraege.provision
+* angebot.bausparvertraege.sparPhase.guthabenZins
+* angebot.bausparvertraege.tilgungsPhase.darlehensGebuehrEinmalig
+* angebot.darlehen.id
+* finanzierungsObjekt.keineBestehendenDarlehenVorhanden
+
 
 ##### Breaking Changes
 
 * viele als Enum deklarierte Werte werden jetzt als String deklariert
+* Die Knoten des `_embedded` Objects sind hoch in das Angebot verschoben
+* Bugfix: Flaechenwerte werden analog Euro und Prozent, wie in Swagger dokumentiert, als Nummern serialisiert
 
-* Angebot
-  * `rueckdatierungsFristEndeAm` entfernt
-  * `angebotsFristEndeAm` entfernt
-  * Im Knoten `dokumente` sind jetzt alle Dokumente gesammelt
-    * Dokument: `zuordnung` entfernt
-  * `bewertungDesAngebots`: Wert `ANGEBOT_ENTSPRICHT_MEINER_EMPFEHLUNG` -> `ANGEBOT_ENTSPRICHT_DER_EMPFEHLUNG_DES_KUNDENBETREUERS`
-  * `erzeugtAm`: um Zeitstempel erweitert 
-  * `beleihung` -> `beleihungsRechnung`
-  
-* Tilgungsersatz: `type` -> `typ`
-  
 * Antrag
   * Anträge werden jetzt unter dem Pfad `/antraege/antragsNummer` abgerufen, wobei bei der Antragsnummer der Slash '/' durch einen
     Unterstrich '_' zu ersetzen ist.
@@ -48,60 +69,68 @@ Informationen zu den Änderungen in den verschiedenen Versionen
   * `istKundenBetreuerVerkaeuferOderMaklerDerImmobilie` ist jetzt vom Typ Boolean
   * `angenommenAm` umbenannt nach `zeitpunktDerAnnahme` und erweitert um Zeitstempel 
 
-* Die Knoten des `_embedded` Objects sind hoch in das Angebot verschoben
-* Bugfix: Flaechenwerte werden analog Euro und Prozent, wie in Swagger dokumentiert, als Nummern serialisiert
+* Angebot
+  * `rueckdatierungsFristEndeAm` entfernt
+  * `angebotsFristEndeAm` entfernt
+  * Im Knoten `dokumente` sind jetzt alle Dokumente gesammelt
+    * Dokument: `zuordnung` entfernt
+  * `bewertungDesAngebots`: Wert `ANGEBOT_ENTSPRICHT_MEINER_EMPFEHLUNG` -> `ANGEBOT_ENTSPRICHT_DER_EMPFEHLUNG_DES_KUNDENBETREUERS`
+  * `erzeugtAm`: um Zeitstempel erweitert 
+  * `beleihung` -> `beleihungsRechnung`
+* Darlehen:
+  * `effektivZinsKosten`: `sonstigeKostenErlaeuterung` entfernt 
+  * `abzuloesendeAltdarlehen` entfernt 
+  * `bestehendesDarlehenDerImmobilieIdsBeiAbloesung` entfernt 
+  * `kreditEntscheider` entfernt 
+  * `abzuloesendeAltdarlehen` entfernt
+  * `restschuldNachZinsBindungsEnde` ist jetzt Attribut am ZinsBindung-Knoten, nicht mehr direkt am Darlehen
+  * `forwardDarlehen` Unterknoten entfernt und Werte direkt ans Darlehen verschoben
+  * `kfWDarlehen` Unterknoten entfernt und Werte direkt ans Darlehen verschoben
+  * `privatDarlehen` Unterknoten entfernt und Werte direkt ans Darlehen verschoben
+  * `zwischenFinanzierung` Unterknoten entfernt und Werte direkt ans Darlehen verschoben
+  
+* BausparAngebot: mehrere Attribute entfernt  
+
+* `zinsBindung` jetzt überall mit großem "B"
+* `zinsBindungBis` -> `zinsBindungEndetAm`
+
+* Tilgungsersatz: `type` -> `typ`
+
 * Bankverbindung: 
   * umgezogen von `haushalt` nach `zugrundeliegendeDaten`
   * `kontoinhaber` ist jetzt eine Liste von AntragstellerVerknuepfungen (jeweils mit den Feldern 'id' und 'name')
   * `kontonummer` entfernt
   * `bankleitzahl` entfert
-* `antragsteller.staatsangehoerigkeit` ist jetzt ein komplexes Objekt vom Typ `Staat` (enthält Iso-Code und menschenlesbaren Namen) 
-* haushalt.einnahmenAusgabenVermoegenVerbindlichkeiten
-  * `lebensUndRentenversicherung` -> `lebensUndRentenversicherungen` 
-  * `privateKrankenversicherungBeitragMonatlich` -> `privateKrankenversicherungsBeitraegeMonatlich` 
+
+* Antragsteller 
+  * `staatsangehoerigkeit` ist jetzt ein komplexes Objekt vom Typ `Staat` (enthält Iso-Code und menschenlesbaren Namen)
+  * `beschaeftigung` neu strukturiert 
+* `haushalt.einnahmenAusgabenVermoegenVerbindlichkeiten` umbenannt zu `positionen`
+  * `ausgabenSonstigeMonatlich` -> `sonstigeAusgaben` 
+  * `ehegattenUnterhaltEinnahmenMonatlich` -> `ehegattenUnterhalt` 
+  * `einnahmenSonstigeMonatlich` -> `sonstigeEinnahmen` 
+  * `lebensUndRentenversicherung` -> `lebensUndRentenVersicherungen` 
+  * `privateKrankenversicherungBeitragMonatlich` -> `privateKrankenversicherung` 
   * `ratenkredit` -> `ratenkredite`
-  * `unbefristeteZusatzRenteMonatlich` -> `unbefristeteZusatzRentenMonatlich`
-  * `unterhaltsVerpflichtungMonatlich` -> `unterhaltsVerpflichtungenMonatlich`
-  * `verbindlichkeitSonstige` -> `verbindlichkeitenSonstige`
+  * `unbefristeteZusatzRenteMonatlich` -> `unbefristeteZusatzRenten`
+  * `unterhaltsVerpflichtungMonatlich` -> `unterhaltsVerpflichtungen`
+  * `variableEinkuenfteMonatlich` -> `variableEinkuenfte`
+  * `verbindlichkeitSonstige` -> `sonstigeVerbindlichkeiten`
+  * `versicherungsAusgabenSonstigeMonatlich` -> `versicherungsAusgaben`
+  * `vermoegenSonstige` -> `sonstigeVermoegen`
   * `bausparvertrag` -> `bausparvertraege`
+  * `vermoegenOderVerbindlichkeit` -> `vermoegensTyp`
   * alle Einnahmen und Ausgaben: `zahlungTyp` -> `zahlungsTyp`
   * alle Berechnungshilfen-Knoten entfernt
-* Lebens- und Rentenversicherungen: komplexes Objekt `produktAnbieter` durch einfachen String `versicherungsGesellschaft` ersetzt
+  * Lebens- und Rentenversicherungen: komplexes Objekt `produktAnbieter` durch einfachen String `versicherungsGesellschaft` ersetzt
 * Jahreszahl ist Integer basiert, nicht String basiert
-* Kellerausbau umbenannt in ingDibaKellerausbau
-* `darlehen.effektivZinsKosten`: `sonstigeKostenErlaeuterung` entfernt 
-* `darlehen.abzuloesendeAltdarlehen` entfernt 
-* `darlehen.bestehendesDarlehenDerImmobilieIdsBeiAbloesung` entfernt 
-* `darlehen.kreditEntscheider` entfernt 
-* `darlehen.abzuloesendeAltdarlehen` entfernt
- * Darlehen: restschuldNachZinsBindungsEnde ist jetzt Attribut am ZinsBindung-Knoten, nicht mehr direkt am Darlehen
- 
-* FinanzierungsObjekt
-  * `BestehendesDarlehenDesFinanzierungsObjekts.darlehenArt` -> `darlehensArt`
-* BestehendeImmobilie
-  * `BestehendesDarlehen.darlehenArt` -> `darlehensArt`
-  * `BestehendesDarlehen.hauptKontonummerDslBank` entfernt
-  * `BestehendesDarlehen.darlehensKontonummer` entfernt
-  * `BestehendesDarlehen.sondertilgungZumZinsBindungsEnde` entfernt
-  * `BestehendesDarlehen.darlehensBetrag` entfernt
-  * `BestehendesDarlehen.sollZins` entfernt
-* NachrangigesExternesDarlehen: `darlehenBetrag` -> `darlehensBetrag`
-* VermietungsInformationen: Umbenennung `vermieteteWohnflaecheBeiTeilvermietung` -> `vermieteteFlaecheBeiTeilvermietung`
-* BausparAngebot: mehrere Attribute entfernt
 
-* Bausparangebote
-  * `sparPhase.guthabenZins` entfernt
-  * `tilgungsPhase.darlehensGebuehrEinmalig` entfernt
-  
-* Vorhaben
-  * `externeImmobilienDarlehen` entfernt
-  
-* ZinsBindung jetzt überall mit großem "B"
-* ZinsBindungBis -> ZinsBindungEndetAm
-
+* FinanzierungsObjekt und BestehendeImmobilie neu strukturiert  
 * Grundbuch `flurStuecke` -> `flurstuecke`
-
 * Gebäude: `gewerbeflaecheVorhanden` entfernt
+* VermietungsInformationen: Umbenennung `vermieteteWohnflaecheBeiTeilvermietung` -> `vermieteteFlaecheBeiTeilvermietung`
+  
+* Vorhaben entfernt
   
 #### Version 0.2
 

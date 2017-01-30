@@ -18,11 +18,6 @@ AngebotZumAntrag                          ;                                     
 AngebotsPruefungsErgebnis                 ;                                                 ;                                                   ;
                                           ;produktAnbieter                                  ;ProduktAnbieter                                    ;
                                           ;weitereAngaben                                   ;string                                             ;
-AnschlussFinanzierung                     ;                                                 ;                                                   ;
-                                          ;bereitsBeglicheneKosten                          ;number                                             ;
-                                          ;modernisierungsKostenInklEigenleistungen         ;number                                             ;
-                                          ;renovierungsKosten                               ;number                                             ;
-                                          ;zusaetzlichesKapital                             ;number                                             ;
 Antraege                                  ;                                                 ;                                                   ;
                                           ;antraege                                         ;array of Antrag                                    ;
                                           ;_links                                           ;Links                                              ;
@@ -173,16 +168,7 @@ Beschaeftigung                            ;                                     
                                           ;anzahlGehaelterProJahr                           ;number(double)                                     ;
                                           ;arbeitgeber                                      ;string                                             ;
                                           ;arbeitgeberInDeutschlandAnsaessig                ;boolean                                            ;
-                                          ;arbeitgeberNichtInDeutschlandAnsaessigKommentar  ;string                                             ;
-                                          ;art                                              ;enum                                               ;
-                                          ;                                                 ;                                                   ;ANGESTELLTER
-                                          ;                                                 ;                                                   ;ARBEITER
-                                          ;                                                 ;                                                   ;ARBEITSLOSER
-                                          ;                                                 ;                                                   ;BEAMTER
-                                          ;                                                 ;                                                   ;FREIBERUFLER
-                                          ;                                                 ;                                                   ;HAUSFRAU
-                                          ;                                                 ;                                                   ;RENTNER
-                                          ;                                                 ;                                                   ;SELBSTAENDIGER
+                                          ;art                                              ;string                                             ;
                                           ;befristungsStatus                                ;enum                                               ;
                                           ;                                                 ;                                                   ;BEFRISTET
                                           ;                                                 ;                                                   ;UNBEFRISTET
@@ -194,7 +180,6 @@ Beschaeftigung                            ;                                     
                                           ;situationNachRenteneintritt                      ;SituationNachRenteneintritt                        ;
                                           ;sonstigesRegelmaessigesEinkommenNettoMonatlich   ;number                                             ;
                                           ;staatlicheRenteNettoMonatlich                    ;number                                             ;
-                                          ;taetigSeit                                       ;string(date)                                       ;
                                           ;taetigkeit                                       ;string                                             ;
 BestehendeImmobilie                       ;                                                 ;                                                   ;
                                           ;adresse                                          ;Postadresse                                        ;
@@ -209,7 +194,6 @@ BestehendeImmobilie                       ;                                     
                                           ;                                                 ;                                                   ;KEIN_EINSATZ
                                           ;                                                 ;                                                   ;VERKAUFEN
                                           ;                                                 ;                                                   ;ALS_ZUSATZSICHERHEIT
-                                          ;kommentar                                        ;string                                             ;
                                           ;maximalEinzusetzenderBetragWennVerkauf           ;number                                             ;
                                           ;objektArt                                        ;enum                                               ;
                                           ;                                                 ;                                                   ;GRUNDSTUECK
@@ -326,12 +310,28 @@ EinnahmenMonatlich                        ;                                     
                                           ;                                                 ;                                                   ;EINNAHME
                                           ;                                                 ;                                                   ;AUSGABE
 Erbbaurecht                               ;                                                 ;                                                   ;
-                                          ;erbbaurechtVorhanden                             ;boolean                                            ;
                                           ;erbbauzinsJaehrlich                              ;number                                             ;
                                           ;grundstuecksEigentuemer                          ;enum                                               ;
                                           ;                                                 ;                                                   ;ANDERE
                                           ;                                                 ;                                                   ;OEFFENTLICH_KIRCHLICH
                                           ;laufzeitBisJahr                                  ;string                                             ;
+Finanzbedarf                              ;                                                 ;                                                   ;
+                                          ;aussenAnlagen                                    ;number                                             ;
+                                          ;bauNebenkosten                                   ;number                                             ;
+                                          ;bereitsBeglichen                                 ;number                                             ;
+                                          ;erschliessung                                    ;number                                             ;
+                                          ;grunderwerbsteuer                                ;number                                             ;
+                                          ;grundstuecksKaufpreis                            ;number                                             ;
+                                          ;herstellung                                      ;number                                             ;
+                                          ;kapitalBeschaffung                               ;number                                             ;
+                                          ;kaufpreis                                        ;number                                             ;
+                                          ;maklergebuehr                                    ;number                                             ;
+                                          ;mobiliar                                         ;number                                             ;
+                                          ;modernisierung                                   ;number                                             ;
+                                          ;notargebuehr                                     ;number                                             ;
+                                          ;renovierung                                      ;number                                             ;
+                                          ;sonstigeKosten                                   ;number                                             ;
+                                          ;zusaetzlichesKapital                             ;number                                             ;
 FinanzierungsObjekt                       ;                                                 ;                                                   ;
                                           ;adresse                                          ;Postadresse                                        ;
                                           ;autostellplaetze                                 ;array of Autostellplatz                            ;
@@ -352,16 +352,38 @@ Flurstueck                                ;                                     
                                           ;flurstuecksNummer                                ;string                                             ;
                                           ;groesse                                          ;number                                             ;
 Gebaeude                                  ;                                                 ;                                                   ;
+                                          ;anzahlDerGewerbeeinheiten                        ;integer(int32)                                     ;
                                           ;anzahlDerWohneinheitenImGebaeude                 ;integer(int32)                                     ;
                                           ;anzahlVollgeschosse                              ;integer(int32)                                     ;
                                           ;ausstattung                                      ;string                                             ;
                                           ;baujahr                                          ;string                                             ;
-                                          ;bauweise                                         ;string                                             ;
+                                          ;bauweise                                         ;enum                                               ;
+                                          ;                                                 ;                                                   ;MASSIV
+                                          ;                                                 ;                                                   ;HOLZ
+                                          ;                                                 ;                                                   ;FACHWERK_MIT_ZIEGELN
+                                          ;                                                 ;                                                   ;FACHWERK_MIT_STROH_LEHM
+                                          ;                                                 ;                                                   ;GLAS_STAHL
+                                          ;bezeichnungWohneinheit                           ;string                                             ;
+                                          ;dachgeschossAusbau                               ;string                                             ;
+                                          ;einliegerwohnungVorhanden                        ;boolean                                            ;
                                           ;gewerbeflaeche                                   ;GebaeudeFlaeche                                    ;
+                                          ;hausAnordnung                                    ;enum                                               ;
+                                          ;                                                 ;                                                   ;FREISTEHEND
+                                          ;                                                 ;                                                   ;KOPFHAUS
+                                          ;                                                 ;                                                   ;MITTELHAUS
+                                          ;hausTyp                                          ;enum                                               ;
+                                          ;                                                 ;                                                   ;DOPPELHAUSHAELFTE
+                                          ;                                                 ;                                                   ;EINFAMILIENHAUS
+                                          ;                                                 ;                                                   ;MEHRFAMILIENHAUS
+                                          ;                                                 ;                                                   ;REIHENHAUS
+                                          ;                                                 ;                                                   ;ZWEIFAMILIENHAUS
+                                          ;istFertighaus                                    ;boolean                                            ;
+                                          ;miteigentumsAnteil                               ;MiteigentumsAnteil                                 ;
                                           ;modernisierungsAngaben                           ;ModernisierungsAngaben                             ;
+                                          ;unterkellerung                                   ;string                                             ;
                                           ;wohnflaeche                                      ;GebaeudeFlaeche                                    ;
 GebaeudeFlaeche                           ;                                                 ;                                                   ;
-                                          ;gesamtGrosse                                     ;number                                             ;
+                                          ;gesamtGroesse                                    ;number                                             ;
                                           ;vermietungsInformationen                         ;VermietungsInformationen                           ;
 GrundbuchAngabe                           ;                                                 ;                                                   ;
                                           ;anmerkungen                                      ;string                                             ;
@@ -409,24 +431,6 @@ HaushaltsPositionen                       ;                                     
                                           ;wertpapiere                                      ;array of Wertpapiere                               ;
 ImmobilieVerknuepfung                     ;                                                 ;                                                   ;
                                           ;id                                               ;string                                             ;
-Kapitalbeschaffung                        ;                                                 ;                                                   ;
-                                          ;betrag                                           ;number                                             ;
-                                          ;verwendungKommentar                              ;string                                             ;
-Kauf                                      ;                                                 ;                                                   ;
-                                          ;bereitsBeglicheneKosten                          ;number                                             ;
-                                          ;kaufpreis                                        ;number                                             ;
-                                          ;mobiliarKosten                                   ;number                                             ;
-                                          ;modernisierungsKostenInklEigenleistungen         ;number                                             ;
-                                          ;nebenkosten                                      ;Nebenkosten                                        ;
-                                          ;renovierungsKosten                               ;number                                             ;
-                                          ;sonstigeKosten                                   ;number                                             ;
-KaufNeubauVomBautraeger                   ;                                                 ;                                                   ;
-                                          ;anzahlTeilzahlungen                              ;integer(int32)                                     ;
-                                          ;bereitsBeglicheneKosten                          ;number                                             ;
-                                          ;kaufpreisInklEigenleistungen                     ;number                                             ;
-                                          ;mobiliarKosten                                   ;number                                             ;
-                                          ;nebenkosten                                      ;Nebenkosten                                        ;
-                                          ;sonstigeKosten                                   ;number                                             ;
 Kind                                      ;                                                 ;                                                   ;
                                           ;geburtsdatum                                     ;string(date)                                       ;
                                           ;kindergeldWirdBezogen                            ;boolean                                            ;
@@ -498,31 +502,16 @@ MietAusgaben                              ;                                     
 MiteigentumsAnteil                        ;                                                 ;                                                   ;
                                           ;anteil                                           ;number(double)                                     ;
                                           ;gesamt                                           ;integer(int32)                                     ;
-Modernisierung                            ;                                                 ;                                                   ;
-                                          ;anzahlTeilzahlungen                              ;integer(int32)                                     ;
-                                          ;mobiliarKosten                                   ;number                                             ;
-                                          ;modernisierungsKostenInklEigenleistungen         ;number                                             ;
-                                          ;renovierungsKosten                               ;number                                             ;
-                                          ;sonstigeKosten                                   ;number                                             ;
-                                          ;zusaetzlichesKapital                             ;number                                             ;
 ModernisierungsAngaben                    ;                                                 ;                                                   ;
                                           ;modernisierungsGrad                              ;string                                             ;
                                           ;modernisierungsJahr                              ;string                                             ;
-Nebenkosten                               ;                                                 ;                                                   ;
-                                          ;grunderwerbsteuer                                ;number                                             ;
-                                          ;maklergebuehr                                    ;number                                             ;
-                                          ;notargebuehr                                     ;number                                             ;
-Neubau                                    ;                                                 ;                                                   ;
-                                          ;anzahlTeilzahlungen                              ;integer(int32)                                     ;
-                                          ;aussenAnlagen                                    ;number                                             ;
-                                          ;bauNebenkosten                                   ;number                                             ;
-                                          ;bereitsBeglicheneKosten                          ;number                                             ;
-                                          ;erschliessungskosten                             ;number                                             ;
-                                          ;grundstueckKaufpreis                             ;number                                             ;
-                                          ;herstellungskostenInklusiveEigenleistungen       ;number                                             ;
-                                          ;mobiliarKosten                                   ;number                                             ;
-                                          ;nebenkosten                                      ;Nebenkosten                                        ;
-                                          ;sonstigeKosten                                   ;number                                             ;
+NachrangigesExternesDarlehen              ;                                                 ;                                                   ;
+                                          ;darlehensBetrag                                  ;number                                             ;
+                                          ;darlehensGeber                                   ;string                                             ;
+                                          ;id                                               ;string                                             ;
+                                          ;rateMonatlich                                    ;number                                             ;
+                                          ;typ                                              ;string                                             ;
+                                          ;zinsBindung                                      ;ZinsBindung                                        ;
 Partner                                   ;                                                 ;                                                   ;
                                           ;partnerId                                        ;string                                             ;
                                           ;vorname                                          ;string                                             ;
@@ -629,6 +618,16 @@ Vermoegen                                 ;                                     
                                           ;vermoegensTyp                                    ;enum                                               ;
                                           ;                                                 ;                                                   ;VERMOEGEN
                                           ;                                                 ;                                                   ;VERBINDLICHKEIT
+Vorhaben                                  ;                                                 ;                                                   ;
+                                          ;finanzbedarf                                     ;Finanzbedarf                                       ;
+                                          ;nachrangigeExterneDarlehen                       ;array of NachrangigesExternesDarlehen              ;
+                                          ;verwendungszweck                                 ;enum                                               ;
+                                          ;                                                 ;                                                   ;ANSCHLUSSFINANZIERUNG
+                                          ;                                                 ;                                                   ;KAUF
+                                          ;                                                 ;                                                   ;KAUF_NEUBAU_VOM_BAUTRAEGER
+                                          ;                                                 ;                                                   ;MODERNISIERUNG_UMBAU_ANBAU
+                                          ;                                                 ;                                                   ;NEUBAU
+                                          ;                                                 ;                                                   ;KAPITALBESCHAFFUNG
 Wertpapiere                               ;                                                 ;                                                   ;
                                           ;aktuellerWert                                    ;number                                             ;
                                           ;dividendenJaehrlich                              ;number                                             ;
@@ -648,4 +647,5 @@ ZugrundeliegendeDatenZumAntrag            ;                                     
                                           ;bankverbindung                                   ;Bankverbindung                                     ;
                                           ;finanzierungsObjekt                              ;FinanzierungsObjekt                                ;
                                           ;haushalte                                        ;array of Haushalt                                  ;
+                                          ;vorhaben                                         ;Vorhaben                                           ;
                                           ;_links                                           ;Links                                              ;

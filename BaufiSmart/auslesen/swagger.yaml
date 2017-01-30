@@ -2,8 +2,8 @@
 swagger: "2.0"
 info:
   description: "Die EUROPACE API zum Auslesen von Anträgen und Vorgängen."
-  version: "0.3"
-  title: "Auslesen API"
+  version: "0.4"
+  title: "Auslesen API Mock"
   contact:
     name: "Europace AG"
     url: "www.europace2.de"
@@ -28,18 +28,28 @@ paths:
       - "*/*"
       produces:
       - "text/html"
-      parameters: []
+      parameters:
+      - name: "Accept"
+        in: "header"
+        required: false
+        type: "string"
+        default: "'text/html'"
       responses:
         200:
           description: "OK"
           schema:
             type: "string"
+          headers:
+            Content-Type:
+              type: "string"
         401:
           description: "Unauthorized"
         403:
           description: "Forbidden"
         404:
           description: "Not Found"
+        500:
+          description: "Internal Server Error"
       security:
       - oauth2:
         - "API"
@@ -55,7 +65,15 @@ paths:
       - "*/*"
       produces:
       - "application/json;charset=UTF-8"
-      parameters: []
+      parameters:
+      - name: "X-Authentication"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "Authorization"
+        in: "header"
+        required: false
+        type: "string"
       responses:
         200:
           description: "OK"
@@ -67,6 +85,8 @@ paths:
           description: "Forbidden"
         404:
           description: "Not Found"
+        500:
+          description: "Internal Server Error"
       security:
       - oauth2:
         - "API"
@@ -88,6 +108,14 @@ paths:
         description: "Nummer des Antrags"
         required: true
         type: "string"
+      - name: "X-Authentication"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "Authorization"
+        in: "header"
+        required: false
+        type: "string"
       responses:
         200:
           description: "OK"
@@ -99,6 +127,8 @@ paths:
           description: "Forbidden"
         404:
           description: "Not Found"
+        500:
+          description: "Internal Server Error"
       security:
       - oauth2:
         - "API"
@@ -120,6 +150,14 @@ paths:
         description: "Nummer des Antrags, wobei '/' durch '_' ersetzt werden muss."
         required: true
         type: "string"
+      - name: "X-Authentication"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "Authorization"
+        in: "header"
+        required: false
+        type: "string"
       responses:
         200:
           description: "OK"
@@ -131,6 +169,8 @@ paths:
           description: "Forbidden"
         404:
           description: "Not Found"
+        500:
+          description: "Internal Server Error"
       security:
       - oauth2:
         - "API"
@@ -314,8 +354,6 @@ definitions:
         - "KEIN_EINSATZ"
         - "VERKAUFEN"
         - "ALS_ZUSATZSICHERHEIT"
-      kommentar:
-        type: "string"
       maximalEinzusetzenderBetragWennVerkauf:
         type: "number"
       objektArt:
@@ -366,15 +404,6 @@ definitions:
           cksichtigt. (DSL Bank)"
       positionen:
         $ref: "#/definitions/HaushaltsPositionen"
-  Nebenkosten:
-    type: "object"
-    properties:
-      grunderwerbsteuer:
-        type: "number"
-      maklergebuehr:
-        type: "number"
-      notargebuehr:
-        type: "number"
   AusgabenMonatlich:
     type: "object"
     properties:
@@ -425,30 +454,6 @@ definitions:
           $ref: "#/definitions/AngebotsPruefungsErgebnis"
       _links:
         $ref: "#/definitions/Links"
-  Neubau:
-    type: "object"
-    properties:
-      anzahlTeilzahlungen:
-        type: "integer"
-        format: "int32"
-      aussenAnlagen:
-        type: "number"
-      bauNebenkosten:
-        type: "number"
-      bereitsBeglicheneKosten:
-        type: "number"
-      erschliessungskosten:
-        type: "number"
-      grundstueckKaufpreis:
-        type: "number"
-      herstellungskostenInklusiveEigenleistungen:
-        type: "number"
-      mobiliarKosten:
-        type: "number"
-      nebenkosten:
-        $ref: "#/definitions/Nebenkosten"
-      sonstigeKosten:
-        type: "number"
   Bausparvertrag:
     type: "object"
     properties:
@@ -702,14 +707,44 @@ definitions:
         type: "boolean"
       wildcardType:
         type: "boolean"
-  AnschlussFinanzierung:
+  Finanzbedarf:
     type: "object"
     properties:
-      bereitsBeglicheneKosten:
+      aussenAnlagen:
         type: "number"
-      modernisierungsKostenInklEigenleistungen:
+      bauNebenkosten:
         type: "number"
-      renovierungsKosten:
+      bereitsBeglichen:
+        type: "number"
+      erschliessung:
+        type: "number"
+      grunderwerbsteuer:
+        type: "number"
+        description: "Nebenkosten"
+      grundstuecksKaufpreis:
+        type: "number"
+      herstellung:
+        type: "number"
+        description: "inklusive Eigenleistungen"
+      kapitalBeschaffung:
+        type: "number"
+      kaufpreis:
+        type: "number"
+        description: "inklusive Eigenleistungen"
+      maklergebuehr:
+        type: "number"
+        description: "Nebenkosten"
+      mobiliar:
+        type: "number"
+      modernisierung:
+        type: "number"
+        description: "inklusive Eigenleistungen"
+      notargebuehr:
+        type: "number"
+        description: "Nebenkosten"
+      renovierung:
+        type: "number"
+      sonstigeKosten:
         type: "number"
       zusaetzlichesKapital:
         type: "number"
@@ -745,23 +780,6 @@ definitions:
         - "UNTERSCHRIEBEN"
         - "ABGELEHNT"
         - "ZURUECKGESTELLT"
-  Kauf:
-    type: "object"
-    properties:
-      bereitsBeglicheneKosten:
-        type: "number"
-      kaufpreis:
-        type: "number"
-      mobiliarKosten:
-        type: "number"
-      modernisierungsKostenInklEigenleistungen:
-        type: "number"
-      nebenkosten:
-        $ref: "#/definitions/Nebenkosten"
-      renovierungsKosten:
-        type: "number"
-      sonstigeKosten:
-        type: "number"
   Flurstueck:
     type: "object"
     properties:
@@ -772,22 +790,6 @@ definitions:
       flurstuecksNummer:
         type: "string"
       groesse:
-        type: "number"
-  KaufNeubauVomBautraeger:
-    type: "object"
-    properties:
-      anzahlTeilzahlungen:
-        type: "integer"
-        format: "int32"
-      bereitsBeglicheneKosten:
-        type: "number"
-      kaufpreisInklEigenleistungen:
-        type: "number"
-      mobiliarKosten:
-        type: "number"
-      nebenkosten:
-        $ref: "#/definitions/Nebenkosten"
-      sonstigeKosten:
         type: "number"
   MietAusgaben:
     type: "object"
@@ -819,6 +821,24 @@ definitions:
     properties:
       id:
         type: "string"
+  Vorhaben:
+    type: "object"
+    properties:
+      finanzbedarf:
+        $ref: "#/definitions/Finanzbedarf"
+      nachrangigeExterneDarlehen:
+        type: "array"
+        items:
+          $ref: "#/definitions/NachrangigesExternesDarlehen"
+      verwendungszweck:
+        type: "string"
+        enum:
+        - "ANSCHLUSSFINANZIERUNG"
+        - "KAUF"
+        - "KAUF_NEUBAU_VOM_BAUTRAEGER"
+        - "MODERNISIERUNG_UMBAU_ANBAU"
+        - "NEUBAU"
+        - "KAPITALBESCHAFFUNG"
   EinnahmenMonatlich:
     type: "object"
     properties:
@@ -856,6 +876,8 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/Haushalt"
+      vorhaben:
+        $ref: "#/definitions/Vorhaben"
       _links:
         $ref: "#/definitions/Links"
   GrundbuchAngabe:
@@ -926,22 +948,6 @@ definitions:
           \ Beleihungswerte"
       produktAnbieter:
         $ref: "#/definitions/ProduktAnbieter"
-  Modernisierung:
-    type: "object"
-    properties:
-      anzahlTeilzahlungen:
-        type: "integer"
-        format: "int32"
-      mobiliarKosten:
-        type: "number"
-      modernisierungsKostenInklEigenleistungen:
-        type: "number"
-      renovierungsKosten:
-        type: "number"
-      sonstigeKosten:
-        type: "number"
-      zusaetzlichesKapital:
-        type: "number"
   SparPhase:
     type: "object"
     properties:
@@ -1338,7 +1344,7 @@ definitions:
   GebaeudeFlaeche:
     type: "object"
     properties:
-      gesamtGrosse:
+      gesamtGroesse:
         type: "number"
       vermietungsInformationen:
         $ref: "#/definitions/VermietungsInformationen"
@@ -1396,6 +1402,10 @@ definitions:
   Gebaeude:
     type: "object"
     properties:
+      anzahlDerGewerbeeinheiten:
+        type: "integer"
+        format: "int32"
+        description: "Nur bei ObjektArt == HAUS."
       anzahlDerWohneinheitenImGebaeude:
         type: "integer"
         format: "int32"
@@ -1418,19 +1428,57 @@ definitions:
         description: "Erlaubte Werte sind: FACHWERK_MIT_STROH_LEHM,FACHWERK_MIT_ZIEGELN,GLAS_STAHL,HOLZ,MASSIV.\
           \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
           \ mit unbekannten Werten umgehen können."
+        enum:
+        - "MASSIV"
+        - "HOLZ"
+        - "FACHWERK_MIT_ZIEGELN"
+        - "FACHWERK_MIT_STROH_LEHM"
+        - "GLAS_STAHL"
+      bezeichnungWohneinheit:
+        type: "string"
+        description: "Nur bei ObjektArt == EIGENTUMSWOHNUNG."
+      dachgeschossAusbau:
+        type: "string"
+        description: "Nur bei ObjektArt == HAUS. Erlaubte Werte sind: FLACHDACH,NICHT_AUSGEBAUT,TEILWEISE_AUSGEBAUT,VOLL_AUSGEBAUT.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      einliegerwohnungVorhanden:
+        type: "boolean"
+        example: false
+        description: "Nur bei ObjektArt == HAUS."
       gewerbeflaeche:
         $ref: "#/definitions/GebaeudeFlaeche"
+      hausAnordnung:
+        type: "string"
+        enum:
+        - "FREISTEHEND"
+        - "KOPFHAUS"
+        - "MITTELHAUS"
+      hausTyp:
+        type: "string"
+        description: "Nur bei ObjektArt == HAUS."
+        enum:
+        - "DOPPELHAUSHAELFTE"
+        - "EINFAMILIENHAUS"
+        - "MEHRFAMILIENHAUS"
+        - "REIHENHAUS"
+        - "ZWEIFAMILIENHAUS"
+      istFertighaus:
+        type: "boolean"
+        example: false
+        description: "Nur bei ObjektArt == HAUS."
+      miteigentumsAnteil:
+        description: "Nur bei ObjektArt == EIGENTUMSWOHNUNG."
+        $ref: "#/definitions/MiteigentumsAnteil"
       modernisierungsAngaben:
         $ref: "#/definitions/ModernisierungsAngaben"
+      unterkellerung:
+        type: "string"
+        description: "Nur bei ObjektArt == HAUS. Erlaubte Werte sind: NICHT_UNTERKELLERT,TEILWEISE_UNTERKELLERT,UNTERKELLERT.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
       wohnflaeche:
         $ref: "#/definitions/GebaeudeFlaeche"
-  Kapitalbeschaffung:
-    type: "object"
-    properties:
-      betrag:
-        type: "number"
-      verwendungKommentar:
-        type: "string"
   FinanzierungsObjekt:
     type: "object"
     properties:
@@ -1486,8 +1534,6 @@ definitions:
   Erbbaurecht:
     type: "object"
     properties:
-      erbbaurechtVorhanden:
-        type: "boolean"
       erbbauzinsJaehrlich:
         type: "number"
       grundstuecksEigentuemer:
@@ -1629,20 +1675,10 @@ definitions:
         type: "boolean"
         example: false
         description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
-      arbeitgeberNichtInDeutschlandAnsaessigKommentar:
-        type: "string"
-        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
       art:
         type: "string"
-        enum:
-        - "ANGESTELLTER"
-        - "ARBEITER"
-        - "ARBEITSLOSER"
-        - "BEAMTER"
-        - "FREIBERUFLER"
-        - "HAUSFRAU"
-        - "RENTNER"
-        - "SELBSTAENDIGER"
+        description: "Erlaubte Werte sind: ANGESTELLTER, ARBEITER, ARBEITSLOSER, BEAMTER,\
+          \ FREIBERUFLER, HAUSFRAU, RENTNER, SELBSTAENDIGER"
       befristungsStatus:
         type: "string"
         description: "nur bei art==ANGESTELLTER,ARBEITER"
@@ -1655,7 +1691,7 @@ definitions:
       beschaeftigtSeit:
         type: "string"
         format: "date"
-        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER,FREIBERUFLER,SELBSTAENDIGER"
       einkommenNettoJaehrlich:
         type: "number"
         description: "nur bei art==FREIBERUFLER,SELBSTAENDIGER"
@@ -1675,13 +1711,19 @@ definitions:
       staatlicheRenteNettoMonatlich:
         type: "number"
         description: "nur bei art==RENTNER"
-      taetigSeit:
-        type: "string"
-        format: "date"
-        description: "nur bei art==FREIBERUFLER,SELBSTAENDIGER"
       taetigkeit:
         type: "string"
-        description: "nur bei art==FREIBERUFLER,SELBSTAENDIGER"
+        description: "nur bei art==FREIBERUFLER,SELBSTAENDIGER. Erlaubte Werte sind:\
+          \   ALTENPFLEGER, AMBULANTER_KRANKENPFLEGER, ANWALT, APOTHEKER, ARCHITEKT,\
+          \ ARZT, BESTATTER, DATENSCHUTZBEAUFTRAGTER, DEKORATEUR, DIAETASSISTENT,\
+          \ DOLMETSCHER, EDV_BERATER, ERGOTHERAPEUT, ERNAEHRUNGSBERATER, FOTOGRAF,\
+          \ GEOGRAF, GRAFIKDESIGNER, GRAFIKER, HEBAMME, HEILMASSEUR, HEILPRAKTIKER,\
+          \ HISTORIKER, INFORMATIKER, INGENIEUR, INSOLVENZVERWALTER, JOURNALIST, KLASSISCHER_KONZERTMUSIKER,\
+          \ KONSTRUKTEUR, KRANKENGYMNAST, KRANKENPFLEGER, KRANKENSCHWESTER, LOGOPAEDE,\
+          \ MEDIZINISCH_TECHN_ASSISTENT, NOTAR, OPERNSAENGER, PERSONALBERATER, PHYSIOTHERAPEUT,\
+          \ PSYCHOLOGE, RAUMAUSSTATTER, RUNDFUNKSPRECHER, SACHVERSTAENDIGER, STADTPLANER,\
+          \ STATIKER, STEUERBERATER, TIERARZT, UNTERNEHMENSBERATER, VERMITTLER, WIRTSCH_BUCHPRUEFER_REVISOR,\
+          \ ZAHNARZT, ZAHNTECHNIKER, SONSTIGES."
   SchufaErgebnis:
     type: "object"
     properties:
@@ -1720,3 +1762,23 @@ definitions:
         description: "Nur wenn ausweisArt = ANDERE"
       ausweisNummer:
         type: "string"
+  NachrangigesExternesDarlehen:
+    type: "object"
+    properties:
+      darlehensBetrag:
+        type: "number"
+      darlehensGeber:
+        type: "string"
+        description: "Der Name des externen Darlehensgebers (Firmierung). Es gibt\
+          \ keine entsprechende Beziehung zu einem Partner auf der Europace-Plattform."
+      id:
+        type: "string"
+      rateMonatlich:
+        type: "number"
+      typ:
+        type: "string"
+        description: "Erlaubte Werte sind: ARBEITGEBERDARLEHEN,BAUSPARDARLEHEN,OEFFENTLICHES_DARLEHEN,RATENKREDIT.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      zinsBindung:
+        $ref: "#/definitions/ZinsBindung"
