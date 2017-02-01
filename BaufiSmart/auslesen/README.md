@@ -1,5 +1,5 @@
 # Anträge Auslesen API
-API Definition zum Auslesen von Anträgen aus der Europace Plattform aus sicht eines Produktanbieters.
+API Definition zum Auslesen von Anträgen aus der Europace-Plattform aus Sicht eines Produktanbieters.
 
 **Hinweis:** Es handelt sich hierbei um eine noch recht frühe Version und es werden noch Veränderungen an der API vorgenommen, die nicht abwärtskompatibel sein könnten. Dies bedeutet, dass gegen diese Version programmierte Clients später noch einmal angepasst werden müssten.
 
