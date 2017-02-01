@@ -2,6 +2,13 @@
 
 Informationen zu den Änderungen in den verschiedenen Versionen
 
+#### Version 0.5
+
+##### Geänderte Dokumentation / YAML
+
+* `link.href` als String interpretieren
+* `link.type` als String interpretieren
+
 #### Version 0.4
 
 ##### Neue Felder
