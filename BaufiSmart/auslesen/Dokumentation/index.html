@@ -561,7 +561,6 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_bestehenderbausparvertrag">BestehenderBausparvertrag</a></li>
 <li><a href="#_bestehendesdarlehen">BestehendesDarlehen</a></li>
 <li><a href="#_bestehendesdarlehendesfinanzierungsobjekts">BestehendesDarlehenDesFinanzierungsObjekts</a></li>
-<li><a href="#_charset">Charset</a></li>
 <li><a href="#_darlehen">Darlehen</a></li>
 <li><a href="#_dokument">Dokument</a></li>
 <li><a href="#_effektivzinskosten">EffektivZinsKosten</a></li>
@@ -583,7 +582,6 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_legitimationsdaten">LegitimationsDaten</a></li>
 <li><a href="#_link">Link</a></li>
 <li><a href="#_links">Links</a></li>
-<li><a href="#_mediatype">MediaType</a></li>
 <li><a href="#_meldung">Meldung</a></li>
 <li><a href="#_mietausgaben">MietAusgaben</a></li>
 <li><a href="#_miteigentumsanteil">MiteigentumsAnteil</a></li>
@@ -601,7 +599,6 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_tilgung">Tilgung</a></li>
 <li><a href="#_tilgungsersatz">TilgungsErsatz</a></li>
 <li><a href="#_tilgungsphase">TilgungsPhase</a></li>
-<li><a href="#_uri">URI</a></li>
 <li><a href="#_verbindlichkeit">Verbindlichkeit</a></li>
 <li><a href="#_vermietungsinformationen">VermietungsInformationen</a></li>
 <li><a href="#_vermoegen">Vermoegen</a></li>
@@ -629,7 +626,7 @@ table.CodeRay td.code>pre{padding:0}
 <div class="sect2">
 <h3 id="_aktuelle_version">Aktuelle Version</h3>
 <div class="paragraph">
-<p><em>Version</em> : 0.4</p>
+<p><em>Version</em> : 0.5</p>
 </div>
 </div>
 <div class="sect2">
@@ -687,15 +684,19 @@ table.CodeRay td.code>pre{padding:0}
 <h5 id="_parameter">Parameter</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 22%;">
-<col style="width: 33%;">
-<col style="width: 44%;">
+<col style="width: 10%;">
+<col style="width: 15%;">
+<col style="width: 45%;">
+<col style="width: 20%;">
+<col style="width: 10%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-middle">Typ</th>
 <th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
 <th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Standard</th>
 </tr>
 </thead>
 <tbody>
@@ -703,13 +704,49 @@ table.CodeRay td.code>pre{padding:0}
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Header</strong></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Authorization</strong><br>
 <em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-middle"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Header</strong></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>X-Authentication</strong><br>
 <em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-middle"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>datenKontext</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Datenkontext</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">enum (ECHT_GESCHAEFT, TEST_MODUS)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"ECHT_GESCHAEFT"</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>erzeugtSeit</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Datum im ISO Format UTC - Zulu</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string(date-time)</p></td>
+<td class="tableblock halign-left valign-middle"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>limit</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">limit</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"10"</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>page</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">page</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"0"</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -1103,34 +1140,6 @@ table.CodeRay td.code>pre{padding:0}
 <div class="content">
 <pre>GET /</pre>
 </div>
-</div>
-<div class="sect4">
-<h5 id="_parameter_4">Parameter</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 18%;">
-<col style="width: 27%;">
-<col style="width: 36%;">
-<col style="width: 18%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Typ</th>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Typ</th>
-<th class="tableblock halign-left valign-middle">Standard</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Header</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Accept</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"'text/html'"</code></p></td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="sect4">
 <h5 id="_antworten_4">Antworten</h5>
@@ -2538,28 +2547,6 @@ table.CodeRay td.code>pre{padding:0}
 </table>
 </div>
 <div class="sect2">
-<h3 id="_charset">Charset</h3>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 42%;">
-<col style="width: 57%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Typ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>registered</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
 <h3 id="_darlehen">Darlehen</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -2763,7 +2750,7 @@ table.CodeRay td.code>pre{padding:0}
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>href</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_uri">URI</a></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>name</strong><br>
@@ -2775,7 +2762,7 @@ table.CodeRay td.code>pre{padding:0}
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>type</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_mediatype">MediaType</a></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 </tbody>
 </table>
@@ -3810,12 +3797,12 @@ table.CodeRay td.code>pre{padding:0}
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>href</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_uri">URI</a></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>type</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_mediatype">MediaType</a></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 </tbody>
 </table>
@@ -3838,68 +3825,6 @@ table.CodeRay td.code>pre{padding:0}
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>self</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_link">Link</a></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_mediatype">MediaType</h3>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 42%;">
-<col style="width: 57%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Typ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>charSet</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_charset">Charset</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>charset</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_charset">Charset</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>concrete</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>parameters</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; string, string &gt; map</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>qualityValue</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">number(double)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>subtype</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>type</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>wildcardSubtype</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>wildcardType</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
 </tr>
 </tbody>
 </table>
@@ -4549,108 +4474,6 @@ table.CodeRay td.code>pre{padding:0}
 </table>
 </div>
 <div class="sect2">
-<h3 id="_uri">URI</h3>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 42%;">
-<col style="width: 57%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Typ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>absolute</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>authority</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>fragment</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>host</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>opaque</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>path</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>port</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>query</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>rawAuthority</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>rawFragment</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>rawPath</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>rawQuery</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>rawSchemeSpecificPart</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>rawUserInfo</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>scheme</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>schemeSpecificPart</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>userInfo</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
 <h3 id="_verbindlichkeit">Verbindlichkeit</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -4955,7 +4778,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-11-03 13:56:52 MEZ
+Last updated 2016-11-04 16:35:16 MEZ
 </div>
 </div>
 </body>
