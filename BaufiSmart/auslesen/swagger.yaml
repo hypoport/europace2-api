@@ -1,9 +1,10 @@
 ---
 swagger: "2.0"
 info:
-  description: "Die EUROPACE API zum Auslesen von Anträgen und Vorgängen."
+  description: "Mit dieser API können die Anträge durch die Produktanbieter abgerufen\
+    \ werden. Dabei wird ausschließlich der Securitykontext des Produktanbieters eingenommen."
   version: "0.5"
-  title: "Auslesen API Mock"
+  title: "Auslesen API"
   contact:
     name: "Europace AG"
     url: "www.europace2.de"
@@ -13,41 +14,9 @@ basePath: "/v1"
 tags:
 - name: "Antraege"
   description: "Dieser Endpunkt repräsentiert die Produktanbietersicht."
-- name: "index-controller"
-  description: "Index Controller"
 schemes:
 - "https"
 paths:
-  /:
-    get:
-      tags:
-      - "index-controller"
-      summary: "getIndexPage"
-      operationId: "getIndexPageUsingGET"
-      consumes:
-      - "*/*"
-      produces:
-      - "text/html"
-      parameters: []
-      responses:
-        200:
-          description: "OK"
-          schema:
-            type: "string"
-          headers:
-            Content-Type:
-              type: "string"
-        401:
-          description: "Unauthorized"
-        403:
-          description: "Forbidden"
-        404:
-          description: "Not Found"
-        500:
-          description: "Internal Server Error"
-      security:
-      - oauth2:
-        - "API"
   /antraege:
     get:
       tags:
@@ -70,7 +39,7 @@ paths:
         enum:
         - "ECHT_GESCHAEFT"
         - "TEST_MODUS"
-      - name: "erzeugtSeit"
+      - name: "angenommenNach"
         in: "query"
         description: "Datum im ISO Format UTC - Zulu"
         required: false
@@ -98,6 +67,14 @@ paths:
         in: "header"
         required: false
         type: "string"
+      - name: "X-TraceId"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "X-Amzn-Trace-Id"
+        in: "header"
+        required: false
+        type: "string"
       responses:
         200:
           description: "OK"
@@ -105,12 +82,20 @@ paths:
             $ref: "#/definitions/Antraege"
         401:
           description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/Error"
         403:
           description: "Forbidden"
+          schema:
+            $ref: "#/definitions/Error"
         404:
           description: "Not Found"
+          schema:
+            $ref: "#/definitions/Error"
         500:
           description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
       security:
       - oauth2:
         - "API"
@@ -140,6 +125,14 @@ paths:
         in: "header"
         required: false
         type: "string"
+      - name: "X-TraceId"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "X-Amzn-Trace-Id"
+        in: "header"
+        required: false
+        type: "string"
       responses:
         200:
           description: "OK"
@@ -147,12 +140,20 @@ paths:
             $ref: "#/definitions/Antrag"
         401:
           description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/Error"
         403:
           description: "Forbidden"
+          schema:
+            $ref: "#/definitions/Error"
         404:
           description: "Not Found"
+          schema:
+            $ref: "#/definitions/Error"
         500:
           description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
       security:
       - oauth2:
         - "API"
@@ -182,6 +183,14 @@ paths:
         in: "header"
         required: false
         type: "string"
+      - name: "X-TraceId"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "X-Amzn-Trace-Id"
+        in: "header"
+        required: false
+        type: "string"
       responses:
         200:
           description: "OK"
@@ -189,12 +198,20 @@ paths:
             $ref: "#/definitions/AngebotZumAntrag"
         401:
           description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/Error"
         403:
           description: "Forbidden"
+          schema:
+            $ref: "#/definitions/Error"
         404:
           description: "Not Found"
+          schema:
+            $ref: "#/definitions/Error"
         500:
           description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
       security:
       - oauth2:
         - "API"
@@ -458,7 +475,7 @@ definitions:
           $ref: "#/definitions/Darlehen"
       erzeugtAm:
         type: "string"
-        format: "date"
+        format: "date-time"
         description: "Erzeugungsdatum des Angebots"
       kennung:
         type: "string"
@@ -1294,7 +1311,7 @@ definitions:
         $ref: "#/definitions/Partner"
       zeitpunktDerAnnahme:
         type: "string"
-        format: "date"
+        format: "date-time"
         description: "Zeitpunkt, zu dem der Antrag im System erstellt wurde."
       zugrundeliegendeDaten:
         description: "Basisdaten des Kunden, die für die Berechnung des Angebots relevant\
@@ -1390,12 +1407,6 @@ definitions:
         description: "Erlaubte Werte sind: FACHWERK_MIT_STROH_LEHM,FACHWERK_MIT_ZIEGELN,GLAS_STAHL,HOLZ,MASSIV.\
           \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
           \ mit unbekannten Werten umgehen können."
-        enum:
-        - "MASSIV"
-        - "HOLZ"
-        - "FACHWERK_MIT_ZIEGELN"
-        - "FACHWERK_MIT_STROH_LEHM"
-        - "GLAS_STAHL"
       bezeichnungWohneinheit:
         type: "string"
         description: "Nur bei ObjektArt == EIGENTUMSWOHNUNG."
@@ -1474,6 +1485,18 @@ definitions:
         type: "number"
         description: "Nur relevant bei Finanzbedarf AnschlussFinanzierung, Modernisierung\
           \ und Kapitalbeschaffung"
+  Error:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+      statusCode:
+        type: "integer"
+        format: "int32"
+      statusMessage:
+        type: "string"
+      traceId:
+        type: "string"
   Autostellplatz:
     type: "object"
     properties:
@@ -1508,7 +1531,6 @@ definitions:
       art:
         type: "string"
         description: "ist nicht immer vorhanden"
-        readOnly: true
       href:
         type: "string"
       name:

@@ -6,7 +6,7 @@ AngebotZumAntrag                          ;                                     
                                           ;                                                 ;                                                   ;ANGEBOT_ENTSPRICHT_DER_EMPFEHLUNG_DES_KUNDENBETREUERS
                                           ;                                                 ;                                                   ;ANGEBOT_ENTSPRICHT_DEM_WUNSCH_DES_KUNDEN
                                           ;darlehen                                         ;array of Darlehen                                  ;
-                                          ;erzeugtAm                                        ;string(date)                                       ;
+                                          ;erzeugtAm                                        ;string(date-time)                                  ;
                                           ;kennung                                          ;string                                             ;
                                           ;machbarkeitsStatus                               ;enum                                               ;
                                           ;                                                 ;                                                   ;MACHBAR
@@ -34,7 +34,7 @@ Antrag                                    ;                                     
                                           ;produktAnbieter                                  ;ProduktAnbieter                                    ;
                                           ;status                                           ;AntragsStatus                                      ;
                                           ;vermittler                                       ;Partner                                            ;
-                                          ;zeitpunktDerAnnahme                              ;string(date)                                       ;
+                                          ;zeitpunktDerAnnahme                              ;string(date-time)                                  ;
                                           ;zugrundeliegendeDaten                            ;ZugrundeliegendeDatenZumAntrag                     ;
                                           ;_links                                           ;Links                                              ;
 AntragsStatus                             ;                                                 ;                                                   ;
@@ -313,6 +313,11 @@ Erbbaurecht                               ;                                     
                                           ;                                                 ;                                                   ;ANDERE
                                           ;                                                 ;                                                   ;OEFFENTLICH_KIRCHLICH
                                           ;laufzeitBisJahr                                  ;string                                             ;
+Error                                     ;                                                 ;                                                   ;
+                                          ;message                                          ;string                                             ;
+                                          ;statusCode                                       ;integer(int32)                                     ;
+                                          ;statusMessage                                    ;string                                             ;
+                                          ;traceId                                          ;string                                             ;
 Finanzbedarf                              ;                                                 ;                                                   ;
                                           ;aussenAnlagen                                    ;number                                             ;
                                           ;bauNebenkosten                                   ;number                                             ;
@@ -355,12 +360,7 @@ Gebaeude                                  ;                                     
                                           ;anzahlVollgeschosse                              ;integer(int32)                                     ;
                                           ;ausstattung                                      ;string                                             ;
                                           ;baujahr                                          ;string                                             ;
-                                          ;bauweise                                         ;enum                                               ;
-                                          ;                                                 ;                                                   ;MASSIV
-                                          ;                                                 ;                                                   ;HOLZ
-                                          ;                                                 ;                                                   ;FACHWERK_MIT_ZIEGELN
-                                          ;                                                 ;                                                   ;FACHWERK_MIT_STROH_LEHM
-                                          ;                                                 ;                                                   ;GLAS_STAHL
+                                          ;bauweise                                         ;string                                             ;
                                           ;bezeichnungWohneinheit                           ;string                                             ;
                                           ;dachgeschossAusbau                               ;string                                             ;
                                           ;einliegerwohnungVorhanden                        ;boolean                                            ;
