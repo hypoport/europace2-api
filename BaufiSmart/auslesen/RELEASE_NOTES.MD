@@ -2,6 +2,18 @@
 
 Informationen zu den Änderungen in den verschiedenen Versionen
 
+#### Version 0.5
+
+#### Geänderte QueryParameter
+
+* `antraege?erzeugtSeit` --\> `antraege?angenommenNach`
+
+##### Geänderte Dokumentation / YAML
+
+* Swagger-Datentyp für `Antrag.zeitpunktDerAnnahme` und `AngebotZumAntrag.erzeugtAm` von `date` auf `date-time` geändert 
+* `link.href` als String interpretieren
+* `link.type` als String interpretieren
+
 #### Version 0.4
 
 ##### Neue Felder
@@ -176,4 +188,3 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 
 * Initiale Version 
 * Anträge können ausgelesen werden
-
