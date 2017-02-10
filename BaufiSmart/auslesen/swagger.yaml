@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "Mit dieser API können die Anträge durch die Produktanbieter abgerufen\
     \ werden. Dabei wird ausschließlich der Securitykontext des Produktanbieters eingenommen."
-  version: "0.5"
+  version: "0.6"
   title: "Auslesen API"
   contact:
     name: "Europace AG"
@@ -44,7 +44,6 @@ paths:
         description: "Datum im ISO Format UTC - Zulu"
         required: false
         type: "string"
-        format: "date-time"
       - name: "page"
         in: "query"
         description: "page"

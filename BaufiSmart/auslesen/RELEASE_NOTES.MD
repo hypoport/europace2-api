@@ -2,6 +2,12 @@
 
 Informationen zu den Änderungen in den verschiedenen Versionen
 
+#### Version 0.6
+
+* Header `Authorization` wird jetzt nicht mehr explizit in der Parameterliste der Operationen erwähnt.
+* Header `X-Authentication` wird jetzt nicht mehr explizit in der Parameterliste der Operationen erwähnt.
+* Bei Collection-Ressourcen sind die `prev`- und `next`-Links explizit spezifizert. 
+
 #### Version 0.5
 
 #### Geänderte QueryParameter
@@ -188,3 +194,4 @@ Informationen zu den Änderungen in den verschiedenen Versionen
 
 * Initiale Version 
 * Anträge können ausgelesen werden
+
