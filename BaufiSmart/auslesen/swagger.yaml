@@ -537,7 +537,7 @@ definitions:
         items:
           $ref: "#/definitions/Antrag"
       _links:
-        $ref: "#/definitions/Links"
+        $ref: "#/definitions/CollectionLinks"
   Sparplaene:
     type: "object"
     properties:
@@ -796,6 +796,15 @@ definitions:
         type: "string"
       groesse:
         type: "number"
+  CollectionLinks:
+    type: "object"
+    properties:
+      next:
+        $ref: "#/definitions/Link"
+      prev:
+        $ref: "#/definitions/Link"
+      self:
+        $ref: "#/definitions/Link"
   MietAusgaben:
     type: "object"
     properties:

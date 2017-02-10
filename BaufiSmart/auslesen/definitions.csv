@@ -20,7 +20,7 @@ AngebotsPruefungsErgebnis                 ;                                     
                                           ;weitereAngaben                                   ;string                                             ;
 Antraege                                  ;                                                 ;                                                   ;
                                           ;antraege                                         ;array of Antrag                                    ;
-                                          ;_links                                           ;Links                                              ;
+                                          ;_links                                           ;CollectionLinks                                    ;
 Antrag                                    ;                                                 ;                                                   ;
                                           ;angebot                                          ;AngebotZumAntrag                                   ;
                                           ;ansprechpartner                                  ;Partner                                            ;
@@ -247,6 +247,10 @@ BestehendesDarlehenDesFinanzierungsObjekts;                                     
                                           ;                                                 ;                                                   ;TRITT_IM_RANG_ZURUECK
                                           ;                                                 ;                                                   ;TRITT_NICHT_IM_RANG_ZURUECK
                                           ;zinsBindungEndetAm                               ;string(date)                                       ;
+CollectionLinks                           ;                                                 ;                                                   ;
+                                          ;next                                             ;Link                                               ;
+                                          ;prev                                             ;Link                                               ;
+                                          ;self                                             ;Link                                               ;
 Darlehen                                  ;                                                 ;                                                   ;
                                           ;auszahlungsBetrag                                ;number                                             ;
                                           ;auszahlungsDatum                                 ;string(date)                                       ;
