@@ -59,14 +59,6 @@ paths:
         type: "integer"
         default: 10
         format: "int32"
-      - name: "X-Authentication"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "Authorization"
-        in: "header"
-        required: false
-        type: "string"
       - name: "X-TraceId"
         in: "header"
         required: false
@@ -80,6 +72,10 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/Antraege"
+        400:
+          description: "Client Error"
+          schema:
+            $ref: "#/definitions/Error"
         401:
           description: "Unauthorized"
           schema:
@@ -117,14 +113,6 @@ paths:
         description: "Nummer des Antrags"
         required: true
         type: "string"
-      - name: "X-Authentication"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "Authorization"
-        in: "header"
-        required: false
-        type: "string"
       - name: "X-TraceId"
         in: "header"
         required: false
@@ -138,6 +126,10 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/Antrag"
+        400:
+          description: "Client Error"
+          schema:
+            $ref: "#/definitions/Error"
         401:
           description: "Unauthorized"
           schema:
@@ -175,14 +167,6 @@ paths:
         description: "Nummer des Antrags, wobei '/' durch '_' ersetzt werden muss."
         required: true
         type: "string"
-      - name: "X-Authentication"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "Authorization"
-        in: "header"
-        required: false
-        type: "string"
       - name: "X-TraceId"
         in: "header"
         required: false
@@ -196,6 +180,10 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/AngebotZumAntrag"
+        400:
+          description: "Client Error"
+          schema:
+            $ref: "#/definitions/Error"
         401:
           description: "Unauthorized"
           schema:
