@@ -61,6 +61,6 @@ Um die Credentials zu erhalten, erfagen Sie beim Helpdesk der Plattform die Zuga
 3. Bei weiteren Requests muss dieses JWToken als Authentication Header mitgeschickt werden.
 
 #### Test mit Mock-Daten
-Für die Entwicklung neuer Clients können Sie mit einer Mock-Implementierung arbeiten. Diese ist unter https://baufismart.api.europace.de/mock erreichbar. So kann eine Liste von Anträgen zum Beispiel unter baufismart.api.europace.de/mock/antraege abgerufen werden.
+Für die Entwicklung neuer Clients können Sie mit einer Mock-Implementierung arbeiten. Diese ist unter https://baufismart.api.europace.de/mock erreichbar. So kann eine Liste von Anträgen zum Beispiel unter https://baufismart.api.europace.de/mock/antraege abgerufen werden.
 
-Passende Access-Token können über den oben beschriebenen Authentifizierungs-Prozess unter api.europace.de/mock/login abgerufen werden.
+Passende Access-Token können über den oben beschriebenen Authentifizierungs-Prozess unter https://api.europace.de/mock/login abgerufen werden.
