@@ -59,3 +59,8 @@ Um die Credentials zu erhalten, erfagen Sie beim Helpdesk der Plattform die Zuga
 1. Absenden eines POST Requests auf den [Login-Endpunkt](https://htmlpreview.github.io/?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/Dokumentation/index.html#_oauth2) /login mit Username und Password. Der Username entspricht der PartnerId und das Password ist der API-Key. Auf dem Testsystem können diese Werte frei gewählt werden.
 2. Aus der JSON-Antwort das JWToken (access_token) entnehmen
 3. Bei weiteren Requests muss dieses JWToken als Authentication Header mitgeschickt werden.
+
+#### Test mit Mock-Daten
+Für die Entwicklung neuer Clients können Sie mit einer Mock-Implementierung arbeiten. Diese ist unter https://baufismart.api.europace.de/mock erreichbar. So kann eine Liste von Anträgen zum Beispiel unter baufismart.api.europace.de/mock/antraege abgerufen werden.
+
+Passende Access-Token können über den oben beschriebenen Authentifizierungs-Prozess unter api.europace.de/mock/login abgerufen werden.
