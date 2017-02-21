@@ -13,7 +13,7 @@ Aus diesen Dateien können mit Hilfe von [Swagger Codegen](https://github.com/sw
 ### API Documentation
 
  - [RELEASE NOTES](RELEASE_NOTES.MD)
- - [statische HTML Seite](http://htmlpreview.github.io?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/Dokumentation/index.html)
+ - [statische HTML Seite](http://htmlpreview.github.io?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/antraege-auslesen/Dokumentation/index.html)
 
 Zur Unterstützung für das Mapping werden folgende Dateien bereit gestellt:
   - [CSV Datei](definitions.csv)
@@ -56,7 +56,7 @@ https://tools.ietf.org/html/rfc6749#section-1.3.3
 Um die Credentials zu erhalten, erfagen Sie beim Helpdesk der Plattform die Zugangsdaten zur Auslesen API, bzw. bitten Ihren Auftraggeber dies zu tun.
 
 #### Schritte 
-1. Absenden eines POST Requests auf den [Login-Endpunkt](https://htmlpreview.github.io/?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/auslesen/Dokumentation/index.html#_oauth2) /login mit Username und Password. Der Username entspricht der PartnerId und das Password ist der API-Key. Auf dem Testsystem können diese Werte frei gewählt werden.
+1. Absenden eines POST Requests auf den [Login-Endpunkt](https://htmlpreview.github.io/?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/antraege-auslesen/Dokumentation/index.html#_oauth2) /login mit Username und Password. Der Username entspricht der PartnerId und das Password ist der API-Key. Auf dem Testsystem können diese Werte frei gewählt werden.
 2. Aus der JSON-Antwort das JWToken (access_token) entnehmen
 3. Bei weiteren Requests muss dieses JWToken als Authentication Header mitgeschickt werden.
 
