@@ -20,7 +20,7 @@ AngebotsPruefungsErgebnis                 ;                                     
                                           ;weitereAngaben                                   ;string                                             ;
 Antraege                                  ;                                                 ;                                                   ;
                                           ;antraege                                         ;array of Antrag                                    ;
-                                          ;_links                                           ;CollectionLinks                                    ;
+                                          ;_links                                           ;PaginationLinks                                    ;
 Antrag                                    ;                                                 ;                                                   ;
                                           ;angebot                                          ;AngebotZumAntrag                                   ;
                                           ;ansprechpartner                                  ;Partner                                            ;
@@ -115,16 +115,6 @@ Autostellplatz                            ;                                     
                                           ;                                                 ;                                                   ;DOPPEL_GARAGE
                                           ;                                                 ;                                                   ;KELLER_GARAGE
                                           ;                                                 ;                                                   ;TIEFGARAGEN_STELLPLATZ
-BankUndSparguthaben                       ;                                                 ;                                                   ;
-                                          ;aktuellerWert                                    ;number                                             ;
-                                          ;maximalAufzuloesenderWert                        ;number                                             ;
-                                          ;vermoegensTyp                                    ;enum                                               ;
-                                          ;                                                 ;                                                   ;VERMOEGEN
-                                          ;                                                 ;                                                   ;VERBINDLICHKEIT
-                                          ;zahlungsTyp                                      ;enum                                               ;
-                                          ;                                                 ;                                                   ;EINNAHME
-                                          ;                                                 ;                                                   ;AUSGABE
-                                          ;zinsertragJaehrlich                              ;number                                             ;
 Bankverbindung                            ;                                                 ;                                                   ;
                                           ;bic                                              ;string                                             ;
                                           ;iban                                             ;string                                             ;
@@ -247,10 +237,6 @@ BestehendesDarlehenDesFinanzierungsObjekts;                                     
                                           ;                                                 ;                                                   ;TRITT_IM_RANG_ZURUECK
                                           ;                                                 ;                                                   ;TRITT_NICHT_IM_RANG_ZURUECK
                                           ;zinsBindungEndetAm                               ;string(date)                                       ;
-CollectionLinks                           ;                                                 ;                                                   ;
-                                          ;next                                             ;Link                                               ;
-                                          ;prev                                             ;Link                                               ;
-                                          ;self                                             ;Link                                               ;
 Darlehen                                  ;                                                 ;                                                   ;
                                           ;auszahlungsBetrag                                ;number                                             ;
                                           ;auszahlungsDatum                                 ;string(date)                                       ;
@@ -411,7 +397,7 @@ Haushalt                                  ;                                     
                                           ;lebenshaltungsKostenMonatlich                    ;number                                             ;
                                           ;positionen                                       ;HaushaltsPositionen                                ;
 HaushaltsPositionen                       ;                                                 ;                                                   ;
-                                          ;bankUndSparguthaben                              ;array of BankUndSparguthaben                       ;
+                                          ;bankUndSparguthaben                              ;array of Vermoegen                                 ;
                                           ;bausparvertraege                                 ;array of BestehenderBausparvertrag                 ;
                                           ;ehegattenUnterhalt                               ;array of EinnahmenMonatlich                        ;
                                           ;einkuenfteAusNebentaetigkeit                     ;array of EinkuenfteAusNebentaetigkeit              ;
@@ -425,12 +411,12 @@ HaushaltsPositionen                       ;                                     
                                           ;sonstigeEinnahmen                                ;array of EinnahmenMonatlich                        ;
                                           ;sonstigeVerbindlichkeiten                        ;array of Verbindlichkeit                           ;
                                           ;sonstigeVermoegen                                ;array of Vermoegen                                 ;
-                                          ;sparplaene                                       ;array of Sparplaene                                ;
+                                          ;sparplaene                                       ;array of Vermoegen                                 ;
                                           ;unbefristeteZusatzRenten                         ;array of EinnahmenMonatlich                        ;
                                           ;unterhaltsVerpflichtungen                        ;array of AusgabenMonatlich                         ;
                                           ;variableEinkuenfte                               ;array of EinnahmenMonatlich                        ;
                                           ;versicherungsAusgaben                            ;array of AusgabenMonatlich                         ;
-                                          ;wertpapiere                                      ;array of Wertpapiere                               ;
+                                          ;wertpapiere                                      ;array of Vermoegen                                 ;
 ImmobilieVerknuepfung                     ;                                                 ;                                                   ;
                                           ;id                                               ;string                                             ;
 Kind                                      ;                                                 ;                                                   ;
@@ -504,6 +490,10 @@ NachrangigesExternesDarlehen              ;                                     
                                           ;rateMonatlich                                    ;number                                             ;
                                           ;typ                                              ;string                                             ;
                                           ;zinsBindung                                      ;ZinsBindung                                        ;
+PaginationLinks                           ;                                                 ;                                                   ;
+                                          ;next                                             ;Link                                               ;
+                                          ;prev                                             ;Link                                               ;
+                                          ;self                                             ;Link                                               ;
 Partner                                   ;                                                 ;                                                   ;
                                           ;partnerId                                        ;string                                             ;
                                           ;vorname                                          ;string                                             ;
@@ -541,16 +531,6 @@ SparPhase                                 ;                                     
                                           ;guthabenBeiZuteilung                             ;number                                             ;
                                           ;sparBeitragMonatlich                             ;number                                             ;
                                           ;sparPhaseInJahren                                ;integer(int32)                                     ;
-Sparplaene                                ;                                                 ;                                                   ;
-                                          ;aktuellerWert                                    ;number                                             ;
-                                          ;beitragMonatlich                                 ;number                                             ;
-                                          ;maximalAufzuloesenderWert                        ;number                                             ;
-                                          ;vermoegensTyp                                    ;enum                                               ;
-                                          ;                                                 ;                                                   ;VERMOEGEN
-                                          ;                                                 ;                                                   ;VERBINDLICHKEIT
-                                          ;zahlungsTyp                                      ;enum                                               ;
-                                          ;                                                 ;                                                   ;EINNAHME
-                                          ;                                                 ;                                                   ;AUSGABE
 Staat                                     ;                                                 ;                                                   ;
                                           ;isoCountryCode                                   ;string                                             ;
                                           ;name                                             ;string                                             ;
@@ -588,10 +568,14 @@ VermietungsInformationen                  ;                                     
                                           ;vermieteteFlaeche                                ;number                                             ;
 Vermoegen                                 ;                                                 ;                                                   ;
                                           ;aktuellerWert                                    ;number                                             ;
+                                          ;dividendenJaehrlich                              ;number                                             ;
                                           ;maximalAufzuloesenderWert                        ;number                                             ;
                                           ;vermoegensTyp                                    ;enum                                               ;
                                           ;                                                 ;                                                   ;VERMOEGEN
                                           ;                                                 ;                                                   ;VERBINDLICHKEIT
+                                          ;zahlungsTyp                                      ;enum                                               ;
+                                          ;                                                 ;                                                   ;EINNAHME
+                                          ;                                                 ;                                                   ;AUSGABE
 Vorhaben                                  ;                                                 ;                                                   ;
                                           ;finanzbedarf                                     ;Finanzbedarf                                       ;
                                           ;nachrangigeExterneDarlehen                       ;array of NachrangigesExternesDarlehen              ;
@@ -602,16 +586,6 @@ Vorhaben                                  ;                                     
                                           ;                                                 ;                                                   ;MODERNISIERUNG_UMBAU_ANBAU
                                           ;                                                 ;                                                   ;NEUBAU
                                           ;                                                 ;                                                   ;KAPITALBESCHAFFUNG
-Wertpapiere                               ;                                                 ;                                                   ;
-                                          ;aktuellerWert                                    ;number                                             ;
-                                          ;dividendenJaehrlich                              ;number                                             ;
-                                          ;maximalAufzuloesenderWert                        ;number                                             ;
-                                          ;vermoegensTyp                                    ;enum                                               ;
-                                          ;                                                 ;                                                   ;VERMOEGEN
-                                          ;                                                 ;                                                   ;VERBINDLICHKEIT
-                                          ;zahlungsTyp                                      ;enum                                               ;
-                                          ;                                                 ;                                                   ;EINNAHME
-                                          ;                                                 ;                                                   ;AUSGABE
 ZinsBindung                               ;                                                 ;                                                   ;
                                           ;endetAm                                          ;string(date)                                       ;
                                           ;jahre                                            ;integer(int32)                                     ;

@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "Mit dieser API können die Anträge durch die Produktanbieter abgerufen\
     \ werden. Dabei wird ausschließlich der Securitykontext des Produktanbieters eingenommen."
-  version: "0.6"
+  version: "1.0"
   title: "Auslesen API"
   contact:
     name: "Europace AG"
@@ -24,7 +24,7 @@ paths:
       summary: "alle Anträge abrufen"
       description: "Es werden alle Anträge ausgeliefert, die der authentifizierten\
         \ Partner sehen darf. Offen: Sortierung, Pagination, Filterung"
-      operationId: "getAllUsingGET"
+      operationId: "getAlleAntraege"
       consumes:
       - "*/*"
       produces:
@@ -59,10 +59,6 @@ paths:
         default: 10
         format: "int32"
       - name: "X-TraceId"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "X-Amzn-Trace-Id"
         in: "header"
         required: false
         type: "string"
@@ -101,7 +97,7 @@ paths:
       summary: "einen Antrag abrufen"
       description: "Als Parameter wird die Antragsnummer verwendet, die aus BaufiSmart\
         \ erzeugt wurde. Dabei ist '/' durch '_' zu ersetzen."
-      operationId: "getAntragUsingGET"
+      operationId: "getAntrag"
       consumes:
       - "*/*"
       produces:
@@ -113,10 +109,6 @@ paths:
         required: true
         type: "string"
       - name: "X-TraceId"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "X-Amzn-Trace-Id"
         in: "header"
         required: false
         type: "string"
@@ -155,7 +147,7 @@ paths:
       summary: "Angebot des Antrags abrufen"
       description: "Es handelt sich um das angenommene Angebot, das zu diesem Antrag\
         \ geführt hat."
-      operationId: "getAngebotUsingGET"
+      operationId: "getAngebot"
       consumes:
       - "*/*"
       produces:
@@ -167,10 +159,6 @@ paths:
         required: true
         type: "string"
       - name: "X-TraceId"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "X-Amzn-Trace-Id"
         in: "header"
         required: false
         type: "string"
@@ -439,6 +427,7 @@ definitions:
         type: "number"
       zahlungsTyp:
         type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
         enum:
         - "EINNAHME"
         - "AUSGABE"
@@ -536,7 +525,16 @@ definitions:
         items:
           $ref: "#/definitions/Antrag"
       _links:
-        $ref: "#/definitions/CollectionLinks"
+        $ref: "#/definitions/PaginationLinks"
+  PaginationLinks:
+    type: "object"
+    properties:
+      next:
+        $ref: "#/definitions/Link"
+      prev:
+        $ref: "#/definitions/Link"
+      self:
+        $ref: "#/definitions/Link"
   Sparplaene:
     type: "object"
     properties:
@@ -548,11 +546,13 @@ definitions:
         type: "number"
       vermoegensTyp:
         type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
         enum:
         - "VERMOEGEN"
         - "VERBINDLICHKEIT"
       zahlungsTyp:
         type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
         enum:
         - "EINNAHME"
         - "AUSGABE"
@@ -663,6 +663,7 @@ definitions:
         type: "number"
       vermoegensTyp:
         type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
         enum:
         - "VERMOEGEN"
         - "VERBINDLICHKEIT"
@@ -692,6 +693,7 @@ definitions:
         type: "number"
       vermoegensTyp:
         type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
         enum:
         - "VERMOEGEN"
         - "VERBINDLICHKEIT"
@@ -699,6 +701,7 @@ definitions:
         type: "boolean"
       zahlungsTyp:
         type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
         enum:
         - "EINNAHME"
         - "AUSGABE"
@@ -764,6 +767,7 @@ definitions:
     properties:
       antragsteller:
         type: "string"
+        description: "Willenserklärung des Antragstellers"
         enum:
         - "BEANTRAGT"
         - "UNTERSCHRIEBEN"
@@ -771,6 +775,7 @@ definitions:
         - "WIDERRUFEN"
       bearbeitungsFortschritt:
         type: "string"
+        description: "Bearbeitungsfortschritt des Antrags nach beidseitiger Unterzeichnung"
         enum:
         - "NICHT_VON_PRODUKTANBIETER_BESTAETIGT"
         - "VON_PRODUKTANBIETER_BESTAETIGT"
@@ -779,6 +784,7 @@ definitions:
         - "PROVISON_AN_KUNDENBETREUER_VOLLSTAENDIG_AUSGEZAHLT"
       produktAnbieter:
         type: "string"
+        description: "Willenserklärung des Produktanbieters"
         enum:
         - "NICHT_BEARBEITET"
         - "UNTERSCHRIEBEN"
@@ -795,15 +801,6 @@ definitions:
         type: "string"
       groesse:
         type: "number"
-  CollectionLinks:
-    type: "object"
-    properties:
-      next:
-        $ref: "#/definitions/Link"
-      prev:
-        $ref: "#/definitions/Link"
-      self:
-        $ref: "#/definitions/Link"
   MietAusgaben:
     type: "object"
     properties:
@@ -813,6 +810,7 @@ definitions:
         type: "boolean"
       zahlungsTyp:
         type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
         enum:
         - "EINNAHME"
         - "AUSGABE"
@@ -826,6 +824,7 @@ definitions:
         type: "number"
       zahlungsTyp:
         type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
         enum:
         - "EINNAHME"
         - "AUSGABE"
@@ -859,6 +858,7 @@ definitions:
         type: "number"
       zahlungsTyp:
         type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
         enum:
         - "EINNAHME"
         - "AUSGABE"
@@ -1000,8 +1000,12 @@ definitions:
     properties:
       id:
         type: "string"
+        description: "Id des Tilgungsersatzproduktes, das in den Vermögenswerten des\
+          \ Haushalts oder in den Bausparangeboten des Angebotes zu finden ist."
       typ:
         type: "string"
+        description: "Menschenlesbarer Hinweis auf den Typ, z.B. BAUSPARVERTRAG oder\
+          \ KAPITALBILDENDE_LEBENSVERSICHERUNG"
   ZinsBindung:
     type: "object"
     properties:
@@ -1060,11 +1064,13 @@ definitions:
         type: "number"
       vermoegensTyp:
         type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
         enum:
         - "VERMOEGEN"
         - "VERBINDLICHKEIT"
       zahlungsTyp:
         type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
         enum:
         - "EINNAHME"
         - "AUSGABE"
@@ -1254,6 +1260,7 @@ definitions:
         - "AUFLOESEN"
       vermoegensTyp:
         type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
         enum:
         - "VERMOEGEN"
         - "VERBINDLICHKEIT"
@@ -1266,6 +1273,7 @@ definitions:
         type: "number"
       zahlungsTyp:
         type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
         enum:
         - "EINNAHME"
         - "AUSGABE"
@@ -1284,15 +1292,22 @@ definitions:
         $ref: "#/definitions/Partner"
       antragsNummer:
         type: "string"
+        description: "Nummer des Antrags auf der Europace Plattform"
       beratung:
+        description: "Informationen zum Geschäftsabschluss"
         $ref: "#/definitions/Beratung"
       datenKontext:
         type: "string"
+        description: "Gibt an, ob es sich um einen Antrag aus dem Testmodus oder Echtgeschä\
+          ft handelt"
         enum:
         - "TEST_MODUS"
         - "ECHT_GESCHAEFT"
       dokumente:
         type: "array"
+        description: "Enthält alle Plattformdokumente, freigegebene Dokumente des\
+          \ Vertriebs, sowie die hochgeladenen Dokumente des Produktanbieters. **Aktuell\
+          \ sind nur Selbstauskunft und Kreditentscheidungsinformation enthalten.**"
         items:
           $ref: "#/definitions/Dokument"
       kreditSachbearbeiter:
@@ -1301,6 +1316,7 @@ definitions:
       produktAnbieter:
         $ref: "#/definitions/ProduktAnbieter"
       status:
+        description: "Bearbeitungsfortschritt des Antrags"
         $ref: "#/definitions/AntragsStatus"
       vermittler:
         description: "Partner auf Seite des Vertriebs"
@@ -1352,6 +1368,7 @@ definitions:
         - "AUFLOESEN"
       vermoegensTyp:
         type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
         enum:
         - "VERMOEGEN"
         - "VERBINDLICHKEIT"
@@ -1371,6 +1388,7 @@ definitions:
         type: "number"
       zahlungsTyp:
         type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
         enum:
         - "EINNAHME"
         - "AUSGABE"
@@ -1556,11 +1574,13 @@ definitions:
         type: "number"
       vermoegensTyp:
         type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
         enum:
         - "VERMOEGEN"
         - "VERBINDLICHKEIT"
       zahlungsTyp:
         type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
         enum:
         - "EINNAHME"
         - "AUSGABE"

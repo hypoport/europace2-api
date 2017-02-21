@@ -2,6 +2,12 @@
 
 Informationen zu den Änderungen in den verschiedenen Versionen
 
+#### Version 1.0
+
+* operationId's angepasst
+* X-Amzn-Trace-Id entfernt
+* `CollectionLinks` in `PaginationLinks` umbenannt
+
 #### Version 0.6
 
 * Header `Authorization` wird jetzt nicht mehr explizit in der Parameterliste der Operationen erwähnt.
