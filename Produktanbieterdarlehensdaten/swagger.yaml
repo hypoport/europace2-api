@@ -5,6 +5,7 @@ info:
     Benutzt werden JSON Datentypen, siehe http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf
   title: PADD API
   version: 0.0.3
+  x-codegen-verson: 2.2.1
 schemes:
 - http
 - https
@@ -187,6 +188,8 @@ definitions:
         items:
           $ref: '#/definitions/BestehendesDarlehen'
       marktwertDesFinanzierungsobjekts:
+        $ref: '#/definitions/Euro'
+      buchwertDesFinanzierungsobjekts:
         $ref: '#/definitions/Euro'
       meldung:
         type: string
