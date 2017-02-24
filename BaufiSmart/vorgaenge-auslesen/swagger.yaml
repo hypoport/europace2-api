@@ -15,6 +15,10 @@ tags:
   description: "Dieser Endpunkt repräsentiert die Vertriebssicht."
 schemes:
 - "https"
+consumes:
+- "application/json"
+produces:
+- "application/json;charset=UTF-8"
 paths:
   /vorgaenge:
     get:
@@ -23,7 +27,7 @@ paths:
       summary: "alle sichtbaren Vorgänge"
       operationId: "vorgaengeUsingGET"
       consumes:
-      - "*/*"
+      - "application/json"
       produces:
       - "application/json;charset=UTF-8"
       parameters: []
@@ -64,7 +68,7 @@ paths:
         \ erzeugt wurde."
       operationId: "getByIdUsingGET"
       consumes:
-      - "*/*"
+      - "application/json"
       produces:
       - "application/json;charset=UTF-8"
       parameters:
@@ -74,14 +78,6 @@ paths:
         required: true
         type: "string"
       - name: "X-TraceId"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "X-Authentication"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "Authorization"
         in: "header"
         required: false
         type: "string"

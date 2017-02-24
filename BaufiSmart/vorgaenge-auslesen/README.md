@@ -10,6 +10,10 @@ Die API ist vollständig in Swagger definiert. Die Swagger Definitionen werden s
 
 Aus diesen Dateien können mit Hilfe von [Swagger Codegen](https://github.com/swagger-api/swagger-codegen) Clients in verschiedenen Sprachen generiert werden.
 
+### Dokumentation
+
+- [statische HTML Seite](http://htmlpreview.github.io?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/vorgaenge-auslesen/Dokumentation/index.html)
+
 ### Generierung des Clients
 #### JAVA mit Retrofit
 
