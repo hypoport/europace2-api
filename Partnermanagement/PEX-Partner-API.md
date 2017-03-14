@@ -58,7 +58,7 @@ Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
   "mobilnummer" : "...",
   "nachname" : "...",
   "rechtDarfEinstellungenOeffnen" : false,   // default false
-  "rechtDarfErgebnisListeNutzen" : false, //default false
+  "rechtDarfErgebnisListeNutzen" : false,   //default false
   "rechtDarfPartnerAnlegen" : false, 		  // default false
   "rechtEchtgeschaeftErlaubt" : true, 		  // default false
   "titelFunktion" : "...",
