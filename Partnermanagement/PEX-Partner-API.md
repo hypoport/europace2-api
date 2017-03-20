@@ -66,7 +66,8 @@ Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
   "vorname" : "...",
   "webseiteUrl" : "...",
   "aufsichtsBehoerde" : "...",
-  "registrierungsNummer" : "..."
+  "registrierungsNummer" : "...",
+  "gehoertZuKreditinstitut" : "false"   // default false, markiert Personen, die Mitarbeiter eines Kreditinstitutes ist
 }
 ```
 
@@ -103,7 +104,8 @@ Dabei gilt:
   "id":"...",                 					// EUROPACE 2 PartnerId (readonly)
   "telefonnummer" : "...",
   "typ": "ORGANISATION",            
-  "webseiteUrl" : "..."
+  "webseiteUrl" : "...",
+  "gehoertZuKreditinstitut" : false   // markiert Vertriebe, die einem Kreditinstitut zugeordnet sind
 }
 ```
 Dabei gilt:
