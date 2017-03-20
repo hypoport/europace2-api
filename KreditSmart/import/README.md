@@ -285,12 +285,18 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 			"anschrift": Anschrift
 		},
 		"nettoeinkommenJaehrlich": Decimal,
+		"bruttoEinkommenLaufendesJahr": Decimal,
+  		"einkommenssteuerLaufendesJahr": Decimal,
+  		"abschreibungenLaufendesJahr": Decimal,
 		"bruttoEinkommenLetztesJahr": Decimal,
 		"einkommenssteuerLetztesJahr": Decimal,
+		"abschreibungenLetztesJahr": Decimal,
 		"einkommenssteuerVor2Jahren": Decimal,
 		"bruttoEinkommenVor2Jahren": Decimal,
+		"abschreibungenVor2Jahren": Decimal,
 		"bruttoEinkommenVor3Jahren": Decimal,
-		"einkommenssteuerVor3Jahren": Decimal
+		"einkommenssteuerVor3Jahren": Decimal,
+		"abschreibungenVor3Jahren": Decimal
 	}
 
 #### Beamter

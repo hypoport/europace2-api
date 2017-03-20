@@ -1,0 +1,1779 @@
+---
+swagger: "2.0"
+info:
+  description: "Mit dieser API können die Anträge durch die Produktanbieter abgerufen\
+    \ werden. Dabei wird ausschließlich der Securitykontext des Produktanbieters eingenommen."
+  version: "1.0"
+  title: "Auslesen API"
+  contact:
+    name: "Europace AG"
+    url: "www.europace2.de"
+    email: "helpdesk@europace2.de"
+host: "baufismart.api.europace.de"
+basePath: "/v1"
+tags:
+- name: "Antraege"
+  description: "Dieser Endpunkt repräsentiert die Produktanbietersicht."
+schemes:
+- "https"
+paths:
+  /antraege:
+    get:
+      tags:
+      - "Antraege"
+      summary: "alle Anträge abrufen"
+      description: "Es werden alle Anträge ausgeliefert, die der authentifizierten\
+        \ Partner sehen darf. Offen: Sortierung, Pagination, Filterung"
+      operationId: "getAlleAntraege"
+      consumes:
+      - "*/*"
+      produces:
+      - "application/json;charset=UTF-8"
+      parameters:
+      - name: "datenKontext"
+        in: "query"
+        description: "Datenkontext"
+        required: false
+        type: "string"
+        default: "ECHT_GESCHAEFT"
+        enum:
+        - "ECHT_GESCHAEFT"
+        - "TEST_MODUS"
+      - name: "angenommenNach"
+        in: "query"
+        description: "Datum im ISO Format UTC - Zulu"
+        required: false
+        type: "string"
+      - name: "page"
+        in: "query"
+        description: "page"
+        required: false
+        type: "integer"
+        default: 0
+        format: "int32"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      - name: "X-TraceId"
+        in: "header"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Antraege"
+        400:
+          description: "Client Error"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - oauth2:
+        - "API"
+  /antraege/{antragsNummer}:
+    get:
+      tags:
+      - "Antraege"
+      summary: "einen Antrag abrufen"
+      description: "Als Parameter wird die Antragsnummer verwendet, die aus BaufiSmart\
+        \ erzeugt wurde. Dabei ist '/' durch '_' zu ersetzen."
+      operationId: "getAntrag"
+      consumes:
+      - "*/*"
+      produces:
+      - "application/json;charset=UTF-8"
+      parameters:
+      - name: "antragsNummer"
+        in: "path"
+        description: "Nummer des Antrags"
+        required: true
+        type: "string"
+      - name: "X-TraceId"
+        in: "header"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Antrag"
+        400:
+          description: "Client Error"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - oauth2:
+        - "API"
+  /antraege/{antragsNummer}/angebot:
+    get:
+      tags:
+      - "Antraege"
+      summary: "Angebot des Antrags abrufen"
+      description: "Es handelt sich um das angenommene Angebot, das zu diesem Antrag\
+        \ geführt hat."
+      operationId: "getAngebot"
+      consumes:
+      - "*/*"
+      produces:
+      - "application/json;charset=UTF-8"
+      parameters:
+      - name: "antragsNummer"
+        in: "path"
+        description: "Nummer des Antrags, wobei '/' durch '_' ersetzt werden muss."
+        required: true
+        type: "string"
+      - name: "X-TraceId"
+        in: "header"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AngebotZumAntrag"
+        400:
+          description: "Client Error"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - oauth2:
+        - "API"
+securityDefinitions:
+  oauth2:
+    type: "oauth2"
+    tokenUrl: "https://api.europace.de/login"
+    flow: "password"
+    scopes:
+      API: "Authorisation Scope für die gesamte API."
+definitions:
+  Bankverbindung:
+    type: "object"
+    properties:
+      bic:
+        type: "string"
+      iban:
+        type: "string"
+      kontoinhaber:
+        type: "array"
+        items:
+          $ref: "#/definitions/AntragstellerVerknuepfung"
+      kreditinstitut:
+        type: "string"
+  HaushaltsPositionen:
+    type: "object"
+    properties:
+      bankUndSparguthaben:
+        type: "array"
+        items:
+          $ref: "#/definitions/BankUndSparguthaben"
+      bausparvertraege:
+        type: "array"
+        items:
+          $ref: "#/definitions/BestehenderBausparvertrag"
+      ehegattenUnterhalt:
+        type: "array"
+        items:
+          $ref: "#/definitions/EinnahmenMonatlich"
+      einkuenfteAusNebentaetigkeit:
+        type: "array"
+        items:
+          $ref: "#/definitions/EinkuenfteAusNebentaetigkeit"
+      kindergeld:
+        type: "array"
+        description: "Read-Only-Feld. Wird dynamisch aus den Angaben zu den Kindern\
+          \ berechnet. Pro kindergelderhaltendem Kind ein Listenelement."
+        items:
+          $ref: "#/definitions/EinnahmenMonatlich"
+      lebensUndRentenVersicherungen:
+        type: "array"
+        items:
+          $ref: "#/definitions/LebensOderRentenversicherungVermoegen"
+      mietAusgaben:
+        type: "array"
+        items:
+          $ref: "#/definitions/MietAusgaben"
+      privateDarlehen:
+        type: "array"
+        items:
+          $ref: "#/definitions/Verbindlichkeit"
+      privateKrankenversicherung:
+        type: "array"
+        items:
+          $ref: "#/definitions/AusgabenMonatlich"
+      ratenkredite:
+        type: "array"
+        items:
+          $ref: "#/definitions/Verbindlichkeit"
+      sonstigeAusgaben:
+        type: "array"
+        items:
+          $ref: "#/definitions/AusgabenMonatlich"
+      sonstigeEinnahmen:
+        type: "array"
+        items:
+          $ref: "#/definitions/EinnahmenMonatlich"
+      sonstigeVerbindlichkeiten:
+        type: "array"
+        items:
+          $ref: "#/definitions/Verbindlichkeit"
+      sonstigeVermoegen:
+        type: "array"
+        items:
+          $ref: "#/definitions/Vermoegen"
+      sparplaene:
+        type: "array"
+        items:
+          $ref: "#/definitions/Sparplaene"
+      unbefristeteZusatzRenten:
+        type: "array"
+        items:
+          $ref: "#/definitions/EinnahmenMonatlich"
+      unterhaltsVerpflichtungen:
+        type: "array"
+        items:
+          $ref: "#/definitions/AusgabenMonatlich"
+      variableEinkuenfte:
+        type: "array"
+        items:
+          $ref: "#/definitions/EinnahmenMonatlich"
+      versicherungsAusgaben:
+        type: "array"
+        items:
+          $ref: "#/definitions/AusgabenMonatlich"
+      wertpapiere:
+        type: "array"
+        items:
+          $ref: "#/definitions/Wertpapiere"
+  Postadresse:
+    type: "object"
+    properties:
+      hausnummer:
+        type: "string"
+      ort:
+        type: "string"
+      postleitzahl:
+        type: "string"
+      strasse:
+        type: "string"
+  TilgungsPhase:
+    type: "object"
+    properties:
+      bausparDarlehenSumme:
+        type: "number"
+      sollZinsNachZuteilung:
+        type: "number"
+      tilgungsBeitragMonatlich:
+        type: "number"
+      tilgungsPhaseInJahren:
+        type: "integer"
+        format: "int32"
+  Bereitstellung:
+    type: "object"
+    properties:
+      bereitstellungsZins:
+        type: "number"
+      bereitstellungsZinsFreieZeitInMonaten:
+        type: "integer"
+        format: "int32"
+  Meldung:
+    type: "object"
+    properties:
+      kategorie:
+        type: "string"
+        description: "Mögliche Werte sind: AUSZAHLUNGS_VORAUSSETZUNG,MACHBAR,MACHBARKEITS_HINWEIS,ANPASSUNG_KUNDENWUNSCH,ANPASSUNG_VERTRIEBSWUNSCH,UNBERUECKSICHTIGTE_ANGABE,KONDITIONEN_UNTER_VORBEHALT_VOLLSTAENDIGER_DATEN,KONDITIONEN_UNTER_VORBEHALT_EXTERNER_SCHNITTSTELLEN,MACHBARKEIT_UNTER_VORBEHALT_VOLLSTAENDIGER_DATEN,MACHBARKEIT_UNTER_VORBEHALT_EXTERNER_SCHNITTSTELLEN,MACHBAR_UNTER_VORBEHALT_PRODUZENT,NICHT_MACHBAR,NICHT_ANBIETBAR.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      kreditEntscheider:
+        $ref: "#/definitions/ProduktAnbieter"
+      produktAnbieter:
+        $ref: "#/definitions/ProduktAnbieter"
+      text:
+        type: "string"
+  BestehendeImmobilie:
+    type: "object"
+    properties:
+      adresse:
+        $ref: "#/definitions/Postadresse"
+      autostellplaetze:
+        type: "array"
+        items:
+          $ref: "#/definitions/Autostellplatz"
+      bestehendeDarlehen:
+        type: "array"
+        items:
+          $ref: "#/definitions/BestehendesDarlehen"
+      erbbaurecht:
+        $ref: "#/definitions/Erbbaurecht"
+      gebaeude:
+        $ref: "#/definitions/Gebaeude"
+      grundbuchAngabe:
+        $ref: "#/definitions/GrundbuchAngabe"
+      grundstueck:
+        $ref: "#/definitions/Grundstueck"
+      id:
+        type: "string"
+      immobilienEinsatz:
+        type: "string"
+        enum:
+        - "KEIN_EINSATZ"
+        - "VERKAUFEN"
+        - "ALS_ZUSATZSICHERHEIT"
+      maximalEinzusetzenderBetragWennVerkauf:
+        type: "number"
+      objektArt:
+        type: "string"
+        enum:
+        - "GRUNDSTUECK"
+        - "EIGENTUMSWOHNUNG"
+        - "HAUS"
+      verkehrswert:
+        type: "number"
+  Haushalt:
+    type: "object"
+    properties:
+      antragsteller:
+        type: "array"
+        items:
+          $ref: "#/definitions/Antragsteller"
+      anzahlErwachseneImHaushalt:
+        type: "integer"
+        format: "int32"
+        description: "Dieses Feld ist eine produktanbieterspezifische Zusatzangabe,\
+          \ sie wird nicht von allen Produktanbietern bei der Angebotsermittlung berü\
+          cksichtigt."
+      anzahlKinderNichtImHaushalt:
+        type: "integer"
+        format: "int32"
+        description: "Dieses Feld ist eine produktanbieterspezifische Zusatzangabe,\
+          \ sie wird nicht von allen Produktanbietern bei der Angebotsermittlung berü\
+          cksichtigt."
+      bestehendeImmobilien:
+        type: "array"
+        items:
+          $ref: "#/definitions/BestehendeImmobilie"
+      kfzAnzahl:
+        type: "integer"
+        format: "int32"
+        description: "Dieses Feld ist eine produktanbieterspezifische Zusatzangabe,\
+          \ sie wird nicht von allen Produktanbietern bei der Angebotsermittlung berü\
+          cksichtigt."
+      kinder:
+        type: "array"
+        items:
+          $ref: "#/definitions/Kind"
+      lebenshaltungsKostenMonatlich:
+        type: "number"
+        description: "Dieses Feld ist eine produktanbieterspezifische Zusatzangabe,\
+          \ sie wird nicht von allen Produktanbietern bei der Angebotsermittlung berü\
+          cksichtigt. (DSL Bank)"
+      positionen:
+        $ref: "#/definitions/HaushaltsPositionen"
+  AusgabenMonatlich:
+    type: "object"
+    properties:
+      ausgabenMonatlich:
+        type: "number"
+      zahlungsTyp:
+        type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
+        enum:
+        - "EINNAHME"
+        - "AUSGABE"
+  AngebotZumAntrag:
+    type: "object"
+    properties:
+      bausparvertraege:
+        type: "array"
+        items:
+          $ref: "#/definitions/Bausparvertrag"
+      beleihungsRechnung:
+        $ref: "#/definitions/BeleihungsRechnung"
+      bewertungDesAngebots:
+        type: "string"
+        enum:
+        - "ANGEBOT_ENTSPRICHT_DER_EMPFEHLUNG_DES_KUNDENBETREUERS"
+        - "ANGEBOT_ENTSPRICHT_DEM_WUNSCH_DES_KUNDEN"
+      darlehen:
+        type: "array"
+        items:
+          $ref: "#/definitions/Darlehen"
+      erzeugtAm:
+        type: "string"
+        format: "date-time"
+        description: "Erzeugungsdatum des Angebots"
+      kennung:
+        type: "string"
+      machbarkeitsStatus:
+        type: "string"
+        enum:
+        - "MACHBAR"
+        - "UNTER_VORBEHALT_PRODUZENT"
+        - "NICHT_MACHBAR"
+      meldungen:
+        type: "array"
+        items:
+          $ref: "#/definitions/Meldung"
+      pruefungsErgebnisse:
+        type: "array"
+        items:
+          $ref: "#/definitions/AngebotsPruefungsErgebnis"
+      _links:
+        $ref: "#/definitions/Links"
+  Bausparvertrag:
+    type: "object"
+    properties:
+      abschlussGebuehr:
+        type: "number"
+      angebotsHinweisFuerAntragsteller:
+        type: "string"
+        description: "nur bei neuen extern berechneten Bausparverträgen und bei Gegenangeboten"
+      bausparSumme:
+        type: "number"
+      einmalzahlung:
+        type: "number"
+      gesamtLaufzeitInJahren:
+        type: "integer"
+        format: "int32"
+      id:
+        type: "string"
+      produktAnbieter:
+        $ref: "#/definitions/ProduktAnbieter"
+      sparPhase:
+        $ref: "#/definitions/SparPhase"
+      tarif:
+        type: "string"
+      tilgungsPhase:
+        $ref: "#/definitions/TilgungsPhase"
+      typ:
+        type: "string"
+      vertragsBeginn:
+        type: "string"
+        format: "date"
+      vertragsNummer:
+        type: "string"
+      verwaltungsgebuehrenJaehrlich:
+        type: "number"
+      zuteilungsDatum:
+        type: "string"
+        format: "date"
+  AntragstellerVerknuepfung:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+        description: "Redundantes Datum für bessere Menschenlesbarkeit / einfachere\
+          \ Zuordnung"
+  Antraege:
+    type: "object"
+    properties:
+      antraege:
+        type: "array"
+        items:
+          $ref: "#/definitions/Antrag"
+      _links:
+        $ref: "#/definitions/PaginationLinks"
+  PaginationLinks:
+    type: "object"
+    properties:
+      next:
+        $ref: "#/definitions/Link"
+      prev:
+        $ref: "#/definitions/Link"
+      self:
+        $ref: "#/definitions/Link"
+  Sparplaene:
+    type: "object"
+    properties:
+      aktuellerWert:
+        type: "number"
+      beitragMonatlich:
+        type: "number"
+      maximalAufzuloesenderWert:
+        type: "number"
+      vermoegensTyp:
+        type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
+        enum:
+        - "VERMOEGEN"
+        - "VERBINDLICHKEIT"
+      zahlungsTyp:
+        type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
+        enum:
+        - "EINNAHME"
+        - "AUSGABE"
+  Darlehen:
+    type: "object"
+    properties:
+      auszahlungsBetrag:
+        type: "number"
+      auszahlungsDatum:
+        type: "string"
+        format: "date"
+        description: "nur bei darlehensArt==FORWARD_DARLEHEN"
+      auszahlungsKurs:
+        type: "number"
+      bereitstellung:
+        description: "nicht bei darlehensArt==PRIVAT_DARLEHEN"
+        $ref: "#/definitions/Bereitstellung"
+      darlehensBetrag:
+        type: "number"
+      darlehensTyp:
+        type: "string"
+        enum:
+        - "ANNUITAETEN_DARLEHEN"
+        - "FORWARD_DARLEHEN"
+        - "KFW_DARLEHEN"
+        - "PRIVAT_DARLEHEN"
+        - "ZWISCHEN_FINANZIERUNG"
+        - "VARIABLES_DARLEHEN"
+      detailsZurVerwendung:
+        type: "string"
+        description: "nur bei darlehensArt==ZWISCHEN_FINANZIERUNG"
+      effektivZins:
+        type: "number"
+      effektivZinsRelevanteKosten:
+        $ref: "#/definitions/EffektivZinsKosten"
+      forwardPeriodeInMonaten:
+        type: "integer"
+        format: "int32"
+        description: "nur bei darlehensArt==FORWARD_DARLEHEN"
+      kfwEnergieEffizienzStandard:
+        type: "string"
+        description: "nur bei darlehensArt==KFW_DARLEHEN. Mögliche Werte: STANDARD_40_PLUS,\
+          \ STANDARD_40, STANDARD_55,STANDARD_70. Nur bei KfW-Programm 153 relevant.\
+          \ Bei neuen Energieeffizienzstandards können auch weitere Werte zulässig\
+          \ werden."
+      kfwProgramm:
+        type: "string"
+        description: "nur bei darlehensArt==KFW_DARLEHEN. Mögiche Werte: PROGRAMM_124,\
+          \ PROGRAMM_141, PROGRAMM_151, PROGRAMM_152, PROGRAMM_153, PROGRAMM_155,\
+          \ PROGRAMM_159, PROGRAMM_167. Bei neu aufgelegten KfW-Programmen können\
+          \ auch weitere Werte zulässig werden."
+      konditionWurdeManuellAngepasst:
+        type: "boolean"
+      konditionsAnpassungsBegruendung:
+        type: "string"
+        description: "Begründung, wenn die Kondition angepasst wurde"
+      laufZeitInJahren:
+        type: "integer"
+        format: "int32"
+        description: "nur bei darlehensArt==KFW_DARLEHEN"
+      laufzeitInMonaten:
+        type: "integer"
+        format: "int32"
+        description: "nur bei darlehensArt==PRIVAT_DARLEHEN"
+      maximaleLaufzeitInMonaten:
+        type: "integer"
+        format: "int32"
+        description: "nur bei darlehensArt==ZWISCHEN_FINANZIERUNG"
+      produktAnbieter:
+        $ref: "#/definitions/ProduktAnbieter"
+      rateMonatlich:
+        type: "number"
+        example: 123.34
+        description: "Die monatliche Rate in Euro"
+      rateMonatlichInDerTilgungsfreienAnlaufzeit:
+        type: "number"
+        description: "nur bei darlehensArt==KFW_DARLEHEN"
+      sollZins:
+        type: "number"
+        example: 2.05
+        description: "Der Sollzinssatz in Prozent"
+      tilgung:
+        description: "nicht bei darlehensArt==ZWISCHEN_FINANZIERUNG"
+        $ref: "#/definitions/Tilgung"
+      tilgungsFreieAnlaufJahre:
+        type: "integer"
+        format: "int32"
+        description: "nur bei darlehensArt==KFW_DARLEHEN"
+      verwendungsZweck:
+        type: "string"
+        description: "nur bei darlehensArt==ZWISCHEN_FINANZIERUNG"
+        enum:
+        - "VORFINANZIERUNG_OEFFENTLICHER_MITTEL"
+        - "VERKAUF_EINES_ANDEREN_OBJEKTS"
+        - "SONSTIGE_VERWENDUNG"
+      zinsBindung:
+        description: "nicht bei darlehensArt IN [VARIABLES_DARLEHEN,ZWISCHEN_FINANZIERUNG]"
+        $ref: "#/definitions/ZinsBindung"
+      zinsZahlungsBeginnAm:
+        type: "string"
+        format: "date"
+  Vermoegen:
+    type: "object"
+    properties:
+      aktuellerWert:
+        type: "number"
+      maximalAufzuloesenderWert:
+        type: "number"
+      vermoegensTyp:
+        type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
+        enum:
+        - "VERMOEGEN"
+        - "VERBINDLICHKEIT"
+  Kind:
+    type: "object"
+    properties:
+      geburtsdatum:
+        type: "string"
+        format: "date"
+      kindergeldWirdBezogen:
+        type: "boolean"
+      name:
+        type: "string"
+      unterhaltsEinnahmenBetragMonatlich:
+        type: "number"
+  Verbindlichkeit:
+    type: "object"
+    properties:
+      glaeubiger:
+        type: "string"
+      laufzeitEnde:
+        type: "string"
+        format: "date"
+      rateMonatlich:
+        type: "number"
+      restschuld:
+        type: "number"
+      vermoegensTyp:
+        type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
+        enum:
+        - "VERMOEGEN"
+        - "VERBINDLICHKEIT"
+      wirdAbgeloest:
+        type: "boolean"
+      zahlungsTyp:
+        type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
+        enum:
+        - "EINNAHME"
+        - "AUSGABE"
+  AngebotsPruefungsErgebnis:
+    type: "object"
+    properties:
+      produktAnbieter:
+        $ref: "#/definitions/ProduktAnbieter"
+      weitereAngaben:
+        type: "string"
+        description: "Vom Produktanbieter bei der Angebotsprüfung ergänzte Daten.\
+          \ Das Format entspricht der Definition des Produktanbieters."
+  Finanzbedarf:
+    type: "object"
+    properties:
+      aussenAnlagen:
+        type: "number"
+      bauNebenkosten:
+        type: "number"
+      bereitsBeglichen:
+        type: "number"
+      erschliessung:
+        type: "number"
+      grunderwerbsteuer:
+        type: "number"
+        description: "Nebenkosten"
+      grundstuecksKaufpreis:
+        type: "number"
+      herstellung:
+        type: "number"
+        description: "inklusive Eigenleistungen"
+      kapitalBeschaffung:
+        type: "number"
+      kaufpreis:
+        type: "number"
+        description: "inklusive Eigenleistungen"
+      maklergebuehr:
+        type: "number"
+        description: "Nebenkosten"
+      mobiliar:
+        type: "number"
+      modernisierung:
+        type: "number"
+        description: "inklusive Eigenleistungen"
+      notargebuehr:
+        type: "number"
+        description: "Nebenkosten"
+      renovierung:
+        type: "number"
+      sonstigeKosten:
+        type: "number"
+      zusaetzlichesKapital:
+        type: "number"
+  BeleihungsWert:
+    type: "object"
+    properties:
+      beleihungsWert:
+        type: "number"
+      immobilie:
+        $ref: "#/definitions/ImmobilieVerknuepfung"
+  AntragsStatus:
+    type: "object"
+    properties:
+      antragsteller:
+        type: "string"
+        description: "Willenserklärung des Antragstellers"
+        enum:
+        - "BEANTRAGT"
+        - "UNTERSCHRIEBEN"
+        - "NICHT_ANGENOMMEN"
+        - "WIDERRUFEN"
+      bearbeitungsFortschritt:
+        type: "string"
+        description: "Bearbeitungsfortschritt des Antrags nach beidseitiger Unterzeichnung"
+        enum:
+        - "NICHT_VON_PRODUKTANBIETER_BESTAETIGT"
+        - "VON_PRODUKTANBIETER_BESTAETIGT"
+        - "FREIGEGEBEN_FUER_SAMMELFORDERUNG"
+        - "PROVISION_IN_BEARBEITUNG"
+        - "PROVISON_AN_KUNDENBETREUER_VOLLSTAENDIG_AUSGEZAHLT"
+      produktAnbieter:
+        type: "string"
+        description: "Willenserklärung des Produktanbieters"
+        enum:
+        - "NICHT_BEARBEITET"
+        - "UNTERSCHRIEBEN"
+        - "ABGELEHNT"
+        - "ZURUECKGESTELLT"
+  Flurstueck:
+    type: "object"
+    properties:
+      anteil:
+        $ref: "#/definitions/MiteigentumsAnteil"
+      flur:
+        type: "string"
+      flurstuecksNummer:
+        type: "string"
+      groesse:
+        type: "number"
+  MietAusgaben:
+    type: "object"
+    properties:
+      ausgabenMonatlich:
+        type: "number"
+      entfallenMitFinanzierung:
+        type: "boolean"
+      zahlungsTyp:
+        type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
+        enum:
+        - "EINNAHME"
+        - "AUSGABE"
+  EinkuenfteAusNebentaetigkeit:
+    type: "object"
+    properties:
+      beginnDerNebentaetigkeit:
+        type: "string"
+        format: "date"
+      einnahmenMonatlich:
+        type: "number"
+      zahlungsTyp:
+        type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
+        enum:
+        - "EINNAHME"
+        - "AUSGABE"
+  ImmobilieVerknuepfung:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+  Vorhaben:
+    type: "object"
+    properties:
+      finanzbedarf:
+        $ref: "#/definitions/Finanzbedarf"
+      nachrangigeExterneDarlehen:
+        type: "array"
+        items:
+          $ref: "#/definitions/NachrangigesExternesDarlehen"
+      verwendungszweck:
+        type: "string"
+        enum:
+        - "ANSCHLUSSFINANZIERUNG"
+        - "KAUF"
+        - "KAUF_NEUBAU_VOM_BAUTRAEGER"
+        - "MODERNISIERUNG_UMBAU_ANBAU"
+        - "NEUBAU"
+        - "KAPITALBESCHAFFUNG"
+  EinnahmenMonatlich:
+    type: "object"
+    properties:
+      einnahmenMonatlich:
+        type: "number"
+      zahlungsTyp:
+        type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
+        enum:
+        - "EINNAHME"
+        - "AUSGABE"
+  Beratung:
+    type: "object"
+    properties:
+      art:
+        type: "string"
+        enum:
+        - "PRAESENZ_GESCHAEFT"
+        - "FERN_ABSATZ_GESCHAEFT"
+        - "AUSSER_GESCHAEFTSRAUM_VERTRAG"
+      hinweisFuerProduktAnbieter:
+        type: "string"
+      istKundenBetreuerVerkaeuferOderMaklerDerImmobilie:
+        type: "boolean"
+        example: false
+        description: "Mit diesem Wert wird ausgedrückt, ob der Kundenbetreuer auch\
+          \ der Immobilienmakler ist."
+  ZugrundeliegendeDatenZumAntrag:
+    type: "object"
+    properties:
+      bankverbindung:
+        $ref: "#/definitions/Bankverbindung"
+      finanzierungsObjekt:
+        $ref: "#/definitions/FinanzierungsObjekt"
+      haushalte:
+        type: "array"
+        items:
+          $ref: "#/definitions/Haushalt"
+      vorhaben:
+        $ref: "#/definitions/Vorhaben"
+      _links:
+        $ref: "#/definitions/Links"
+  GrundbuchAngabe:
+    type: "object"
+    properties:
+      anmerkungen:
+        type: "string"
+      bandUndBlatt:
+        type: "string"
+        description: "Angabe von Band und Blatt"
+      flurstuecke:
+        type: "array"
+        items:
+          $ref: "#/definitions/Flurstueck"
+      ort:
+        type: "string"
+        description: "Ort des als Grundbuchamt zuständigen Amtsgerichtes"
+      rechteInAbteilung2:
+        description: "Belastungen und Beschränkungen in der Nutzbarkeit des Grundstü\
+          cks. Leitungsrechte, Verzichte auf Abstandsflächen, Wegerechte, Insolvenzvermerke."
+        $ref: "#/definitions/RechteAbteilung2"
+  Grundstueck:
+    type: "object"
+    properties:
+      groesse:
+        type: "number"
+      grundstuecksArt:
+        type: "string"
+        enum:
+        - "UNBEBAUTES_WOHNGRUNDSTUECK"
+        - "UNBEBAUTES_MISCHGRUNDSTUECK"
+        - "UNBEBAUTES_GEWERBEGRUNDSTUECK"
+        - "LANDWIRTSCHAFTLICHES_GRUNDSTUECK"
+        - "SONSTIGES_GRUNDSTUECK"
+  ProduktAnbieter:
+    type: "object"
+    properties:
+      partnerId:
+        type: "string"
+      produktAnbieterId:
+        type: "string"
+      vorname:
+        type: "string"
+      nachname:
+        type: "string"
+      firmierung:
+        type: "string"
+      email:
+        type: "string"
+      telefonnummer:
+        type: "string"
+  BeleihungsRechnung:
+    type: "object"
+    properties:
+      beleihungsAuslauf:
+        type: "number"
+        description: "Der Beleihungsauslauf aus Sicht des Produktanbieters. Berechnet\
+          \ sich aus dem Verhältnis anerkannter Darlehen zur Summe der anerkannten\
+          \ Beleihungswerte."
+      beleihungsWerte:
+        type: "array"
+        description: "Enthält die vom Produktanbieter anerkannten Beleihungswerte"
+        items:
+          $ref: "#/definitions/BeleihungsWert"
+      beleihungsWerteSumme:
+        type: "number"
+        description: "Berechnungshilfe: Die Summe aller vom Produktanbieter anerkannten\
+          \ Beleihungswerte"
+      produktAnbieter:
+        $ref: "#/definitions/ProduktAnbieter"
+  SparPhase:
+    type: "object"
+    properties:
+      guthabenBeiZuteilung:
+        type: "number"
+      sparBeitragMonatlich:
+        type: "number"
+      sparPhaseInJahren:
+        type: "integer"
+        format: "int32"
+  Link:
+    type: "object"
+    properties:
+      href:
+        type: "string"
+      type:
+        type: "string"
+  Tilgung:
+    type: "object"
+    properties:
+      anfaenglicheTilgung:
+        type: "number"
+        description: "wenn null oder 0: tilgungsausgesetzt"
+      sonderTilgungJaehrlich:
+        type: "number"
+        description: "nur wenn darlehensArt IN [ANNUITAETEN_DARLEHEN,FORWARD_DARLEHEN]\
+          \ und KEIN tilgungsErsatz"
+      tilgungsBeginnAm:
+        type: "string"
+        format: "date"
+        description: "nullable"
+      tilgungsErsatz:
+        description: "nicht bei PRIVAT_DARLEHEN"
+        $ref: "#/definitions/TilgungsErsatz"
+  TilgungsErsatz:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        description: "Id des Tilgungsersatzproduktes, das in den Vermögenswerten des\
+          \ Haushalts oder in den Bausparangeboten des Angebotes zu finden ist."
+      typ:
+        type: "string"
+        description: "Menschenlesbarer Hinweis auf den Typ, z.B. BAUSPARVERTRAG oder\
+          \ KAPITALBILDENDE_LEBENSVERSICHERUNG"
+  ZinsBindung:
+    type: "object"
+    properties:
+      endetAm:
+        type: "string"
+        format: "date"
+      jahre:
+        type: "integer"
+        format: "int32"
+      monate:
+        type: "integer"
+        format: "int32"
+      restschuldNachZinsBindungsEnde:
+        type: "number"
+  RechteAbteilung2:
+    type: "object"
+    properties:
+      beschreibung:
+        type: "string"
+      betrag:
+        type: "number"
+  EffektivZinsKosten:
+    type: "object"
+    properties:
+      beratungsHonorar:
+        type: "number"
+      grundbuchKosten:
+        type: "number"
+      sonstigeKosten:
+        type: "number"
+      tilgungsErsatzProduktKosten:
+        type: "number"
+      wohnGebaeudeVersicherungsKosten:
+        type: "number"
+      zinsabsicherungsKosten:
+        type: "number"
+      zusatzSicherheitsKosten:
+        type: "number"
+  ModernisierungsAngaben:
+    type: "object"
+    properties:
+      modernisierungsGrad:
+        type: "string"
+        description: "erlaubt sind GERING,MITTEL,HOCH. Neue Ausprägungen können kurzfristig\
+          \ hinzukommen. Der Client muss daher mit unbekannten Werten umgehen können."
+      modernisierungsJahr:
+        type: "string"
+        example: "2016"
+        description: "Jahr der Modernisierung der Immobilie. Vierstellige Jahresangabe"
+  BankUndSparguthaben:
+    type: "object"
+    properties:
+      aktuellerWert:
+        type: "number"
+      maximalAufzuloesenderWert:
+        type: "number"
+      vermoegensTyp:
+        type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
+        enum:
+        - "VERMOEGEN"
+        - "VERBINDLICHKEIT"
+      zahlungsTyp:
+        type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
+        enum:
+        - "EINNAHME"
+        - "AUSGABE"
+      zinsertragJaehrlich:
+        type: "number"
+  Antragsteller:
+    type: "object"
+    properties:
+      anrede:
+        type: "string"
+        enum:
+        - "FRAU"
+        - "HERR"
+      anschrift:
+        $ref: "#/definitions/Postadresse"
+      arbeitserlaubnis:
+        type: "boolean"
+        example: false
+        description: "wenn keine deutsche Staatsangehörigkeit"
+      arbeitserlaubnisBefristetBis:
+        type: "string"
+        format: "date"
+        description: "wenn Arbeitserlaubnis befristet"
+      aufenthaltsTitel:
+        type: "string"
+        description: "wenn keine deutsche Staatsangehörigkeit"
+        enum:
+        - "VISUM"
+        - "AUFENTHALTS_ERLAUBNIS"
+        - "NIEDERLASSUNGS_ERLAUBNIS"
+        - "DAUERAUFENTHALT_EU"
+      aufenthaltsTitelBefristetBis:
+        type: "string"
+        format: "date"
+        description: "wenn Aufenthaltstitel befristet"
+      berufsgruppeBeiIngDiba:
+        type: "string"
+        description: "Berufsgruppe des Antragstellers (ING-DiBa) Dieses Feld ist eine\
+          \ produktanbieterspezifische Zusatzangabe, sie wird nicht von allen Produktanbietern\
+          \ bei der Angebotsermittlung berücksichtigt.. Erlaubte Werte sind:  ANGESTELLTER,ARBEITER,BEAMTER,FREIBERUFLER,SELBSTSTAENDIG,RENTNER,HAUSMANN,PRIVATIER,SOLDAT,SCHUELER,AZUBI,STUDENT,OHNE.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      beschaeftigung:
+        $ref: "#/definitions/Beschaeftigung"
+      brancheBeiIngDiba:
+        type: "string"
+        description: "Branche, in welcher der Antragsteller tätig ist. (ING-DiBa)\
+          \ Dieses Feld ist eine produktanbieterspezifische Zusatzangabe, sie wird\
+          \ nicht von allen Produktanbietern bei der Angebotsermittlung berücksichtigt..\
+          \ Erlaubte Werte sind: BANKEN_VERSICHERUNGEN,BAUGEWERBE,DIENSTLEISTUNGEN_SONSTIGE,EDV_BERATUNG,ENERGIE,ERZIEHUNG_UNTERRICHT,GESUNDHEITSWESEN,HANDEL,HANDWERK,HOTEL_GASTRONOMIE,LANDWIRTSCHAFT,OEFFENTLICHER_DIENST,PRODUKTION_INDUSTRIE,VERKEHR.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      brancheBeiMhb:
+        type: "string"
+        description: "Branche, in welcher der Antragsteller tätig ist. (MHB) Dieses\
+          \ Feld ist eine produktanbieterspezifische Zusatzangabe, sie wird nicht\
+          \ von allen Produktanbietern bei der Angebotsermittlung berücksichtigt..\
+          \ Erlaubte Werte sind: VERARBEITENDES_GEWERBE,BAU,HANDEL,VERKEHR_INFORMATION,DIENSTLEISTUNG,SONSTIGES.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      brancheBeiSRating:
+        type: "string"
+        description: "Branche, in welcher der Antragsteller tätig ist. (Sparkassen)\
+          \ Dieses Feld ist eine produktanbieterspezifische Zusatzangabe, sie wird\
+          \ nicht von allen Produktanbietern bei der Angebotsermittlung berücksichtigt..\
+          \ Erlaubte Werte sind: BAUGEWERBE,DIENSTLEISTUNGEN,ENERGIE_UND_WASSERVERSORGUNG_BERGBAU,GEBIETSKOERPERSCHAFTEN_UND_SOZIALVERSICHERUNGEN,GESUNDHEITSWESEN,HANDEL,HOTEL_UND_GASTRONOMIE,KREDITINSTITUTE,LAND_UND_FORSTWIRTSCHAFT_FISCHEREI,OEFFENTLICHER_DIENST,ORGANISATIONEN_OHNE_ERWERBSZWECK_PRIVATE_HAUSHALTE,VERARBEITENDES_GEWERBE,VERKEHR_UND_NACHRICHTENUEBERMITTLUNG,VERSICHERUNGEN,SONSTIGE.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      email:
+        type: "string"
+      externeAntragstellerId:
+        type: "string"
+      familienstand:
+        type: "string"
+        enum:
+        - "GESCHIEDEN"
+        - "GETRENNT_LEBEND"
+        - "LEBENSPARTNERSCHAFT"
+        - "LEDIG"
+        - "VERHEIRATET"
+        - "VERWITWET"
+      geburtsdatum:
+        type: "string"
+        format: "date"
+      geburtsort:
+        type: "string"
+        description: "Dieses Feld ist eine produktanbieterspezifische Zusatzangabe,\
+          \ sie wird nicht von allen Produktanbietern bei der Angebotsermittlung berü\
+          cksichtigt. Relevant für Sparprodukte (Bausparkassen)."
+      guetertrennungVereinbartWennVerheiratet:
+        type: "boolean"
+        example: false
+        description: "nur wenn verheiratet"
+      id:
+        type: "string"
+      legitimationsDaten:
+        description: "Dieses Feld ist eine produktanbieterspezifische Zusatzangabe,\
+          \ sie wird nicht von allen Produktanbietern bei der Angebotsermittlung berü\
+          cksichtigt."
+        $ref: "#/definitions/LegitimationsDaten"
+      nachname:
+        type: "string"
+      schufaErgebnis:
+        $ref: "#/definitions/SchufaErgebnis"
+      staatsangehoerigkeit:
+        $ref: "#/definitions/Staat"
+      telefonnummer:
+        type: "string"
+      telefonnummerVorwahl:
+        type: "string"
+      titelDoktor:
+        type: "boolean"
+      titelProfessor:
+        type: "boolean"
+      verheiratetMitAntragsteller:
+        description: "nur wenn verheiratet"
+        $ref: "#/definitions/AntragstellerVerknuepfung"
+      vorAnschrift:
+        $ref: "#/definitions/Postadresse"
+      vorname:
+        type: "string"
+      weitereKontaktMoeglichkeiten:
+        type: "string"
+      wohnhaftSeit:
+        type: "string"
+        format: "date"
+  Partner:
+    type: "object"
+    properties:
+      partnerId:
+        type: "string"
+      vorname:
+        type: "string"
+      nachname:
+        type: "string"
+      firmierung:
+        type: "string"
+      email:
+        type: "string"
+      telefonnummer:
+        type: "string"
+      _links:
+        $ref: "#/definitions/Links"
+    description: "Minimale Informationen zum Partner der EP2 Plattform, weitere Informationen\
+      \ können über die HAL-Relation abgerufen werden."
+  VermietungsInformationen:
+    type: "object"
+    properties:
+      mieteinnahmenNettoKaltMonatlich:
+        type: "number"
+      nutzungsArt:
+        type: "string"
+        enum:
+        - "EIGENGENUTZT"
+        - "TEIL_VERMIETET"
+        - "VERMIETET"
+      vermieteteFlaeche:
+        type: "number"
+  BestehenderBausparvertrag:
+    type: "object"
+    properties:
+      abschlussGebuehr:
+        type: "number"
+      aktuellerWert:
+        type: "number"
+      bausparSumme:
+        type: "number"
+      einmalzahlung:
+        type: "number"
+      id:
+        type: "string"
+      maximalAufzuloesenderBetrag:
+        type: "number"
+      produktAnbieter:
+        $ref: "#/definitions/ProduktAnbieter"
+      sparBeitragMonatlich:
+        type: "number"
+      tarif:
+        type: "string"
+      typ:
+        type: "string"
+      vermoegensEinsatz:
+        type: "string"
+        enum:
+        - "KEIN_EINSATZ"
+        - "ABTRETEN"
+        - "AUFLOESEN"
+      vermoegensTyp:
+        type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
+        enum:
+        - "VERMOEGEN"
+        - "VERBINDLICHKEIT"
+      vertragsBeginn:
+        type: "string"
+        format: "date"
+      vertragsNummer:
+        type: "string"
+      verwaltungsgebuehrenJaehrlich:
+        type: "number"
+      zahlungsTyp:
+        type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
+        enum:
+        - "EINNAHME"
+        - "AUSGABE"
+      zuteilungsDatum:
+        type: "string"
+        format: "date"
+  Antrag:
+    type: "object"
+    properties:
+      angebot:
+        description: "Das angenommene Angebot, auf dem dieser Antrag basiert"
+        $ref: "#/definitions/AngebotZumAntrag"
+      ansprechpartner:
+        description: "Für Rückfragen auf Seite des Vertriebs, kann mit dem Vermittler\
+          \ identisch sein"
+        $ref: "#/definitions/Partner"
+      antragsNummer:
+        type: "string"
+        description: "Nummer des Antrags auf der Europace Plattform"
+      beratung:
+        description: "Informationen zum Geschäftsabschluss"
+        $ref: "#/definitions/Beratung"
+      datenKontext:
+        type: "string"
+        description: "Gibt an, ob es sich um einen Antrag aus dem Testmodus oder Echtgeschä\
+          ft handelt"
+        enum:
+        - "TEST_MODUS"
+        - "ECHT_GESCHAEFT"
+      dokumente:
+        type: "array"
+        description: "Enthält alle Plattformdokumente, freigegebene Dokumente des\
+          \ Vertriebs, sowie die hochgeladenen Dokumente des Produktanbieters. **Aktuell\
+          \ sind nur Selbstauskunft und Kreditentscheidungsinformation enthalten.**"
+        items:
+          $ref: "#/definitions/Dokument"
+      kreditSachbearbeiter:
+        description: "Gewählter Sachbearbeiter aus Seite des Kreditvertriebs"
+        $ref: "#/definitions/Partner"
+      produktAnbieter:
+        $ref: "#/definitions/ProduktAnbieter"
+      status:
+        description: "Bearbeitungsfortschritt des Antrags"
+        $ref: "#/definitions/AntragsStatus"
+      vermittler:
+        description: "Partner auf Seite des Vertriebs"
+        $ref: "#/definitions/Partner"
+      zeitpunktDerAnnahme:
+        type: "string"
+        format: "date-time"
+        description: "Zeitpunkt, zu dem der Antrag im System erstellt wurde."
+      zugrundeliegendeDaten:
+        description: "Basisdaten des Kunden, die für die Berechnung des Angebots relevant\
+          \ waren"
+        $ref: "#/definitions/ZugrundeliegendeDatenZumAntrag"
+      _links:
+        $ref: "#/definitions/Links"
+    description: "Diese Resource repräsentiert einen Antrag in Baufi Smart."
+  GebaeudeFlaeche:
+    type: "object"
+    properties:
+      gesamtGroesse:
+        type: "number"
+      vermietungsInformationen:
+        $ref: "#/definitions/VermietungsInformationen"
+  LebensOderRentenversicherungVermoegen:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      maximalAufzuloesenderBetrag:
+        type: "number"
+      praemieMonatlich:
+        type: "number"
+      rueckkaufsWertAktuell:
+        type: "number"
+      tarif:
+        type: "string"
+      typ:
+        type: "string"
+        enum:
+        - "KAPITALBILDENDE_LEBENSVERSICHERUNG"
+        - "FONDSGEBUNDENE_LEBENSVERSICHERUNG"
+        - "KAPITALBILDENDE_RENTENVERSICHERUNG"
+        - "FONDSGEBUNDENE_RENTENVERSICHERUNG"
+        - "RISIKO_LEBENSVERSICHERUNG"
+      vermoegensEinsatz:
+        type: "string"
+        enum:
+        - "KEIN_EINSATZ"
+        - "ABTRETEN"
+        - "AUFLOESEN"
+      vermoegensTyp:
+        type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
+        enum:
+        - "VERMOEGEN"
+        - "VERBINDLICHKEIT"
+      versicherungsGesellschaft:
+        type: "string"
+      versicherungsSumme:
+        type: "number"
+      vertragsBeginn:
+        type: "string"
+        format: "date"
+      vertragsEnde:
+        type: "string"
+        format: "date"
+      vertragsNummer:
+        type: "string"
+      verwaltungsgebuehrenJaehrlich:
+        type: "number"
+      zahlungsTyp:
+        type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
+        enum:
+        - "EINNAHME"
+        - "AUSGABE"
+  Gebaeude:
+    type: "object"
+    properties:
+      anzahlDerGewerbeeinheiten:
+        type: "integer"
+        format: "int32"
+        description: "Nur bei ObjektArt == HAUS."
+      anzahlDerWohneinheitenImGebaeude:
+        type: "integer"
+        format: "int32"
+      anzahlVollgeschosse:
+        type: "integer"
+        format: "int32"
+      ausstattung:
+        type: "string"
+        description: "Angaben zur Ausstattung für alle verschiedene Produktanbieter,\
+          \ aber nicht für ING-DiBa. Erlaubte Werte sind: EINFACH,MITTEL,GEHOBEN,STARK_GEHOBEN.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      baujahr:
+        type: "string"
+        example: "2016"
+        description: "Baujahr des Gebäudes. Bei verwendungsZweck != NEUBAUVierstellige\
+          \ Jahresangabe"
+      bauweise:
+        type: "string"
+        description: "Erlaubte Werte sind: FACHWERK_MIT_STROH_LEHM,FACHWERK_MIT_ZIEGELN,GLAS_STAHL,HOLZ,MASSIV.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      bezeichnungWohneinheit:
+        type: "string"
+        description: "Nur bei ObjektArt == EIGENTUMSWOHNUNG."
+      dachgeschossAusbau:
+        type: "string"
+        description: "Nur bei ObjektArt == HAUS. Erlaubte Werte sind: FLACHDACH,NICHT_AUSGEBAUT,TEILWEISE_AUSGEBAUT,VOLL_AUSGEBAUT.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      einliegerwohnungVorhanden:
+        type: "boolean"
+        example: false
+        description: "Nur bei ObjektArt == HAUS."
+      gewerbeflaeche:
+        $ref: "#/definitions/GebaeudeFlaeche"
+      hausAnordnung:
+        type: "string"
+        enum:
+        - "FREISTEHEND"
+        - "KOPFHAUS"
+        - "MITTELHAUS"
+      hausTyp:
+        type: "string"
+        description: "Nur bei ObjektArt == HAUS."
+        enum:
+        - "DOPPELHAUSHAELFTE"
+        - "EINFAMILIENHAUS"
+        - "MEHRFAMILIENHAUS"
+        - "REIHENHAUS"
+        - "ZWEIFAMILIENHAUS"
+      istFertighaus:
+        type: "boolean"
+        example: false
+        description: "Nur bei ObjektArt == HAUS."
+      miteigentumsAnteil:
+        description: "Nur bei ObjektArt == EIGENTUMSWOHNUNG."
+        $ref: "#/definitions/MiteigentumsAnteil"
+      modernisierungsAngaben:
+        $ref: "#/definitions/ModernisierungsAngaben"
+      unterkellerung:
+        type: "string"
+        description: "Nur bei ObjektArt == HAUS. Erlaubte Werte sind: NICHT_UNTERKELLERT,TEILWEISE_UNTERKELLERT,UNTERKELLERT.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      wohnflaeche:
+        $ref: "#/definitions/GebaeudeFlaeche"
+  FinanzierungsObjekt:
+    type: "object"
+    properties:
+      adresse:
+        $ref: "#/definitions/Postadresse"
+      autostellplaetze:
+        type: "array"
+        items:
+          $ref: "#/definitions/Autostellplatz"
+      bestehendeDarlehen:
+        type: "array"
+        items:
+          $ref: "#/definitions/BestehendesDarlehenDesFinanzierungsObjekts"
+      erbbaurecht:
+        $ref: "#/definitions/Erbbaurecht"
+      gebaeude:
+        $ref: "#/definitions/Gebaeude"
+      grundbuchAngabe:
+        $ref: "#/definitions/GrundbuchAngabe"
+      grundstueck:
+        $ref: "#/definitions/Grundstueck"
+      id:
+        type: "string"
+      objektArt:
+        type: "string"
+        enum:
+        - "GRUNDSTUECK"
+        - "EIGENTUMSWOHNUNG"
+        - "HAUS"
+      verkehrswert:
+        type: "number"
+        description: "Nur relevant bei Finanzbedarf AnschlussFinanzierung, Modernisierung\
+          \ und Kapitalbeschaffung"
+  Error:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+      statusCode:
+        type: "integer"
+        format: "int32"
+      statusMessage:
+        type: "string"
+      traceId:
+        type: "string"
+  Autostellplatz:
+    type: "object"
+    properties:
+      mieteinnahmenMonatlich:
+        type: "number"
+      typ:
+        type: "string"
+        enum:
+        - "STELLPLATZ"
+        - "CARPORT"
+        - "GARAGE"
+        - "DOPPEL_GARAGE"
+        - "KELLER_GARAGE"
+        - "TIEFGARAGEN_STELLPLATZ"
+  Erbbaurecht:
+    type: "object"
+    properties:
+      erbbauzinsJaehrlich:
+        type: "number"
+      grundstuecksEigentuemer:
+        type: "string"
+        enum:
+        - "ANDERE"
+        - "OEFFENTLICH_KIRCHLICH"
+      laufzeitBisJahr:
+        type: "string"
+        example: "2016"
+        description: "Vierstellige Jahresangabe"
+  Dokument:
+    type: "object"
+    properties:
+      art:
+        type: "string"
+        description: "ist nicht immer vorhanden"
+      href:
+        type: "string"
+      name:
+        type: "string"
+      type:
+        type: "string"
+  SituationNachRenteneintritt:
+    type: "object"
+    properties:
+      gesetzlicheRenteMonatlich:
+        type: "number"
+      privateRenteMonatlich:
+        type: "number"
+      rentenBeginn:
+        type: "string"
+        format: "date"
+      sonstigesEinkommenMonatlich:
+        type: "number"
+  Wertpapiere:
+    type: "object"
+    properties:
+      aktuellerWert:
+        type: "number"
+      dividendenJaehrlich:
+        type: "number"
+      maximalAufzuloesenderWert:
+        type: "number"
+      vermoegensTyp:
+        type: "string"
+        description: "Redundante Angabe des Vermögenstyp dient als zusätzliches Filterkriterium"
+        enum:
+        - "VERMOEGEN"
+        - "VERBINDLICHKEIT"
+      zahlungsTyp:
+        type: "string"
+        description: "Redundante Angabe des Zahlungstyps dient als zusätzliches Filterkriterium"
+        enum:
+        - "EINNAHME"
+        - "AUSGABE"
+  BestehendesDarlehen:
+    type: "object"
+    properties:
+      abzuloesendeRestschuld:
+        type: "number"
+      aktuelleRestschuldWennNichtAbzuloesen:
+        type: "number"
+        description: "nur wenn wirdAbgeloest==true"
+      darlehensArt:
+        type: "string"
+        description: "Erlaubte Werte sind: BAUSPARDARLEHEN,FOERDERDARLEHEN,IMMOBILIENDARLEHEN,SONSTIGES_DARLEHEN.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      darlehensGeber:
+        $ref: "#/definitions/ProduktAnbieter"
+      eingetrageneGrundschuld:
+        type: "number"
+      id:
+        type: "string"
+      rateMonatlich:
+        type: "number"
+      zinsBindungEndetAm:
+        type: "string"
+        format: "date"
+  BestehendesDarlehenDesFinanzierungsObjekts:
+    type: "object"
+    properties:
+      abzuloesendeRestschuld:
+        type: "number"
+      aktuelleRestschuldWennNichtAbzuloesen:
+        type: "number"
+        description: "nur wenn wirdAbgeloest==true"
+      darlehensArt:
+        type: "string"
+        description: "Erlaubte Werte sind: BAUSPARDARLEHEN,FOERDERDARLEHEN,IMMOBILIENDARLEHEN,SONSTIGES_DARLEHEN.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      darlehensGeber:
+        $ref: "#/definitions/ProduktAnbieter"
+      eingetrageneGrundschuld:
+        type: "number"
+      id:
+        type: "string"
+      rateMonatlich:
+        type: "number"
+      verwendenAls:
+        type: "string"
+        description: "Beschreibt wie das Darlehen im Zusammenhang mit dem Vorhaben,\
+          \ behandelt werden soll."
+        enum:
+        - "ABLOESEN"
+        - "TRITT_IM_RANG_ZURUECK"
+        - "TRITT_NICHT_IM_RANG_ZURUECK"
+      zinsBindungEndetAm:
+        type: "string"
+        format: "date"
+  Staat:
+    type: "object"
+    properties:
+      isoCountryCode:
+        type: "string"
+      name:
+        type: "string"
+  MiteigentumsAnteil:
+    type: "object"
+    properties:
+      anteil:
+        type: "number"
+        format: "double"
+      gesamt:
+        type: "integer"
+        format: "int32"
+  Beschaeftigung:
+    type: "object"
+    properties:
+      anzahlGehaelterProJahr:
+        type: "number"
+        format: "double"
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
+      arbeitgeber:
+        type: "string"
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
+      arbeitgeberInDeutschlandAnsaessig:
+        type: "boolean"
+        example: false
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
+      art:
+        type: "string"
+        description: "Erlaubte Werte sind: ANGESTELLTER, ARBEITER, ARBEITSLOSER, BEAMTER,\
+          \ FREIBERUFLER, HAUSFRAU, RENTNER, SELBSTAENDIGER"
+      befristungsStatus:
+        type: "string"
+        description: "nur bei art==ANGESTELLTER,ARBEITER"
+        enum:
+        - "BEFRISTET"
+        - "UNBEFRISTET"
+      beruf:
+        type: "string"
+        description: "nur bei art!=RENTNER"
+      beschaeftigtSeit:
+        type: "string"
+        format: "date"
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER,FREIBERUFLER,SELBSTAENDIGER"
+      einkommenNettoJaehrlich:
+        type: "number"
+        description: "nur bei art==FREIBERUFLER,SELBSTAENDIGER"
+      einkommenNettoMonatlich:
+        type: "number"
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
+      inProbezeit:
+        type: "boolean"
+        example: false
+        description: "nur bei art==ANGESTELLTER,ARBEITER,BEAMTER"
+      situationNachRenteneintritt:
+        description: "nur bei art!=RENTNER"
+        $ref: "#/definitions/SituationNachRenteneintritt"
+      sonstigesRegelmaessigesEinkommenNettoMonatlich:
+        type: "number"
+        description: "nur bei art==ARBEITSLOSER,HAUSFRAU"
+      staatlicheRenteNettoMonatlich:
+        type: "number"
+        description: "nur bei art==RENTNER"
+      taetigkeit:
+        type: "string"
+        description: "nur bei art==FREIBERUFLER,SELBSTAENDIGER. Erlaubte Werte sind:\
+          \   ALTENPFLEGER, AMBULANTER_KRANKENPFLEGER, ANWALT, APOTHEKER, ARCHITEKT,\
+          \ ARZT, BESTATTER, DATENSCHUTZBEAUFTRAGTER, DEKORATEUR, DIAETASSISTENT,\
+          \ DOLMETSCHER, EDV_BERATER, ERGOTHERAPEUT, ERNAEHRUNGSBERATER, FOTOGRAF,\
+          \ GEOGRAF, GRAFIKDESIGNER, GRAFIKER, HEBAMME, HEILMASSEUR, HEILPRAKTIKER,\
+          \ HISTORIKER, INFORMATIKER, INGENIEUR, INSOLVENZVERWALTER, JOURNALIST, KLASSISCHER_KONZERTMUSIKER,\
+          \ KONSTRUKTEUR, KRANKENGYMNAST, KRANKENPFLEGER, KRANKENSCHWESTER, LOGOPAEDE,\
+          \ MEDIZINISCH_TECHN_ASSISTENT, NOTAR, OPERNSAENGER, PERSONALBERATER, PHYSIOTHERAPEUT,\
+          \ PSYCHOLOGE, RAUMAUSSTATTER, RUNDFUNKSPRECHER, SACHVERSTAENDIGER, STADTPLANER,\
+          \ STATIKER, STEUERBERATER, TIERARZT, UNTERNEHMENSBERATER, VERMITTLER, WIRTSCH_BUCHPRUEFER_REVISOR,\
+          \ ZAHNARZT, ZAHNTECHNIKER, SONSTIGES."
+  SchufaErgebnis:
+    type: "object"
+    properties:
+      antragstellerUnbekannt:
+        type: "boolean"
+        example: false
+        description: "Der Antragsteller ist bei der Schufa unbekannt."
+      inManuellerNachbehandlung:
+        type: "boolean"
+        example: false
+        description: "Die Ermittlung des Schufa-Scores verzögert sich, wenn sich die\
+          \ Anfrage bei der Schufa in manueller Nachbehandlung befindet."
+      score:
+        type: "string"
+  Links:
+    type: "object"
+    properties:
+      self:
+        $ref: "#/definitions/Link"
+  LegitimationsDaten:
+    type: "object"
+    properties:
+      ausstellendeBehoerde:
+        type: "string"
+      ausstellungsdatum:
+        type: "string"
+        format: "date"
+      ausweisArt:
+        type: "string"
+        enum:
+        - "PERSONALAUSWEIS"
+        - "REISEPASS"
+        - "ANDERE"
+      ausweisArtBeiAndererAusweis:
+        type: "string"
+        description: "Nur wenn ausweisArt = ANDERE"
+      ausweisNummer:
+        type: "string"
+  NachrangigesExternesDarlehen:
+    type: "object"
+    properties:
+      darlehensBetrag:
+        type: "number"
+      darlehensGeber:
+        type: "string"
+        description: "Der Name des externen Darlehensgebers (Firmierung). Es gibt\
+          \ keine entsprechende Beziehung zu einem Partner auf der Europace-Plattform."
+      id:
+        type: "string"
+      rateMonatlich:
+        type: "number"
+      typ:
+        type: "string"
+        description: "Erlaubte Werte sind: ARBEITGEBERDARLEHEN,BAUSPARDARLEHEN,OEFFENTLICHES_DARLEHEN,RATENKREDIT.\
+          \ Neue Ausprägungen können kurzfristig hinzukommen. Der Client muss daher\
+          \ mit unbekannten Werten umgehen können."
+      zinsBindung:
+        $ref: "#/definitions/ZinsBindung"

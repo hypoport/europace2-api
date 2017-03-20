@@ -2,6 +2,30 @@
 
 Informationen zu den Änderungen in den verschiedenen Versionen
 
+#### Version 1.0
+
+* operationId's angepasst
+* X-Amzn-Trace-Id entfernt
+* `CollectionLinks` in `PaginationLinks` umbenannt
+
+#### Version 0.6
+
+* Header `Authorization` wird jetzt nicht mehr explizit in der Parameterliste der Operationen erwähnt.
+* Header `X-Authentication` wird jetzt nicht mehr explizit in der Parameterliste der Operationen erwähnt.
+* Bei Collection-Ressourcen sind die `prev`- und `next`-Links explizit spezifizert. 
+
+#### Version 0.5
+
+#### Geänderte QueryParameter
+
+* `antraege?erzeugtSeit` --\> `antraege?angenommenNach`
+
+##### Geänderte Dokumentation / YAML
+
+* Swagger-Datentyp für `Antrag.zeitpunktDerAnnahme` und `AngebotZumAntrag.erzeugtAm` von `date` auf `date-time` geändert 
+* `link.href` als String interpretieren
+* `link.type` als String interpretieren
+
 #### Version 0.4
 
 ##### Neue Felder

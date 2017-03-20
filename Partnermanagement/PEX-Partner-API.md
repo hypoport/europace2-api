@@ -58,6 +58,7 @@ Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
   "mobilnummer" : "...",
   "nachname" : "...",
   "rechtDarfEinstellungenOeffnen" : false,   // default false
+  "rechtDarfErgebnisListeNutzen" : false,   //default false
   "rechtDarfPartnerAnlegen" : false, 		  // default false
   "rechtEchtgeschaeftErlaubt" : true, 		  // default false
   "titelFunktion" : "...",
@@ -223,6 +224,7 @@ Content-Type: application/json;charset=utf-8
   "gesperrtTransitiv": false,
   "nachname" : "Mustermann",
   "rechtDarfEinstellungenOeffnen" : false,
+  "rechtDarfErgebnisListeNutzen" : false,
   "rechtDarfPartnerAnlegen" : false,
   "rechtEchtgeschaeftErlaubt" : false,
   "vorname" : "Max"
@@ -272,6 +274,7 @@ Content-Type: application/json;charset=utf-8
   "gesperrtTransitiv": false,
   "nachname" : "Mustermann",
   "rechtDarfEinstellungenOeffnen" : true,
+  "rechtDarfErgebnisListeNutzen" : true,
   "rechtDarfPartnerAnlegen" : false,
   "rechtEchtgeschaeftErlaubt" : true,
   "vorname" : "Max",
@@ -343,6 +346,7 @@ Content-Type: application/json;charset=utf-8
   "nachname" : "Mustermann",
   "gesperrtTransitiv": false,
   "rechtDarfEinstellungenOeffnen" : false,
+  "rechtDarfErgebnisListeNutzen" : true,
   "rechtDarfPartnerAnlegen" : false,
   "rechtEchtgeschaeftErlaubt" : false,
   "typ" : "ORGANISATION",
