@@ -57,6 +57,7 @@ Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
   "id":"...",                 				  // EUROPACE 2 PartnerId (readonly)
   "mobilnummer" : "...",
   "nachname" : "...",
+  "rechtDarfBaufiSmartEinstellungenVornehmen" : false,   //default false
   "rechtDarfEinstellungenOeffnen" : false,   // default false
   "rechtDarfErgebnisListeNutzen" : false,   //default false
   "rechtDarfPartnerAnlegen" : false, 		  // default false
@@ -68,7 +69,7 @@ Die Datenhaushalte für Personen und Organisationen sind unterschiedlich.
   "webseiteUrl" : "...",
   "aufsichtsBehoerde" : "...",
   "registrierungsNummer" : "...",
-  "gehoertZuKreditinstitut" : "false"   // default false, markiert Personen, die Mitarbeiter eines Kreditinstitutes ist
+  "gehoertZuKreditinstitut" : "false"   // default false, markiert Personen, die Mitarbeiter eines Kreditinstitutes sind
 }
 ```
 
@@ -223,6 +224,7 @@ Content-Type: application/json;charset=utf-8
   "gesperrt": false,
   "gesperrtTransitiv": false,
   "nachname" : "Mustermann",
+  "rechtDarfBaufiSmartEinstellungenVornehmen" : false,
   "rechtDarfEinstellungenOeffnen" : false,
   "rechtDarfErgebnisListeNutzen" : false,
   "rechtDarfPartnerAnlegen" : false,
@@ -273,6 +275,7 @@ Content-Type: application/json;charset=utf-8
   "gesperrt": false,
   "gesperrtTransitiv": false,
   "nachname" : "Mustermann",
+  "rechtDarfBaufiSmartEinstellungenVornehmen" : true,
   "rechtDarfEinstellungenOeffnen" : true,
   "rechtDarfErgebnisListeNutzen" : true,
   "rechtDarfPartnerAnlegen" : false,
@@ -345,6 +348,7 @@ Content-Type: application/json;charset=utf-8
   "id" : "4712",
   "nachname" : "Mustermann",
   "gesperrtTransitiv": false,
+  "rechtDarfBaufiSmartEinstellungenVornehmen" : false,
   "rechtDarfEinstellungenOeffnen" : false,
   "rechtDarfErgebnisListeNutzen" : true,
   "rechtDarfPartnerAnlegen" : false,
