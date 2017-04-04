@@ -1,15 +1,16 @@
 ---
 swagger: "2.0"
 info:
-  description: "Mit dieser API können die Vorgänge durch die Vertriebe abgerufen werden."
+  description: "Mit dieser API können die Vorgänge aus der Europace Plattform ausgelesen\
+    \ werden."
   version: "0.1"
-  title: "Vorgänge Auslesen API"
+  title: "Vorgänge API"
   contact:
     name: "Europace AG"
     url: "www.europace2.de"
     email: "helpdesk@europace2.de"
 host: "baufismart.api.europace.de"
-basePath: "/mock"
+basePath: "/v1"
 tags:
 - name: "Vorgänge"
   description: "Dieser Endpunkt repräsentiert die Vertriebssicht."
@@ -25,12 +26,40 @@ paths:
       tags:
       - "Vorgänge"
       summary: "alle sichtbaren Vorgänge"
-      operationId: "vorgaengeUsingGET"
+      operationId: "getVorgaenge"
       consumes:
       - "application/json"
       produces:
       - "application/json;charset=UTF-8"
-      parameters: []
+      parameters:
+      - name: "datenKontext"
+        in: "query"
+        description: "Datenkontext"
+        required: false
+        type: "string"
+        default: "ECHT_GESCHAEFT"
+        enum:
+        - "ECHT_GESCHAEFT"
+        - "TEST_MODUS"
+      - name: "aenderungSeit"
+        in: "query"
+        description: "aenderungSeit"
+        required: false
+        type: "string"
+      - name: "page"
+        in: "query"
+        description: "page"
+        required: false
+        type: "integer"
+        default: 0
+        format: "int32"
+      - name: "limit"
+        in: "query"
+        description: "limit"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
       responses:
         200:
           description: "OK"
@@ -66,7 +95,7 @@ paths:
       summary: "einen Vorgang abrufen"
       description: "Als Parameter wird die Vorgangsnummer verwendet, die aus BaufiSmart\
         \ erzeugt wurde."
-      operationId: "getByIdUsingGET"
+      operationId: "getVorgang"
       consumes:
       - "application/json"
       produces:
@@ -112,7 +141,7 @@ paths:
 securityDefinitions:
   oauth2:
     type: "oauth2"
-    tokenUrl: "https://api.europace.de/mock/login"
+    tokenUrl: "https://api.europace.de/login"
     flow: "password"
     scopes:
       API: "Authorisation Scope für die gesamte API."
@@ -124,10 +153,14 @@ definitions:
         type: "string"
       iban:
         type: "string"
-      kontoinhaber:
+      id:
+        type: "string"
+      kontoinhaberIds:
         type: "array"
         items:
-          $ref: "#/definitions/AntragstellerVerknuepfung"
+          type: "string"
+      kontoinhaberName:
+        type: "string"
       kreditinstitut:
         type: "string"
   HaushaltsPositionen:
@@ -226,6 +259,69 @@ definitions:
         type: "string"
       strasse:
         type: "string"
+  VorgaengeResourceListItem:
+    type: "object"
+    properties:
+      antraege:
+        type: "array"
+        items:
+          $ref: "#/definitions/Antrag"
+      bankverbindung:
+        $ref: "#/definitions/Bankverbindung"
+      datenKontext:
+        type: "string"
+        enum:
+        - "TEST_MODUS"
+        - "ECHT_GESCHAEFT"
+      datumLetztesEreignis:
+        type: "string"
+      datumLetztesEreignisTimestamp:
+        type: "integer"
+        format: "int64"
+      erstelltAm:
+        type: "string"
+        format: "date"
+      externeVorgangsNummer:
+        type: "string"
+      finanzierungsObjekt:
+        $ref: "#/definitions/FinanzierungsObjekt"
+      geschlossenAm:
+        type: "string"
+        format: "date"
+      haushalte:
+        type: "array"
+        items:
+          $ref: "#/definitions/Haushalt"
+      importQuelle:
+        type: "string"
+      kundenBetreuer:
+        $ref: "#/definitions/Partner"
+      leadTracking:
+        $ref: "#/definitions/LeadTracking"
+      personenbezogeneDatenGeloescht:
+        type: "boolean"
+      phase:
+        type: "string"
+      prioritaet:
+        type: "string"
+        description: "Priorität des Vorgangs, Werte: [NIEDRIG,NEUTRAL,HOCH]"
+        enum:
+        - "NIEDRIG"
+        - "NEUTRAL"
+        - "HOCH"
+      status:
+        type: "string"
+        description: "Status des Vorgangs, Werte: [AKTIV,ARCHIVIERT]"
+      tippGeber:
+        $ref: "#/definitions/Partner"
+      vorgangsBearbeiter:
+        $ref: "#/definitions/Partner"
+      vorgangsNummer:
+        type: "string"
+      vorhaben:
+        $ref: "#/definitions/Vorhaben"
+      _links:
+        $ref: "#/definitions/Links"
   BestehendeImmobilie:
     type: "object"
     properties:
@@ -349,6 +445,15 @@ definitions:
         type: "string"
         description: "Redundantes Datum für bessere Menschenlesbarkeit / einfachere\
           \ Zuordnung"
+  PaginationLinks:
+    type: "object"
+    properties:
+      next:
+        $ref: "#/definitions/Link"
+      prev:
+        $ref: "#/definitions/Link"
+      self:
+        $ref: "#/definitions/Link"
   KfwDarlehensWunsch:
     type: "object"
     properties:
@@ -632,6 +737,34 @@ definitions:
         description: "wenn praeferenzAuswahl==ZWISCHEN_BIS_JAHREN"
       zusatzlicheKommentare:
         type: "string"
+  Vorhaben:
+    type: "object"
+    properties:
+      eigenleistungWennNeubauOderModernisierungsmassnahmen:
+        type: "number"
+      externeBausparAngebote:
+        type: "array"
+        items:
+          $ref: "#/definitions/BausparAngebot"
+      finanzbedarf:
+        $ref: "#/definitions/Finanzbedarf"
+      finanzierungswunsch:
+        $ref: "#/definitions/Finanzierungswunsch"
+      nachrangigeExterneDarlehen:
+        type: "array"
+        items:
+          $ref: "#/definitions/NachrangigesExternesDarlehen"
+      praeferenzen:
+        $ref: "#/definitions/Praeferenzen"
+      verwendungszweck:
+        type: "string"
+        enum:
+        - "ANSCHLUSSFINANZIERUNG"
+        - "KAUF"
+        - "KAUF_NEUBAU_VOM_BAUTRAEGER"
+        - "MODERNISIERUNG_UMBAU_ANBAU"
+        - "NEUBAU"
+        - "KAPITALBESCHAFFUNG"
   EinnahmenMonatlich:
     type: "object"
     properties:
@@ -735,34 +868,6 @@ definitions:
         type: "string"
       type:
         type: "string"
-  VorhabenVertrieb:
-    type: "object"
-    properties:
-      eigenleistungWennNeubauOderModernisierungsmassnahmen:
-        type: "number"
-      externeBausparAngebote:
-        type: "array"
-        items:
-          $ref: "#/definitions/BausparAngebot"
-      finanzbedarf:
-        $ref: "#/definitions/Finanzbedarf"
-      finanzierungswunsch:
-        $ref: "#/definitions/Finanzierungswunsch"
-      nachrangigeExterneDarlehen:
-        type: "array"
-        items:
-          $ref: "#/definitions/NachrangigesExternesDarlehen"
-      praeferenzen:
-        $ref: "#/definitions/Praeferenzen"
-      verwendungszweck:
-        type: "string"
-        enum:
-        - "ANSCHLUSSFINANZIERUNG"
-        - "KAUF"
-        - "KAUF_NEUBAU_VOM_BAUTRAEGER"
-        - "MODERNISIERUNG_UMBAU_ANBAU"
-        - "NEUBAU"
-        - "KAPITALBESCHAFFUNG"
   Finanzierungswunsch:
     type: "object"
     properties:
@@ -1561,14 +1666,20 @@ definitions:
         $ref: "#/definitions/Partner"
       leadTracking:
         $ref: "#/definitions/LeadTracking"
+      personenbezogeneDatenGeloescht:
+        type: "boolean"
       phase:
         type: "string"
       prioritaet:
         type: "string"
+        description: "Priorität des Vorgangs, Werte: [NIEDRIG,NEUTRAL,HOCH]"
         enum:
         - "NIEDRIG"
         - "NEUTRAL"
         - "HOCH"
+      status:
+        type: "string"
+        description: "Status des Vorgangs, Werte: [AKTIV,ARCHIVIERT]"
       tippGeber:
         $ref: "#/definitions/Partner"
       vorgangsBearbeiter:
@@ -1576,7 +1687,7 @@ definitions:
       vorgangsNummer:
         type: "string"
       vorhaben:
-        $ref: "#/definitions/VorhabenVertrieb"
+        $ref: "#/definitions/Vorhaben"
       _links:
         $ref: "#/definitions/Links"
   BestehendesDarlehenDesFinanzierungsObjekts:
@@ -1640,9 +1751,9 @@ definitions:
       vorgaenge:
         type: "array"
         items:
-          $ref: "#/definitions/Vorgang"
+          $ref: "#/definitions/VorgaengeResourceListItem"
       _links:
-        $ref: "#/definitions/Link"
+        $ref: "#/definitions/PaginationLinks"
   MiteigentumsAnteil:
     type: "object"
     properties:
