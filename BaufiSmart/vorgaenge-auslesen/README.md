@@ -1,10 +1,6 @@
 # Vorgänge Auslesen API
 API Definition zum Auslesen von Vorgängen aus der Europace-Plattform aus Sicht eines Vertriebes.
 
-**Hinweis:** Es handelt sich hierbei um eine noch recht frühe Version und es werden noch Veränderungen an der API vorgenommen, die nicht abwärtskompatibel sein könnten. Dies bedeutet, dass gegen diese Version programmierte Clients später noch einmal angepasst werden müssten.
-
-**Hinweis:** Bisher sind nur Mock-Daten über die Vorgänge Auslesen API abrufbar.
-
 ### Swagger Spezifikationen
 Die API ist vollständig in Swagger definiert. Die Swagger Definitionen werden sowohl im JSON- als auch im YAML-Format zur Verfügung gestellt.
 
@@ -17,15 +13,15 @@ Aus diesen Dateien können mit Hilfe von [Swagger Codegen](https://github.com/sw
 ### Generierung des Clients
 #### JAVA mit Retrofit
 
-1. Die aktuelle Swagger Version 2.2.1 downloaden
+1. Die aktuelle Swagger Version 2.2.2 downloaden
 2. Client mit folgendem Kommando generieren:
 
 
 ```
-java -jar swagger-codegen-cli-2.2.1.jar generate -i swagger.yaml -l java -c codegen-config-file.json -o europace-api-client
+java -jar swagger-codegen-cli-2.2.2.jar generate -i swagger.yaml -l java -c codegen-config-file.json -o europace-api-client
 ```
 
-Example **codegen-config-file.json** für Version 0.1:
+Example **codegen-config-file.json** für Version 0.2:
 
 ```
 {
