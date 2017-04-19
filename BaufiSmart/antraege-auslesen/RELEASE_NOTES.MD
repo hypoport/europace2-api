@@ -2,6 +2,12 @@
 
 Informationen zu den Änderungen in den verschiedenen Versionen
 
+#### Version 2.0
+
+* Die Adressierung der Anträge erfolgt jetzt über die vollständige Antragsnummer `AB1234/1/1`.
+* Bankverbindung enthält jetzt nur noch Referenzen auf Kontoinhaber
+* Partner und Produktanbieter enthalten optional eine externe PartnerId
+
 #### Version 1.0
 
 * operationId's angepasst

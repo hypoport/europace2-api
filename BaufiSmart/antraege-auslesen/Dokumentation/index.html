@@ -527,8 +527,10 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_antraege_resource">Antraege</a>
 <ul class="sectlevel3">
 <li><a href="#_getalleantraege">alle Anträge abrufen</a></li>
-<li><a href="#_getantrag">einen Antrag abrufen</a></li>
+<li><a href="#_getantraegebyvorgangnummer">Alle Anträg eines Vorgangs abrufen</a></li>
+<li><a href="#_getantrag">Teilanträge eines Antrags abrufen</a></li>
 <li><a href="#_getangebot">Angebot des Antrags abrufen</a></li>
+<li><a href="#_getantrag_1">einen Antrag abrufen</a></li>
 </ul>
 </li>
 </ul>
@@ -583,7 +585,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_miteigentumsanteil">MiteigentumsAnteil</a></li>
 <li><a href="#_modernisierungsangaben">ModernisierungsAngaben</a></li>
 <li><a href="#_nachrangigesexternesdarlehen">NachrangigesExternesDarlehen</a></li>
-<li><a href="#_paginationlinks">PaginationLinks</a></li>
+    <li><a href="#_paginationlinks">PaginationLinks</a></li>
 <li><a href="#_partner">Partner</a></li>
 <li><a href="#_postadresse">Postadresse</a></li>
 <li><a href="#_produktanbieter">ProduktAnbieter</a></li>
@@ -623,7 +625,7 @@ table.CodeRay td.code>pre{padding:0}
 <div class="sect2">
 <h3 id="_aktuelle_version">Aktuelle Version</h3>
 <div class="paragraph">
-<p><em>Version</em> : 1.0</p>
+<p><em>Version</em> : 2.0</p>
 </div>
 </div>
 <div class="sect2">
@@ -637,7 +639,7 @@ table.CodeRay td.code>pre{padding:0}
 <h3 id="_uri_schema">URI Schema</h3>
 <div class="paragraph">
 <p><em>Host</em> : baufismart.api.europace.de<br>
-<em>Basis-Pfad</em> : /v1<br>
+<em>Basis-Pfad</em> : /v2<br>
 <em>Schemata</em> : HTTPS</p>
 </div>
 </div>
@@ -848,16 +850,16 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect3">
-<h4 id="_getantrag">einen Antrag abrufen</h4>
+<h4 id="_getantraegebyvorgangnummer">Alle Anträg eines Vorgangs abrufen</h4>
 <div class="literalblock">
 <div class="content">
-<pre>GET /antraege/{antragsNummer}</pre>
+<pre>GET /antraege/{vorgang}</pre>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_beschreibung_2">Beschreibung</h5>
 <div class="paragraph">
-<p>Als Parameter wird die Antragsnummer verwendet, die aus BaufiSmart erzeugt wurde. Dabei ist '/' durch '_' zu ersetzen.</p>
+<p>Als Parameter wird die Vorgangsnummer in der Form 'AB1234' verwendet.</p>
 </div>
 </div>
 <div class="sect4">
@@ -901,7 +903,7 @@ table.CodeRay td.code>pre{padding:0}
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>antragsNummer</strong><br>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgang</strong><br>
 <em>verpflichtend</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">Nummer des Antrags</p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
@@ -928,7 +930,7 @@ table.CodeRay td.code>pre{padding:0}
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_antrag">Antrag</a></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_antraege">Antraege</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>400</strong></p></td>
@@ -1004,16 +1006,16 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect3">
-<h4 id="_getangebot">Angebot des Antrags abrufen</h4>
+<h4 id="_getantrag">Teilanträge eines Antrags abrufen</h4>
 <div class="literalblock">
 <div class="content">
-<pre>GET /antraege/{antragsNummer}/angebot</pre>
+<pre>GET /antraege/{vorgang}/{antrag}</pre>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_beschreibung_3">Beschreibung</h5>
 <div class="paragraph">
-<p>Es handelt sich um das angenommene Angebot, das zu diesem Antrag geführt hat.</p>
+<p>Als Parameter wird die Vorgangs- und Antragsnummer in der Form 'AB1234/1' verwendet.</p>
 </div>
 </div>
 <div class="sect4">
@@ -1057,9 +1059,16 @@ table.CodeRay td.code>pre{padding:0}
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>antragsNummer</strong><br>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>antrag</strong><br>
 <em>verpflichtend</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Nummer des Antrags, wobei '/' durch '_' ersetzt werden muss.</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">antrag</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgang</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Nummer des Antrags</p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 </tbody>
@@ -1084,7 +1093,7 @@ table.CodeRay td.code>pre{padding:0}
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_angebotzumantrag">AngebotZumAntrag</a></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_antraege">Antraege</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>400</strong></p></td>
@@ -1136,6 +1145,339 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 <div class="sect4">
 <h5 id="_sicherheit_3">Sicherheit</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 20%;">
+<col style="width: 65%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Scopes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong><a href="#_oauth2">oauth2</a></strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_getangebot">Angebot des Antrags abrufen</h4>
+<div class="literalblock">
+<div class="content">
+<pre>GET /antraege/{vorgang}/{antrag}/angebot</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_beschreibung_4">Beschreibung</h5>
+<div class="paragraph">
+<p>Es handelt sich um das angenommene Angebot, das zu diesem Antrag geführt hat.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameter_4">Parameter</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Header</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Authorization</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Header</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>X-Authentication</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Header</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>X-TraceId</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>antrag</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">antrag</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgang</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Nummer des Antrags, bestehend aus Vorgangsnummer und Antragnummer.</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_antworten_4">Antworten</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_angebotzumantrag">AngebotZumAntrag</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>400</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Client Error</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>500</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Internal Server Error</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_verarbeitet_4">Verarbeitet</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code><strong>/</strong></code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_erzeugt_4">Erzeugt</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json;charset=UTF-8</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sicherheit_4">Sicherheit</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 20%;">
+<col style="width: 65%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Scopes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong><a href="#_oauth2">oauth2</a></strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_getantrag_1">einen Antrag abrufen</h4>
+<div class="literalblock">
+<div class="content">
+<pre>GET /antraege/{vorgang}/{antrag}/{teilantrag}</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_beschreibung_5">Beschreibung</h5>
+<div class="paragraph">
+<p>Als Parameter wird die komplette Antragsnummer in der Form 'AB1234/1/2' verwendet.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameter_5">Parameter</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Header</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Authorization</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Header</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>X-Authentication</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Header</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>X-TraceId</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>antrag</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">antrag</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>teilantrag</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">teilantrag</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgang</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Nummer des Antrags</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_antworten_5">Antworten</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_antrag">Antrag</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>400</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Client Error</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>500</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Internal Server Error</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_verarbeitet_5">Verarbeitet</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code><strong>/</strong></code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_erzeugt_5">Erzeugt</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json;charset=UTF-8</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sicherheit_5">Sicherheit</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 15%;">
@@ -1279,8 +1621,8 @@ table.CodeRay td.code>pre{padding:0}
 <h3 id="_antraege">Antraege</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 42%;">
-<col style="width: 57%;">
+    <col style="width: 42%;">
+    <col style="width: 57%;">
 </colgroup>
 <thead>
 <tr>
@@ -1297,7 +1639,8 @@ table.CodeRay td.code>pre{padding:0}
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>_links</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_paginationlinks">PaginationLinks</a></p></td>
+    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_paginationlinks">PaginationLinks</a></p>
+    </td>
 </tr>
 </tbody>
 </table>
@@ -1809,9 +2152,19 @@ table.CodeRay td.code>pre{padding:0}
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>kontoinhaber</strong><br>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_antragstellerverknuepfung">AntragstellerVerknuepfung</a> &gt; array</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>kontoinhaberIds</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; string &gt; array</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>kontoinhaberName</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>kreditinstitut</strong><br>
@@ -4047,34 +4400,34 @@ table.CodeRay td.code>pre{padding:0}
 </tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="_paginationlinks">PaginationLinks</h3>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 42%;">
-<col style="width: 57%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Typ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>next</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_link">Link</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>prev</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_link">Link</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>self</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_link">Link</a></p></td>
+    <div class="sect2">
+        <h3 id="_paginationlinks">PaginationLinks</h3>
+        <table class="tableblock frame-all grid-all spread">
+            <colgroup>
+                <col style="width: 42%;">
+                <col style="width: 57%;">
+            </colgroup>
+            <thead>
+            <tr>
+                <th class="tableblock halign-left valign-middle">Name</th>
+                <th class="tableblock halign-left valign-middle">Typ</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>next</strong><br>
+                    <em>optional</em></p></td>
+                <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_link">Link</a></p></td>
+            </tr>
+            <tr>
+                <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>prev</strong><br>
+                    <em>optional</em></p></td>
+                <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_link">Link</a></p></td>
+            </tr>
+            <tr>
+                <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>self</strong><br>
+                    <em>optional</em></p></td>
+                <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_link">Link</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -4123,6 +4476,11 @@ table.CodeRay td.code>pre{padding:0}
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>telefonnummer</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>externerKreditSachbearbeiterId</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
@@ -4217,6 +4575,11 @@ table.CodeRay td.code>pre{padding:0}
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>telefonnummer</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>externerKreditSachbearbeiterId</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
@@ -4871,7 +5234,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-11-03 13:56:52 MEZ
+Last updated 2017-04-05 22:57:37 MESZ
 </div>
 </div>
 </body>

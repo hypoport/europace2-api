@@ -3,14 +3,14 @@ swagger: "2.0"
 info:
   description: "Mit dieser API können die Anträge durch die Produktanbieter abgerufen\
     \ werden. Dabei wird ausschließlich der Securitykontext des Produktanbieters eingenommen."
-  version: "1.0"
+  version: "2.0"
   title: "Auslesen API"
   contact:
     name: "Europace AG"
     url: "www.europace2.de"
     email: "helpdesk@europace2.de"
 host: "baufismart.api.europace.de"
-basePath: "/v1"
+basePath: "/v2"
 tags:
 - name: "Antraege"
   description: "Dieser Endpunkt repräsentiert die Produktanbietersicht."
@@ -90,20 +90,19 @@ paths:
       security:
       - oauth2:
         - "API"
-  /antraege/{antragsNummer}:
+  /antraege/{vorgang}:
     get:
       tags:
       - "Antraege"
-      summary: "einen Antrag abrufen"
-      description: "Als Parameter wird die Antragsnummer verwendet, die aus BaufiSmart\
-        \ erzeugt wurde. Dabei ist '/' durch '_' zu ersetzen."
-      operationId: "getAntrag"
+      summary: "Alle Anträg eines Vorgangs abrufen"
+      description: "Als Parameter wird die Vorgangsnummer in der Form 'AB1234' verwendet."
+      operationId: "getAntraegeByVorgangNummer"
       consumes:
       - "*/*"
       produces:
       - "application/json;charset=UTF-8"
       parameters:
-      - name: "antragsNummer"
+      - name: "vorgang"
         in: "path"
         description: "Nummer des Antrags"
         required: true
@@ -116,7 +115,7 @@ paths:
         200:
           description: "OK"
           schema:
-            $ref: "#/definitions/Antrag"
+            $ref: "#/definitions/Antraege"
         400:
           description: "Client Error"
           schema:
@@ -140,7 +139,63 @@ paths:
       security:
       - oauth2:
         - "API"
-  /antraege/{antragsNummer}/angebot:
+  /antraege/{vorgang}/{antrag}:
+    get:
+      tags:
+      - "Antraege"
+      summary: "Teilanträge eines Antrags abrufen"
+      description: "Als Parameter wird die Vorgangs- und Antragsnummer in der Form\
+        \ 'AB1234/1' verwendet."
+      operationId: "getAntrag"
+      consumes:
+      - "*/*"
+      produces:
+      - "application/json;charset=UTF-8"
+      parameters:
+      - name: "vorgang"
+        in: "path"
+        description: "Nummer des Antrags"
+        required: true
+        type: "string"
+      - name: "antrag"
+        in: "path"
+        description: "antrag"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "X-TraceId"
+        in: "header"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Antraege"
+        400:
+          description: "Client Error"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - oauth2:
+        - "API"
+  /antraege/{vorgang}/{antrag}/angebot:
     get:
       tags:
       - "Antraege"
@@ -153,11 +208,17 @@ paths:
       produces:
       - "application/json;charset=UTF-8"
       parameters:
-      - name: "antragsNummer"
+      - name: "vorgang"
         in: "path"
-        description: "Nummer des Antrags, wobei '/' durch '_' ersetzt werden muss."
+        description: "Nummer des Antrags, bestehend aus Vorgangsnummer und Antragnummer."
         required: true
         type: "string"
+      - name: "antrag"
+        in: "path"
+        description: "antrag"
+        required: true
+        type: "integer"
+        format: "int32"
       - name: "X-TraceId"
         in: "header"
         required: false
@@ -167,6 +228,68 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/AngebotZumAntrag"
+        400:
+          description: "Client Error"
+          schema:
+            $ref: "#/definitions/Error"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/Error"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+      - oauth2:
+        - "API"
+  /antraege/{vorgang}/{antrag}/{teilantrag}:
+    get:
+      tags:
+      - "Antraege"
+      summary: "einen Antrag abrufen"
+      description: "Als Parameter wird die komplette Antragsnummer in der Form 'AB1234/1/2'\
+        \ verwendet."
+      operationId: "getAntrag_1"
+      consumes:
+      - "*/*"
+      produces:
+      - "application/json;charset=UTF-8"
+      parameters:
+      - name: "vorgang"
+        in: "path"
+        description: "Nummer des Antrags"
+        required: true
+        type: "string"
+      - name: "antrag"
+        in: "path"
+        description: "antrag"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "teilantrag"
+        in: "path"
+        description: "teilantrag"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "X-TraceId"
+        in: "header"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Antrag"
         400:
           description: "Client Error"
           schema:
@@ -205,10 +328,14 @@ definitions:
         type: "string"
       iban:
         type: "string"
-      kontoinhaber:
+      id:
+        type: "string"
+      kontoinhaberIds:
         type: "array"
         items:
-          $ref: "#/definitions/AntragstellerVerknuepfung"
+          type: "string"
+      kontoinhaberName:
+        type: "string"
       kreditinstitut:
         type: "string"
   HaushaltsPositionen:
@@ -942,6 +1069,8 @@ definitions:
         type: "string"
       telefonnummer:
         type: "string"
+      externerKreditSachbearbeiterId:
+        type: "string"
   BeleihungsRechnung:
     type: "object"
     properties:
@@ -1211,6 +1340,8 @@ definitions:
       email:
         type: "string"
       telefonnummer:
+        type: "string"
+      externerKreditSachbearbeiterId:
         type: "string"
       _links:
         $ref: "#/definitions/Links"

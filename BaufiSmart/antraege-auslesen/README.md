@@ -15,18 +15,15 @@ Zur Unterstützung für das Mapping werden folgende Dateien bereit gestellt:
   - [CSV Datei](definitions.csv)
   - [Excel Datei](definitions.xls)
 
-Beispielantworten:
-- [Ein Antrag](beispiel-antrag.json)
-
 ### Generierung des Clients
 #### JAVA mit Retrofit
 
-1. Die aktuelle Swagger Version 2.2.1 downloaden
+1. Die aktuelle Swagger-Codegen Version 2.2.2 downloaden
 2. Client mit folgendem Kommando generieren:
 
 
 ```
-java -jar swagger-codegen-cli-2.2.1.jar generate -i swagger.yaml -l java -c codegen-config-file.json -o europace-api-client
+java -jar swagger-codegen-cli-2.2.2.jar generate -i swagger.yaml -l java -c codegen-config-file.json -o europace-api-client
 ```
 
 Example **codegen-config-file.json**:
