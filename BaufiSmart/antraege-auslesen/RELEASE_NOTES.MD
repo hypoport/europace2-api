@@ -2,6 +2,10 @@
 
 Informationen zu den Änderungen in den verschiedenen Versionen
 
+#### Version 2.1
+
+* Der Status der Anträge ist jetzt über die API setzbar.
+
 #### Version 2.0
 
 * Die Adressierung der Anträge erfolgt jetzt über die vollständige Antragsnummer `AB1234/1/1`.

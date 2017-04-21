@@ -57,3 +57,33 @@ Um die Credentials zu erhalten, erfagen Sie beim Helpdesk der Plattform die Zuga
 Für die Entwicklung neuer Clients können Sie mit einer Mock-Implementierung arbeiten. Diese ist unter https://baufismart.api.europace.de/mock erreichbar. So kann eine Liste von Anträgen zum Beispiel unter https://baufismart.api.europace.de/mock/antraege abgerufen werden.
 
 Passende Access-Token können über den oben beschriebenen Authentifizierungs-Prozess unter https://api.europace.de/mock/login abgerufen werden.
+
+### Quickstart
+
+#### Liste aller meiner Anträge abrufen
+
+```
+GET https://baufismart.api.europace.de/v2/antraege
+```
+
+#### Einen konkreten Antrag abrufen
+
+```
+GET https://baufismart.api.europace.de/v2/antraege/AB1234/1/1
+```
+
+#### Den Status eines Antrags neu setzen
+
+```
+POST https://baufismart.api.europace.de/v2/antraege/AB1234/1/1/status
+```
+mit
+```
+{
+	"antragsteller": "BEANTRAGT",
+	"produktAnbieter": "ABGELEHNT",
+	"kommentar": "Unterlagen fehlen"
+}
+```
+
+im Body.

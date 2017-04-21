@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "Mit dieser API können die Anträge durch die Produktanbieter abgerufen\
     \ werden. Dabei wird ausschließlich der Securitykontext des Produktanbieters eingenommen."
-  version: "2.0"
+  version: "2.1"
   title: "Auslesen API"
   contact:
     name: "Europace AG"
@@ -310,6 +310,54 @@ paths:
           description: "Internal Server Error"
           schema:
             $ref: "#/definitions/Error"
+      security:
+      - oauth2:
+        - "API"
+  /antraege/{vorgang}/{antrag}/{teilantrag}/status:
+    post:
+      tags:
+      - "Antraege"
+      summary: "Zum Setzen des Antragsstatus"
+      operationId: "setAntragsStatus_1"
+      consumes:
+      - "*/*"
+      produces:
+      - "application/json;charset=UTF-8"
+      parameters:
+      - name: "vorgang"
+        in: "path"
+        description: "vorgang"
+        required: true
+        type: "string"
+      - name: "antrag"
+        in: "path"
+        description: "antrag"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "teilantrag"
+        in: "path"
+        description: "teilantrag"
+        required: true
+        type: "integer"
+        format: "int32"
+      - in: "body"
+        name: "statusDTO"
+        description: "statusDTO"
+        required: true
+        schema:
+          $ref: "#/definitions/StatusDTO"
+      responses:
+        201:
+          description: "Created"
+        202:
+          description: "Accepted"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
       security:
       - oauth2:
         - "API"
@@ -1523,6 +1571,25 @@ definitions:
         enum:
         - "EINNAHME"
         - "AUSGABE"
+  StatusDTO:
+    type: "object"
+    properties:
+      antragsteller:
+        type: "string"
+        enum:
+        - "BEANTRAGT"
+        - "UNTERSCHRIEBEN"
+        - "NICHT_ANGENOMMEN"
+        - "WIDERRUFEN"
+      kommentar:
+        type: "string"
+      produktAnbieter:
+        type: "string"
+        enum:
+        - "NICHT_BEARBEITET"
+        - "UNTERSCHRIEBEN"
+        - "ABGELEHNT"
+        - "ZURUECKGESTELLT"
   Gebaeude:
     type: "object"
     properties:

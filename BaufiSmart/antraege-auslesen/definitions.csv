@@ -558,6 +558,18 @@ Sparplaene                                ;                                     
 Staat                                     ;                                                 ;                                                   ;
                                           ;isoCountryCode                                   ;string                                             ;
                                           ;name                                             ;string                                             ;
+StatusDTO                                 ;                                                 ;                                                   ;
+                                          ;antragsteller                                    ;enum                                               ;
+                                          ;                                                 ;                                                   ;BEANTRAGT
+                                          ;                                                 ;                                                   ;UNTERSCHRIEBEN
+                                          ;                                                 ;                                                   ;NICHT_ANGENOMMEN
+                                          ;                                                 ;                                                   ;WIDERRUFEN
+                                          ;kommentar                                        ;string                                             ;
+                                          ;produktAnbieter                                  ;enum                                               ;
+                                          ;                                                 ;                                                   ;NICHT_BEARBEITET
+                                          ;                                                 ;                                                   ;UNTERSCHRIEBEN
+                                          ;                                                 ;                                                   ;ABGELEHNT
+                                          ;                                                 ;                                                   ;ZURUECKGESTELLT
 Tilgung                                   ;                                                 ;                                                   ;
                                           ;anfaenglicheTilgung                              ;number                                             ;
                                           ;sonderTilgungJaehrlich                           ;number                                             ;
