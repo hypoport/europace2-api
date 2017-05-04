@@ -254,7 +254,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 			"befristetBis": "YYYY-MM-DD",
 			"inProbezeit": true | false
 		},
-		"vorherigeresBeschaeftigungsverhaeltnis": {
+		"vorherigesBeschaeftigungsverhaeltnis": {
 			"arbeitgeber": {
 				"name": String,
 				"anschrift": {
@@ -310,7 +310,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 			"arbeitgeber": 	Arbeitgeber,
 			"beschaeftigtSeit": "YYYY-MM-DD"
 		},
-		"vorherigeresBeschaeftigungsverhaeltnis": {
+		"vorherigesBeschaeftigungsverhaeltnis": {
 			"arbeitgeber": {
 				"name": String,
 				"anschrift": {
