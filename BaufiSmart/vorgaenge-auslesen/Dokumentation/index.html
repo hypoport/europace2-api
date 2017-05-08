@@ -533,6 +533,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_antraegezumvorgangusingget">antraegeZumVorgang</a></li>
 <li><a href="#_antraegezumvorgangfilteredusingget">antraegeZumVorgangFiltered</a></li>
 <li><a href="#_getteilantragusingget">getTeilantrag</a></li>
+    <li><a href="#_setantragsstatus_1">Zum Setzen des Antragsstatus</a></li>
 </ul>
 </li>
 </ul>
@@ -611,6 +612,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_sparphase">SparPhase</a></li>
 <li><a href="#_sparplaene">Sparplaene</a></li>
 <li><a href="#_staat">Staat</a></li>
+    <li><a href="#_statusdto">StatusDTO</a></li>
 <li><a href="#_tilgung">Tilgung</a></li>
 <li><a href="#_tilgungsersatz">TilgungsErsatz</a></li>
 <li><a href="#_tilgungsphase">TilgungsPhase</a></li>
@@ -1414,6 +1416,153 @@ table.CodeRay td.code>pre{padding:0}
 </table>
 </div>
 </div>
+    <div class="sect3">
+        <h4 id="_setantragsstatus_1">Zum Setzen des Antragsstatus</h4>
+        <div class="literalblock">
+            <div class="content">
+                <pre>POST /vorgaenge/{vorgangsNummer}/antraege/{antragsNummer}/{teilantragsNummer}/status</pre>
+            </div>
+        </div>
+        <div class="sect4">
+            <h5 id="_parameter_6">Parameter</h5>
+            <table class="tableblock frame-all grid-all spread">
+                <colgroup>
+                    <col style="width: 11%;">
+                    <col style="width: 16%;">
+                    <col style="width: 50%;">
+                    <col style="width: 22%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-middle">Typ</th>
+                    <th class="tableblock halign-left valign-middle">Name</th>
+                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
+                    <th class="tableblock halign-left valign-middle">Typ</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>antragsNummer</strong><br>
+                        <em>verpflichtend</em></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">antragsNummer</p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>teilantragsNummer</strong><br>
+                        <em>verpflichtend</em></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">teilantragsNummer</p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
+                        <em>verpflichtend</em></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">vorgangsNummer</p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>statusDTO</strong><br>
+                        <em>verpflichtend</em></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">statusDTO</p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_statusdto">StatusDTO</a></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="sect4">
+            <h5 id="_antworten_6">Antworten</h5>
+            <table class="tableblock frame-all grid-all spread">
+                <colgroup>
+                    <col style="width: 10%;">
+                    <col style="width: 70%;">
+                    <col style="width: 20%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-middle">HTTP Code</th>
+                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
+                    <th class="tableblock halign-left valign-middle">Typ</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>201</strong></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Created</p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>202</strong></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Accepted</p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+                </tr>
+                <tr>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="sect4">
+            <h5 id="_verarbeitet_7">Verarbeitet</h5>
+            <div class="ulist">
+                <ul>
+                    <li>
+                        <p><code>application/json</code></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sect4">
+            <h5 id="_erzeugt_7">Erzeugt</h5>
+            <div class="ulist">
+                <ul>
+                    <li>
+                        <p><code>application/json;charset=UTF-8</code></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sect4">
+            <h5 id="_sicherheit_6">Sicherheit</h5>
+            <table class="tableblock frame-all grid-all spread">
+                <colgroup>
+                    <col style="width: 15%;">
+                    <col style="width: 20%;">
+                    <col style="width: 65%;">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="tableblock halign-left valign-middle">Typ</th>
+                    <th class="tableblock halign-left valign-middle">Name</th>
+                    <th class="tableblock halign-left valign-middle">Scopes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">
+                        <strong><a href="#_oauth2">oauth2</a></strong></p></td>
+                    <td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 </div>
 </div>
@@ -3219,7 +3368,7 @@ table.CodeRay td.code>pre{padding:0}
 <td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>verwendungsZweck</strong><br>
+    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>verwendungszweck</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">nur bei darlehensArt==ZWISCHEN_FINANZIERUNG</p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">enum (VORFINANZIERUNG_OEFFENTLICHER_MITTEL, VERKAUF_EINES_ANDEREN_OBJEKTS, SONSTIGE_VERWENDUNG)</p></td>
@@ -3833,7 +3982,8 @@ table.CodeRay td.code>pre{padding:0}
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>baujahr</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Baujahr des Gebäudes. Bei verwendungsZweck != NEUBAUVierstellige Jahresangabe<br>
+    <td class="tableblock halign-left valign-middle">
+        <p class="tableblock">Baujahr des Gebäudes. Bei verwendungszweck != NEUBAU; Vierstellige Jahresangabe<br>
 <strong>Beispiel</strong> : <code>"2016"</code></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
@@ -5384,6 +5534,40 @@ table.CodeRay td.code>pre{padding:0}
 </tbody>
 </table>
 </div>
+    <div class="sect2">
+        <h3 id="_statusdto">StatusDTO</h3>
+        <table class="tableblock frame-all grid-all spread">
+            <colgroup>
+                <col style="width: 42%;">
+                <col style="width: 57%;">
+            </colgroup>
+            <thead>
+            <tr>
+                <th class="tableblock halign-left valign-middle">Name</th>
+                <th class="tableblock halign-left valign-middle">Typ</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>antragsteller</strong><br>
+                    <em>optional</em></p></td>
+                <td class="tableblock halign-left valign-middle">
+                    <p class="tableblock">enum (BEANTRAGT, UNTERSCHRIEBEN, NICHT_ANGENOMMEN, WIDERRUFEN)</p></td>
+            </tr>
+            <tr>
+                <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>kommentar</strong><br>
+                    <em>optional</em></p></td>
+                <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+            </tr>
+            <tr>
+                <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>produktAnbieter</strong><br>
+                    <em>optional</em></p></td>
+                <td class="tableblock halign-left valign-middle">
+                    <p class="tableblock">enum (NICHT_BEARBEITET, UNTERSCHRIEBEN, ABGELEHNT, ZURUECKGESTELLT)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="sect2">
 <h3 id="_tilgung">Tilgung</h3>
 <table class="tableblock frame-all grid-all spread">
@@ -5772,148 +5956,39 @@ table.CodeRay td.code>pre{padding:0}
 <h3 id="_vorgaengeresourcelistitem">VorgaengeResourceListItem</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 16%;">
-<col style="width: 61%;">
-<col style="width: 22%;">
+    <col style="width: 42%;">
+    <col style="width: 57%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Beschreibung</th>
 <th class="tableblock halign-left valign-middle">Typ</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>antraege</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_antrag">Antrag</a> &gt; array</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>bankverbindung</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_bankverbindung">Bankverbindung</a></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>datenKontext</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">enum (TEST_MODUS, ECHT_GESCHAEFT)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>datumLetztesEreignis</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>datumLetztesEreignisTimestamp</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int64)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>erstelltAm</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string(date)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>externeVorgangsNummer</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>finanzierungsObjekt</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_finanzierungsobjekt">FinanzierungsObjekt</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>geschlossenAm</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string(date)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>haushalte</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_haushalt">Haushalt</a> &gt; array</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>importQuelle</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>kundenBetreuer</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_partner">Partner</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>leadTracking</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_leadtracking">LeadTracking</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>personenbezogeneDatenGeloescht</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>phase</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>prioritaet</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Priorität des Vorgangs, Werte: [NIEDRIG,NEUTRAL,HOCH]</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">enum (NIEDRIG, NEUTRAL, HOCH)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>status</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">Status des Vorgangs, Werte: [AKTIV,ARCHIVIERT]</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>tippGeber</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_partner">Partner</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsBearbeiter</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_partner">Partner</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorhaben</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_vorhaben">Vorhaben</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>_links</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_links">Links</a></p></td>
 </tr>
 </tbody>
@@ -6349,7 +6424,7 @@ table.CodeRay td.code>pre{padding:0}
 <td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>verwendungsZweck</strong><br>
+    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>verwendungszweck</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">enum (VORFINANZIERUNG_OEFFENTLICHER_MITTEL, VERKAUF_EINES_ANDEREN_OBJEKTS, SONSTIGE_VERWENDUNG)</p></td>
 </tr>

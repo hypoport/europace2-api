@@ -288,6 +288,54 @@ paths:
       security:
       - oauth2:
         - "API"
+  /vorgaenge/{vorgangsNummer}/antraege/{antragsNummer}/{teilantragsNummer}/status:
+    post:
+      tags:
+      - "Vorgänge"
+      summary: "Zum Setzen des Antragsstatus"
+      operationId: "setAntragsStatus_1"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json;charset=UTF-8"
+      parameters:
+      - name: "vorgangsNummer"
+        in: "path"
+        description: "vorgangsNummer"
+        required: true
+        type: "string"
+      - name: "antragsNummer"
+        in: "path"
+        description: "antragsNummer"
+        required: true
+        type: "integer"
+        format: "int32"
+      - name: "teilantragsNummer"
+        in: "path"
+        description: "teilantragsNummer"
+        required: true
+        type: "integer"
+        format: "int32"
+      - in: "body"
+        name: "statusDTO"
+        description: "statusDTO"
+        required: true
+        schema:
+          $ref: "#/definitions/StatusDTO"
+      responses:
+        201:
+          description: "Created"
+        202:
+          description: "Accepted"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+      security:
+      - oauth2:
+        - "API"
 securityDefinitions:
   oauth2:
     type: "oauth2"
@@ -412,12 +460,6 @@ definitions:
   VorgaengeResourceListItem:
     type: "object"
     properties:
-      antraege:
-        type: "array"
-        items:
-          $ref: "#/definitions/Antrag"
-      bankverbindung:
-        $ref: "#/definitions/Bankverbindung"
       datenKontext:
         type: "string"
         enum:
@@ -428,48 +470,8 @@ definitions:
       datumLetztesEreignisTimestamp:
         type: "integer"
         format: "int64"
-      erstelltAm:
-        type: "string"
-        format: "date"
-      externeVorgangsNummer:
-        type: "string"
-      finanzierungsObjekt:
-        $ref: "#/definitions/FinanzierungsObjekt"
-      geschlossenAm:
-        type: "string"
-        format: "date"
-      haushalte:
-        type: "array"
-        items:
-          $ref: "#/definitions/Haushalt"
-      importQuelle:
-        type: "string"
-      kundenBetreuer:
-        $ref: "#/definitions/Partner"
-      leadTracking:
-        $ref: "#/definitions/LeadTracking"
-      personenbezogeneDatenGeloescht:
-        type: "boolean"
-      phase:
-        type: "string"
-      prioritaet:
-        type: "string"
-        description: "Priorität des Vorgangs, Werte: [NIEDRIG,NEUTRAL,HOCH]"
-        enum:
-        - "NIEDRIG"
-        - "NEUTRAL"
-        - "HOCH"
-      status:
-        type: "string"
-        description: "Status des Vorgangs, Werte: [AKTIV,ARCHIVIERT]"
-      tippGeber:
-        $ref: "#/definitions/Partner"
-      vorgangsBearbeiter:
-        $ref: "#/definitions/Partner"
       vorgangsNummer:
         type: "string"
-      vorhaben:
-        $ref: "#/definitions/Vorhaben"
       _links:
         $ref: "#/definitions/Links"
   TilgungsPhase:
@@ -845,7 +847,7 @@ definitions:
         type: "integer"
         format: "int32"
         description: "nur bei darlehensArt==KFW_DARLEHEN"
-      verwendungsZweck:
+      verwendungszweck:
         type: "string"
         description: "nur bei darlehensArt==ZWISCHEN_FINANZIERUNG"
         enum:
@@ -1812,6 +1814,25 @@ definitions:
         enum:
         - "EINNAHME"
         - "AUSGABE"
+  StatusDTO:
+    type: "object"
+    properties:
+      antragsteller:
+        type: "string"
+        enum:
+        - "BEANTRAGT"
+        - "UNTERSCHRIEBEN"
+        - "NICHT_ANGENOMMEN"
+        - "WIDERRUFEN"
+      kommentar:
+        type: "string"
+      produktAnbieter:
+        type: "string"
+        enum:
+        - "NICHT_BEARBEITET"
+        - "UNTERSCHRIEBEN"
+        - "ABGELEHNT"
+        - "ZURUECKGESTELLT"
   Gebaeude:
     type: "object"
     properties:
@@ -1834,7 +1855,7 @@ definitions:
       baujahr:
         type: "string"
         example: "2016"
-        description: "Baujahr des Gebäudes. Bei verwendungsZweck != NEUBAUVierstellige\
+        description: "Baujahr des Gebäudes. Bei verwendungszweck != NEUBAU; Vierstellige\
           \ Jahresangabe"
       bauweise:
         type: "string"
@@ -2211,7 +2232,7 @@ definitions:
       maximaleLaufzeitInMonaten:
         type: "integer"
         format: "int32"
-      verwendungsZweck:
+      verwendungszweck:
         type: "string"
         enum:
         - "VORFINANZIERUNG_OEFFENTLICHER_MITTEL"
