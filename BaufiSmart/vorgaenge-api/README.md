@@ -55,7 +55,7 @@ Passende Access-Token können über den oben beschriebenen Authentifizierungs-Pr
 
 ### Den Status eines Vorgangs setzen
 
-Der Status eines Vorgangs kann mittels eines PATCH-Requests auf baufismart.api.europace.de/v1/vorgaenge/{vorgangsNummer} mit folgendem Body geändert werden:
+Der Status eines Vorgangs kann mittels eines PATCH-Requests auf https://baufismart.api.europace.de/v1/vorgaenge/{vorgangsNummer} mit folgendem Body geändert werden:
 ```
 [
 	{
@@ -69,7 +69,7 @@ Der Status eines Vorgangs kann mittels eines PATCH-Requests auf baufismart.api.e
 Als value sind hier AKTIV und ARCHIVIERT erlaubt.
 
 ### Den Kundenbetreuer und/oder den Bearbeiter eines Vorgangs setzen
-Der Kundenbetreuer und der Bearbeiter eines Vorgangs sind jetzt als separate Ressourcen mittel GET-Request auf baufismart.api.europace.de/v1/vorgaenge/{vorgangsNummer}/kundenBetreuer bzw. baufismart.api.europace.de/v1/vorgaenge/{vorgangsNummer}/vorgangsBearbeiter abrufbar. Ein PUT-Request mit folgendem Body auf diese Ressourcen setzten den jeweiligen Wert neu:
+Der Kundenbetreuer und der Bearbeiter eines Vorgangs sind jetzt als separate Ressourcen mittel GET-Request auf https://baufismart.api.europace.de/v1/vorgaenge/{vorgangsNummer}/kundenBetreuer bzw. https://baufismart.api.europace.de/v1/vorgaenge/{vorgangsNummer}/vorgangsBearbeiter abrufbar. Ein PUT-Request mit folgendem Body auf diese Ressourcen setzten den jeweiligen Wert neu:
 ```
 {
 	"partnerId": "OEJ16"
