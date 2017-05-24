@@ -535,12 +535,12 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_antraegezumvorgangfilteredusingget">antraegeZumVorgangFiltered</a></li>
 <li><a href="#_getteilantragusingget">getTeilantrag</a></li>
 <li><a href="#_setantragsstatus">Zum Setzen des Antragsstatus</a></li>
-    <li><a href="#_getkundenbetreuerusingget">getKundenbetreuer</a></li>
-    <li><a href="#_updatekundenbetreuerusingput">updateKundenBetreuer</a></li>
-    <li><a href="#_updatekundenbetreuerusingpatch">Den Kundenbetreuer ändern</a></li>
-    <li><a href="#_getvorgangsbearbeiterusingget">getVorgangsBearbeiter</a></li>
-    <li><a href="#_putvorgangsbearbeiteridusingput">putVorgangsBearbeiterId</a></li>
-    <li><a href="#_updatevorgangsbearbeiteridusingpatch">updateVorgangsBearbeiterId</a></li>
+<li><a href="#_getkundenbetreuerusingget">getKundenbetreuer</a></li>
+<li><a href="#_updatekundenbetreuerusingput">updateKundenBetreuer</a></li>
+<li><a href="#_updatekundenbetreuerusingpatch">Den Kundenbetreuer ändern</a></li>
+<li><a href="#_getvorgangsbearbeiterusingget">getVorgangsBearbeiter</a></li>
+<li><a href="#_putvorgangsbearbeiteridusingput">putVorgangsBearbeiterId</a></li>
+<li><a href="#_updatevorgangsbearbeiteridusingpatch">updateVorgangsBearbeiterId</a></li>
 </ul>
 </li>
 </ul>
@@ -608,7 +608,7 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_nachrangigesexternesdarlehen">NachrangigesExternesDarlehen</a></li>
 <li><a href="#_paginationlinks">PaginationLinks</a></li>
 <li><a href="#_partner">Partner</a></li>
-    <li><a href="#_partnerdto">PartnerDTO</a></li>
+<li><a href="#_partnerdto">PartnerDTO</a></li>
 <li><a href="#_patchoperation">PatchOperation</a></li>
 <li><a href="#_postadresse">Postadresse</a></li>
 <li><a href="#_praeferenzen">Praeferenzen</a></li>
@@ -917,7 +917,7 @@ table.CodeRay td.code>pre{padding:0}
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
 <em>verpflichtend</em></p></td>
-    <td class="tableblock halign-left valign-middle"><p class="tableblock">Nummer des Vorgangs</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Nummer des Vorgangs</p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 </tbody>
@@ -1699,796 +1699,784 @@ table.CodeRay td.code>pre{padding:0}
 </table>
 </div>
 </div>
-    <div class="sect3">
-        <h4 id="_getkundenbetreuerusingget">getKundenbetreuer</h4>
-        <div class="literalblock">
-            <div class="content">
-                <pre>GET /vorgaenge/{vorgangsNummer}/kundenBetreuer</pre>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_parameter_8">Parameter</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 11%;">
-                    <col style="width: 16%;">
-                    <col style="width: 50%;">
-                    <col style="width: 22%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                    <th class="tableblock halign-left valign-middle">Name</th>
-                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
-                        <em>verpflichtend</em></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">vorgangsNummer</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="sect4">
-            <h5 id="_antworten_8">Antworten</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 10%;">
-                    <col style="width: 70%;">
-                    <col style="width: 20%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">HTTP Code</th>
-                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_partner">Partner</a></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>400</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Client Error</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>500</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Internal Server Error</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="sect4">
-            <h5 id="_verarbeitet_9">Verarbeitet</h5>
-            <div class="ulist">
-                <ul>
-                    <li>
-                        <p><code>application/json</code></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_erzeugt_9">Erzeugt</h5>
-            <div class="ulist">
-                <ul>
-                    <li>
-                        <p><code>application/json;charset=UTF-8</code></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_sicherheit_8">Sicherheit</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 15%;">
-                    <col style="width: 20%;">
-                    <col style="width: 65%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                    <th class="tableblock halign-left valign-middle">Name</th>
-                    <th class="tableblock halign-left valign-middle">Scopes</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">
-                        <strong><a href="#_oauth2">oauth2</a></strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="sect3">
-        <h4 id="_updatekundenbetreuerusingput">updateKundenBetreuer</h4>
-        <div class="literalblock">
-            <div class="content">
-                <pre>PUT /vorgaenge/{vorgangsNummer}/kundenBetreuer</pre>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_parameter_9">Parameter</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 11%;">
-                    <col style="width: 16%;">
-                    <col style="width: 50%;">
-                    <col style="width: 22%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                    <th class="tableblock halign-left valign-middle">Name</th>
-                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
-                        <em>verpflichtend</em></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">vorgangsNummer</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>partnerDTO</strong><br>
-                        <em>verpflichtend</em></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">partnerDTO</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_partnerdto">PartnerDTO</a>
-                    </p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="sect4">
-            <h5 id="_antworten_9">Antworten</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 10%;">
-                    <col style="width: 70%;">
-                    <col style="width: 20%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">HTTP Code</th>
-                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>201</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Created</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>204</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="sect4">
-            <h5 id="_verarbeitet_10">Verarbeitet</h5>
-            <div class="ulist">
-                <ul>
-                    <li>
-                        <p><code>application/json</code></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_erzeugt_10">Erzeugt</h5>
-            <div class="ulist">
-                <ul>
-                    <li>
-                        <p><code>application/json;charset=UTF-8</code></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_sicherheit_9">Sicherheit</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 15%;">
-                    <col style="width: 20%;">
-                    <col style="width: 65%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                    <th class="tableblock halign-left valign-middle">Name</th>
-                    <th class="tableblock halign-left valign-middle">Scopes</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">
-                        <strong><a href="#_oauth2">oauth2</a></strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="sect3">
-        <h4 id="_updatekundenbetreuerusingpatch">Den Kundenbetreuer ändern</h4>
-        <div class="literalblock">
-            <div class="content">
-                <pre>PATCH /vorgaenge/{vorgangsNummer}/kundenBetreuer</pre>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_parameter_10">Parameter</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 11%;">
-                    <col style="width: 16%;">
-                    <col style="width: 50%;">
-                    <col style="width: 22%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                    <th class="tableblock halign-left valign-middle">Name</th>
-                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
-                        <em>verpflichtend</em></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">vorgangsNummer</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>patchOperations</strong><br>
-                        <em>verpflichtend</em></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">patchOperations</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">&lt;
-                        <a href="#_patchoperation">PatchOperation</a> &gt; array</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="sect4">
-            <h5 id="_antworten_10">Antworten</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 10%;">
-                    <col style="width: 70%;">
-                    <col style="width: 20%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">HTTP Code</th>
-                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>204</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="sect4">
-            <h5 id="_verarbeitet_11">Verarbeitet</h5>
-            <div class="ulist">
-                <ul>
-                    <li>
-                        <p><code>application/json-patch+json</code></p>
-                    </li>
-                    <li>
-                        <p><code>application/json</code></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_erzeugt_11">Erzeugt</h5>
-            <div class="ulist">
-                <ul>
-                    <li>
-                        <p><code>application/json;charset=UTF-8</code></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_sicherheit_10">Sicherheit</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 15%;">
-                    <col style="width: 20%;">
-                    <col style="width: 65%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                    <th class="tableblock halign-left valign-middle">Name</th>
-                    <th class="tableblock halign-left valign-middle">Scopes</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">
-                        <strong><a href="#_oauth2">oauth2</a></strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="sect3">
-        <h4 id="_getvorgangsbearbeiterusingget">getVorgangsBearbeiter</h4>
-        <div class="literalblock">
-            <div class="content">
-                <pre>GET /vorgaenge/{vorgangsNummer}/vorgangsBearbeiter</pre>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_parameter_11">Parameter</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 11%;">
-                    <col style="width: 16%;">
-                    <col style="width: 50%;">
-                    <col style="width: 22%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                    <th class="tableblock halign-left valign-middle">Name</th>
-                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
-                        <em>verpflichtend</em></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">vorgangsNummer</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="sect4">
-            <h5 id="_antworten_11">Antworten</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 10%;">
-                    <col style="width: 70%;">
-                    <col style="width: 20%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">HTTP Code</th>
-                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_partner">Partner</a></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>400</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Client Error</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>500</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Internal Server Error</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="sect4">
-            <h5 id="_verarbeitet_12">Verarbeitet</h5>
-            <div class="ulist">
-                <ul>
-                    <li>
-                        <p><code>application/json</code></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_erzeugt_12">Erzeugt</h5>
-            <div class="ulist">
-                <ul>
-                    <li>
-                        <p><code>application/json;charset=UTF-8</code></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_sicherheit_11">Sicherheit</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 15%;">
-                    <col style="width: 20%;">
-                    <col style="width: 65%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                    <th class="tableblock halign-left valign-middle">Name</th>
-                    <th class="tableblock halign-left valign-middle">Scopes</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">
-                        <strong><a href="#_oauth2">oauth2</a></strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="sect3">
-        <h4 id="_putvorgangsbearbeiteridusingput">putVorgangsBearbeiterId</h4>
-        <div class="literalblock">
-            <div class="content">
-                <pre>PUT /vorgaenge/{vorgangsNummer}/vorgangsBearbeiter</pre>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_parameter_12">Parameter</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 11%;">
-                    <col style="width: 16%;">
-                    <col style="width: 50%;">
-                    <col style="width: 22%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                    <th class="tableblock halign-left valign-middle">Name</th>
-                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
-                        <em>verpflichtend</em></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">vorgangsNummer</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>partnerDTO</strong><br>
-                        <em>verpflichtend</em></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">partnerDTO</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_partnerdto">PartnerDTO</a>
-                    </p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="sect4">
-            <h5 id="_antworten_12">Antworten</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 10%;">
-                    <col style="width: 70%;">
-                    <col style="width: 20%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">HTTP Code</th>
-                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>201</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Created</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="sect4">
-            <h5 id="_verarbeitet_13">Verarbeitet</h5>
-            <div class="ulist">
-                <ul>
-                    <li>
-                        <p><code>application/json</code></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_erzeugt_13">Erzeugt</h5>
-            <div class="ulist">
-                <ul>
-                    <li>
-                        <p><code>application/json;charset=UTF-8</code></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_sicherheit_12">Sicherheit</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 15%;">
-                    <col style="width: 20%;">
-                    <col style="width: 65%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                    <th class="tableblock halign-left valign-middle">Name</th>
-                    <th class="tableblock halign-left valign-middle">Scopes</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">
-                        <strong><a href="#_oauth2">oauth2</a></strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="sect3">
-        <h4 id="_updatevorgangsbearbeiteridusingpatch">updateVorgangsBearbeiterId</h4>
-        <div class="literalblock">
-            <div class="content">
-                <pre>PATCH /vorgaenge/{vorgangsNummer}/vorgangsBearbeiter</pre>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_parameter_13">Parameter</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 11%;">
-                    <col style="width: 16%;">
-                    <col style="width: 50%;">
-                    <col style="width: 22%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                    <th class="tableblock halign-left valign-middle">Name</th>
-                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
-                        <em>verpflichtend</em></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">vorgangsNummer</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>patchOperations</strong><br>
-                        <em>verpflichtend</em></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">patchOperations</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">&lt;
-                        <a href="#_patchoperation">PatchOperation</a> &gt; array</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="sect4">
-            <h5 id="_antworten_13">Antworten</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 10%;">
-                    <col style="width: 70%;">
-                    <col style="width: 20%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">HTTP Code</th>
-                    <th class="tableblock halign-left valign-middle">Beschreibung</th>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>204</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="sect4">
-            <h5 id="_verarbeitet_14">Verarbeitet</h5>
-            <div class="ulist">
-                <ul>
-                    <li>
-                        <p><code>application/json-patch+json</code></p>
-                    </li>
-                    <li>
-                        <p><code>application/json</code></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_erzeugt_14">Erzeugt</h5>
-            <div class="ulist">
-                <ul>
-                    <li>
-                        <p><code>application/json;charset=UTF-8</code></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="sect4">
-            <h5 id="_sicherheit_13">Sicherheit</h5>
-            <table class="tableblock frame-all grid-all spread">
-                <colgroup>
-                    <col style="width: 15%;">
-                    <col style="width: 20%;">
-                    <col style="width: 65%;">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="tableblock halign-left valign-middle">Typ</th>
-                    <th class="tableblock halign-left valign-middle">Name</th>
-                    <th class="tableblock halign-left valign-middle">Scopes</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">
-                        <strong><a href="#_oauth2">oauth2</a></strong></p></td>
-                    <td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="sect3">
+<h4 id="_getkundenbetreuerusingget">getKundenbetreuer</h4>
+<div class="literalblock">
+<div class="content">
+<pre>GET /vorgaenge/{vorgangsNummer}/kundenBetreuer</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameter_8">Parameter</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">vorgangsNummer</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_antworten_8">Antworten</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_partner">Partner</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>400</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Client Error</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>500</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Internal Server Error</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_verarbeitet_9">Verarbeitet</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_erzeugt_9">Erzeugt</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json;charset=UTF-8</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sicherheit_8">Sicherheit</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 20%;">
+<col style="width: 65%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Scopes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong><a href="#_oauth2">oauth2</a></strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_updatekundenbetreuerusingput">updateKundenBetreuer</h4>
+<div class="literalblock">
+<div class="content">
+<pre>PUT /vorgaenge/{vorgangsNummer}/kundenBetreuer</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameter_9">Parameter</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">vorgangsNummer</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>partnerDTO</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">partnerDTO</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_partnerdto">PartnerDTO</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_antworten_9">Antworten</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>201</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Created</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>204</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_verarbeitet_10">Verarbeitet</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_erzeugt_10">Erzeugt</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json;charset=UTF-8</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sicherheit_9">Sicherheit</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 20%;">
+<col style="width: 65%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Scopes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong><a href="#_oauth2">oauth2</a></strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_updatekundenbetreuerusingpatch">Den Kundenbetreuer ändern</h4>
+<div class="literalblock">
+<div class="content">
+<pre>PATCH /vorgaenge/{vorgangsNummer}/kundenBetreuer</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameter_10">Parameter</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">vorgangsNummer</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>patchOperations</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">patchOperations</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_patchoperation">PatchOperation</a> &gt; array</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_antworten_10">Antworten</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>204</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_verarbeitet_11">Verarbeitet</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json-patch+json</code></p>
+</li>
+<li>
+<p><code>application/json</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_erzeugt_11">Erzeugt</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json;charset=UTF-8</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sicherheit_10">Sicherheit</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 20%;">
+<col style="width: 65%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Scopes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong><a href="#_oauth2">oauth2</a></strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_getvorgangsbearbeiterusingget">getVorgangsBearbeiter</h4>
+<div class="literalblock">
+<div class="content">
+<pre>GET /vorgaenge/{vorgangsNummer}/vorgangsBearbeiter</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameter_11">Parameter</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">vorgangsNummer</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_antworten_11">Antworten</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_partner">Partner</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>400</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Client Error</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>500</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Internal Server Error</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_error">Error</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_verarbeitet_12">Verarbeitet</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_erzeugt_12">Erzeugt</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json;charset=UTF-8</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sicherheit_11">Sicherheit</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 20%;">
+<col style="width: 65%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Scopes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong><a href="#_oauth2">oauth2</a></strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_putvorgangsbearbeiteridusingput">putVorgangsBearbeiterId</h4>
+<div class="literalblock">
+<div class="content">
+<pre>PUT /vorgaenge/{vorgangsNummer}/vorgangsBearbeiter</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameter_12">Parameter</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">vorgangsNummer</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>partnerDTO</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">partnerDTO</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_partnerdto">PartnerDTO</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_antworten_12">Antworten</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>201</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Created</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>404</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Not Found</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_verarbeitet_13">Verarbeitet</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_erzeugt_13">Erzeugt</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json;charset=UTF-8</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sicherheit_12">Sicherheit</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 20%;">
+<col style="width: 65%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Scopes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong><a href="#_oauth2">oauth2</a></strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_updatevorgangsbearbeiteridusingpatch">updateVorgangsBearbeiterId</h4>
+<div class="literalblock">
+<div class="content">
+<pre>PATCH /vorgaenge/{vorgangsNummer}/vorgangsBearbeiter</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameter_13">Parameter</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">vorgangsNummer</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>patchOperations</strong><br>
+<em>verpflichtend</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">patchOperations</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_patchoperation">PatchOperation</a> &gt; array</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_antworten_13">Antworten</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Beschreibung</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>200</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>204</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>401</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Unauthorized</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>403</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Forbidden</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">Kein Inhalt</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_verarbeitet_14">Verarbeitet</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json-patch+json</code></p>
+</li>
+<li>
+<p><code>application/json</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_erzeugt_14">Erzeugt</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json;charset=UTF-8</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sicherheit_13">Sicherheit</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 15%;">
+<col style="width: 20%;">
+<col style="width: 65%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Typ</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Scopes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>oauth2</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong><a href="#_oauth2">oauth2</a></strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">API</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -6020,31 +6008,31 @@ table.CodeRay td.code>pre{padding:0}
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 <tr>
-    <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>_links</strong><br>
-        <em>optional</em></p></td>
-    <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_links">Links</a></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>_links</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_links">Links</a></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-    <div class="sect2">
-        <h3 id="_partnerdto">PartnerDTO</h3>
-        <table class="tableblock frame-all grid-all spread">
-            <colgroup>
-                <col style="width: 42%;">
-                <col style="width: 57%;">
-            </colgroup>
-            <thead>
-            <tr>
-                <th class="tableblock halign-left valign-middle">Name</th>
-                <th class="tableblock halign-left valign-middle">Typ</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>partnerId</strong><br>
-                    <em>optional</em></p></td>
-                <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+<div class="sect2">
+<h3 id="_partnerdto">PartnerDTO</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 42%;">
+<col style="width: 57%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Typ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>partnerId</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 </tbody>
 </table>
@@ -6954,14 +6942,14 @@ table.CodeRay td.code>pre{padding:0}
 <td class="tableblock halign-left valign-middle"><p class="tableblock">enum (TEST_MODUS, ECHT_GESCHAEFT)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>datumLetztesEreignis</strong><br>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>externeVorgangsNummer</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>datumLetztesEreignisTimestamp</strong><br>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>letztesEreignis</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int64)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string(date-time)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>vorgangsNummer</strong><br>
@@ -7449,7 +7437,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 <div id="footer">
 <div id="footer-text">
-    Last updated 2017-04-05 22:57:37 MESZ
+Last updated 2017-04-05 22:57:37 MESZ
 </div>
 </div>
 </body>

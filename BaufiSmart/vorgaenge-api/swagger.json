@@ -1114,12 +1114,12 @@
             "ECHT_GESCHAEFT"
           ]
         },
-        "datumLetztesEreignis": {
+        "externeVorgangsNummer": {
           "type": "string"
         },
-        "datumLetztesEreignisTimestamp": {
-          "type": "integer",
-          "format": "int64"
+        "letztesEreignis": {
+          "type": "string",
+          "format": "date-time"
         },
         "vorgangsNummer": {
           "type": "string"

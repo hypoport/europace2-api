@@ -3,7 +3,7 @@ swagger: "2.0"
 info:
   description: "Mit dieser API können die Vorgänge aus der Europace Plattform ausgelesen\
     \ werden."
-  version: "0.2"
+  version: "0.4"
   title: "Vorgänge API"
   contact:
     name: "Europace AG"
@@ -731,11 +731,11 @@ definitions:
         enum:
         - "TEST_MODUS"
         - "ECHT_GESCHAEFT"
-      datumLetztesEreignis:
+      externeVorgangsNummer:
         type: "string"
-      datumLetztesEreignisTimestamp:
-        type: "integer"
-        format: "int64"
+      letztesEreignis:
+        type: "string"
+        format: "date-time"
       vorgangsNummer:
         type: "string"
       _links:

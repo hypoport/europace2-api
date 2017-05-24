@@ -21,7 +21,7 @@ Aus diesen Dateien können mit Hilfe von [Swagger Codegen](https://github.com/sw
 java -jar swagger-codegen-cli-2.2.2.jar generate -i swagger.yaml -l java -c codegen-config-file.json -o europace-api-client
 ```
 
-Example **codegen-config-file.json** für Version 0.2:
+Example **codegen-config-file.json**:
 
 ```
 {
@@ -52,3 +52,39 @@ Um die Credentials zu erhalten, erfagen Sie beim Helpdesk der Plattform die Zuga
 Für die Entwicklung neuer Clients können Sie mit einer Mock-Implementierung arbeiten. Diese ist unter https://baufismart.api.europace.de/mock erreichbar. So kann ein Vorgang mit Mock-Daten zum Beispiel unter https://baufismart.api.europace.de/mock/vorgaenge/AB1234 abgerufen werden.
 
 Passende Access-Token können über den oben beschriebenen Authentifizierungs-Prozess unter https://api.europace.de/mock/login abgerufen werden.
+
+### Den Status eines Vorgangs setzen
+
+Der Status eines Vorgangs kann mittels eines PATCH-Requests auf baufismart.api.europace.de/v1/vorgaenge/{vorgangsNummer} mit folgendem Body geändert werden:
+```
+[
+	{
+		"op": "replace",
+		"path": "/status",
+		"value": "AKTIV"
+	}
+]
+```
+
+Als value sind hier AKTIV und ARCHIVIERT erlaubt.
+
+### Den Kundenbetreuer und/oder den Bearbeiter eines Vorgangs setzen
+Der Kundenbetreuer und der Bearbeiter eines Vorgangs sind jetzt als separate Ressourcen mittel GET-Request auf baufismart.api.europace.de/v1/vorgaenge/{vorgangsNummer}/kundenBetreuer bzw. baufismart.api.europace.de/v1/vorgaenge/{vorgangsNummer}/vorgangsBearbeiter abrufbar. Ein PUT-Request mit folgendem Body auf diese Ressourcen setzten den jeweiligen Wert neu:
+```
+{
+	"partnerId": "OEJ16"
+}
+```
+
+Hierbei muss im Feld `partnerId` eine gültige PartnerID unserer Plattform übergeben werden. Des Weiteren muss der entsprechende Partner auch die Berechtigungen haben den Vorgang zu übernehmen.
+
+Der Kundenbetreuer sowie der Bearbeiter eines Vorgangs können auch über PATCH-Requests auf der jeweiligen Ressource mit folgendem Body neu gesetzt werden:
+```
+[
+	{
+		"op": "replace",
+		"path": "/partnerId",
+		"value": "OEJ16"
+	}
+]
+```
