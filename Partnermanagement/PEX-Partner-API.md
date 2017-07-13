@@ -266,7 +266,8 @@ Content-Type: application/json;charset=utf-8
 
 {
   "_links" : {
-    "self" : "https://www.europace2.de/partnermanagement/partner/4712"
+    "self" : "https://www.europace2.de/partnermanagement/partner/4712",
+    "administrierbare": "https://www.europace2.de/partnermanagement/partner/4712/administrierbare"
   },
   "id":"4712",
   "anrede" : "HERR",
@@ -285,6 +286,120 @@ Content-Type: application/json;charset=utf-8
   "webseiteUrl" : "https://github.com/hypoport/europace2-api",
   "aufsichtsBehoerde" : "Musterbehörde",
   "registrierungsNummer" : "987654"
+}
+```
+
+## Rechte eines Partners
+
+Jeder Partner darf unterschiedliche Aktionen zu anderen Partnern ausführen. Das betrifft die Modifikation eines Partners, sowie
+die Interaktion mit Vorgängen eines Partners.
+
+### Administrationsrecht
+
+Dieses Recht besagt, dass man die Daten zum anderen Partner ändern darf. Darüber hinaus, dürfen die Berechtigungen angepasst werden.
+Dies jedoch nur zu Rechten, die der ausführende Partner selbst besitzt.
+
+#### GET Request Beispiel:
+```
+GET https://www.europace2.de/partnermanagement/partner/ABC987/administrierbare
+X-ApiKey: xxxxxx
+X-PartnerId: ABC987
+X-TraceId: request-2014-10-01-07-59
+Accept: application/json
+```
+
+#### GET Response Beispiel:
+
+```
+200 OK
+X-TraceId: request-2014-10-01-07-59
+Content-Type: application/json;charset=utf-8
+
+[
+    {
+        "id": "AB123",
+        "partnerId": "AB123",
+        "organisationsName": "Musterorganisation",
+        "typ": "ORGANISATION",
+        "_links": {
+            "self": "https://www.europace2.de/partnermanagement/partner/AB123",
+            "administrierbare": "https://www.europace2.de/partnermanagement/partner/AB123/administrierbare"
+        }
+    },
+    {
+        ....
+    }
+    ....   
+]
+```
+
+### Übernahmerecht
+
+Das Übernahmerecht besagt, dass der Partner auf alle Vorgänge des anderen Partners lesend und schreiben zugreifen darf.
+
+#### GET Request Beispiel (viele Partner):
+```
+GET https://www.europace2.de/partnermanagement/partner/ABC987/uebernahmeRechtFuer
+X-ApiKey: xxxxxx
+X-PartnerId: ABC987
+X-TraceId: request-2014-10-01-07-59
+Accept: application/json
+```
+
+#### GET Response Beispiel (viele Partner):
+
+```
+200 OK
+X-TraceId: request-2014-10-01-07-59
+Content-Type: application/json;charset=utf-8
+
+{
+    "alleSichtbar": false,
+    "_embedded": {
+        "partner": [
+            {
+                "id": "AB123",
+                "nachname": "Mustermann",
+                "orgaEinheitId": "xxxxxxxxxxxxxxxxxxxxxx",
+                "vorname": "Max",
+                "email": "max.mustermann@europace.de",
+                "kreditsachbearbeiter": true,
+                "avatarUrl": "https://www.europace2.de/partnermanagement/yyyyyyyyyyyyyyyy.avatar?orgaEinheitId=xxxxxxxxxxxxxxxx",
+                "_links": {
+                    "self": {
+                        "href": "https://www.europace2.de/partnermanagement/partner/AB123"
+                    }
+                },
+                "typ": "PERSON"
+            },
+            {
+                ....
+            }
+        ]
+    }
+}
+```
+
+#### GET Request Beispiel (ein Partner):
+```
+GET https://www.europace2.de/partnermanagement/partner/ABC987/uebernahmeRechtFuer/AB123
+X-ApiKey: xxxxxx
+X-PartnerId: ABC987
+X-TraceId: request-2014-10-01-07-59
+Accept: application/json
+```
+
+#### GET Response Beispiel (ein Partner):
+
+```
+200 OK
+X-TraceId: request-2014-10-01-07-59
+Content-Type: application/json;charset=utf-8
+
+{
+    "partnerId": "AB123",
+    "gesperrt": false,
+    "uebernehmbar": true
 }
 ```
 
