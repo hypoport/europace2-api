@@ -8,7 +8,7 @@ Aus diesen Dateien können mit Hilfe von [Swagger Codegen](https://github.com/sw
 
 ### Dokumentation
 
-- [statische HTML Seite](http://htmlpreview.github.io?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/vorgaenge-auslesen/Dokumentation/index.html)
+- [statische HTML Seite](http://htmlpreview.github.io?https://raw.githubusercontent.com/hypoport/europace2-api/master/BaufiSmart/vorgaenge-api/Dokumentation/index.html)
 
 ### Generierung des Clients
 #### JAVA mit Retrofit
