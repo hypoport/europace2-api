@@ -63,6 +63,8 @@ definitions:
         type: string
       partnerId:
         $ref: '#/definitions/PartnerId'
+      vermittlerNummer:
+        type: string
 
   Antragsteller:
     description: Daten eines Antragsteller
@@ -161,7 +163,7 @@ definitions:
         items:
           $ref: '#/definitions/BestehendesDarlehen'
       kundenBetreuer:
-        $ref: '#/definitions/Partner'
+        $ref: '#/definitions/KundenBetreuer'
       bearbeiter:
         $ref: '#/definitions/Partner'
       antragsteller:
