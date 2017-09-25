@@ -205,7 +205,6 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
 			"hausnummer": String,
 			"plz": String,
 			"ort": String,
-			"land": "ALPHA-2 Isocode",
 			"wohnhaftSeit": "YYYY-MM-DD"
 		},
 		"gemeinsamerHaushalt": true | false,
@@ -217,7 +216,6 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
 			"hausnummer": String,
 			"plz": String,
 			"ort": String,
-			"land": "ALPHA-2 Isocode",
 			"wohnhaftSeit": "YYYY-MM-DD"
 		}
 	}
