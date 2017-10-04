@@ -95,6 +95,7 @@ definitions:
       - IMMOBILIENDARLEHEN
       - BAUSPARDARLEHEN
       - FOERDERDARLEHEN
+      - PRIVATDARLEHEN
       - SONSTIGES_DARLEHEN
 
   DatenKontext:
