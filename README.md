@@ -41,7 +41,9 @@ API zum automatisierten Anlegen von Vorgängen.
 Die Dokumentation befindet sich hier: (https://github.com/hypoport/europace2-api/tree/master/BaufiSmart/vorgang-anlegen)
 
 ## Prolongation
+
 Um einen bestehenden BaufiSmart Vorgang zu prolongieren gehen sie wie folgt vor: (https://github.com/hypoport/europace2-api/tree/master/BaufiSmart/prolongation)
+
 ---
 
 # Reporting
