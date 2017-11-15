@@ -164,7 +164,7 @@ definitions:
         items:
           $ref: '#/definitions/BestehendesDarlehen'
       kundenBetreuer:
-        $ref: '#/definitions/KundenBetreuer'
+        $ref: '#/definitions/Partner'
       bearbeiter:
         $ref: '#/definitions/Partner'
       antragsteller:
