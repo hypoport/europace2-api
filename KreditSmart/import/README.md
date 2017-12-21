@@ -177,7 +177,8 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
 		"arbeitserlaubnisBefristetBis": "YYYY-MM-DD",
 		"inDeutschlandSeit": "YYYY-MM-DD",
 		"staatsangehoerigkeit": "ALPHA-2 Isocode",
-		"aufenthaltstitel": "VISUM" | "AUFENTHALTSERLAUBNIS" | "NIEDERLASSUNGSERLAUBNIS" | "ERLAUBNIS_ZUM_DAUERAUFENTHALT_EU"
+		"aufenthaltstitel": "VISUM" | "AUFENTHALTSERLAUBNIS" | "NIEDERLASSUNGSERLAUBNIS" | "ERLAUBNIS_ZUM_DAUERAUFENTHALT_EU",
+		"steuerId": String
 	}
 
 #### Personendaten
