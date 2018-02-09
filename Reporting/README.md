@@ -1,6 +1,7 @@
 Europace2 Reporting
 ===============================================
 
+Bei Fragen und Anregungen entweder ein Issue in GitHub anlegen oder an [helpdesk@europace2.de](mailto:helpdesk@europace2.de) schreiben.
 
 Report: Vorgänge, Teilanträge, Bausteine, Provisionen
 ------------------------------------------------------
@@ -33,6 +34,6 @@ Automatischer Abruf
 
 Sie können mit nur einem Aufrauf sich anmelden und die Reports abrufen.
 Die dafür notwendigen Schritte sind in [Partnermanagement-API](../Partnermanagement/PEX-Benutzername-Passwort-API.md)
-beschrieben. 
+beschrieben.
 Lesen Sie dort den Abschnitt „Einloggen per HTTP POST Request“
 in Kombination mit dem „oeffne“-Parameter.

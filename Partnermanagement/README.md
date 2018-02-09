@@ -9,6 +9,9 @@ https://www.europace2.de/partnermanagement/benutzer/%s
 
 https://www.europace2.de/partnermanagement/partner/%s
 
+Bei Fragen und Anregungen entweder ein Issue in GitHub anlegen oder an [helpdesk@europace2.de](mailto:helpdesk@europace2.de) schreiben.
+
+
 
 PEX API's
 ==========

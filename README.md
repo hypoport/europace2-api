@@ -3,7 +3,9 @@ EUROPACE 2 API Dokumentation
 
 Dokumentation der öffentlichen Schnittstellen der EUROPACE 2 Platform.
 
-Hier finden sie weiterführende Dokumentation zu den folgenden Bereichen:
+Hier finden sie weiterführende Dokumentation zu den folgenden Bereichen.
+
+Bei Fragen und Anregungen entweder ein Issue in GitHub anlegen oder an [helpdesk@europace2.de](mailto:helpdesk@europace2.de) schreiben.
 
 # KreditSmart Extern (KEX) APIs
 Dokumentation der öffentlichen Schnittstellen des **Kredit**Smart Moduls.
