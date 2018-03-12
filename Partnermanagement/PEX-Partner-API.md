@@ -267,7 +267,8 @@ Content-Type: application/json;charset=utf-8
 {
   "_links" : {
     "self" : "https://www.europace2.de/partnermanagement/partner/4712",
-    "administrierbare": "https://www.europace2.de/partnermanagement/partner/4712/administrierbare"
+    "administrierbare": "https://www.europace2.de/partnermanagement/partner/4712/administrierbare",
+    "partnerkennzeichen": "https://www.europace2.de/partnermanagement/partner/4712/partnerkennzeichen",
   },
   "id":"4712",
   "anrede" : "HERR",
@@ -286,6 +287,94 @@ Content-Type: application/json;charset=utf-8
   "webseiteUrl" : "https://github.com/hypoport/europace2-api",
   "aufsichtsBehoerde" : "Musterbehörde",
   "registrierungsNummer" : "987654"
+}
+```
+
+## Details zu einem Partner
+
+Bitte nutzen sie die Relationen des Knotens `_links` der Partner-Entität.
+**Es handelt sich hierbei um ein älteres API-Konzept, weshalb künftige Änderungen wahrscheinlich sind.**
+Wir beabsichtigen die Clientkompatibilität über die Relationen sicherzustellen.
+Über die Bereitstellung einer neueren API werden wir informieren.
+
+### Partnerkennzeichen
+Die Partnerkennzeichen identifizieren einen Vertrieb bei einem Produktanbieter.
+Die erfassten Werte können über diesen Endpunkt ausgelesen werden.
+
+#### GET Request Beispiele
+
+```
+GET https://www.europace2.de/partnermanagement/partner/AB123/partnerkennzeichen
+X-ApiKey: xxxxxx
+X-PartnerId: AB123
+X-TraceId: request-2014-10-01-07-59
+Accept: application/json
+```
+
+#### GET Response Beispiel:
+
+```
+200 OK
+X-TraceId: request-2014-10-01-07-59
+Content-Type: application/json;charset=utf-8
+
+{
+    "dslSapGeschaeftspartnerNummerFuerRatenkredit": "eineNummer",
+    "dslVertriebsWegSchluesselFuerRatenkredit": "dslVertriebsWegSchluessel",
+    "dkbVertriebsIdFuerRatenkredit": "dkbVertriebsId",
+    "kennzeichenIngDiba": {
+        "vermittlerNummer": "vermittlerNummerFürBaufi",
+        "vermittlerVorname": null,
+        "vermittlerNachname": null,
+        "vermittlerNummerFuerRatenkredit": "vermittlerNummerFürRatenkredit"
+    },
+    "kennzeichenErgo": {
+        "maklerBuero": null,
+        "bdNummer": null
+    },
+    "kennzeichenBhw": {
+        "vgeNummer": "VGENummer",
+        "orgaNummer": "OGRANummer"
+    },
+    "lbsNordVermittlerNummer": null,
+    "lbsOstVermittlerNummer": null,
+    "lbsShhVermittlerNummer": null,
+    "lbsSuedwestVermittlerNummer": null,
+    "lbsWestVermittlerNummer": "nummer",
+    "wuestenrotVermittlerNummer": null,
+    "allianzVertreterNummer": null,
+    "axaGeschaeftsPartnerNummer": null,
+    "dslVermittlerGruppenSchluessel": null,
+    "bshVoNummer": "VONummer",
+    "wlBankVermittlerNummer": null,
+    "naevVermittlerNummer": null,
+    "rUndvBankAgenturNummer": null,
+    "bausparkasseMainzVermittlerNummer": null,
+    "deutscherRingVermittlerNummer": null,
+    "alteLeipzigerVerbundVermittlerNummer": null,
+    "signalIdunaBetreuerNummer": null,
+    "signalIdunaFilialDirektionNummer": null,
+    "_embedded": {
+        "partnerKennzeichenDerVertriebsOrganisation": {
+            "_links": {
+                "partner": {
+                    "href": "https://www.europace2.de/partnermanagement/partner/CD987"
+                },
+                "self": {
+                    "href": "https://www.europace2.de/partnermanagement/partner/CD987/partnerkennzeichen"
+                }
+            },
+            "dslSapGeschaeftspartnerNummerFuerRatenkredit": "dslSapNummerDerVO"
+        }
+    },
+    "_links": {
+        "partner": {
+            "href": "https://www.europace2.de/partnermanagement/partner/AB123"
+        },
+        "self": {
+            "href": "https://www.europace2.de/partnermanagement/partner/AB123/partnerkennzeichen"
+        }
+    }
 }
 ```
 
