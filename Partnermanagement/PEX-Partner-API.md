@@ -293,7 +293,7 @@ Content-Type: application/json;charset=utf-8
 ## Details zu einem Partner
 
 Bitte nutzen sie die Relationen des Knotens `_links` der Partner-Entität.
-Es handelt sich hierbei um ein älteres API-Konzept, weshalb künftige Änderungen wahrscheinlich sind.
+**Es handelt sich hierbei um ein älteres API-Konzept, weshalb künftige Änderungen wahrscheinlich sind.**
 Wir beabsichtigen die Clientkompatibilität über die Relationen sicherzustellen.
 Über die Bereitstellung einer neueren API werden wir informieren.
 
@@ -337,9 +337,9 @@ Content-Type: application/json;charset=utf-8
         "orgaNummer": "OGRANummer"
     },
     "lbsNordVermittlerNummer": null,
-    "lbsOstVermittlerNummer": "null",
-    "lbsShhVermittlerNummer": "null",
-    "lbsSuedwestVermittlerNummer": "null",
+    "lbsOstVermittlerNummer": null,
+    "lbsShhVermittlerNummer": null,
+    "lbsSuedwestVermittlerNummer": null,
     "lbsWestVermittlerNummer": "nummer",
     "wuestenrotVermittlerNummer": null,
     "allianzVertreterNummer": null,
