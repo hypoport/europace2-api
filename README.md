@@ -20,7 +20,7 @@ Die Dokumentation befindet sich hier: (https://github.com/hypoport/europace2-api
 
 ---
 
-# BaufiSmart Extern (BEX) APIs
+# BaufiSmart Extern APIs
 
 ## Anträge Auslesen API
 API Definition zum Auslesen von Anträgen aus der Europace-Plattform aus Sicht eines Produktanbieters.
@@ -38,7 +38,7 @@ Die Dokumentation befindet sich hier:  (https://github.com/hypoport/vorgaenge-ap
 Diese Schnittstelle ermöglicht es, Dokumente einem BaufiSmart Vorgang hinzuzufügen.
 Die Dokumentation befindet sich hier:  (https://github.com/hypoport/europace2-api/tree/master/BaufiSmart/dokumente).
 
-## Vorgang Anlegen
+## Vorgang Anlegen (BEX)
 API zum automatisierten Anlegen von Vorgängen.
 Die Dokumentation befindet sich hier: (https://github.com/hypoport/europace2-api/tree/master/BaufiSmart/vorgang-anlegen)
 
