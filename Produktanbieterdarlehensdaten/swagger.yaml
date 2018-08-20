@@ -4,7 +4,7 @@ info:
     Produktanbieter-Darlehensdaten API
     Benutzt werden JSON Datentypen, siehe http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf
   title: PADD API
-  version: 0.0.4
+  version: 0.0.5
 schemes:
 - http
 - https
@@ -153,6 +153,12 @@ definitions:
       einmalvalutierungserklaerungAbgegeben:
         description: true, wenn der Produktanbieter für die Grundschuld dieses Darlehens eine Einmalvalutierungserklärung abgegeben hat.
         type: boolean
+      anfaenglicherTilgungssatz:
+        $ref: '#/definitions/Prozent'
+      konditionsAuslauf:
+        $ref: '#/definitions/Prozent'
+      restschuldAllerDarlehenZumAbloeseTermin:
+        $ref: '#/definitions/Euro'
 
   DarlehensdatenAnfrage:
     type: object
