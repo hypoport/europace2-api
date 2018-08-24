@@ -147,7 +147,8 @@ Die Übermittlung erfolgt im Format [ISO-3166/ALPHA-2](https://de.wikipedia.org/
 		"antragsteller1": Antragsteller,
 		"antragsteller2": Antragsteller,
 		"haushalt": Haushalt,
-		"finanzbedarf": Finanzbedarf
+		"finanzbedarf": Finanzbedarf,
+		"kommentare": [ String ]
 	}
 
 Das Feld *kundenbetreuer.partnerId* ist ein Pflichtfeld.
@@ -440,7 +441,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		"gehoertZuAntragsteller": Antragstellerzuordnung,
 		"abloesen": true | false,
 		"iban": String,
-		"bic": String
+		"bic": String,
 		"kreditinstitut": String 
 	}
 
@@ -547,7 +548,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 			"rateMonatlich": Decimal
 		},
 		"ratenschutz": {
-			"versicherteRisikenAntragsteller2": [ "ARBEITSLOSIGKEIT" | "ARBEITSUNFAEHIGKEIT" | "LEBEN" ]
+			"versicherteRisikenAntragsteller2": [ "ARBEITSLOSIGKEIT" | "ARBEITSUNFAEHIGKEIT" | "LEBEN" ],
 			"versicherteRisikenAntragsteller1": [ "ARBEITSLOSIGKEIT" | "ARBEITSUNFAEHIGKEIT" | "LEBEN" ]
 		}
 	}
