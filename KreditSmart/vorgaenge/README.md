@@ -35,7 +35,7 @@ Request Header Name</th><th>	Beschreibung</th>
 </table>
 
 
-Das API JWT (JSON Web Token) erhalten Sie von Ihrem Ansprechpartner im **Kredit**Smart Team. 
+Das API JWT (JSON Web Token) erhalten Sie von Ihrem Ansprechpartner im **Kredit**Smart-Team. 
 
 Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.
 
@@ -43,15 +43,15 @@ Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit
 
 Für jeden Request soll eine eindeutige ID generiert werden, die den Request im EUROPACE 2 System nachverfolgbar macht und so bei etwaigen Problemen oder Fehlern die systemübergreifende Analyse erleichtert.
 
-Die Übermittlung der X-TraceId erfolgt über einen HTTP Header. 
+Die Übermittlung der X-TraceId erfolgt über einen HTTP Header. Dieser Header ist optional,
+wenn er nicht gesetzt ist, wir eine ID vom System generiert.
 
 <table>
 <tr>
-<th>Request Header Name</th><th>Beschreibung</th><th>Format</th><th>Beispiel</th>
+<th>Request Header Name</th><th>Beschreibung</th><th>Beispiel</th>
 <tr>
 <td>X-TraceId</td>
 <td>eindeutige Id für jeden Request</td>
-<td>&lt;Kürzel des aufrufenden Systems&gt;&lt;8Ziffern&gt;</td>
 <td>sys12345678</td>
 </tr>
 </table>
@@ -104,16 +104,9 @@ Wenn der Request nicht erfolgreich verarbeitet werden konnte, liefert die Schnit
 Achtung: In diesem Fall wird kein Vorgang in **Kredit**Smart importiert und angelegt.
 
 <table>
-<tr>
-<th>
-Fehlercode</th><th>Nachricht</th><th>	Erklärung</th>
-</tr>
-<tr>
-<td>401</td><td>Unauthorized</td><td>Authentifizierung ist fehlgeschlagen</td></tr>
-<td>422</td><td>Unprocessable Entity</td><td>Es wurde keine gültige Kundenbetreuer-Partner-ID angegeben</td>
-<tr>
-
-</tr>
+<tr><th>Fehlercode</th><th>Nachricht</th><th>	Erklärung</th></tr>
+<tr><td>401</td><td>Unauthorized</td><td>Authentifizierung ist fehlgeschlagen</td></tr>
+<tr><td>422</td><td>Unprocessable Entity</td><td>Es wurde keine gültige Kundenbetreuer-Partner-ID angegeben</td></tr>
 </table>
 
 Weitere Fehlercodes und ihre Bedeutung siehe Wikipedia: [HTTP-Statuscode](https://de.wikipedia.org/wiki/HTTP-Statuscode)
