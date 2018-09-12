@@ -16,7 +16,7 @@ Die Dokumentation befindet sich hier: (https://github.com/hypoport/europace2-api
 
 ## KEX-Vorgang-Import-API
 Die Schnittstelle ermöglicht das automatisierte Anlegen von Vorgängen in KreditSmart.
-Die Dokumentation befindet sich hier: (https://github.com/hypoport/europace2-api/tree/master/KreditSmart/import)
+Die Dokumentation befindet sich hier: (https://github.com/hypoport/europace2-api/tree/master/KreditSmart/vorgaenge)
 
 ---
 
