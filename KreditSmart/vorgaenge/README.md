@@ -355,6 +355,8 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 
     {
 		"verbindlichkeiten": {
+			"geschaeftskredite": [ Geschäftskredit ],
+			"kontokorrentkredite": [ Kontokorrentkredit ],
 			"kreditkarten": [ Kreditkarte ],
 			"dispositionskredite": [ Dispositionskredit ],
 			"ratenkredite": [ Ratenkredit ],
@@ -362,6 +364,9 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 			"sonstigeVerbindlichkeiten": [ Sonstige Verbindlichkeit ]
 		},
 		"vermoegen": {
+			"depotvermoegen": [ Depotvermögen ],
+			"sonstigeVermoegenswerte": [ Sonstiger Vermögenswert ],
+			"bankUndSparguthaben": [ Bank- und Sparguthaben ],
 			"lebensversicherungen": [ Lebensversicherung ],
 			"bausparvertraege": [ Bausparvertrag ]
 		},
@@ -376,6 +381,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 			"einkuenfteAusNebentaetigkeit": [ Einkunft aus Nebentätigkeit ],
 			"ehegattenunterhalt": [ Ehegattenunterhalt ],
 			"sonstigeEinnahmen": [ Sonstige Einnahme ],
+			"einkuenfteAusKapitalvermoegen": [ Einkunft aus Kapitalvermögen ],
 			"unbefristeteZusatzrenten": [ Unbefristete Zusatzrente ]
 		},
 		"immobilien": [ Immobilie ],
@@ -391,6 +397,33 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 #### Antragstellerzuordnung
 
 	"ANTRAGSTELLER_1" | "ANTRAGSTELLER_2" | "BEIDE"
+
+#### Ratenkredit, Geschäftskredit und Sonstige Verbindlichkeit
+
+	{
+		"rateMonatlich": Decimal,
+		"schlussrate": Decimal,
+		"datumErsteZahlung": "YYYY-MM-DD",
+		"datumLetzteRate": "YYYY-MM-DD",
+		"restschuld": Decimal,
+		"urspruenglicherKreditbetrag": Decimal,
+		"glaeubiger": String,
+		"gehoertZuAntragsteller": Antragstellerzuordnung,
+		"abloesen": true | false,
+		"iban": String,
+		"bic": String,
+		"kreditinstitut": String 
+	}
+
+#### Kontokorrentkredit
+
+	{
+		"beanspruchterBetrag": Decimal,
+		"verfuegungsrahmen": Decimal,
+		"glaeubiger": String,
+		"zinssatz": Decimal,
+		"gehoertZuAntragsteller": Antragstellerzuordnung,
+	}			
 
 #### Kreditkarte
 
@@ -421,23 +454,6 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		"kreditinstitut": String 
 	}			
 
-#### Ratenkredit und Sonstige Verbindlichkeit
-
-	{
-		"rateMonatlich": Decimal,
-		"schlussrate": Decimal,
-		"datumErsteZahlung": "YYYY-MM-DD",
-		"datumLetzteRate": "YYYY-MM-DD",
-		"restschuld": Decimal,
-		"urspruenglicherKreditbetrag": Decimal,
-		"glaeubiger": String,
-		"gehoertZuAntragsteller": Antragstellerzuordnung,
-		"abloesen": true | false,
-		"iban": String,
-		"bic": String,
-		"kreditinstitut": String 
-	}
-
 #### Leasing
 
 	{
@@ -448,6 +464,32 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		"gehoertZuAntragsteller": Antragstellerzuordnung
 	}
 
+#### Depotvermögen
+
+
+	{
+		"betrag": Decimal,
+		"gehoertZuAntragsteller": Antragstellerzuordnung
+	}
+				
+
+#### Sonstiger Vermögenswert
+
+
+	{
+		"betrag": Decimal,
+		"gehoertZuAntragsteller": Antragstellerzuordnung
+	}
+				
+
+#### Bank- und Sparguthaben
+
+
+	{
+		"betrag": Decimal,
+		"gehoertZuAntragsteller": Antragstellerzuordnung
+	}
+				
 #### Lebensversicherung
 
 
@@ -488,7 +530,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* berück
 		"gehoertZuAntragsteller": "ANTRAGSTELLER_1" | "ANTRAGSTELLER_2"
 	}
 
-#### Ehegattenunterhalt, Sonstige Einnahme und Unbefristete Zusatzrente
+#### Ehegattenunterhalt, Sonstige Einnahme, Einkunft aus Kapitalvermögen und Unbefristete Zusatzrente
 
 	{
 		"betragMonatlich": Decimal,
