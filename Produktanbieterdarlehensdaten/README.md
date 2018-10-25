@@ -1,5 +1,7 @@
 # Produktanbieter-Darlehensdaten API
-## API zur Abfrage von Darlehensdaten für Produktanbieter
+API zur Abfrage von Darlehensdaten für Produktanbieter
+
+# Dokumentation
 
 Im Rahmen der BaufiSmart-Erweiterung Prolongation haben wir eine API für unsere Produktanbieter zur Implementierung zur Verfügung gestellt. 
 Die API ist nach *OpenAPI Spec 2.0* (https://openapis.org/) spezifiziert.
