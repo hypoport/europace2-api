@@ -1,10 +1,12 @@
 
-PEX SSO (Silent Sign On) API
-============================
+# PEX SSO (Silent Sign On) API
 
 EUROPACE 2 erlaubt es seinen Partnern, Benutzer per _Silent Sign On_ anzumelden.
 
 _Silent Sign On_ in ein Verfahren, das es ermöglicht, einen Benutzer von einer Webseite zu BaufiSmart weiter zu leiten, ohne das sich dieser erneut anmelden muss.
+
+# Dokumentation
+
 
 EUROPACE 2 nutzt dafür den Internet Standard [JWT](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32)
 und [JWS](https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41)
