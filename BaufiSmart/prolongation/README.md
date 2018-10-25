@@ -1,5 +1,6 @@
-Prolongation von BaufiSmart Vorgängen
-===========
+# Prolongation von BaufiSmart Vorgängen
+
+# Dokumentation
 
 Um einen bestehenden BaufiSmart Vorgang zu prolongieren, muss zunächst ein HTTP POST Request geschickt werden:
  
