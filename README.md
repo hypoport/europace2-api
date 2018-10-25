@@ -51,6 +51,10 @@ Die Ereignisse-API liefert die Ereignisse eines Vorgangs inkl. Zeitpunkt, Typ, E
 
 Um einen bestehenden BaufiSmart Vorgang zu prolongieren gehen sie wie folgt vor: (https://github.com/hypoport/europace2-api/tree/master/BaufiSmart/prolongation)
 
+## API zur Abfrage von Darlehensdaten für Produktanbieter
+
+Die Dokumentation befindet sich hier: (https://github.com/hypoport/europace2-api/tree/master/Produktanbieterdarlehensdaten)
+
 ---
 # Dokumenten API
 API Rund um Platform dokumente.
@@ -68,8 +72,4 @@ Mehr Erfahren sie hier: (https://github.com/hypoport/europace2-api/tree/master/R
  Unter dem Akronym "PEX" sind alle API's versammelt, welche zur externen Steuerung des EUROPACE 2 Moduls Partnermanagement (Einstellungen) verwendet werden.
 Die Dokumentation befindet sich hier: (https://github.com/hypoport/europace2-api/tree/master/Partnermanagement)
 
----
 
-# Produktanbieter-Darlehensdaten API
-## API zur Abfrage von Darlehensdaten für Produktanbieter
-Die Dokumentation befindet sich hier: (https://github.com/hypoport/europace2-api/tree/master/Produktanbieterdarlehensdaten)
