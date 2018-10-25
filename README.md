@@ -63,7 +63,7 @@ API Rund um Platform dokumente.
 ---
 
 # Reporting
-Folgende Reports können sie bezihene: Vorgänge, Teilanträge, Bausteine, Provisionen
+Folgende Reports können sie beziehen: Vorgänge, Teilanträge, Bausteine, Provisionen
 Mehr Erfahren sie hier: (https://github.com/hypoport/europace2-api/tree/master/Reporting)
 
 ---
