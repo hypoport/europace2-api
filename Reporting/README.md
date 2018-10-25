@@ -1,10 +1,12 @@
-Europace2 Reporting
-===============================================
+# Europace2 Reporting
 
-Bei Fragen und Anregungen entweder ein Issue in GitHub anlegen oder an [helpdesk@europace2.de](mailto:helpdesk@europace2.de) schreiben.
 
-Report: Vorgänge, Teilanträge, Bausteine, Provisionen
-------------------------------------------------------
+Folgende Reports können bezogen werden: Vorgänge, Teilanträge, Bausteine, Provisionen
+
+# Dokumentation
+
+## Report: Vorgänge, Teilanträge, Bausteine, Provisionen
+
 
 Das grundsätzliche Prinzip basiert darauf, dass Sie bei Aufruf der URL alle Reports als ZIP-Datei erhalten.
 ```
@@ -16,8 +18,8 @@ Für den Abruf müssen sie bereits angemeldet sein. Beim Abruf selbst wird dann 
 dass Sie die Berechtigung zum Zugriff auf die Daten besitzen.
 
 
-Report: Partner
------------------------------------------------------
+## Report: Partner
+
 
 Die URL zum Abruf des Partner-Reports lautet:
 ```
@@ -29,8 +31,8 @@ Für den Abruf müssen sie bereits angemeldet sein. Beim Abruf selbst wird dann 
 dass Sie die Berechtigung zum Zugriff auf die Daten besitzen.
 Es werden alle Daten für den abgerufenen Partner incl. der Untereinheiten bereitgestellt.
 
-Automatischer Abruf
------------------------------------------------------
+## Automatischer Abruf
+
 
 Sie können mit nur einem Aufrauf sich anmelden und die Reports abrufen.
 Die dafür notwendigen Schritte sind in [Partnermanagement-API](../Partnermanagement/PEX-Benutzername-Passwort-API.md)
