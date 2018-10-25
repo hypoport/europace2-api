@@ -1,8 +1,10 @@
 
-EUROPACE 2 - Authentiﬁzierung für Partner
-=========================================
+# EUROPACE 2 - Authentiﬁzierung für Partner
+
 
 Dieses Dokument beschreibt die von Europace2 unterstützten Authentiﬁzierungsarten mit Benutzername (email) und Passwort.
+
+# Dokumentation
 
 Formularbasiertes Silent-Sign-On
 -----------------------------------------
