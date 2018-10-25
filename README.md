@@ -34,17 +34,27 @@ Die Dokumentation befindet sich hier:  (https://github.com/hypoport/finanzierung
 API Definition zum Auslesen von Vorgängen aus der Europace-Plattform aus Sicht eines Vertriebes.
 Die Dokumentation befindet sich hier:  (https://github.com/hypoport/vorgaenge-api).
 
-## Externe Dokumente API
-Diese Schnittstelle ermöglicht es, Dokumente einem BaufiSmart Vorgang hinzuzufügen.
-Die Dokumentation befindet sich hier:  (https://github.com/hypoport/europace2-api/tree/master/BaufiSmart/dokumente).
+## ~~Externe Dokumente API~~
+Diese API ist überholt. Bitte verwenden sie die Dokumenten API (weiter unten)
+
+ ~~(https://github.com/hypoport/europace2-api/tree/master/BaufiSmart/dokumente).~~
 
 ## Vorgang Anlegen (BEX)
 API zum automatisierten Anlegen von Vorgängen.
 Die Dokumentation befindet sich hier: (https://github.com/hypoport/europace2-api/tree/master/BaufiSmart/vorgang-anlegen)
 
+## Ereignisse APIs
+Die Ereignisse-API liefert die Ereignisse eines Vorgangs inkl. Zeitpunkt, Typ, Ersteller, Text und ggf. verlinkter Dokumente zurück.
+(https://github.com/hypoport/ep-ereignisse-api)
+
 ## Prolongation
 
 Um einen bestehenden BaufiSmart Vorgang zu prolongieren gehen sie wie folgt vor: (https://github.com/hypoport/europace2-api/tree/master/BaufiSmart/prolongation)
+
+---
+# Dokumenten API
+API Rund um Platform dokumente.
+(https://github.com/hypoport/ep-dokumente-api)
 
 ---
 
