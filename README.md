@@ -41,7 +41,7 @@ Diese API ist überholt. Bitte verwenden sie die Dokumenten API (weiter unten)
 
 ## Vorgang Anlegen (BEX)
 API zum automatisierten Anlegen von Vorgängen.
-Die Dokumentation befindet sich hier: (https://github.com/hypoport/europace2-api/tree/master/BaufiSmart/vorgang-anlegen)
+Die Dokumentation befindet sich hier: (https://github.com/europace/baufismart-vorgang-anlegen-api)
 
 ## Ereignisse APIs
 Die Ereignisse-API liefert die Ereignisse eines Vorgangs inkl. Zeitpunkt, Typ, Ersteller, Text und ggf. verlinkter Dokumente zurück.
@@ -71,5 +71,3 @@ Mehr Erfahren sie hier: (https://github.com/hypoport/europace2-api/tree/master/R
 # Partnermanagement Extern (PEX) APIs
  Unter dem Akronym "PEX" sind alle API's versammelt, welche zur externen Steuerung des EUROPACE 2 Moduls Partnermanagement (Einstellungen) verwendet werden.
 Die Dokumentation befindet sich hier: (https://github.com/hypoport/europace2-api/tree/master/Partnermanagement)
-
-
