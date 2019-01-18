@@ -1,7 +1,5 @@
-# KEX-Vorgang-Import-API 
+# KEX-Vorgang-Import und -Export 
 
-Diese Dokumentation ist umgezogen: https://github.com/europace/kex-vorgaenge-api
+Diese Dokumentation der KEX-Vorgang-Import API ist umgezogen: https://github.com/europace/kex-vorgaenge-api
 
-# KEX-Vorgang-Export-API 
-
-Die Dokumentation befindet sich unter: https://github.com/europace/kex-vorgang-export-api
+Die Dokumentation der KEX-Vorgang-Export API befindet sich unter: https://github.com/europace/kex-vorgang-export-api
