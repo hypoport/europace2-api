@@ -1,3 +1,5 @@
 # KEX-Antragsstatus-API
 
-Diese Dokumentation ist umgezogen: https://github.com/europace/kex-antragsstatus-api
+Wir haben eine neue Webseite: https://developer.europace.de/
+
+Diese Webseite bietet Ihnen eine Übersicht aller APIs in Europace.
